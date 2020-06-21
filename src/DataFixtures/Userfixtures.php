@@ -54,10 +54,10 @@ class Userfixtures extends Fixture
             $user->setCenter($center);
             $user->setCenterUser(true);
         }
-        #$user->setFirstName('Jorge');
-        #$user->setLastName('Maté');
+        $user->setFirstName('Jorge');
+        $user->setLastName('Maté');
         $user->setEmail('jorgematemartinez@gmail.com');
-        #$user->setTel('(+34) 636 831 823');
+        $user->setTel('(+34) 636 831 823');
 
         $this->passUniversalEncoded = $this->passwordEncoder->encodePassword(
             $user,
@@ -65,7 +65,7 @@ class Userfixtures extends Fixture
         );
 
         $user->setPassword($this->passUniversalEncoded);
-        #$user->setEnabled(true);
+        $user->setEnabled(true);
 
         $roles[] = 'ROLE_SUPER_ADMIN';
         $user->setRoles($roles);
