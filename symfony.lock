@@ -370,6 +370,9 @@
     "symfony/polyfill-intl-idn": {
         "version": "v1.17.0"
     },
+    "symfony/polyfill-intl-messageformatter": {
+        "version": "v1.17.0"
+    },
     "symfony/polyfill-intl-normalizer": {
         "version": "v1.17.0"
     },
@@ -524,6 +527,18 @@
     },
     "symfony/yaml": {
         "version": "v5.1.2"
+    },
+    "twig/extensions": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "a86723ee8d8b2f9437c8ce60a5546a1c267da5ed"
+        },
+        "files": [
+            "config/packages/twig_extensions.yaml"
+        ]
     },
     "twig/extra-bundle": {
         "version": "v3.0.3"
