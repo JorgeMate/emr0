@@ -8,12 +8,12 @@ use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use App\Entity\User;
-#use App\Entity\Center;
+use App\Entity\Center;
 
 class Userfixtures extends Fixture
 {
     #private $loadSuperUser = 1;
-    private $loadCenter = 0;
+    private $loadCenter = 1;
     /////////////////////////////
 
 

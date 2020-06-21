@@ -62,6 +62,12 @@ class User implements UserInterface
      */
     private $created_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Center::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $center;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -199,4 +205,68 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getCenter(): ?Center
+    {
+        return $this->center;
+    }
+
+    public function setCenter(?Center $center): self
+    {
+        $this->center = $center;
+
+        return $this;
+    }
+
+
+
+
+
+
+
+
+    
+
+
+    public function getCenterUser(){
+        if ($this->getCenter()) {
+            return ($this === $this->getCenter()->getUser());
+        } else {
+            return false;
+        }
+    }
+
+    public function setAdmin(bool $admin)
+    {
+        if($admin || $this->getCenterUser()){
+            if (!in_array('ROLE_SUPER_ADMIN', $this->getRoles())) {
+                $this->setRoles(['ROLE_ADMIN']);
+            }
+            $this->setEnabled(true);
+        } else {
+            $this->setRoles([]);            
+        }
+        
+        return $this;
+    }
+
+    public function setCenterUser(bool $update)
+    {
+        if($update) {
+            $this->getCenter()->setUser($this);
+            // Hacemos administrador a este usuario
+            $this->setAdmin(true);
+        } else {
+            $this->getCenter()->setUser(null);
+        }
+
+        return $this;
+        
+    }
+
+
+
+
+
+
 }
