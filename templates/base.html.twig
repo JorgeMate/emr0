@@ -17,17 +17,31 @@
         {% endblock %}
 
     </head>
-    <body>
+
+    <body id="{% block body_id %}{% endblock %}">
 
         {% block navbar %}
             {{ include('_navbar.html.twig') }}
         {% endblock %} 
 
 
-        {% block body %}{% endblock %}
+        <div class="container body-container">
+
+            {% block header %}
+            {% endblock %}
+
+            {{ include('_flash_messages.html.twig') }}
+        
+            {% block body %}
+            {% endblock %}
+
+        </div> 
+
         {% block javascripts %}
             <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>        
             <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
         {% endblock %}
+
     </body>
+
 </html>

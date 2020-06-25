@@ -77,6 +77,12 @@ class Center
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Gedmo\Slug(fields={"name"}) 
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -201,6 +207,7 @@ class Center
         return $this;
     }
 
+    // Ojo !
     public function removeUser(User $user): self
     {
         if ($this->users->contains($user)) {
@@ -237,4 +244,31 @@ class Center
 
         return $this;
     }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+
+
+
+    public function getPatientsNo() 
+    {
+        $patientsNo = 0;
+        foreach ($this->users as $user) {
+            $patientsNo += $user->getPatients()->count();
+        }
+        return $patientsNo;
+    } 
+
+
+
 }

@@ -1,0 +1,111 @@
+{% extends 'base93.html.twig' %}
+
+{% block body_id 'user_edit' %}
+
+{% block main %}
+
+    {% if app.user.id != user.id and is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %} 
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+
+                {% if is_granted('ROLE_SUPER_ADMIN') %} 
+                    <li class="breadcrumb-item"><a href="{{ path('super_cpanel') }}">{{ 'title.super_cpanel'|trans }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ path('centers_index') }}">{{ 'title.centers_list'|trans }}</a></li>
+                {% endif %}
+
+                {% if is_granted('ROLE_ADMIN') and not is_granted('ROLE_SUPER_ADMIN') %} 
+                        <li class="breadcrumb-item"><a href="{{ path('center_cpanel', {slug:app.user.center.slug}) }}">{{ 'title.center_cpanel'|trans }}</a></li>
+                {% endif %}
+
+                <li class="breadcrumb-item aria-current=page"><a href="{{ path('users_index', {slug:app.user.center.slug}) }}">{{ user.center.name }}</a></li>
+                
+            </ol>
+        </nav>
+
+    {% endif %}
+
+    <div class="row justify-content-between">
+
+        <div class="col">
+            <h4>{{ 'title.edit_user'|trans }} <i class="far fa-user"></i> <span class="text-success">{{ user.email }}</span></h4>
+        </div>        
+        <div class="col text-right">
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+            <h5>{{ 'label.recorded'|trans }}: {{user.createdAt|date("d/m/Y") }} </h5>
+                {% if 'ROLE_ADMIN' in user.roles %}
+                    {{ 'title.center_cpanel'|trans }} <i class="fas fa-key text-info"></i> 
+                {% endif %}        
+                {% if user.centerUser == user.id %}
+                    {{ 'title.center_owner'|trans }} <i class="fas fa-key text-warning"></i> 
+                {% endif %}        
+            {% endif %}        
+        </div>     
+        
+    </div>    
+
+    {{ form_start(form) }}
+
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+
+{% block sidebar %}
+
+    {% if app.user.id == user.id %}
+    {# Cambiamos SOLO la contraseña propia #} 
+
+        <div class="row">
+
+            <div class="col-sm">
+
+                <a href="" class="btn btn-lg btn-block btn-danger">
+                    <i class="fa fa-lock" aria-hidden="true"></i> {{ 'action.change_password'|trans }}
+                </a>
+
+            </div>
+
+        </div>
+
+        <br>
+
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+    
+    <div class="row">
+
+        <div class="col-sm">
+                
+            <div class="card">
+
+                <div class="card-header">
+                    <h5>{{ 'security.title'|trans }}</h5>
+                </div>
+
+                <div class="card-body">
+            
+                    <h6 class="card-text text-primary">
+                        <i class="fas fa-key text-warning"></i> {{ 'title.center_owner'|trans }}<br>{{ 'security.owner_1'|trans }}
+                    </h6>
+
+                    <br>
+
+                    <h6 class="card-text text-primary">
+                        <i class="fas fa-key text-info"></i> {{ 'title.center_cpanel'|trans }}<br>{{ 'security.admin_1'|trans }}
+                    </h6>
+                    <br>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+                
+    {% endif %}
+    
+{% endblock %}

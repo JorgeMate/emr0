@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panel{% endblock %}
+
+{% block header %}
+    {{ include('_header.html.twig') }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+
+        <div class="col-sm-3">
+            <p>
+                <i class="fas fa-users"></i> {{ 'title.patients'|trans|upper }}
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="fas fa-notes-medical"></i> <a href="">{{ 'action.new'|trans }} {{ 'label.patient'|trans }}</a></li>
+                        <li class="list-group-item"><i class="fas fa-list-ol"></i> <a href="">{{ 'label.last.records'|trans }}</a></li>
+                        <li class="list-group-item"><i class="fas fa-search"></i> <a href="">{{ 'search_for'|trans }}</a></li>
+                    </ul>
+
+            </p>    
+        </div>
+
+        <div class="col-sm-3">
+                <p>
+                    <i class="far fa-calendar-alt"></i> <a href="">Agendas</a>
+                    <ul>
+                   
+                    </ul>
+                </p>    
+        </div>
+    
+
+        <div class="col-sm-3">
+                <p>
+                    <i class="far fa-folder-open"></i> {{'label.docs'|trans}}
+                    <ul>
+                    </ul>
+                </p>    
+        </div>
+    </div>
+    
+{% endblock %}

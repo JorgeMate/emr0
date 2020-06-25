@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use App\Form\UserType;
+
 
 /**
  * Controller used to manage current user.
@@ -23,9 +25,9 @@ class UserController extends AbstractController
     /**
      * @Route("/cpanel", name="user_cpanel")
      */
-    public function index()
+    public function cpanel()
     {
-        return $this->render('user/index.html.twig', [
+        return $this->render('user/cpanel.html.twig', [
             'controller_name' => 'UserController',
         ]);
     }
@@ -37,9 +39,7 @@ class UserController extends AbstractController
     {
 
         $user = $this->getUser();
-        #$slug = $user->getCenter()->getSlug();
-
-        if(false){
+        $slug = $user->getCenter()->getSlug();
 
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -52,11 +52,10 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_cpanel', ['slug' => $slug]);
         }
 
-        }
-
+        
         return $this->render('user/edit.html.twig', [
             'user' => $user,
-        #    'form' => $form->createView(),
+            'form' => $form->createView(),
         ]);
 
     }

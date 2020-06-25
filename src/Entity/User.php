@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -67,6 +69,16 @@ class User implements UserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $center;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Patient::class, mappedBy="user")
+     */
+    private $patients;
+
+    public function __construct()
+    {
+        $this->patients = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -225,9 +237,16 @@ class User implements UserInterface
 
 
 
+
+
+    public function getAdmin(){
+
+        if (in_array('ROLE_ADMIN', $this->getRoles()) 
+                || in_array('ROLE_SUPER_ADMIN', $this->getRoles())) {
+            return true;
+        }
+    }
     
-
-
     public function getCenterUser(){
         if ($this->getCenter()) {
             return ($this === $this->getCenter()->getUser());
@@ -262,6 +281,37 @@ class User implements UserInterface
 
         return $this;
         
+    }
+
+    /**
+     * @return Collection|Patient[]
+     */
+    public function getPatients(): Collection
+    {
+        return $this->patients;
+    }
+
+    public function addPatient(Patient $patient): self
+    {
+        if (!$this->patients->contains($patient)) {
+            $this->patients[] = $patient;
+            $patient->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePatient(Patient $patient): self
+    {
+        if ($this->patients->contains($patient)) {
+            $this->patients->removeElement($patient);
+            // set the owning side to null (unless already changed)
+            if ($patient->getUser() === $this) {
+                $patient->setUser(null);
+            }
+        }
+
+        return $this;
     }
 
 

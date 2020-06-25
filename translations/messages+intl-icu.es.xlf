@@ -243,7 +243,7 @@
             </trans-unit>
             <trans-unit id="action.change_password">
                 <source>action.change_password</source>
-                <target>Cambiar su contraseña</target>
+                <target>Su contraseña</target>
             </trans-unit>
             <trans-unit id="info.change_password">
                 <source>info.change_password</source>
@@ -553,7 +553,18 @@
             </trans-unit>
 
 
-
+            <trans-unit id="label.doc_groups">
+                <source>label.doc_groups</source>
+                <target>Grupos de documentos disponibles</target>
+            </trans-unit>
+            <trans-unit id="label.doc_group">
+                <source>label.doc_group</source>
+                <target>Grupos de documentos</target>
+            </trans-unit>
+            <trans-unit id="label.docs">
+                <source>label.docs</source>
+                <target>Documentos</target>
+            </trans-unit>
 
 
 
