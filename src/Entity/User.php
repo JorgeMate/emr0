@@ -80,6 +80,14 @@ class User implements UserInterface
      */
     private $medic;
 
+
+
+
+
+
+
+
+    
     public function __construct()
     {
         $this->patients = new ArrayCollection();

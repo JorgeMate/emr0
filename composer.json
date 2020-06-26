@@ -5,8 +5,10 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "fzaninotto/faker": "^1.9",
         "gedmo/doctrine-extensions": "^2.4",
         "sensio/framework-extra-bundle": "^5.1",
+        "sensiolabs/security-checker": "^6.0",
         "stof/doctrine-extensions-bundle": "^1.4",
         "symfony/asset": "5.1.*",
         "symfony/console": "5.1.*",
@@ -70,7 +72,8 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "security-checker security:check": "script"
         },
         "post-install-cmd": [
             "@auto-scripts"
