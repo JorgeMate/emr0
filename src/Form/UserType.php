@@ -72,10 +72,10 @@ class UserType extends AbstractType
                     'label' => 'label.email'
                 ]);
 
-                #$form->add('medic', CheckboxType::class, [
-                #    'label' => 'Medic Role',
-                #    'required' => false,
-                #]);
+                $form->add('medic', CheckboxType::class, [
+                    'label' => 'Medic Role',
+                    'required' => false,
+                ]);
 
             } else {
 

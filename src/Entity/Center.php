@@ -83,6 +83,16 @@ class Center
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="string", length=127, nullable=true)
+     */
+    private $ssaas_account_name;
+
+    /**
+     * @ORM\Column(type="string", length=127, nullable=true)
+     */
+    private $ssaas_api_key;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -267,6 +277,30 @@ class Center
             $patientsNo += $user->getPatients()->count();
         }
         return $patientsNo;
+    }
+
+    public function getSsaasAccountName(): ?string
+    {
+        return $this->ssaas_account_name;
+    }
+
+    public function setSsaasAccountName(?string $ssaas_account_name): self
+    {
+        $this->ssaas_account_name = $ssaas_account_name;
+
+        return $this;
+    }
+
+    public function getSsaasApiKey(): ?string
+    {
+        return $this->ssaas_api_key;
+    }
+
+    public function setSsaasApiKey(?string $ssaas_api_key): self
+    {
+        $this->ssaas_api_key = $ssaas_api_key;
+
+        return $this;
     } 
 
 

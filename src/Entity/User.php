@@ -44,7 +44,7 @@ class User implements UserInterface
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=127)
+     * @ORM\Column(type="string", length=127, nullable=true)
      */
     private $lastname;
 
@@ -74,6 +74,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Patient::class, mappedBy="user")
      */
     private $patients;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $medic;
 
     public function __construct()
     {
@@ -310,6 +315,18 @@ class User implements UserInterface
                 $patient->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMedic(): ?bool
+    {
+        return $this->medic;
+    }
+
+    public function setMedic(?bool $medic): self
+    {
+        $this->medic = $medic;
 
         return $this;
     }

@@ -17,7 +17,7 @@
                     {% if app.user %} 
     
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('user_cpanel', {} ) }}">
+                            <a class="nav-link" href="{{ path('user_cpanel', {slug:app.user.center.slug} ) }}">
                                 <i class="fa fa-home" aria-hidden="true"></i> {{ 'menu.homepage'|trans }}
                             </a>
                         </li>

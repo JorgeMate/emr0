@@ -63,7 +63,7 @@
             {% for user in users %}
             <tr>
                 <td> 
-                {% if not is_granted('ROLE_PREVIOUS_ADMIN') %}
+                {% if not is_granted('IS_IMPERSONATOR') %}
                     <a href="{{ path('user_cpanel', {slug:app.user.center.slug, _switch_user:user.email} ) }}">
                         <i class="fas fa-user-shield text-danger"></i>
                     </a>
@@ -141,7 +141,7 @@
 
 {% block sidebar %}
 
-    {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+    {% if is_granted('IS_IMPERSONATOR') %}
         <a href="{{ path('users_index', {slug:center.slug,'_switch_user': '_exit'}) }}" class="btn btn-block btn-danger">
             <i class="fas fa-user-shield"></i> Exit impersonation
         </a>

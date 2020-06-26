@@ -7,7 +7,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+
 use App\Entity\Center;
+
+use App\Form\CenterType;
 
 /**
  * Controller used to manage ALL !!!
@@ -49,6 +55,32 @@ class SuperController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/center/new", methods={"GET", "POST"}, name="center_new")
+     */
+    public function centerNew(Request $request): Response
+    {
+        $center = new Center();
+        $center->setEnabled(true);
+        
+        $form = $this->createForm(CenterType::class, $center);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->getDoctrine()->getManager()->persist($center);
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'record.updated_successfully');
+
+            return $this->redirectToRoute('centers_index');
+        }
+
+        return $this->render('super/center/new.html.twig', [
+            'center' => $center,
+            'form' => $form->createView(),
+        ]);
+    }    
 
 
 

@@ -46,6 +46,77 @@
 
     {{ form_start(form) }}
 
+        <div class="form-row">
+
+            {% if app.user.id != user.id %} 
+
+                <div class="form-group col-auto">
+                    {{ form_row(form.enabled) }}
+                </div> 
+                {% if app.user.centerUser == app.user.center.id or is_granted('ROLE_SUPER_ADMIN') %}        
+                <div class="form-group col-auto">
+                    {{ form_row(form.admin) }}
+                </div>
+                {% endif %}
+                {% if is_granted('ROLE_SUPER_ADMIN') %}        
+                <div class="form-group col-auto">
+                    {{ form_row(form.center_user) }}
+                </div>
+                {% endif %}
+
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}        
+
+                <div class="form-group col-auto text-right"> <i class="fas fa-user-md"></i></div>
+                <div class="form-group col-auto">
+                    {{ form_row(form.medic) }}
+                </div>
+            {% endif %}
+
+        </div> 
+
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                {{ form_row(form.email) }}
+            </div>
+            <div class="form-group col-md-4">
+                {{ form_row(form.tel) }}
+            </div> 
+        </div>
+    
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                {{ form_row(form.firstname) }}
+            </div>        
+            <div class="form-group col-md-4">
+                {{ form_row(form.lastname) }}
+            </div>
+        </div>
+
+        <div class="form-row justify-content-between">  
+
+            <div class="form-group col-sm-3">
+                {% if app.user != user or is_granted('ROLE_SUPER_ADMIN') %}
+                <div class="form-group text-right">
+                    <a href="{{ path('users_index', {slug:app.user.center.slug}) }}" class="btn btn-block btn-success">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i> {{ 'title.users_list'|trans }}
+                    </a>
+                </div>
+                {% else %} 
+                    <a href="{{ path('user_cpanel', {slug:app.user.center.slug} ) }}" class="btn btn-block btn-success">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i> {{ 'label.cancel'|trans }}
+                    </a>                
+                {% endif %} 
+            </div>            
+
+            <div class="form-group col-sm-3">
+                <button type="submit" class="btn btn-block btn-primary">
+                    <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.save'|trans }}
+                </button>
+            </div>
+
+        </div>
 
     {{ form_end(form) }}
 
@@ -61,7 +132,7 @@
 
             <div class="col-sm">
 
-                <a href="" class="btn btn-lg btn-block btn-danger">
+                <a href="{{ path('user_change_password') }}" class="btn btn-lg btn-block btn-danger">
                     <i class="fa fa-lock" aria-hidden="true"></i> {{ 'action.change_password'|trans }}
                 </a>
 
