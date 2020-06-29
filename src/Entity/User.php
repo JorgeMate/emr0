@@ -65,7 +65,7 @@ class User implements UserInterface
     private $created_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Center::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Center::class, inversedBy="users", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $center;
@@ -79,6 +79,41 @@ class User implements UserInterface
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $medic;
+
+    /**
+     * @ORM\Column(type="string", length=3, nullable=true)
+     */
+    private $cod;
+
+    /**
+     * @ORM\Column(type="string", length=15, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="string", length=127, nullable=true)
+     */
+    private $speciality;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $internal;
+
+    /**
+     * @ORM\Column(type="string", length=63, nullable=true)
+     */
+    private $tax_code;
+
+    /**
+     * @ORM\Column(type="string", length=63, nullable=true)
+     */
+    private $reg_code1;
+
+    /**
+     * @ORM\Column(type="string", length=63, nullable=true)
+     */
+    private $reg_code2;
 
 
 
@@ -335,6 +370,90 @@ class User implements UserInterface
     public function setMedic(?bool $medic): self
     {
         $this->medic = $medic;
+
+        return $this;
+    }
+
+    public function getCod(): ?string
+    {
+        return $this->cod;
+    }
+
+    public function setCod(?string $cod): self
+    {
+        $this->cod = $cod;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getSpeciality(): ?string
+    {
+        return $this->speciality;
+    }
+
+    public function setSpeciality(?string $speciality): self
+    {
+        $this->speciality = $speciality;
+
+        return $this;
+    }
+
+    public function getInternal(): ?bool
+    {
+        return $this->internal;
+    }
+
+    public function setInternal(?bool $internal): self
+    {
+        $this->internal = $internal;
+
+        return $this;
+    }
+
+    public function getTaxCode(): ?string
+    {
+        return $this->tax_code;
+    }
+
+    public function setTaxCode(?string $tax_code): self
+    {
+        $this->tax_code = $tax_code;
+
+        return $this;
+    }
+
+    public function getRegCode1(): ?string
+    {
+        return $this->reg_code1;
+    }
+
+    public function setRegCode1(?string $reg_code1): self
+    {
+        $this->reg_code1 = $reg_code1;
+
+        return $this;
+    }
+
+    public function getRegCode2(): ?string
+    {
+        return $this->reg_code2;
+    }
+
+    public function setRegCode2(?string $reg_code2): self
+    {
+        $this->reg_code2 = $reg_code2;
 
         return $this;
     }

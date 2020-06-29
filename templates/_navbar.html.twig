@@ -68,7 +68,7 @@
 
                                 {% if is_granted('ROLE_ADMIN') and not is_granted('ROLE_SUPER_ADMIN') %} 
                                     <li>
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{ path('center_cpanel', {slug:app.user.center.slug}) }}">
                                             {% if app.user.centerUser == app.user.id %}    
                                                 <i class="fa fa-key text-warning" aria-hidden="true"></i> 
                                             {% else %}

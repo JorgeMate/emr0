@@ -1,20 +1,86 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CenterController!{% endblock %}
+{% block pag_name %}{{ 'title.center_cpanel'|trans }}{% endblock %}
+
+{% block header %}
+    {{ include('_header.html.twig') }}
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="row">
+    
+    <div class="col-sm-3">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/jorge/code/emr0/src/Controller/CenterController.php'|file_link(0) }}">src/Controller/CenterController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/jorge/code/emr0/templates/center/index.html.twig'|file_link(0) }}">templates/center/index.html.twig</a></code></li>
-    </ul>
+        <div class="card">
+            <div class="card-header"> 
+                <h5><i class="fas fa-users"></i> {{ 'label.users'|trans }}</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="far fa-list-alt"></i> <a href="{{ path('users_index',{slug:center.slug}) }}"> {{ 'title.users_list'|trans }}</a></li>
+                    <li class="list-group-item"><i class="fas fa-user-md"></i> <a href=""> {{ 'label.medic.users'|trans }}</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="col-sm-3">
+
+        <div class="card">
+            <div class="card-header"> 
+                <h5><i class="fas fa-sitemap"></i> {{ 'entity.title'|trans }}</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fas fa-ambulance"></i> <a href=""> {{ 'entity.title_inss'|trans }}</a></li>
+                    <li class="list-group-item"><i class="far fa-question-circle"></i> <a href=""> {{ 'entity.title_sou'|trans }}</a></li>
+                    <li class="list-group-item"><i class="fas fa-briefcase-medical"></i> <a href=""> {{ 'label.treatments'|trans }}</a></li>
+                    <li class="list-group-item"><i class="fas fa-hospital-alt"></i> <a href=""> {{ 'label.places'|trans }}</a></li>
+                    
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-sm-3">
+
+        <div class="card">
+            <div class="card-header"> 
+                <h5><i class="far fa-folder-open"></i> <a href=""> {{'label.doc_groups'|trans}}</a></h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for group in groups %}
+                    <li class="list-group-item"><i class="far fa-file-alt"></i> <a href="">{{ group.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="col-sm-3">
+
+        <div class="card">
+            <div class="card-header"> 
+                <h5><i class="fas fa-cog"></i> Program Settings</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fas fa-toggle-on"></i> <a href=""> Program Options</a></li>
+                    <li class="list-group-item"><i class="fas fa-lock-open"></i> <a href=""> Premissions</a></li>
+                    
+                    <li class="list-group-item"></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
 </div>
-{% endblock %}
+
+{% endblock %} 

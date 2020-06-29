@@ -2,28 +2,64 @@
 
 namespace App\DataFixtures;
 
-#use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
+use Faker\ORM\Doctrine\Populator;
 
 use App\Entity\Center;
 use App\Entity\User;
 
 
-class UserFixtures extends AppFixtures
+class UserFixtures extends Fixture
 {
+    private $locale = 'nl_NL';
+    private $repeatData = true;
 
-    private $passwordEncoder;
+    private $generator;
+    private $populator;
 
-        public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    private $manager;
+    private $encoder;
+
+    private $passUniversal = '4444';
+
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+        $this->generator = \Faker\Factory::create($this->locale);        
+    }
+
+
+    public function load(ObjectManager $manager, $loadsuper = 1)
+    {
+        $this->populator = new Populator($this->generator, $manager);
+        $this->manager = $manager;
+
+        if($loadsuper)
         {
-            $this->passwordEncoder = $passwordEncoder;
+            $this->loadSuper();
         }
 
 
-    public function load(ObjectManager $manager)
+
+
+
+
+        $manager->flush();
+    }
+
+
+
+
+
+
+    private function loadSuper()
     {
+
         $center = new Center();
         $center->setName('Kimberly Systems SLU');
         $center->setContactPerson('Jorge Maté Martínez');
@@ -34,18 +70,9 @@ class UserFixtures extends AppFixtures
         $center->setCity('Altea');
         $center->setEnabled(true);
         
-        $manager->persist($center);
+        $this->manager->persist($center);
 
         $user = new User();
-
-        
-        $this->passUniversalEncoded = $this->passwordEncoder->encodePassword(
-            $user,
-            $this->passUniversal
-        );
-
-
-
         $user->setCenter($center);
         $user->setCenterUser(true);
         $user->setFirstName('Jorge');
@@ -53,13 +80,22 @@ class UserFixtures extends AppFixtures
         $user->setEmail('jorgematemartinez@gmail.com');
         $user->setTel('(+34) 636 831 823');
 
+        $this->passUniversalEncoded = $this->encoder->encodePassword(
+            $user,
+            $this->passUniversal
+        );
 
-        $user->setPassword($this->passwordEncoder->encodePassword(
-                         $user,
-                         '4444'
-                     ));
+        $user->setPassword($this->passUniversalEncoded);
+        $user->setEnabled(true);
 
-        $manager->persist($user);
-        $manager->flush();
+        $roles[] = 'ROLE_SUPER_ADMIN';
+        $user->setRoles($roles);
+        
+        $this->manager->persist($user);
+        $this->manager->flush();
     }
+
+    
+
+
 }

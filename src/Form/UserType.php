@@ -73,7 +73,7 @@ class UserType extends AbstractType
                 ]);
 
                 $form->add('medic', CheckboxType::class, [
-                    'label' => 'Medic Role',
+                    'label' => 'label.medic_role',
                     'required' => false,
                 ]);
 

@@ -29,13 +29,27 @@ use App\Form\NewUserType;
  */
 class CenterController extends AbstractController
 {
+ 
+ 
     /**
-     * @Route("/center", name="center_cpanel")
+     * @Route("/{slug}/cpanel", methods={"GET"}, name="center_cpanel")
      */
-    public function cpanel()
+    public function centerCpanel($slug): Response
     {
+
+        $center = $this->getUser()->getCenter();
+        $this->denyAccessUnlessGranted('CENTER_EDIT', $center);
+        $user = $this->getUser();
+
+        # $groups = $center->getCenterDocGroups();
+
+        $groups = null;
+
         return $this->render('center/cpanel.html.twig', [
-            'controller_name' => 'CenterController',
+
+            'user' => $user,
+            'center' => $center,
+            'groups' => $groups,
         ]);
     }
 

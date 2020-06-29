@@ -545,6 +545,11 @@
                 <target>Datum van voltooiing</target>
             </trans-unit>
 
+            <trans-unit id="label.medic_role">
+                <source>label.medic_role</source>
+                <target>Medic Rol</target>
+            </trans-unit>
+
         
         </body>
     </file>
