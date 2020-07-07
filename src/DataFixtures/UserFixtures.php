@@ -34,7 +34,7 @@ class UserFixtures extends Fixture
     }
 
 
-    public function load(ObjectManager $manager, $loadsuper = 1)
+    public function load(ObjectManager $manager, $loadsuper = 1, $seedCenters = 3)
     {
         $this->populator = new Populator($this->generator, $manager);
         $this->manager = $manager;
@@ -42,6 +42,11 @@ class UserFixtures extends Fixture
         if($loadsuper)
         {
             $this->loadSuper();
+        }
+
+        if($seedCenters)
+        {
+
         }
 
 
