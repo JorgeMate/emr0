@@ -7,3 +7,6 @@ twig:
         # 'form/layout.html.twig'
         # 'form/fields.html.twig'
 
+
+    globals:
+        app_name: '%env(APP_NAME)%'

@@ -16,4 +16,16 @@ class DefaultController extends AbstractController
             # 'controller_name' => 'DefaultController',
         ]);
     }
+
+
+
+    
+    /**
+     * @Route("/register", name="register")
+     */
+    public function register()
+    {
+    }
+
+
 }

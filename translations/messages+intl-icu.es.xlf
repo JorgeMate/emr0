@@ -285,6 +285,26 @@
                 <target>Nueva cuenta de usuario</target>
             </trans-unit>
 
+
+
+
+
+
+            <trans-unit id="label.request_password">
+                <source>label.request_password</source>
+                <target>Introduzca una contraseña por favor</target>
+            </trans-unit>
+
+            <trans-unit id="label.pass_min">
+                <source>label.pass_min</source>
+                <target>Su contraseña ha de tener al menos 6 caracteres</target>
+            </trans-unit>
+
+            <trans-unit id="label.pass_match">
+                <source>label.pass_match</source>
+                <target>Los campos de contraseña deben coincidir.</target>
+            </trans-unit>
+
             <trans-unit id="label.forgot_password">
                 <source>label.forgot_password</source>
                 <target>Olvidé mi contraseña</target>
@@ -300,27 +320,57 @@
                 <target>Utilize su dirección de email</target>
             </trans-unit>
 
+
             <trans-unit id="text.resetting_help">
                 <source>text.resetting_help</source>
-                <target>Recibirá un email con un enlace e instrucciones para recuperar su contraseña. Esta acción solo será válida durante un periodo de tiempo determinado.</target>
+                <target>Recibirá un email con instrucciones para recuperar su contraseña. Esta opción estará disponible solo temporalmente.</target>
             </trans-unit>
 
-            <trans-unit id="label.resetting_sent">
-                <source>label.resetting_sent</source>
-                <target>Le hemos enviado un email. Siga sus instrucciones</target>
+            <trans-unit id="text.resetting_help1">
+                <source>text.resetting_help1</source>
+                <target>Recibirá un email con un enlace e instrucciones para recuperar su contraseña. Esta acción solo será válida durante un periodo de</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_help2">
+                <source>text.resetting_help2</source>
+                <target>Si no recibe ningún email revise su carpeta de spam o</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_help3">
+                <source>text.resetting_help3</source>
+                <target>inténtelo otra vez</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_sent">
+                <source>text.resetting_sent</source>
+                <target>Email Enviado</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_email">
+                <source>text.resetting_email</source>
+                <target>Ha solicitado recuperar su contraseña. Para proceder, visite</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_email1">
+                <source>text.resetting_email1</source>
+                <target>este enlace.</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_email2">
+                <source>text.resetting_email2</source>
+                <target>Esta opción estará disponible durante</target>
             </trans-unit>
 
 
-            <trans-unit id="resetting.check_email">
-                <source>resetting.check_email</source>
-                <target>Le hemos enviado un email. Contiene un enlace que debe seguir para cambiar su contraseña. 
-                Solo puede solicitar la renovación de su contraseña una vez cada</target>
+
+
+            <trans-unit id="text.resetting_problem">
+                <source>text.resetting_problem</source>
+                <target>Ha habido un problema al procesar su solicitud de cambio de contraseña.</target>
             </trans-unit>
 
-            <trans-unit id="resetting.check_email2">
-                <source>resetting.check_email2</source>
-                <target>horas.</target>
-            </trans-unit>
+
+
 
             <trans-unit id="title.center_owner">
                 <source>title.center_owner</source>

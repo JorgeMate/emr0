@@ -288,11 +288,28 @@
                 <target>Nieuw gebruikersaccount</target>
             </trans-unit>
 
+
+
+
+            <trans-unit id="label.request_password">
+                <source>label.request_password</source>
+                <target>voer een wachtwoord in alstublieft</target>
+            </trans-unit>
+
+            <trans-unit id="label.pass_min">
+                <source>label.pass_min</source>
+                <target>Uw wachtwoord moet minimaal 6 tekens bevatten</target>
+            </trans-unit>
+
+            <trans-unit id="label.pass_match">
+                <source>label.pass_match</source>
+                <target>De wachtwoordvelden moeten overeenkomen.</target>
+            </trans-unit>
+
             <trans-unit id="label.forgot_password">
                 <source>label.forgot_password</source>
                 <target>Ik ben mijn wachtwoord vergeten</target>
             </trans-unit>
-
 
             <trans-unit id="title.resetting_request">
                 <source>title.resetting_request</source>
@@ -310,10 +327,55 @@
                 <target>U ontvangt een e-mail met instructies om uw wachtwoord te herstellen. Het is geldig voor een bepaalde periode.</target>
             </trans-unit>
 
-            <trans-unit id="label.resetting_sent">
-                <source>label.resetting_sent</source>
-                <target>Er is een e-mail naar je verzonden. Volg de instructies.</target>
+            <trans-unit id="text.resetting_help1">
+                <source>text.resetting_help1</source>
+                <target>Er is een e-mail verzonden met een link waarop u kunt klikken om uw wachtwoord opnieuw in te stellen. Deze link verloopt over</target>
             </trans-unit>
+
+            <trans-unit id="text.resetting_help2">
+                <source>text.resetting_help2</source>
+                <target>Als u geen e-mail ontvangt, controleer dan uw spam-map of</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_help3">
+                <source>text.resetting_help3</source>
+                <target>probeer het opnieuw</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_sent">
+                <source>text.resetting_sent</source>
+                <target>Wachtwoord Reset e-mail verzonden</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_email">
+                <source>text.resetting_email</source>
+                <target>U heeft verzocht om een wachtwoordherstel. Ga naar om uw wachtwoord opnieuw in te stellen</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_email1">
+                <source>text.resetting_email1</source>
+                <target>deze link</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_email2">
+                <source>text.resetting_email2</source>
+                <target>dat geldt voor</target>
+            </trans-unit>
+
+
+
+
+
+            <trans-unit id="text.resetting_problem">
+                <source>text.resetting_problem</source>
+                <target>Er is een probleem opgetreden bij het verwerken van uw verzoek voor het opnieuw instellen van uw wachtwoord.</target>
+            </trans-unit>
+
+
+
+
+
+
 
             <trans-unit id="title.center_owner">
                 <source>title.center_owner</source>

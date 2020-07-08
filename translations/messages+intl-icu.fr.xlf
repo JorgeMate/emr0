@@ -284,6 +284,24 @@
                 <target>Nouveau compte utilisateur</target>
             </trans-unit>
 
+
+
+
+            <trans-unit id="label.request_password">
+                <source>label.request_password</source>
+                <target>Veuillez entrer un mot de passe</target>
+            </trans-unit>
+
+            <trans-unit id="label.pass_min">
+                <source>label.pass_min</source>
+                <target>Votre mot de passe doit contenir au moins 6 caractères</target>
+            </trans-unit>
+
+            <trans-unit id="label.pass_match">
+                <source>label.pass_match</source>
+                <target>Les champs de mot de passe doivent correspondre.</target>
+            </trans-unit>
+
             <trans-unit id="label.forgot_password">
                 <source>label.forgot_password</source>
                 <target>j'ai oublié mon mot de passe</target>
@@ -304,10 +322,54 @@
                 <target>Vous recevrez un email avec les instructions pour récupérer votre mot de passe. Ce sera valable pour une période de temps.</target>
             </trans-unit>
 
-            <trans-unit id="label.resetting_sent">
-                <source>label.resetting_sent</source>
-                <target>Un email vous a été envoyé. Suivez ses instructions.</target>
+            <trans-unit id="text.resetting_help1">
+                <source>text.resetting_help1</source>
+                <target>Un e-mail a été envoyé contenant un lien sur lequel vous pouvez cliquer pour réinitialiser votre mot de passe. Ce lien expirera dans</target>
             </trans-unit>
+
+            <trans-unit id="text.resetting_help2">
+                <source>text.resetting_help2</source>
+                <target>Si vous ne recevez pas d'e-mail, veuillez vérifier votre dossier spam ou</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_help3">
+                <source>text.resetting_help3</source>
+                <target>réessayer</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_sent">
+                <source>text.resetting_sent</source>
+                <target>Email de réinitialisation du mot de passe envoyé</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_email">
+                <source>text.resetting_email</source>
+                <target>Vous avez demandé une récupération de mot de passe. Pour réinitialiser votre mot de passe, veuillez visiter</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_email1">
+                <source>text.resetting_email1</source>
+                <target>ce lien</target>
+            </trans-unit>
+
+            <trans-unit id="text.resetting_email2">
+                <source>text.resetting_email2</source>
+                <target>qui sera valable pour</target>
+            </trans-unit>
+
+
+
+
+            <trans-unit id="text.resetting_problem">
+                <source>text.resetting_problem</source>
+                <target>Un problème est survenu lors du traitement de votre demande de réinitialisation de mot de passe.</target>
+            </trans-unit>
+
+
+
+
+
+
 
             <trans-unit id="title.center_owner">
                 <source>title.center_owner</source>

@@ -132,6 +132,7 @@ class ResetPasswordController extends AbstractController
 
     private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer): RedirectResponse
     {
+
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy([
             'email' => $emailFormData,
         ]);
@@ -147,8 +148,12 @@ class ResetPasswordController extends AbstractController
         try {
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);
         } catch (ResetPasswordExceptionInterface $e) {
-            $this->addFlash('reset_password_error', sprintf(
-                'There was a problem handling your password reset request - %s',
+
+
+            $this->addFlash('danger', 'text.resetting_problem');
+
+            $this->addFlash('danger', sprintf(
+                '%s',
                 $e->getReason()
             ));
 
@@ -156,7 +161,7 @@ class ResetPasswordController extends AbstractController
         }
 
         $email = (new TemplatedEmail())
-            ->from(new Address('noreply@kimberly-systems.nl', 'Kimberly Systems Mail Bot'))
+            ->from(new Address('noreply@kimberly-systems.nl', 'KBL mail Bot'))
             ->to($user->getEmail())
             ->subject('Your password reset request')
             ->htmlTemplate('reset_password/email.html.twig')
