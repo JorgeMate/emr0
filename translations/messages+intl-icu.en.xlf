@@ -328,7 +328,7 @@
 
             <trans-unit id="text.resetting_help">
                 <source>text.resetting_help</source>
-                <target>You will get an email with instructions to recover your password. This option only will be available for a while.</target>
+                <target>You will get an email with a link to recover your password. This option only will be available for a while.</target>
             </trans-unit>
 
 

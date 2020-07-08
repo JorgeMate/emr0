@@ -50,6 +50,7 @@ class DefaultController extends AbstractController
             $this->getDoctrine()->getManager()->persist($center);
             $this->getDoctrine()->getManager()->flush();
 
+
             // Insertamos el usuario/propietario
 
             $user = new User();
@@ -65,12 +66,21 @@ class DefaultController extends AbstractController
                 $this->passUniversal
             );
     
-
+            $user->setPassword($this->passUniversalEncoded);
+            $user->setEnabled(false);
+    
+            $roles[] = 'ROLE_ADMIN';
+            $user->setRoles($roles);
+            
+            $this->getDoctrine()->getManager()->persist($user);
+            $this->getDoctrine()->getManager()->flush();
+    
+            // Insertamos el usuario/propietario
 
 
             $this->addFlash('success', 'message.request_ok');
 
-            return $this->redirectToRoute('default');
+            return $this->redirectToRoute('reset-password');
         }
 
         return $this->render('default/register.html.twig', [

@@ -14,7 +14,10 @@
 
             <div class="col-8">
 
-                <p>{{ 'text.resetting_help1'|trans }} {{ tokenLifetime|date('g') }} h(s).</p>
+                <div class="alert alert-info" role="alert">
+                    <p>{{ 'text.resetting_help1'|trans }} {{ tokenLifetime|date('g') }} h(s).</p>
+                </div>
+
                 <p>{{ 'text.resetting_help2'|trans }} <a href="{{ path('app_forgot_password_request') }}">{{ 'text.resetting_help3'|trans }}</a>.</p>
 
             </div>

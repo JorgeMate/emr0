@@ -93,9 +93,15 @@ class Center
      */
     private $ssaas_api_key;
 
+    /**
+     * @ORM\OneToMany(targetEntity=DocCenterGroup::class, mappedBy="center")
+     */
+    private $docCenterGroups;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->docCenterGroups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -299,6 +305,37 @@ class Center
     public function setSsaasApiKey(?string $ssaas_api_key): self
     {
         $this->ssaas_api_key = $ssaas_api_key;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DocCenterGroup[]
+     */
+    public function getDocCenterGroups(): Collection
+    {
+        return $this->docCenterGroups;
+    }
+
+    public function addDocCenterGroup(DocCenterGroup $docCenterGroup): self
+    {
+        if (!$this->docCenterGroups->contains($docCenterGroup)) {
+            $this->docCenterGroups[] = $docCenterGroup;
+            $docCenterGroup->setCenter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocCenterGroup(DocCenterGroup $docCenterGroup): self
+    {
+        if ($this->docCenterGroups->contains($docCenterGroup)) {
+            $this->docCenterGroups->removeElement($docCenterGroup);
+            // set the owning side to null (unless already changed)
+            if ($docCenterGroup->getCenter() === $this) {
+                $docCenterGroup->setCenter(null);
+            }
+        }
 
         return $this;
     } 

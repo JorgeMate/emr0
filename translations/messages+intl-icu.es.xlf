@@ -259,7 +259,7 @@
             </trans-unit>
             <trans-unit id="label.new_password_confirm">
                 <source>label.new_password_confirm</source>
-                <target>Repita la nueva contraseña</target>
+                <target>Repita su nueva contraseña</target>
             </trans-unit>
 
             <trans-unit id="record.updated_successfully">
@@ -323,12 +323,12 @@
 
             <trans-unit id="text.resetting_help">
                 <source>text.resetting_help</source>
-                <target>Recibirá un email con instrucciones para recuperar su contraseña. Esta opción estará disponible solo temporalmente.</target>
+                <target>Recibirá un email con un enlace para recuperar su contraseña. Esta opción estará disponible solo temporalmente.</target>
             </trans-unit>
 
             <trans-unit id="text.resetting_help1">
                 <source>text.resetting_help1</source>
-                <target>Recibirá un email con un enlace e instrucciones para recuperar su contraseña. Esta acción solo será válida durante un periodo de</target>
+                <target>Recibirá un email con un enlace para recuperar su contraseña. Estará activo durante un periodo de</target>
             </trans-unit>
 
             <trans-unit id="text.resetting_help2">
