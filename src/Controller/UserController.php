@@ -26,7 +26,6 @@ use App\Form\Type\ChangePasswordType;
 class UserController extends AbstractController
 {
 
-
     /**
      * @Route("/{slug}/cpanel", methods={"GET","POST"}, name="user_cpanel")
      */
@@ -106,7 +105,7 @@ class UserController extends AbstractController
 
     }
 
-        /**
+    /**
      * @Route("/profile/change-password", methods={"GET", "POST"}, name="user_change_password")
      */
     public function changePassword(Request $request, UserPasswordEncoderInterface $encoder): Response

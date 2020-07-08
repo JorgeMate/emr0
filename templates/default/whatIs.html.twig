@@ -1,0 +1,27 @@
+    {% extends 'base.html.twig' %}
+
+{% block title %} {{ 'label.reg_whatIs'|trans }} {{ app_name }} ?{% endblock %}
+
+
+
+
+{% block body %}
+
+    <br>
+
+    <div class="page-hero d-flex align-items-center justify-content-center">
+        
+        <a href="{{ path('whatIs') }} ">{{ 'label.reg_whatIs'|trans }} {{ app_name }} ?</a>
+        
+    </div>
+
+
+    <br>
+
+    <div class="page-hero d-flex align-items-center justify-content-center">
+
+        <a href="{{ path('register') }} ">{{ 'label.reg_soli'|trans }}</a>
+        
+    </div>
+
+{% endblock %}

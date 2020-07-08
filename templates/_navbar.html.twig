@@ -2,7 +2,11 @@
 
         <div class="container">
 
-            <h4 class="text-primary">{{ app_name }} &nbsp;&nbsp;</h4>
+            {% if not app.user %} 
+
+                <h4 class="text-primary"><a href="{{ path('whatIs') }} ">{{ app_name }}</a> &nbsp;&nbsp;</h4>
+
+            {% endif %} 
 
             <a class="navbar-brand" href="{{ path('default') }}"><img src="{{ asset('assets/images/logoKS80x50.png') }}"></a>
 
@@ -38,19 +42,10 @@
                             </div>
                         </li>
 
-                        {% if false %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('contact') }}">TechMed</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                            </li>
-                        {% endif %}
-
 
                     {% else %}
 
-                        <a href="{{ path('register') }} ">Solicite una prueba</a>
+                       
 
                     {% endif %}
 

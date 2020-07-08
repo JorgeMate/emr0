@@ -90,7 +90,7 @@
             </trans-unit>
             <trans-unit id="title.center_new">
                 <source>title.center_new</source>
-                <target>Nuevo grupo (Centro Médico) de usuarios del sistema</target>
+                <target>Nuevo Centro</target>
             </trans-unit>
 
 
@@ -621,6 +621,25 @@
                 <target>Medic Rol</target>
             </trans-unit>
 
+            <trans-unit id="label.reg_whatIs">
+                <source>label.reg_whatIs</source>
+                <target>¿Qué es</target>
+            </trans-unit>
+
+            <trans-unit id="label.reg_soli">
+                <source>label.reg_soli</source>
+                <target>Solicite una prueba gratuita</target>
+            </trans-unit>
+
+            <trans-unit id="label.center_name">
+                <source>label.center_name</source>
+                <target>Nombre del Centro</target>
+            </trans-unit>
+
+            <trans-unit id="message.request_ok">
+                <source>message.request_ok</source>
+                <target>En breve recibirá un email con instrucciones</target>
+            </trans-unit>
 
 
 

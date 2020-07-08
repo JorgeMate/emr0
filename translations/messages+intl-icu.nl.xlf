@@ -612,6 +612,26 @@
                 <target>Medic Rol</target>
             </trans-unit>
 
+            <trans-unit id="label.reg_whatIs">
+                <source>label.reg_whatIs</source>
+                <target>Wat is</target>
+            </trans-unit>
+
+            <trans-unit id="label.reg_soli">
+                <source>label.reg_soli</source>
+                <target>Vraag een gratis proefperiode aan</target>
+            </trans-unit>
+
+            <trans-unit id="label.center_name">
+                <source>label.center_name</source>
+                <target>Center naam</target>
+            </trans-unit>
+
+            <trans-unit id="message.request_ok">
+                <source>message.request_ok</source>
+                <target>En breve recibirá un email con instrucciones</target>
+            </trans-unit>
+
         
         </body>
     </file>

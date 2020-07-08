@@ -6,6 +6,8 @@
 
         <div id="main" class="col-sm-9">
 
+            {{ include('_flash_messages.html.twig') }}
+
             {% block main %}
                 {# BLOQUE principal, 3/4 a la IZDA. #}
             {% endblock %}

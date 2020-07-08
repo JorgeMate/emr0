@@ -607,6 +607,25 @@
                 <target>Medic Rol</target>
             </trans-unit>
 
+            <trans-unit id="label.reg_whatIs">
+                <source>label.reg_whatIs</source>
+                <target>Qu'est-ce que</target>
+            </trans-unit>
+
+            <trans-unit id="label.reg_soli">
+                <source>label.reg_soli</source>
+                <target>Demander un essai gratuit</target>
+            </trans-unit>
+
+            <trans-unit id="label.center_name">
+                <source>label.center_name</source>
+                <target>Nom du centre</target>
+            </trans-unit>
+
+            <trans-unit id="message.request_ok">
+                <source>message.request_ok</source>
+                <target>En breve recibirá un email con instrucciones</target>
+            </trans-unit>
 
         
         </body>
