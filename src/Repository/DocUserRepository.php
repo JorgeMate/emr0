@@ -7,12 +7,12 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method UserDoc|null find($id, $lockMode = null, $lockVersion = null)
- * @method UserDoc|null findOneBy(array $criteria, array $orderBy = null)
- * @method UserDoc[]    findAll()
- * @method UserDoc[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method DocUser|null find($id, $lockMode = null, $lockVersion = null)
+ * @method DocUser|null findOneBy(array $criteria, array $orderBy = null)
+ * @method DocUser[]    findAll()
+ * @method DocUser[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserDocRepository extends ServiceEntityRepository
+class DocUserRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -25,10 +25,10 @@ class UserDocRepository extends ServiceEntityRepository
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
+            ->orderBy('d.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -39,8 +39,8 @@ class UserDocRepository extends ServiceEntityRepository
     /*
     public function findOneBySomeField($value): ?DocUser
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()

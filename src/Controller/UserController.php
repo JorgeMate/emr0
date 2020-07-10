@@ -15,6 +15,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Form\UserType;
 use App\Form\Type\ChangePasswordType;
 
+use App\Form\DocUserType;
+
+use App\Entity\DocCenterGroup;
+use App\Entity\DocUser;
+
+
 
 /**
  * Controller used to manage current user.
@@ -33,8 +39,8 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
         $center = $this->getUser()->getCenter();
-        #$groups = $center->getCenterDocGroups();
-        $groups = null;
+        $groups = $center->getDocCenterGroups();
+        
 
         $client = null;
         $agendas = null;
@@ -131,6 +137,80 @@ class UserController extends AbstractController
     }    
 
 
+    /**
+     * @Route("/{slug}/documents-groups", methods={"GET", "POST"}, name="doc_groups_index") 
+     */
+    public function programDocGroupsIndex(Request $request, $slug): Response
+    {
+
+        $center = $this->getUser()->getCenter();
+
+        $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
+
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository(DocCenterGroup::class);
+        $groups = $repository->findBy(['center' => $center->getId()], ['name' => 'ASC']);
+
+        return $this->render('center/doc_groups/index.html.twig', [
+             
+            'slug' => $slug,
+            'groups' => $groups,
+        ]);     
+
+        
+    }
+
+
+
+    /**
+     * @Route("/{slug}/documents-group/{id}/index", methods={"GET", "POST"}, name="docs_index")
+     * 
+     */ 
+    public function docsIndex(Request $request, $slug, DocCenterGroup $docCenterGroup)
+    {
+
+        $center = $this->getUser()->getCenter();
+
+        $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
+
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository(DocUser::class);
+        $docs = $repository->findBy(['docCenterGroup' => $docCenterGroup->getId()], ['name' => 'ASC']);
+
+        $newDoc = new DocUser();
+        $newDoc->setUser($this->getUser());
+        $newDoc->setDocCenterGroup($docCenterGroup);
+
+        $formDoc = $this->createForm(DocUserType::class, $newDoc);
+        $formDoc->handleRequest($request);
+        if ($formDoc->isSubmitted() && $formDoc->isValid()) {
+
+            $em->persist($newDoc);
+            $em->flush();
+                
+            $this->addFlash('info', 'doc.up_suc');
+            
+    
+            return $this->redirectToRoute('docs_index', ['slug' => $slug, 'id' => $docCenterGroup->getId() ] );
+            
+        }
+
+
+        return $this->render('center/doc_groups/doc_index.html.twig', [
+             
+            'docCenterGroup' => $docCenterGroup,
+            'docs' => $docs,
+            'form' => $formDoc->createView(),
+            
+        ]);     
+
+    }
+
+
+
 
 
 }
+
+
+

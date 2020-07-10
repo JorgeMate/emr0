@@ -32,11 +32,11 @@ class DocCenterGroup
     /**
      * @ORM\OneToMany(targetEntity=DocUser::class, mappedBy="docCenterGroup")
      */
-    private $docsUser;
+    private $docs;
 
     public function __construct()
     {
-        $this->docsUser = new ArrayCollection();
+        $this->docs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,25 +71,25 @@ class DocCenterGroup
     /**
      * @return Collection|DocUser[]
      */
-    public function getDocsUser(): Collection
+    public function getDocs(): Collection
     {
-        return $this->docsUser;
+        return $this->docs;
     }
 
-    public function addDocsUser(DocUser $docsUser): self
+    public function addDocs(DocUser $docsUser): self
     {
-        if (!$this->docsUser->contains($docsUser)) {
-            $this->docsUser[] = $docsUser;
+        if (!$this->docs->contains($docsUser)) {
+            $this->docs[] = $docsUser;
             $docsUser->setDocCenterGroup($this);
         }
 
         return $this;
     }
 
-    public function removeDocsUser(DocUser $docsUser): self
+    public function removeDocs(DocUser $docsUser): self
     {
-        if ($this->docsUser->contains($docsUser)) {
-            $this->docsUser->removeElement($docsUser);
+        if ($this->docs->contains($docsUser)) {
+            $this->docs->removeElement($docsUser);
             // set the owning side to null (unless already changed)
             if ($docsUser->getDocCenterGroup() === $this) {
                 $docsUser->setDocCenterGroup(null);

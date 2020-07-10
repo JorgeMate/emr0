@@ -14,9 +14,14 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\Center;
 use App\Entity\User;
 
+use App\Entity\DocCenterGroup;
+
 use App\Form\CenterType;
 use App\Form\UserType;
 use App\Form\NewUserType;
+
+use App\Form\DocCenterGroupType;
+
 
 
 
@@ -41,9 +46,7 @@ class CenterController extends AbstractController
         $this->denyAccessUnlessGranted('CENTER_EDIT', $center);
         $user = $this->getUser();
 
-        # $groups = $center->getCenterDocGroups();
-
-        $groups = null;
+        $groups = $center->getDocCenterGroups();
 
         return $this->render('center/cpanel.html.twig', [
 
@@ -187,6 +190,77 @@ class CenterController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+    /**
+     * @Route("/{slug}/new/documents-group", methods={"GET", "POST"}, name="group_new")
+     * 
+     * Insertar el nombre de un nuevo grupo de documentos.
+     */
+    public function newDocGroup(Request $request, $slug): Response
+    {
+        $center = $this->getUser()->getCenter();
+
+        $this->denyAccessUnlessGranted('CENTER_EDIT', $center);
+
+        $group = new DocCenterGroup();
+        $group->setCenter($center);
+
+        $form = $this->createForm(DocCenterGroupType::class, $group);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($group);
+            $em->flush();
+
+            $this->addFlash('info', 'record.updated_successfully');
+
+            return $this->redirectToRoute('doc_groups_index', ['slug' => $slug]);
+
+
+        }
+
+        return $this->render('center/doc_groups/edit.html.twig', [
+
+            'group' => $group,
+            'form' => $form->createView(), 
+        ]);
+
+    }
+
+    /**
+     * @Route("/{slug}/documents-group/{id}/edit", methods={"GET", "POST"}, name="group_edit")
+     * 
+     */
+    public function centerDocGroupEdit(Request $request, $slug, DocCenterGroup $docCenterGroup)
+    {
+        $center = $this->getUser()->getCenter();
+
+        $this->denyAccessUnlessGranted('CENTER_EDIT', $center);        
+
+        $form = $this->createForm(DocCenterGroupType::class, $docCenterGroup);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $this->addFlash('info', 'record.updated_successfully');
+
+            return $this->redirectToRoute('doc_groups_index', ['slug' => $slug] );
+        }
+
+        return $this->render('center/doc_groups/edit.html.twig', [
+
+            'group' => $docCenterGroup,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
 
 
 

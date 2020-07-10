@@ -115,6 +115,11 @@ class User implements UserInterface
      */
     private $reg_code2;
 
+    /**
+     * @ORM\OneToMany(targetEntity=DocUser::class, mappedBy="user")
+     */
+    private $docs;
+
 
 
 
@@ -126,6 +131,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->patients = new ArrayCollection();
+        $this->docs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -454,6 +460,37 @@ class User implements UserInterface
     public function setRegCode2(?string $reg_code2): self
     {
         $this->reg_code2 = $reg_code2;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DocUser[]
+     */
+    public function getDocs(): Collection
+    {
+        return $this->docs;
+    }
+
+    public function addDoc(DocUser $doc): self
+    {
+        if (!$this->docs->contains($doc)) {
+            $this->docs[] = $doc;
+            $doc->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDoc(DocUser $doc): self
+    {
+        if ($this->docs->contains($doc)) {
+            $this->docs->removeElement($doc);
+            // set the owning side to null (unless already changed)
+            if ($doc->getUser() === $this) {
+                $doc->setUser(null);
+            }
+        }
 
         return $this;
     }

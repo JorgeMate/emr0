@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\UserDocRepository;
+use App\Repository\DocUserRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=UserDocRepository::class)
+ * @ORM\Entity(repositoryClass=DocUserRepository::class)
  */
 class DocUser
 {
@@ -18,9 +18,15 @@ class DocUser
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=DocCenterGroup::class, inversedBy="docsUser")
+     * @ORM\ManyToOne(targetEntity=DocCenterGroup::class, inversedBy="docs")
      */
     private $docCenterGroup;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="docs")
+     */
+    private $user;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -41,6 +47,12 @@ class DocUser
      * @ORM\Column(type="string", length=127)
      */
     private $mime_type;
+
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $visible;
 
     public function getId(): ?int
     {
@@ -103,6 +115,30 @@ class DocUser
     public function setMimeType(string $mime_type): self
     {
         $this->mime_type = $mime_type;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getVisible(): ?bool
+    {
+        return $this->visible;
+    }
+
+    public function setVisible(bool $visible): self
+    {
+        $this->visible = $visible;
 
         return $this;
     }
