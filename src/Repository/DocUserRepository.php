@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\UserDoc;
+use App\Entity\DocUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,11 +16,11 @@ class UserDocRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, UserDoc::class);
+        parent::__construct($registry, DocUser::class);
     }
 
     // /**
-    //  * @return UserDoc[] Returns an array of UserDoc objects
+    //  * @return DocUser[] Returns an array of DocUser objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class UserDocRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?UserDoc
+    public function findOneBySomeField($value): ?DocUser
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.exampleField = :val')
