@@ -121,6 +121,11 @@ class Patient
      */
     private $insurance;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Source::class, inversedBy="patients")
+     */
+    private $source;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -362,6 +367,18 @@ class Patient
     public function setInsurance(?Insurance $insurance): self
     {
         $this->insurance = $insurance;
+
+        return $this;
+    }
+
+    public function getSource(): ?Source
+    {
+        return $this->source;
+    }
+
+    public function setSource(?Source $source): self
+    {
+        $this->source = $source;
 
         return $this;
     }

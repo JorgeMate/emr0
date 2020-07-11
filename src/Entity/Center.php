@@ -103,11 +103,17 @@ class Center
      */
     private $insurances;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Source::class, mappedBy="center")
+     */
+    private $sources;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->docCenterGroups = new ArrayCollection();
         $this->insurances = new ArrayCollection();
+        $this->sources = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -371,6 +377,37 @@ class Center
             // set the owning side to null (unless already changed)
             if ($insurance->getCenter() === $this) {
                 $insurance->setCenter(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Source[]
+     */
+    public function getSources(): Collection
+    {
+        return $this->sources;
+    }
+
+    public function addSource(Source $source): self
+    {
+        if (!$this->sources->contains($source)) {
+            $this->sources[] = $source;
+            $source->setCenter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSource(Source $source): self
+    {
+        if ($this->sources->contains($source)) {
+            $this->sources->removeElement($source);
+            // set the owning side to null (unless already changed)
+            if ($source->getCenter() === $this) {
+                $source->setCenter(null);
             }
         }
 

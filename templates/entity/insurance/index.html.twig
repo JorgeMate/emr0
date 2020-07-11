@@ -50,10 +50,11 @@
             <td><a href="{{ path('insurance_edit', {slug:app.user.center.slug, id:insurance.id}) }}"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
             <td></td>
             <td>{{ insurance.name }}</td>
-            <td class="text-center">{% if insurance.enabled %} 
-                    <i class="fas fa-toggle-on"></i>
+            <td class="text-center">
+                {% if insurance.enabled %} 
+                    <i class="fas fa-toggle-on text-success"></i>
                 {% else %}
-                    <i class="fas fa-toggle-off"></i>
+                    <i class="fas fa-toggle-off text-danger"></i>
                 {% endif %}
             </td>
             <td>{{ insurance.contact }}</td>

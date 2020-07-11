@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+
+
 /**
  * Controller used to manage current user.
  *
@@ -38,6 +42,8 @@ class PatientController extends AbstractController
         $center = $this->getUser()->getCenter();
 
         $em = $this->getDoctrine()->getManager();
+
+        
 
         $queryBuilder = $em->createQueryBuilder($center->getId())
             ->select('p', 's', 'i') 
