@@ -79,7 +79,7 @@
                     <td>{{ doc.name|slice(14) }}</td>
                     <td>
                         <h3>
-                        <a href="{{ vich_uploader_asset(doc,'docFile') }}"><i class="far fa-file-pdf"></i>
+                        <a href="{{ path('doc_show', {slug:app.user.center.slug}) }}"><i class="far fa-file-pdf"></i>
                         </a>
                     </h3>
                     </td>                 

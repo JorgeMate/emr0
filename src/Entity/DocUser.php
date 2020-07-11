@@ -70,7 +70,7 @@ class DocUser
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
-     * @Vich\UploadableField(mapping="local_user_docs", mimeType="mime_type", fileNameProperty="name", size="docSize")
+     * @Vich\UploadableField(mapping="remote_user_docs", mimeType="mime_type", fileNameProperty="name", size="docSize")
      * 
      * @var File
      */

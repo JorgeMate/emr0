@@ -21,6 +21,11 @@ use App\Entity\DocCenterGroup;
 use App\Entity\DocUser;
 
 
+use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
+
+use Aws\S3\S3Client;
+use Aws\S3\Exception\S3Exception;
+
 
 /**
  * Controller used to manage current user.
@@ -167,7 +172,10 @@ class UserController extends AbstractController
      * 
      */ 
     public function docsIndex(Request $request, $slug, DocCenterGroup $docCenterGroup)
+
+
     {
+
 
         $center = $this->getUser()->getCenter();
 
@@ -207,9 +215,52 @@ class UserController extends AbstractController
 
     }
 
+    /**
+     * @Route("/{slug}/documents-group/show", methods={"GET", "POST"}, name="doc_show")
+     * 
+     */ 
+    public function docShow(Request $request, $slug, S3Client $S3Client)
+    {
+
+        $bucket = 'meddocs';
+        $keyname = 'DOCS/user_docs/5f09198641073_Botoline toxine voor Oksels NL.pdf';
+        
+ 
+     
 
 
 
+
+
+        $s3 = new S3Client([
+            'version' => '2006-03-01',
+            'region'  => 'eu-west-3',
+
+
+            'credentials' =>  [
+                'key'    => 'AKIA3EZCSC52K7DVHE7Z',
+                'secret' => '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',
+                
+            ]
+
+
+        ]);
+
+        try {
+            // Get the object.
+            $result = $s3->getObject([
+                'Bucket' => $bucket,
+                'Key'    => $keyname
+            ]);
+        
+            // Display the object in the browser.
+            header("Content-Type: {$result['ContentType']}");
+            echo $result['Body'];
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . PHP_EOL;
+        }
+    
+    }
 
 }
 

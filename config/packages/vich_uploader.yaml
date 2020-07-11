@@ -1,5 +1,6 @@
 vich_uploader:
     db_driver: orm
+    storage: flysystem
 
     #mappings:
     #    products:
@@ -19,4 +20,16 @@ vich_uploader:
             inject_on_load: false
             delete_on_update: true
             delete_on_remove: true
+
+
+        remote_user_docs:
+            uri_prefix: /DOCS/user_docs
+            upload_destination: remotedocs.storage
+
+            namer: Vich\UploaderBundle\Naming\OrignameNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
 

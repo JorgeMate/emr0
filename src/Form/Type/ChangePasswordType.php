@@ -52,7 +52,7 @@ class ChangePasswordType extends AbstractType
                 'constraints' => [
                     new NotBlank(),
                     new Length([
-                        'min' => 5,
+                        'min' => 6,
                         'max' => 25
                         #'max' => BCryptPasswordEncoder::MAX_PASSWORD_LENGTH,
                     ]),
