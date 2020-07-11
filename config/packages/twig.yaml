@@ -10,3 +10,6 @@ twig:
 
     globals:
         app_name: '%env(APP_NAME)%'
+
+        aws_s3_bucket_name: '%env(AWS_S3_BUCKET_NAME)%'
+        

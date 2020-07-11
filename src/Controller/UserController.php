@@ -192,16 +192,14 @@ class UserController extends AbstractController
 
         $formDoc = $this->createForm(DocUserType::class, $newDoc);
         $formDoc->handleRequest($request);
+
         if ($formDoc->isSubmitted() && $formDoc->isValid()) {
 
             $em->persist($newDoc);
-            $em->flush();
-                
+            $em->flush();        
             $this->addFlash('info', 'doc.up_suc');
             
-    
             return $this->redirectToRoute('docs_index', ['slug' => $slug, 'id' => $docCenterGroup->getId() ] );
-            
         }
 
 
@@ -210,41 +208,22 @@ class UserController extends AbstractController
             'docCenterGroup' => $docCenterGroup,
             'docs' => $docs,
             'form' => $formDoc->createView(),
-            
         ]);     
 
     }
 
     /**
-     * @Route("/{slug}/documents-group/show", methods={"GET", "POST"}, name="doc_show")
+     * @Route("/{slug}/{bucket}/{id}/show", methods={"GET", "POST"}, name="doc_show")
      * 
      */ 
-    public function docShow(Request $request, $slug, S3Client $S3Client)
+    public function docShow(Request $request, $slug, $bucket, DocUser $docUser, S3Client $S3Client)
     {
 
-        $bucket = 'meddocs';
-        $keyname = 'DOCS/user_docs/5f09198641073_Botoline toxine voor Oksels NL.pdf';
-        
+        #$bucket = '';
+        $keyname =  'DOCS/user_docs/' ;
+        $keyname .= $docUser->getName();
  
-     
-
-
-
-
-
-        $s3 = new S3Client([
-            'version' => '2006-03-01',
-            'region'  => 'eu-west-3',
-
-
-            'credentials' =>  [
-                'key'    => 'AKIA3EZCSC52K7DVHE7Z',
-                'secret' => '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',
-                
-            ]
-
-
-        ]);
+        $s3 = $S3Client;
 
         try {
             // Get the object.

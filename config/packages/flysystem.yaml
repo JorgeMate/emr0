@@ -13,4 +13,4 @@ flysystem:
                 client: Aws\S3\S3Client # The service ID of the Aws\S3\S3Client instance
                 bucket: '%env(AWS_S3_BUCKET_NAME)%'
 
-                prefix: /DOCS/user_docs
+                prefix: '%env(AWS_S3_DOCS_PREFIX)%'
