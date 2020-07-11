@@ -440,7 +440,7 @@
 
             <trans-unit id="entity.title_sou">
                 <source>entity.title_sou</source>
-                <target>Patiënbronn</target>
+                <target>Herkomst van patiënten</target>
             </trans-unit>
 
             <trans-unit id="label.tags">

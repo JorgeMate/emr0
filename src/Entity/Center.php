@@ -108,12 +108,24 @@ class Center
      */
     private $sources;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Type::class, mappedBy="center", orphanRemoval=true)
+     */
+    private $types;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Place::class, mappedBy="center", orphanRemoval=true)
+     */
+    private $places;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->docCenterGroups = new ArrayCollection();
         $this->insurances = new ArrayCollection();
         $this->sources = new ArrayCollection();
+        $this->types = new ArrayCollection();
+        $this->places = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -408,6 +420,68 @@ class Center
             // set the owning side to null (unless already changed)
             if ($source->getCenter() === $this) {
                 $source->setCenter(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Type[]
+     */
+    public function getTypes(): Collection
+    {
+        return $this->types;
+    }
+
+    public function addType(Type $type): self
+    {
+        if (!$this->types->contains($type)) {
+            $this->types[] = $type;
+            $type->setCenter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeType(Type $type): self
+    {
+        if ($this->types->contains($type)) {
+            $this->types->removeElement($type);
+            // set the owning side to null (unless already changed)
+            if ($type->getCenter() === $this) {
+                $type->setCenter(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Place[]
+     */
+    public function getPlaces(): Collection
+    {
+        return $this->places;
+    }
+
+    public function addPlace(Place $place): self
+    {
+        if (!$this->places->contains($place)) {
+            $this->places[] = $place;
+            $place->setCenter($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlace(Place $place): self
+    {
+        if ($this->places->contains($place)) {
+            $this->places->removeElement($place);
+            // set the owning side to null (unless already changed)
+            if ($place->getCenter() === $this) {
+                $place->setCenter(null);
             }
         }
 

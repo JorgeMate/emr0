@@ -1,0 +1,65 @@
+{% extends 'base93.html.twig' %}
+
+{% block main %}
+
+<div class="form-row">
+    <div class="form-group col-md-9">
+        <h4>{{'label.treatment'|trans}} <i class="fas fa-file-medical-alt"></i> {{ treatment.name }}</h4>
+    </div>
+    <div class="form-group col-md-3">
+            
+    </div>
+</div>
+
+{{ form_start(form) }}
+
+    <div class="form-row">
+
+        <div class="form-group col-md-10">
+            {{ form_row(form.name) }}
+        </div>
+        <div class="form-group col-md-2 text-right">
+            {{ form_row(form.enabled) }}
+        </div>
+    
+    </div>
+
+    <div class="form-row">
+
+        <div class="form-group col-md-12">
+            {{ form_widget(form) }}
+        </div>
+
+    </div>
+
+
+
+
+    <div class="form-row">
+        
+        <div class="form-group col-sm-3">
+            
+            <a href="{{ path('treats_index', {slug:app.user.center.slug, id: treatment.type.id}) }}" class="btn btn-block btn-success">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i> {{ treatment.type.name }}
+            </a>                
+        </div>
+
+        <div class="form-group col-sm-6"></div>
+
+        <div class="form-group col-sm-3">
+            <button type="submit" class="btn btn-block btn-primary">
+                <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.save'|trans }}
+            </button>
+        </div>
+    
+                    
+    </div>    
+        
+
+
+{{ form_end(form) }}
+
+
+
+
+{% endblock %}

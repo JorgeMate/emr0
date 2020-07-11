@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use App\Entity\Insurance;
 use App\Entity\Source;
+use App\Entity\Place;
 
 use App\Form\InsuranceType;
 use App\Form\SourceType;
@@ -181,6 +182,67 @@ class EntityController extends AbstractController
             'form' => $form->createView(), 
         ]);
     }    
+
+
+    /**
+     * @Route("/{slug}/places", methods={"GET"}, name="places_index")
+     * 
+     * LISTAR todos los lugares del centro id
+     */
+    public function placesIndex(Request $request, $slug): Response
+    {
+        $center = $this->getUser()->getCenter();
+
+        $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
+
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository(Place::class);
+        $places = $repository->findBy(['center' => $center->getId()], ['name' => 'ASC']);
+
+        return $this->render('entity/place/index.html.twig', [
+             
+            'slug' => $slug,
+            'places' => $places,
+        ]);        
+
+    }
+
+        /**
+     * @Route("/{slug}/place/new", methods={"GET", "POST"}, name="place_new")
+     * 
+     */
+    public function placeNew(Request $request, $slug, Place $place): Response
+    {
+        $center = $this->getUser()->getCenter();
+
+        $this->denyAccessUnlessGranted('CENTER_EDIT', $center);
+        ///////////////////////////////////////////////////////
+
+        $place = new Place();
+        $place->setCenter($center);
+
+        $form = $this->createForm(PlaceType::class, $place);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($place);
+            $em->flush();
+
+            $this->addFlash('info', 'record.updated_successfully');
+
+            return $this->redirectToRoute('places_index', ['slug' => $slug]);
+        }
+
+        return $this->render('entity/place/edit.html.twig', [
+            'slug' => $slug,
+            'place' => $place,
+            'form' => $form->createView(), 
+        ]);
+    }    
+
+
 
 
 }
