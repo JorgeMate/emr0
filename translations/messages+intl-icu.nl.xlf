@@ -574,6 +574,31 @@
                 <target>Specialiteit</target>
             </trans-unit>
 
+
+            <trans-unit id="label.medic.tax">
+                <source>label.medic.tax</source>
+                <target>BTW N.</target>
+            </trans-unit>
+            <trans-unit id="label.medic.reg1">
+                <source>label.medic.reg1</source>
+                <target>Professionele licentie N.</target>
+            </trans-unit>
+            <trans-unit id="label.medic.reg2">
+                <source>label.medic.reg2</source>
+                <target>Nog een ID</target>
+            </trans-unit>
+
+            <trans-unit id="label.medic.internal">
+                <source>label.medic.internal</source>
+                <target>Intern</target>
+            </trans-unit>
+            <trans-unit id="label.medic.COD">
+                <source>label.medic.COD</source>
+                <target>Code</target>
+            </trans-unit>            
+
+
+
             <trans-unit id="label.option">
                 <source>label.option</source>
                 <target>Kies een optie</target>

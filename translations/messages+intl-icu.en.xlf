@@ -572,6 +572,28 @@
                 <target>Speciality</target>
             </trans-unit>
 
+            <trans-unit id="label.medic.tax">
+                <source>label.medic.tax</source>
+                <target>VAT N.</target>
+            </trans-unit>
+            <trans-unit id="label.medic.reg1">
+                <source>label.medic.reg1</source>
+                <target>Professional License N.</target>
+            </trans-unit>
+            <trans-unit id="label.medic.reg2">
+                <source>label.medic.reg2</source>
+                <target>Another ID.</target>
+            </trans-unit>
+
+            <trans-unit id="label.medic.internal">
+                <source>label.medic.internal</source>
+                <target>Internal</target>
+            </trans-unit>
+            <trans-unit id="label.medic.COD">
+                <source>label.medic.COD</source>
+                <target>Code</target>
+            </trans-unit>            
+
             <trans-unit id="label.option">
                 <source>label.option</source>
                 <target>Choose one option</target>

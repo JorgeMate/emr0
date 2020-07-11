@@ -570,6 +570,32 @@
                 <target>Especialidad</target>
             </trans-unit>
 
+            <trans-unit id="label.medic.tax">
+                <source>label.medic.tax</source>
+                <target>N.I.F.</target>
+            </trans-unit>
+            <trans-unit id="label.medic.reg1">
+                <source>label.medic.reg1</source>
+                <target>Nº de Colegiado</target>
+            </trans-unit>
+            <trans-unit id="label.medic.reg2">
+                <source>label.medic.reg2</source>
+                <target>Otro ID.</target>
+            </trans-unit>
+
+            <trans-unit id="label.medic.internal">
+                <source>label.medic.internal</source>
+                <target>Interno</target>
+            </trans-unit>
+            <trans-unit id="label.medic.COD">
+                <source>label.medic.COD</source>
+                <target>Código</target>
+            </trans-unit>
+
+
+
+
+
             <trans-unit id="label.option">
                 <source>label.option</source>
                 <target>Elija una opción</target>
