@@ -179,6 +179,7 @@ class UserController extends AbstractController
 
         $newDoc = new DocUser();
         $newDoc->setUser($this->getUser());
+        $newDoc->setVisible(true);
         $newDoc->setDocCenterGroup($docCenterGroup);
 
         $formDoc = $this->createForm(DocUserType::class, $newDoc);

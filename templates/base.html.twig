@@ -2,7 +2,7 @@
 <html lang="{{ app.request.locale }}">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{{ app_name }}{% endblock %}</title>
 
         {% block stylesheets %}
         
@@ -42,6 +42,26 @@
         {% block javascripts %}
             <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>        
             <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+
+            <script>
+
+                $('.custom-file-input').on('change', function(event) {
+                var inputFile = event.currentTarget;
+                $(inputFile).parent()
+                    .find('.custom-file-label')
+                    .html(inputFile.files[0].name);
+
+                $('.collapse').collapse();
+
+                });
+
+            </script>
+
+
+
+
+
+
         {% endblock %}
 
     </body>

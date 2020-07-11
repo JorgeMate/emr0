@@ -46,6 +46,8 @@ class UserFixtures extends Fixture
 
         if($seedCenters)
         {
+            $this->loadCenterBeta();
+
 
         }
 
@@ -100,7 +102,49 @@ class UserFixtures extends Fixture
         $this->manager->flush();
     }
 
-    
+    private function loadCenterBeta()
+    {
+
+        $center = new Center();
+        $center->setName('Karimed BV');
+        $center->setContactPerson('R.B. Karim');
+        $center->setTel('(+31) --- --- ---');
+        $center->setEmail('rbkarim@gmail.com');
+        $center->setAddress('Amsterdamseweg 330');
+        $center->setPostcode('');
+        $center->setCity('Amstelveel');
+        $center->setEnabled(true);
+        
+        $this->manager->persist($center);
+
+        if (false){
+
+            $user = new User();
+            $user->setCenter($center);
+            $user->setCenterUser(true);
+            $user->setFirstName('R.B.');
+            $user->setLastName('Karimé');
+            $user->setEmail('rbkarim@gmail.com');
+            $user->setTel('(+31) --- --- ---');
+
+            $this->passUniversalEncoded = $this->encoder->encodePassword(
+                $user,
+                $this->passUniversal
+            );
+
+            $roles[] = 'ROLE_ADMIN';
+            $user->setRoles($roles);
+            
+            $this->manager->persist($user);
+
+        }
+        
+        $this->manager->flush();
+
+
+
+
+    }
 
 
 }

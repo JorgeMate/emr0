@@ -47,6 +47,13 @@
                     <div class="form-group col">   
 
                    
+                        {{ form_row(form.docFile, {
+                                attr: {
+                                    'placeholder': 'Seleccione una archivo',
+                                }
+                            }) 
+                        }}
+                        
                         <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseNewImg" aria-expanded="false" aria-controls="collapseNewImg">
                                 <i class="fas fa-undo-alt"></i> {{ 'label.cancel'|trans }} 
                         </button>
@@ -72,7 +79,7 @@
                     <td>{{ doc.name|slice(14) }}</td>
                     <td>
                         <h3>
-                        <a href=""><i class="far fa-file-pdf"></i>
+                        <a href="{{ vich_uploader_asset(doc,'docFile') }}"><i class="far fa-file-pdf"></i>
                         </a>
                     </h3>
                     </td>                 
