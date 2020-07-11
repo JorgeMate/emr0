@@ -116,6 +116,11 @@ class Patient
      */
     private $notes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Insurance::class, inversedBy="patients")
+     */
+    private $insurance;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -345,6 +350,18 @@ class Patient
     public function setNotes(?string $notes): self
     {
         $this->notes = $notes;
+
+        return $this;
+    }
+
+    public function getInsurance(): ?Insurance
+    {
+        return $this->insurance;
+    }
+
+    public function setInsurance(?Insurance $insurance): self
+    {
+        $this->insurance = $insurance;
 
         return $this;
     }

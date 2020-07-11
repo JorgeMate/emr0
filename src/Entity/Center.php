@@ -98,10 +98,16 @@ class Center
      */
     private $docCenterGroups;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Insurance::class, mappedBy="center")
+     */
+    private $insurances;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->docCenterGroups = new ArrayCollection();
+        $this->insurances = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -334,6 +340,37 @@ class Center
             // set the owning side to null (unless already changed)
             if ($docCenterGroup->getCenter() === $this) {
                 $docCenterGroup->setCenter(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Insurance[]
+     */
+    public function getInsurances(): Collection
+    {
+        return $this->insurances;
+    }
+
+    public function addInsurance(Insurance $insurance): self
+    {
+        if (!$this->insurances->contains($insurance)) {
+            $this->insurances[] = $insurance;
+            $insurance->setCenter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInsurance(Insurance $insurance): self
+    {
+        if ($this->insurances->contains($insurance)) {
+            $this->insurances->removeElement($insurance);
+            // set the owning side to null (unless already changed)
+            if ($insurance->getCenter() === $this) {
+                $insurance->setCenter(null);
             }
         }
 
