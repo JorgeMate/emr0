@@ -91,6 +91,7 @@ class PatientType extends AbstractType
                 'choices' => $this->insuranceRepository->findBy(['center' => $this->centerId], ['name' => 'ASC']),
                 'choice_label' => 'name',
                 'placeholder' => 'label.option',
+                'required' => false,
                 
             ])
             ->add('source', EntityType::class,[
@@ -99,6 +100,7 @@ class PatientType extends AbstractType
                 'choices' => $this->sourceRepository->findBy(['center' => $this->centerId], ['name' => 'ASC']),
                 'choice_label' => 'name',
                 'placeholder' => 'label.option',
+                'required' => false,
             ]);
 
             if($patient->getId()){

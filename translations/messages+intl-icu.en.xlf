@@ -504,7 +504,7 @@
             </trans-unit>
             <trans-unit id="label.new_entry">
                 <source>label.new_entry</source>
-                <target>New entry</target>
+                <target>New</target>
             </trans-unit>
             <trans-unit id="label.problem">
                 <source>label.problem</source>

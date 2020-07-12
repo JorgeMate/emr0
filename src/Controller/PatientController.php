@@ -16,9 +16,16 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Entity\Patient;
+
+use App\Entity\Consult;
+use App\Entity\Medicat;
+use App\Entity\Historia;
 use App\Entity\Opera;
 
+
 use App\Form\PatientType;
+use App\Form\ConsultType;
+
 
 
 /**
@@ -180,14 +187,14 @@ class PatientController extends AbstractController
         
         $center = $this->getUser()->getCenter();
                 
-        #$repository = $em->getRepository(Consult::class);
-        #$consults = $repository->findBy(['patient' => $patId], ['created_at' => 'DESC']);
+        $repository = $em->getRepository(Consult::class);
+        $consults = $repository->findBy(['patient' => $patId], ['created_at' => 'DESC']);
 
-        #$repository = $em->getRepository(Historia::class);
-        #$historias = $repository->findBy(['patient' => $patId], ['date' => 'DESC']);
+        $repository = $em->getRepository(Historia::class);
+        $historias = $repository->findBy(['patient' => $patId], ['date' => 'DESC']);
 
-        #$repository = $em->getRepository(Medicat::class);
-        #$medicats = $repository->findBy(['patient' => $patId], ['created_at' => 'DESC']);
+        $repository = $em->getRepository(Medicat::class);
+        $medicats = $repository->findBy(['patient' => $patId], ['created_at' => 'DESC']);
 
         $repository = $em->getRepository(Opera::class);
         $operas = $repository->findBy(['patient' => $patId], ['created_at' => 'DESC']);
@@ -203,24 +210,26 @@ class PatientController extends AbstractController
 
         //var_dump($operas);die;
 
+        $consult = new Consult();
+        $formConsult = $this->createForm(ConsultType::class, $consult);
+        $formConsult->handleRequest($request);
+        if ($formConsult->isSubmitted() && $formConsult->isValid()) {
+
+            $consult->setPatient($patient);
+            $consult->setUser($this->getUser());
+
+            $em->persist($consult);
+            $em->flush();
+
+            $this->addFlash('info', 'record.updated_successfully');
+
+            return $this->redirectToRoute('patient_show', ['slug' => $slug, 'id' => $patient->getId() ] );
+
+        }
+
+
         if (false){
 
-            $consult = new Consult();
-            $formConsult = $this->createForm(ConsultType::class, $consult);
-            $formConsult->handleRequest($request);
-            if ($formConsult->isSubmitted() && $formConsult->isValid()) {
-
-                $consult->setPatient($patient);
-                $consult->setUser($this->getUser());
-
-                $em->persist($consult);
-                $em->flush();
-
-                $this->addFlash('info', 'record.updated_successfully');
-
-                return $this->redirectToRoute('patient_show', ['id' => $patient->getId() ] );
-
-            }
 
             $storedImg = new StoredImg();
             $storedImg->setPatient($patient);
@@ -261,9 +270,9 @@ class PatientController extends AbstractController
            
             'center' => $center,
             'patient' => $patient,
-            #'consults' => $consults,
-            #'historias' => $historias,
-            #'medicats' => $medicats,
+            'consults' => $consults,
+            'historias' => $historias,
+            'medicats' => $medicats,
             'operas' => $operas,
 
             #'debts' => $debts,
@@ -271,7 +280,7 @@ class PatientController extends AbstractController
             #'imgs' => $imgs,
             #'docs' => $docs,
 
-            #'formConsult' => $formConsult->createView(),
+            'formConsult' => $formConsult->createView(),
             #'formDoc' => $formDoc->createView(),
             #'formImg' => $formImg->createView(),
 
@@ -309,5 +318,8 @@ class PatientController extends AbstractController
         ]);
 
     }
+
+
+
 
 }

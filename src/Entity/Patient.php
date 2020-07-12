@@ -133,9 +133,27 @@ class Patient
      */
     private $operas;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Consult::class, mappedBy="patient", orphanRemoval=true)
+     */
+    private $consults;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Medicat::class, mappedBy="patient", orphanRemoval=true)
+     */
+    private $medicats;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Historia::class, mappedBy="patient", orphanRemoval=true)
+     */
+    private $historias;
+
     public function __construct()
     {
         $this->operas = new ArrayCollection();
+        $this->consults = new ArrayCollection();
+        $this->medicats = new ArrayCollection();
+        $this->historias = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -420,6 +438,99 @@ class Patient
             // set the owning side to null (unless already changed)
             if ($opera->getPatient() === $this) {
                 $opera->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Consult[]
+     */
+    public function getConsults(): Collection
+    {
+        return $this->consults;
+    }
+
+    public function addConsult(Consult $consult): self
+    {
+        if (!$this->consults->contains($consult)) {
+            $this->consults[] = $consult;
+            $consult->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConsult(Consult $consult): self
+    {
+        if ($this->consults->contains($consult)) {
+            $this->consults->removeElement($consult);
+            // set the owning side to null (unless already changed)
+            if ($consult->getPatient() === $this) {
+                $consult->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Medicat[]
+     */
+    public function getMedicats(): Collection
+    {
+        return $this->medicats;
+    }
+
+    public function addMedicat(Medicat $medicat): self
+    {
+        if (!$this->medicats->contains($medicat)) {
+            $this->medicats[] = $medicat;
+            $medicat->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedicat(Medicat $medicat): self
+    {
+        if ($this->medicats->contains($medicat)) {
+            $this->medicats->removeElement($medicat);
+            // set the owning side to null (unless already changed)
+            if ($medicat->getPatient() === $this) {
+                $medicat->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Historia[]
+     */
+    public function getHistorias(): Collection
+    {
+        return $this->historias;
+    }
+
+    public function addHistoria(Historia $historia): self
+    {
+        if (!$this->historias->contains($historia)) {
+            $this->historias[] = $historia;
+            $historia->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoria(Historia $historia): self
+    {
+        if ($this->historias->contains($historia)) {
+            $this->historias->removeElement($historia);
+            // set the owning side to null (unless already changed)
+            if ($historia->getPatient() === $this) {
+                $historia->setPatient(null);
             }
         }
 

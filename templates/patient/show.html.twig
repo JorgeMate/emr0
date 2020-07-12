@@ -14,7 +14,7 @@
             <div class="col-auto">
 
                 <h4>
-                    <i class="far fa-id-card"></i>
+
                     {{ patient.firstname }} {{ patient.lastname }} &nbsp;
                     {% if patient.sex == '0' %}
                         <i class="fas fa-mars text-info"></i>
@@ -23,7 +23,11 @@
                     {% else  %}
                         <i class="far fa-question-circle text-success"></i>
                     {% endif %}
-                    {{ patient.dateOfBirth | age }}    
+
+                    {% if patient.dateOfBirth %}
+                        {{ patient.dateOfBirth | age }}    
+                    {% endif %}
+
                 </h4>
                                     
             </div>        
@@ -65,9 +69,14 @@
             form: formConsult,
         
             id: patient.id,
+            
             consults: consults,
+            medicats: medicats,
+            historias: historias,
 
-            button_label_new: 'label.new_con'|trans,
+            button_label_new_con: 'label.new_con'|trans,
+            button_label_new_entry: 'label.new_entry'|trans,
+
             button_label_cancel: 'label.cancel'|trans,
             button_label_save: 'action.save'|trans
 

@@ -88,13 +88,11 @@
                                 or (not('ROLE_ADMIN' in user.roles) and not('ROLE_SUPER_ADMIN' in user.roles))
                     %}
 
-                    
-
-                    <div class="item-actions">
-                        <a href="{{ path('user_edit', {slug:user.center.slug, id: user.id}) }}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-edit" aria-hidden="true"></i>
-                        </a>
-                    </div>
+                        <div class="item-actions">
+                            <a href="{{ path('user_edit', {slug:user.center.slug, id: user.id}) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </a>
+                        </div>
                     
                     {% else %}
                     {% endif %}
