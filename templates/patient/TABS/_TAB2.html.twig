@@ -1,0 +1,58 @@
+<div role="tabpanel" class="tab-pane fade" id="nav-2">
+
+   <div class="row">
+
+        <div class="col-sm-8">
+
+            <div class="card border-success mb-3">
+
+                <div class="card-header">
+
+                    <div class="row justify-content-between">
+
+                        <div class="col">
+                            <h4><i class="far fa-comments"></i> {{ 'title.cons'|trans }}</h4>  
+                        </div>        
+                    
+                        <div class="col text-right">
+                            <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseNewCon" aria-expanded="false" aria-controls="collapseExample">
+                                {# Button with data-target #}
+                                <i class="fas fa-edit" aria-hidden="true"></i> {{ button_label_new }}
+                            </button>
+                        </div>   
+                        
+                    </div>
+
+                </div>
+
+                <div class="card card-body collapse" id="collapseNewCon">
+
+                    {{ form_start(form, {'attr': {} }) }}
+
+                        {{ form_widget(form) }}
+
+                        <div class="form-row">
+
+                                <div class="form-group col-sm-6">
+                                    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseNewCon" aria-expanded="false" aria-controls="collapseNewCon">
+                                        <i class="fas fa-undo-alt"></i> {{ button_label_cancel }}
+                                    </button>
+                                </div>
+                        
+                                <div class="form-group col-sm-6 text-right">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa fa-save" aria-hidden="true"></i> {{ button_label_save }}
+                                    </button>
+                                </div>                    
+                            </div>                                              
+
+                    {{ form_end(form) }}
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+</div>

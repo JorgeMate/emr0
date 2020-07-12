@@ -13,7 +13,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 
+use Doctrine\ORM\EntityManagerInterface;
+
 use App\Entity\Patient;
+use App\Entity\Opera;
 
 use App\Form\PatientType;
 
@@ -164,7 +167,147 @@ class PatientController extends AbstractController
 
     }
 
+    /**
+     * @Route("{slug}/patient/{id}/show", methods={"GET", "POST"}, name="patient_show")
+     * 
+     * MOSTRAR el paciente id
+     */
+    public function showPat(Request $request, $slug, Patient $patient, EntityManagerInterface $em): Response
+    {
+        $this->denyAccessUnlessGranted('PATIENT_VIEW', $patient);
 
+        $patId = $patient->getId();
+        
+        $center = $this->getUser()->getCenter();
+                
+        #$repository = $em->getRepository(Consult::class);
+        #$consults = $repository->findBy(['patient' => $patId], ['created_at' => 'DESC']);
 
+        #$repository = $em->getRepository(Historia::class);
+        #$historias = $repository->findBy(['patient' => $patId], ['date' => 'DESC']);
+
+        #$repository = $em->getRepository(Medicat::class);
+        #$medicats = $repository->findBy(['patient' => $patId], ['created_at' => 'DESC']);
+
+        $repository = $em->getRepository(Opera::class);
+        $operas = $repository->findBy(['patient' => $patId], ['created_at' => 'DESC']);
+
+        ///////////////////////////////////////////////
+        #$debts = $repository->findNotPaidOpera($patId); 
+
+        //var_dump($debts);die;
+
+        #$repository = $em->getRepository(StoredImg::class);
+        #$imgs = $repository->findBy(['patient' => $patId, 'mime_type' => 'image/jpeg'], ['updated_at' => 'DESC']);
+        #$docs = $repository->findBy(['patient' => $patId, 'mime_type' => 'application/pdf'], ['updated_at' => 'DESC']);
+
+        //var_dump($operas);die;
+
+        if (false){
+
+            $consult = new Consult();
+            $formConsult = $this->createForm(ConsultType::class, $consult);
+            $formConsult->handleRequest($request);
+            if ($formConsult->isSubmitted() && $formConsult->isValid()) {
+
+                $consult->setPatient($patient);
+                $consult->setUser($this->getUser());
+
+                $em->persist($consult);
+                $em->flush();
+
+                $this->addFlash('info', 'record.updated_successfully');
+
+                return $this->redirectToRoute('patient_show', ['id' => $patient->getId() ] );
+
+            }
+
+            $storedImg = new StoredImg();
+            $storedImg->setPatient($patient);
+
+            // Entramos al mismo repositorio por los 2 lados
+
+            $formDoc = $this->createForm(StoredDocType::class, $storedImg);
+            $formDoc->handleRequest($request);
+            if ($formDoc->isSubmitted() && $formDoc->isValid()) {
+
+                $em->persist($storedImg);
+                $em->flush();
+                    
+                $this->addFlash('info', 'doc.up_suc');
+                $slug = $patient->getUser()->getCenter()->getSlug();
+
+                return $this->redirectToRoute('patient_show', ['slug' => $slug, 'id' => $patient->getId() ] );
+                
+            }
+
+            $formImg = $this->createForm(StoredImgType::class, $storedImg);
+            $formImg->handleRequest($request);
+            if ($formImg->isSubmitted() && $formImg->isValid()) {
+                
+                $em->persist($storedImg);
+                $em->flush();
+                    
+                $this->addFlash('info', 'img.up_suc');
+                $slug = $patient->getUser()->getCenter()->getSlug();
+
+                return $this->redirectToRoute('patient_show', ['slug' =>$slug ,'id' => $patient->getId() ] );
+
+            }
+
+        }
+
+        return $this->render('patient/show.html.twig', [
+           
+            'center' => $center,
+            'patient' => $patient,
+            #'consults' => $consults,
+            #'historias' => $historias,
+            #'medicats' => $medicats,
+            'operas' => $operas,
+
+            #'debts' => $debts,
+
+            #'imgs' => $imgs,
+            #'docs' => $docs,
+
+            #'formConsult' => $formConsult->createView(),
+            #'formDoc' => $formDoc->createView(),
+            #'formImg' => $formImg->createView(),
+
+            'show_confirmation' => true,
+            
+        ]);
+    }
+
+    /**
+     * @Route("{slug}/patient/{id}/edit", methods={"GET", "POST"}, name="patient_edit")
+     * 
+     * EDITAR el paciente id
+     */
+    public function editPat($slug, Request $request, Patient $patient): Response
+    {
+
+        $this->denyAccessUnlessGranted('PATIENT_EDIT', $patient);
+
+        $form = $this->createForm(PatientType::class, $patient);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            
+            $this->addFlash('info', 'record.updated_successfully');
+            
+            return $this->redirectToRoute('patient_show', 
+                ['slug' => $slug, 'id' => $patient->getId()] );
+        }
+
+        return $this->render('patient/edit.html.twig', [
+           
+            'patient' => $patient,
+            'formPat' => $form->createView(),
+        ]);
+
+    }
 
 }

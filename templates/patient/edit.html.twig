@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'patient_edit' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="row justify-content-between">
+
+            <div class="column">
+
+                <h4>
+                    
+                    {{ patient.firstname }} {{ patient.lastname }} &nbsp;
+
+                    {% if patient.sex == 0 %}
+                        <i class="fas fa-mars text-info"></i>
+                    {% else %}    
+                        {% if patient.sex == 1 %}
+                            <i class="fas fa-venus text-danger"></i>
+                        {% else  %}
+                            <i class="far fa-question-circle" text-success"></i>
+                        {% endif %}
+                    {% endif %}
+
+                    {{ patient.dateOfBirth | age }}
+
+                </h4>
+                                    
+            </div>        
+
+            <div class="column text-right">
+                {{ 'label.recorded'|trans }}: {{ patient.createdAt|date('d-m-y') }}
+            </div>        
+            
+        </div>
+
+    </div>
+
+    {{ include('/patient/_form.html.twig', {
+
+        form: formPat,
+
+        patient: patient,
+        button_label: 'action.save'|trans,
+        include_back_to_home_link: true,
+
+    }, with_context = false) }}
+
+    
+    {# 
+         button_label: 'action.save'|trans,
+            include_back_to_home_link: true,
+    #}
+
+    <br>
+
+{% endblock %}
+
+
+
+{% block sidebar %}
+    {{ include('/patient/_delete_record_confirmation.html.twig') }}
+{% endblock %}
+
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+{% endblock %}

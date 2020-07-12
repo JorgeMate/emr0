@@ -161,10 +161,11 @@ class PatientType extends AbstractType
                     'attr' => ['rows' => '5'],              
                 ])
 
-                ->add('tags', TagsInputType::class, [
-                    'label' => 'label.tags',
-                    'required' => false,
-                ]);
+                #->add('tags', TagsInputType::class, [
+                #    'label' => 'label.tags',
+                #    'required' => false,
+                #])
+                ;
 
             }
                     
