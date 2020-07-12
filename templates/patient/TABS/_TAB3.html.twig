@@ -1,6 +1,71 @@
 <div role="tabpanel" class="tab-pane fade" id="nav-3">
 
+    <br>
 
+    <div class="row justify-content-between">
+
+        <div class="col-auto">
+            <h4><i class="fas fa-file-medical-alt"></i> {{ 'label.treatments'|trans }}</h4>  
+        </div>        
+
+        <div class="col-auto">
+
+        </div>
+    
+        <div class="col-auto text-right">
+
+            <a href="{{ path('opera_new', {slug:app.user.center.slug, id:id} ) }}" class="btn btn-primary">
+                <i class="fas fa-edit" aria-hidden="true"></i> {{ button_label_new }}
+            </a>
+
+        </div>   
+        
+    </div>
+        
+    <div class="row">
+
+        <table class="table table-responsive js-operas-table">
+            <thead>
+                <tr>
+                    
+                    <th></th>
+                    <th></th>
+                    <th>Registered</th>
+                    <th>{{ 'label.treatments'|trans }}</th>
+                    <th>Dr.</th>
+                    <th>{{ 'label.place'|trans }}</th>
+                    <th>PLANNED</th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for opera in operas %}
+                <tr>                    
+                    <td>
+                        <a href="" 
+                            class="js-delete-record" data-url="{{ path('opera_delete', {id: opera.id}) }}"
+                        >
+                            <span class="fa fa-trash"></span>
+                        </a>
+                    </td>
+                    <td>{{ opera.id }}</td>        
+                    <td>{{ opera.createdAt|date('d/m/y') }}</td>
+                    <td>{{ opera.treatment.name }}</td>
+                    <td>{{ opera.user.firstname }} {{ opera.user.lastname }}</td>
+                    <td>{{ opera.place.name }}</td>
+                    <td>{{ opera.madeAt|date('d/m/y') }}</td>
+                    <td>
+                        <a href="{{ path('opera_edit', {slug:app.user.center.slug,id:opera.id} ) }}">
+                            <span class="fas fa-search"></span>
+                        </a>
+                        </td>            
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+            
+    </div>
 
 </div>
 

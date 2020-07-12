@@ -15,13 +15,17 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Form\UserType;
 use App\Form\Type\ChangePasswordType;
 
+use Doctrine\ORM\EntityManagerInterface;
+
 use App\Form\DocUserType;
 
 use App\Entity\DocCenterGroup;
 use App\Entity\DocUser;
 
+use App\Entity\Treatment;
 
-use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
+
+#use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
@@ -142,6 +146,11 @@ class UserController extends AbstractController
     }    
 
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     /**
      * @Route("/{slug}/documents-groups", methods={"GET", "POST"}, name="doc_groups_index") 
      */
@@ -165,15 +174,11 @@ class UserController extends AbstractController
         
     }
 
-
-
     /**
      * @Route("/{slug}/documents-group/{id}/index", methods={"GET", "POST"}, name="docs_index")
      * 
      */ 
     public function docsIndex(Request $request, $slug, DocCenterGroup $docCenterGroup)
-
-
     {
 
 
@@ -240,6 +245,42 @@ class UserController extends AbstractController
         }
     
     }
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    /**
+     * @Route("/treatments", methods={"POST"}, name="treatments_get")
+     */
+    public function getTreatmentsFromTypeApi(Request $request, EntityManagerInterface $em)
+    {
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        $typeId = $request->query->get('query');
+
+        //$typeId = $type->getId();
+        $results = [];
+        
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository(Treatment::class);
+        $foundTreatments = $repository->findBy(['type' => $typeId], ['name' => 'ASC']);
+
+        foreach ($foundTreatments as $treatment){
+
+            $results[] = [
+                'id' => $treatment->getId(),
+                'name' => $treatment->getName(),
+            ];
+
+        };
+
+        return $this->json($results);
+    }
+
 
 }
 

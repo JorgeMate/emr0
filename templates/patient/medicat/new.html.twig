@@ -14,14 +14,20 @@
                 
                 {{ 'title.medicat'|trans }} <i class="fas fa-capsules"></i>
                  {{ 'label.new_entry'|trans }} | <i class="fas fa-user-injured"></i>
-                {{ patient.firstname }} {{ patient.lastname }} &nbsp;
-                {% if patient.sex %}
-                    <i class="fas fa-venus text-danger"></i>
-                {% else %}
-                    <i class="fas fa-mars text-info"></i>
-                {% endif %}
-                {{ patient.dateOfBirth | age }}
 
+
+                    {{ patient.firstname }} {{ patient.lastname }} &nbsp;
+                    {% if patient.sex == '0' %}
+                        <i class="fas fa-mars text-info"></i>
+                    {% elseif patient.sex == '1' %}
+                        <i class="fas fa-venus text-danger"></i>
+                    {% else  %}
+                        <i class="far fa-question-circle text-success"></i>
+                    {% endif %}
+
+                    {% if patient.dateOfBirth %}
+                        {{ patient.dateOfBirth | age }}    
+                    {% endif %}
             </h4>
 
         </div>
