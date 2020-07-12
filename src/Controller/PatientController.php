@@ -6,11 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
+
+use App\Entity\Patient;
+
+use App\Form\PatientType;
 
 
 /**
@@ -118,6 +123,46 @@ class PatientController extends AbstractController
     }
 
 
+     /**
+     * @Route("/{slug}/new/patient", methods={"GET", "POST"}, name="patient_new")
+     * 
+     * NUEVO paciente (del usuario)
+     */
+    public function newPat(Request $request, $slug): Response
+    {
+
+        $user = $this->getUser();
+        $center = $user->getCenter();
+
+        $this->denyAccessUnlessGranted('CENTER_EDIT', $center);
+
+        // Todos pueden insertar pacientes !?
+
+        $patient = new Patient();
+        $patient->setUser($user);
+
+        $form = $this->createForm(PatientType::class, $patient);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($patient);
+            $em->flush();
+
+            $this->addFlash('info', 'record.updated_successfully');
+
+            return $this->redirectToRoute('patient_show', ['slug' => $slug, 'id' => $patient->getId()]);
+        }
+
+        return $this->render('/patient/new.html.twig', [
+             
+            'patient' => $patient,
+            'form' => $form->createView(),
+            
+        ]);
+
+    }
 
 
 

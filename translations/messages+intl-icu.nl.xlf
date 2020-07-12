@@ -179,6 +179,12 @@
                 <target>Vrouw</target>
             </trans-unit>
 
+            <trans-unit id="label.otro">
+                <source>label.otro</source>
+                <target>Andere</target>
+            </trans-unit>
+
+
 
             <trans-unit id="label.tel">
                 <source>label.tel</source>
