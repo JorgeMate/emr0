@@ -39,6 +39,7 @@ class Source
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Gedmo\Slug(fields={"name"}) 
      */
     private $slug;
 

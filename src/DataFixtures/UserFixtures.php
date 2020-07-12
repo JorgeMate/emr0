@@ -56,7 +56,7 @@ class UserFixtures extends Fixture
 
 
 
-        $manager->flush();
+        
     }
 
 
@@ -106,9 +106,10 @@ class UserFixtures extends Fixture
     {
 
         $center = new Center();
+
         $center->setName('Karimed BV');
         $center->setContactPerson('R.B. Karim');
-        $center->setTel('(+31) --- --- ---');
+        $center->setTel('');
         $center->setEmail('rbkarim@gmail.com');
         $center->setAddress('Amsterdamseweg 330');
         $center->setPostcode('');
@@ -117,29 +118,33 @@ class UserFixtures extends Fixture
         
         $this->manager->persist($center);
 
-        if (false){
+        if (true){
 
             $user = new User();
             $user->setCenter($center);
             $user->setCenterUser(true);
             $user->setFirstName('R.B.');
-            $user->setLastName('Karimé');
+            $user->setLastName('Karim');
             $user->setEmail('rbkarim@gmail.com');
-            $user->setTel('(+31) --- --- ---');
+            $user->setTel('');
 
             $this->passUniversalEncoded = $this->encoder->encodePassword(
                 $user,
                 $this->passUniversal
             );
 
+            $user->setPassword($this->passUniversalEncoded);
+            $user->setEnabled(true);
+
             $roles[] = 'ROLE_ADMIN';
             $user->setRoles($roles);
             
             $this->manager->persist($user);
+            $this->manager->flush();
 
         }
         
-        $this->manager->flush();
+        
 
 
 

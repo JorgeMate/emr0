@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TreatmentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +44,16 @@ class Treatment
      * @ORM\Column(type="boolean", options={"default" : true})
      */
     private $enabled;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Opera::class, mappedBy="treatment")
+     */
+    private $operas;
+
+    public function __construct()
+    {
+        $this->operas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +116,37 @@ class Treatment
     public function setEnabled(bool $enabled): self
     {
         $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Opera[]
+     */
+    public function getOperas(): Collection
+    {
+        return $this->operas;
+    }
+
+    public function addOpera(Opera $opera): self
+    {
+        if (!$this->operas->contains($opera)) {
+            $this->operas[] = $opera;
+            $opera->setTreatment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOpera(Opera $opera): self
+    {
+        if ($this->operas->contains($opera)) {
+            $this->operas->removeElement($opera);
+            // set the owning side to null (unless already changed)
+            if ($opera->getTreatment() === $this) {
+                $opera->setTreatment(null);
+            }
+        }
 
         return $this;
     }

@@ -13,8 +13,12 @@ use App\Entity\Insurance;
 use App\Entity\Source;
 use App\Entity\Place;
 
+use App\Entity\Opera;
+use App\Entity\Treatment;
+
 use App\Form\InsuranceType;
 use App\Form\SourceType;
+use App\Form\PlaceType;
 
 /**
  * Controller used to manage current center entities.
@@ -181,6 +185,35 @@ class EntityController extends AbstractController
             'source' => $source,
             'form' => $form->createView(), 
         ]);
+    }  
+    
+   /**
+     * @Route("/{slug}/source/{id}/edit", methods={"GET", "POST"}, name="source_edit")
+     * 
+     */
+    public function sourceEdit(Request $request, $slug, Source $source)
+    {
+        $center = $this->getUser()->getCenter();
+
+        $this->denyAccessUnlessGranted('CENTER_EDIT', $center);        
+
+        $form = $this->createForm(SourceType::class, $source);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $this->addFlash('info', 'record.updated_successfully');
+
+            return $this->redirectToRoute('sources_index', ['slug' => $slug] );
+        }
+
+        return $this->render('entity/source/edit.html.twig', [
+            'center' => $center,
+            'source' => $source,
+            'form' => $form->createView(),
+        ]);
     }    
 
 
@@ -207,11 +240,11 @@ class EntityController extends AbstractController
 
     }
 
-        /**
+    /**
      * @Route("/{slug}/place/new", methods={"GET", "POST"}, name="place_new")
      * 
      */
-    public function placeNew(Request $request, $slug, Place $place): Response
+    public function placeNew(Request $request, $slug): Response
     {
         $center = $this->getUser()->getCenter();
 
@@ -241,6 +274,106 @@ class EntityController extends AbstractController
             'form' => $form->createView(), 
         ]);
     }    
+
+    /**
+     * @Route("/{slug}/place/{id}/edit", methods={"GET", "POST"}, name="place_edit")
+     * 
+     */
+    public function placeEdit(Request $request, $slug, Place $place)
+    {
+        $center = $this->getUser()->getCenter();
+
+        $this->denyAccessUnlessGranted('CENTER_EDIT', $center);        
+
+        $form = $this->createForm(PlaceType::class, $place);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $this->addFlash('info', 'record.updated_successfully');
+
+            return $this->redirectToRoute('places_index', ['slug' => $slug] );
+        }
+
+        return $this->render('entity/place/edit.html.twig', [
+            'slug' => $slug,
+            'place' => $place,
+            'form' => $form->createView(),
+        ]);
+
+        
+    }
+
+
+
+
+
+
+   /**
+     * @Route("/{slug}/treatments/{slug2}", methods={"GET"}, name="operasPerPlace_index")
+     */
+    public function operasPerPlaceIndex($slug, $slug2)
+    {
+
+        $center = $this->getUser()->getCenter();
+        $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
+
+        //$idPlace = $request->get('id');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $repository = $em->getRepository(Place::class);
+        $place = $repository->findOneBy(['slug' => $slug2]);
+
+        //$placeName = $place->getName();
+        $placeId = $place->getId();
+
+
+        $repository = $em->getRepository(Opera::class);
+
+        $operas = $repository->findBy(['place' => $placeId], ['made_at' => 'DESC']);
+        
+        return $this->render('patient/opera/index_place.html.twig', [
+
+            'slug' => $slug,
+            'place' => $place,
+            'operas' => $operas,
+
+        ]);
+    }
+
+    /**
+     * @Route("/{slug}/treatment/{id}/ops", methods={"GET"}, name="operasPerTreatment_index")
+     */
+    public function operasPerTreatmentIndex($slug, $id)
+    {
+
+        $center = $this->getUser()->getCenter();
+        $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $repository = $em->getRepository(Treatment::class);
+        $treatment = $repository->findOneBy(['id' => $id]);
+
+        //$treatment = $treatment->getName();
+
+        $repository = $em->getRepository(Opera::class);
+
+        $operas = $repository->findBy(['treatment' => $id], ['made_at' => 'DESC']);
+
+        return $this->render('patient/opera/index_treatment.html.twig', [
+
+            'slug' => $slug,
+            'treatment' => $treatment,
+            'operas' => $operas,
+
+        ]);
+
+
+    }
 
 
 

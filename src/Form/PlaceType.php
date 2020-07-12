@@ -25,7 +25,7 @@ class PlaceType extends AbstractType
             ])
 
             ->add('name', TextType::class, [
-                'label' => 'entity.title_ins',
+                'label' => 'label.center_name',
             ])
             ->add('contact', TextType::class, [
                 'label' => 'label.contact',
@@ -39,7 +39,7 @@ class PlaceType extends AbstractType
                 'label' => 'label.tel',                
                 'required' => false,                
             ])
-            ->add('fax', TelType::class, [
+            ->add('cel', TelType::class, [
                 'required' => false,                
             ])
             ->add('notes', TextareaType::class, [

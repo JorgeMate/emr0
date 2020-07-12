@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PlaceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -25,7 +27,7 @@ class Place
     private $name;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" : true})
      */
     private $enabled;
 
@@ -71,6 +73,16 @@ class Place
      * @Gedmo\Timestampable(on="create")
      */
     private $created_at;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Opera::class, mappedBy="place")
+     */
+    private $operas;
+
+    public function __construct()
+    {
+        $this->operas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -193,6 +205,37 @@ class Place
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Opera[]
+     */
+    public function getOperas(): Collection
+    {
+        return $this->operas;
+    }
+
+    public function addOpera(Opera $opera): self
+    {
+        if (!$this->operas->contains($opera)) {
+            $this->operas[] = $opera;
+            $opera->setPlace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOpera(Opera $opera): self
+    {
+        if ($this->operas->contains($opera)) {
+            $this->operas->removeElement($opera);
+            // set the owning side to null (unless already changed)
+            if ($opera->getPlace() === $this) {
+                $opera->setPlace(null);
+            }
+        }
 
         return $this;
     }

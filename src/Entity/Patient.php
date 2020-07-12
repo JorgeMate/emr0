@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PatientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -125,6 +127,16 @@ class Patient
      * @ORM\ManyToOne(targetEntity=Source::class, inversedBy="patients")
      */
     private $source;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Opera::class, mappedBy="patient", orphanRemoval=true)
+     */
+    private $operas;
+
+    public function __construct()
+    {
+        $this->operas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -379,6 +391,37 @@ class Patient
     public function setSource(?Source $source): self
     {
         $this->source = $source;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Opera[]
+     */
+    public function getOperas(): Collection
+    {
+        return $this->operas;
+    }
+
+    public function addOpera(Opera $opera): self
+    {
+        if (!$this->operas->contains($opera)) {
+            $this->operas[] = $opera;
+            $opera->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOpera(Opera $opera): self
+    {
+        if ($this->operas->contains($opera)) {
+            $this->operas->removeElement($opera);
+            // set the owning side to null (unless already changed)
+            if ($opera->getPatient() === $this) {
+                $opera->setPatient(null);
+            }
+        }
 
         return $this;
     }
