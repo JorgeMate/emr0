@@ -10,6 +10,7 @@
         "guzzlefry/twig-age-extension": "@dev",
         "league/flysystem-aws-s3-v3": "^1.0",
         "league/flysystem-bundle": "^1.5",
+        "liip/imagine-bundle": "^2.3",
         "pagerfanta/pagerfanta": "^2.3",
         "sensio/framework-extra-bundle": "^5.1",
         "sensiolabs/security-checker": "^6.0",

@@ -126,6 +126,9 @@
     "http-interop/http-factory-guzzle": {
         "version": "1.0.0"
     },
+    "imagine/imagine": {
+        "version": "1.2.3"
+    },
     "jean85/pretty-package-versions": {
         "version": "1.2"
     },
@@ -158,6 +161,19 @@
         "files": [
             "config/packages/flysystem.yaml",
             "var/storage/.gitignore"
+        ]
+    },
+    "liip/imagine-bundle": {
+        "version": "1.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.8",
+            "ref": "5a5bdc2d0e2533ed6935d5ae562f2b318a8fc1ee"
+        },
+        "files": [
+            "config/packages/liip_imagine.yaml",
+            "config/routes/liip_imagine.yaml"
         ]
     },
     "monolog/monolog": {
@@ -596,6 +612,9 @@
         "version": "v5.1.2"
     },
     "symfony/string": {
+        "version": "v5.1.2"
+    },
+    "symfony/templating": {
         "version": "v5.1.2"
     },
     "symfony/test-pack": {

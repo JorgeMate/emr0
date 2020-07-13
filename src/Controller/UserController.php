@@ -23,6 +23,7 @@ use App\Entity\DocCenterGroup;
 use App\Entity\DocUser;
 
 use App\Entity\Treatment;
+use App\Entity\DocPatient;
 
 
 #use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
@@ -218,10 +219,10 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}/{bucket}/{id}/show", methods={"GET", "POST"}, name="doc_show")
+     * @Route("/{slug}/{bucket}/{id}/user-doc", methods={"GET", "POST"}, name="doc_user_show")
      * 
      */ 
-    public function docShow(Request $request, $slug, $bucket, DocUser $docUser, S3Client $S3Client)
+    public function docUserShow(Request $request, $slug, $bucket, DocUser $docUser, S3Client $S3Client)
     {
 
         #$bucket = '';
@@ -245,6 +246,36 @@ class UserController extends AbstractController
         }
     
     }
+
+    /**
+     * @Route("/{slug}/{bucket}/{id}/patient-doc", methods={"GET", "POST"}, name="doc_patient_show")
+     * 
+     */ 
+    public function docPatShow(Request $request, $slug, $bucket, DocPatient $docPatient, S3Client $S3Client)
+    {
+
+        $keyname =  'DOCS/patient_docs/' ;
+        $keyname .= $docPatient->getName();
+ 
+        $s3 = $S3Client;
+
+        try {
+            // Get the object.
+            $result = $s3->getObject([
+                'Bucket' => $bucket,
+                'Key'    => $keyname
+            ]);
+        
+            // Display the object in the browser.
+            header("Content-Type: {$result['ContentType']}");
+            echo $result['Body'];
+        } catch (S3Exception $e) {
+            echo $e->getMessage() . PHP_EOL;
+        }
+        
+
+    }
+
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -280,6 +311,18 @@ class UserController extends AbstractController
 
         return $this->json($results);
     }
+
+    /**
+     * @Route("/img/{id}", methods={"DELETE"}, name="img_delete")
+     */
+    public function deleteImg(DocPatient $docPatient)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($docPatient);
+        $em->flush();
+        return new Response(null, 204);
+    }   
 
 
 }

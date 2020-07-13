@@ -209,7 +209,7 @@ class PatientController extends AbstractController
         //var_dump($debts);die;
 
         $repository = $em->getRepository(docPatient::class);
-        $imgs = $repository->findBy(['patient' => $patId, 'mime_type' => 'image/jpeg'], ['updated_at' => 'DESC']);
+        $imgs = $repository->findBy(['patient' => $patId, 'mime_type' => 'image/png'], ['updated_at' => 'DESC']);
         #$docs = $repository->findBy(['patient' => $patId, 'mime_type' => 'application/pdf'], ['updated_at' => 'DESC']);
 
 
