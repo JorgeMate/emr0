@@ -54,7 +54,7 @@ class Opera
     private $user;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", options={"default" : 0.0})
      */
     private $value;
 

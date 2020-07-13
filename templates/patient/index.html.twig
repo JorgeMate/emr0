@@ -62,7 +62,9 @@
                     <td class="text-left"><a href="{{ path('patient_show', {slug: center.slug, id: item.id}) }}" >{{ item.lastname }}</a></td>
                     <td class="text-center">
 
-                        {{ item.dateOfBirth | age }} 
+                    {% if item.dateOfBirth %}
+                        {{ item.dateOfBirth | age }}    
+                    {% endif %}
 
                     {% if item.sex == '0' %}
                         <i class="fas fa-mars text-info"></i>

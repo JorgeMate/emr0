@@ -7,10 +7,23 @@ flysystem:
             options:
                 directory: '%kernel.project_dir%/var/storage/default'
 
-        remotedocs.storage:
+
+
+
+
+        remote.userdocs.storage:
             adapter: 'aws'
             options:
                 client: Aws\S3\S3Client # The service ID of the Aws\S3\S3Client instance
                 bucket: '%env(AWS_S3_BUCKET_NAME)%'
 
-                prefix: '%env(AWS_S3_DOCS_PREFIX)%'
+                prefix: '%env(AWS_S3_USE_DOCS_PREFIX)%'
+
+
+        remote.patientdocs.storage:
+            adapter: 'aws'
+            options:
+                client: Aws\S3\S3Client # The service ID of the Aws\S3\S3Client instance
+                bucket: '%env(AWS_S3_BUCKET_NAME)%'
+
+                prefix: '%env(AWS_S3_PAT_DOCS_PREFIX)%'

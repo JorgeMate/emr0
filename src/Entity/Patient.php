@@ -148,12 +148,18 @@ class Patient
      */
     private $historias;
 
+    /**
+     * @ORM\OneToMany(targetEntity=DocPatient::class, mappedBy="patient", orphanRemoval=true)
+     */
+    private $docPatients;
+
     public function __construct()
     {
         $this->operas = new ArrayCollection();
         $this->consults = new ArrayCollection();
         $this->medicats = new ArrayCollection();
         $this->historias = new ArrayCollection();
+        $this->docPatients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -531,6 +537,37 @@ class Patient
             // set the owning side to null (unless already changed)
             if ($historia->getPatient() === $this) {
                 $historia->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DocPatient[]
+     */
+    public function getDocPatients(): Collection
+    {
+        return $this->docPatients;
+    }
+
+    public function addDocPatient(DocPatient $docPatient): self
+    {
+        if (!$this->docPatients->contains($docPatient)) {
+            $this->docPatients[] = $docPatient;
+            $docPatient->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocPatient(DocPatient $docPatient): self
+    {
+        if ($this->docPatients->contains($docPatient)) {
+            $this->docPatients->removeElement($docPatient);
+            // set the owning side to null (unless already changed)
+            if ($docPatient->getPatient() === $this) {
+                $docPatient->setPatient(null);
             }
         }
 

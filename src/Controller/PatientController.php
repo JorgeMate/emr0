@@ -22,9 +22,13 @@ use App\Entity\Medicat;
 use App\Entity\Historia;
 use App\Entity\Opera;
 
+use App\Entity\DocPatient;
+
 
 use App\Form\PatientType;
 use App\Form\ConsultType;
+
+use App\Form\ DocPatientType;
 
 
 
@@ -204,11 +208,11 @@ class PatientController extends AbstractController
 
         //var_dump($debts);die;
 
-        #$repository = $em->getRepository(StoredImg::class);
-        #$imgs = $repository->findBy(['patient' => $patId, 'mime_type' => 'image/jpeg'], ['updated_at' => 'DESC']);
+        $repository = $em->getRepository(docPatient::class);
+        $imgs = $repository->findBy(['patient' => $patId, 'mime_type' => 'image/jpeg'], ['updated_at' => 'DESC']);
         #$docs = $repository->findBy(['patient' => $patId, 'mime_type' => 'application/pdf'], ['updated_at' => 'DESC']);
 
-        //var_dump($operas);die;
+
 
         $consult = new Consult();
         $formConsult = $this->createForm(ConsultType::class, $consult);
@@ -228,11 +232,31 @@ class PatientController extends AbstractController
         }
 
 
+        $storedImg = new DocPatient();
+        $storedImg->setPatient($patient);
+        $storedImg->setVisible(true);
+
+        $formImg = $this->createForm(DocPatientType::class, $storedImg);
+        $formImg->handleRequest($request);
+
+        if ($formImg->isSubmitted() && $formImg->isValid()) {
+                
+            $em->persist($storedImg);
+            $em->flush();
+                
+            $this->addFlash('info', 'img.up_suc');
+            $slug = $patient->getUser()->getCenter()->getSlug();
+
+            return $this->redirectToRoute('patient_show', ['slug' =>$slug ,'id' => $patient->getId() ] );
+
+        }
+
+
+
+
+
         if (false){
 
-
-            $storedImg = new StoredImg();
-            $storedImg->setPatient($patient);
 
             // Entramos al mismo repositorio por los 2 lados
 
@@ -252,19 +276,11 @@ class PatientController extends AbstractController
 
             $formImg = $this->createForm(StoredImgType::class, $storedImg);
             $formImg->handleRequest($request);
-            if ($formImg->isSubmitted() && $formImg->isValid()) {
-                
-                $em->persist($storedImg);
-                $em->flush();
-                    
-                $this->addFlash('info', 'img.up_suc');
-                $slug = $patient->getUser()->getCenter()->getSlug();
-
-                return $this->redirectToRoute('patient_show', ['slug' =>$slug ,'id' => $patient->getId() ] );
-
-            }
 
         }
+
+
+
 
         return $this->render('patient/show.html.twig', [
            
@@ -277,12 +293,12 @@ class PatientController extends AbstractController
 
             #'debts' => $debts,
 
-            #'imgs' => $imgs,
+            'imgs' => $imgs,
             #'docs' => $docs,
 
             'formConsult' => $formConsult->createView(),
             #'formDoc' => $formDoc->createView(),
-            #'formImg' => $formImg->createView(),
+            'formImg' => $formImg->createView(),
 
             'show_confirmation' => true,
             

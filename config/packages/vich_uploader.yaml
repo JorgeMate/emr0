@@ -24,12 +24,24 @@ vich_uploader:
 
         remote_user_docs:
             uri_prefix: /DOCS/user_docs
-            upload_destination: remotedocs.storage
+            upload_destination: remote.userdocs.storage
 
             namer: Vich\UploaderBundle\Naming\OrignameNamer
 
             inject_on_load: false
             delete_on_update: true
             delete_on_remove: true
+
+        
+        remote_patient_docs:
+            uri_prefix: /DOCS/patient_docs
+            upload_destination: remote.patientdocs.storage
+
+            namer: Vich\UploaderBundle\Naming\OrignameNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
 
 

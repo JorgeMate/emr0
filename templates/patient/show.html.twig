@@ -84,7 +84,7 @@
 
         {# TAB 3 tratamientos #}
         {{ include('/patient/TABS/_TAB3.html.twig', {
-            
+    
             id: patient.id,
             button_label_new: 'action.new'|trans,
             operas: operas
@@ -95,6 +95,10 @@
         {# TAB 4 imagenes #}
         {{ include('/patient/TABS/_TAB4.html.twig', {
 
+        form: formImg,
+            
+        imgs: imgs,
+        
         button_label_new: 'label.newpic'|trans,
         button_label_cancel: 'label.cancel'|trans,
         button_label_upload: 'label.upload'|trans,
