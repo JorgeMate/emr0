@@ -5,6 +5,7 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "aws/aws-sdk-php": "^3.145",
         "fzaninotto/faker": "^1.9",
         "gedmo/doctrine-extensions": "^2.4",
         "guzzlefry/twig-age-extension": "@dev",

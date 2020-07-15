@@ -3,9 +3,45 @@ liip_imagine:
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "gd"
 
-    filter_sets:
 
+    resolvers:
+
+        default :
+            web_path : ~
+
+        patient_docs:
+
+            aws_s3:
+                client_config:
+                    credentials:
+                        key: '%env(AWS_S3_ACCESS_ID)%'
+                        secret: '%env(AWS_S3_ACCESS_SECRET)%'
+                    region: '%env(AWS_S3_REGION)%'
+                    version: '%env(AWS_S3_VERSION)%'
+
+                bucket: '%env(AWS_S3_BUCKET_NAME)'
+                
+                get_options:
+                    Scheme: https
+                put_options:
+                    CacheControl: "max-age=86400"
+
+                #cache: true
+
+
+
+
+
+    filter_sets:
+        cache: ~
+
+        # the name of the "filter set"
         squared_thumbnail_small:
+
+            cache: patient_docs
+
+            quality: 75
+
             filters:
                 thumbnail:
                     size:          [200, 200]

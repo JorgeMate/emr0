@@ -240,6 +240,8 @@ class PatientController extends AbstractController
         $formImg->handleRequest($request);
 
         if ($formImg->isSubmitted() && $formImg->isValid()) {
+
+            dd($formImg['docFile']->getData());
                 
             $em->persist($storedImg);
             $em->flush();

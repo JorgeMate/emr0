@@ -251,31 +251,33 @@ class UserController extends AbstractController
      * @Route("/{slug}/{bucket}/{id}/patient-doc", methods={"GET", "POST"}, name="doc_patient_show")
      * 
      */ 
-    public function docPatShow(Request $request, $slug, $bucket, DocPatient $docPatient, S3Client $S3Client)
+    public function getPathDocPat(Request $request, $slug, $bucket, DocPatient $docPatient, S3Client $S3Client)
     {
 
-        $keyname =  'DOCS/patient_docs/' ;
-        $keyname .= $docPatient->getName();
+
+
+
+        $path =  'DOCS/patient_docs/' ;
+        $path .= $docPatient->getName();
  
         $s3 = $S3Client;
 
         try {
-            // Get the object.
-            $result = $s3->getObject([
-                'Bucket' => $bucket,
-                'Key'    => $keyname
-            ]);
-        
-            // Display the object in the browser.
-            header("Content-Type: {$result['ContentType']}");
-            echo $result['Body'];
+
+            $model = $this->s3->getObject(['Bucket' => $bucket, 'Key' => $path]);
+            return (string) $model->get('Body');
+
         } catch (S3Exception $e) {
+            if ($e->getAwsErrorCode() == 'NoSuchKey') {
+                echo $e->getMessage() . ' Clave INEXISTENTE';
+            }
             echo $e->getMessage() . PHP_EOL;
         }
-        
+
+
+ 
 
     }
-
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

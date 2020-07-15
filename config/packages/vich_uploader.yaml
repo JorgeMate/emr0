@@ -23,7 +23,7 @@ vich_uploader:
 
 
         remote_user_docs:
-            uri_prefix: /DOCS/user_docs
+            uri_prefix: '%env(AWS_S3_USE_DOCS_PREFIX)%'
             upload_destination: remote.userdocs.storage
 
             namer: Vich\UploaderBundle\Naming\OrignameNamer
@@ -34,7 +34,7 @@ vich_uploader:
 
         
         remote_patient_docs:
-            uri_prefix: /DOCS/patient_docs
+            uri_prefix: '%env(AWS_S3_PAT_DOCS_PREFIX)%'
             upload_destination: remote.patientdocs.storage
 
             namer: Vich\UploaderBundle\Naming\OrignameNamer
