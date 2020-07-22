@@ -255,8 +255,6 @@ class UserController extends AbstractController
     {
 
 
-
-
         $path =  'DOCS/patient_docs/' ;
         $path .= $docPatient->getName();
  

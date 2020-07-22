@@ -69,14 +69,12 @@
                 // Correción del fallo en input-files de bootstrap 4
 
                 $('.custom-file-input').on('change', function(event) {
-                    
-                var inputFile = event.currentTarget;
-                $(inputFile).parent()
-                    .find('.custom-file-label')
-                    .html(inputFile.files[0].name);
+                    var inputFile = event.currentTarget;
+                    $(inputFile).parent()
+                        .find('.custom-file-label')
+                        .html(inputFile.files[0].name);
 
-                $('.collapse').collapse();
-
+                    $('.collapse').collapse();
                 });
 
             </script>

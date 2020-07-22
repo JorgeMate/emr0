@@ -28,8 +28,10 @@ use App\Entity\DocPatient;
 use App\Form\PatientType;
 use App\Form\ConsultType;
 
-use App\Form\ DocPatientType;
+use App\Form\DocPatient2Type;
 
+
+use App\Service\UploaderHelper;
 
 
 /**
@@ -183,7 +185,7 @@ class PatientController extends AbstractController
      * 
      * MOSTRAR el paciente id
      */
-    public function showPat(Request $request, $slug, Patient $patient, EntityManagerInterface $em): Response
+    public function showPat(Request $request, $slug, Patient $patient, EntityManagerInterface $em, UploaderHelper $uploaderHelper): Response
     {
         $this->denyAccessUnlessGranted('PATIENT_VIEW', $patient);
 
@@ -209,7 +211,8 @@ class PatientController extends AbstractController
         //var_dump($debts);die;
 
         $repository = $em->getRepository(docPatient::class);
-        $imgs = $repository->findBy(['patient' => $patId, 'mime_type' => 'image/png'], ['updated_at' => 'DESC']);
+        $imgs = $repository->findBy(['patient' => $patId], ['updated_at' => 'DESC']);
+        #$imgs = $repository->findBy(['patient' => $patId, 'mime_type' => 'image/png'], ['updated_at' => 'DESC']);
         #$docs = $repository->findBy(['patient' => $patId, 'mime_type' => 'application/pdf'], ['updated_at' => 'DESC']);
 
 
@@ -236,12 +239,31 @@ class PatientController extends AbstractController
         $storedImg->setPatient($patient);
         $storedImg->setVisible(true);
 
-        $formImg = $this->createForm(DocPatientType::class, $storedImg);
+        $formImg = $this->createForm(DocPatient2Type::class, $storedImg);
         $formImg->handleRequest($request);
 
         if ($formImg->isSubmitted() && $formImg->isValid()) {
 
-            dd($formImg['docFile']->getData());
+            #dd($formImg['docFile']->getData());
+
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $formImg['docFile']->getData();
+
+            if ($uploadedFile){
+
+                $newFilename = $uploaderHelper->uploadPatientImage($uploadedFile);
+
+                $storedImg->setName($newFilename);
+                
+            };
+
+
+                        
+
+            $storedImg->setDocSize('0');
+            $storedImg->setMimeType('');
+            $storedImg->setUpdatedAt(new \DateTime());
+
                 
             $em->persist($storedImg);
             $em->flush();

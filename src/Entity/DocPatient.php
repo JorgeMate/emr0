@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\DocPatientRepository;
+use App\Service\UploaderHelper;
 use Doctrine\ORM\Mapping as ORM;
 
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -67,6 +68,11 @@ class DocPatient
      * @var File
      */
     private $docFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
 
 
 
@@ -177,4 +183,25 @@ class DocPatient
 
         return $this;
     }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+
+    public function getFilePath()
+    {
+        return UploaderHelper::PATIENT_IMAGES . '/' . $this->getName();
+    }
+
+
+
 }

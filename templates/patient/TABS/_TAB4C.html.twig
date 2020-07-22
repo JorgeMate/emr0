@@ -1,28 +1,37 @@
 <div role="tabpanel" class="tab-pane fade" id="nav-4">
+
+    <div class="row">
     
-                <!--
+        <div class="col-sm-4">
 
-                <form method="POST" action ="{{ path('upload_test') }}" enctype="multipart/form-data">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNewImg" aria-expanded="false" aria-controls="collapseNewImg">
+                {# Button with data-target #}
+                <i class="fas fa-camera"></i> {{button_label_new}}
+            </button>
 
-                    <input type="file" name="image">
+            <div class="row"> 
+                &nbsp;
+            </div>
 
-                    <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-file-upload"></i> {{ button_label_upload }} 
-                    </button>           
-
-                </form>
-
-                -->
+            <div class="collapse" id="collapseNewImg">
 
                 {{ form_start(form) }}
-            
+
                     <div class="row"> 
             
                         <div class="form-group col">   
-                            
+                    
                             {{ form_row(form.docFile, {
                                     attr: {
                                         'placeholder': 'Seleccione una imagen'
+                                    }
+                                }) 
+                            }}
+
+
+                            {{ form_row(form.description, {
+                                    attr: {
+                                        'placeholder': 'Describa la imagen'
                                     }
                                 }) 
                             }}
@@ -35,13 +44,49 @@
                             </button>           
 
                         </div>
-            
+
                     </div>
-            
-                {{ form_end(form)}}
 
-                <hr>
+                {{ form_end(form)}}                  
 
-  
+            </div>
+
+        </div>
+
+        <div class="col-sm-8">
+
+            <table class="table table-responsive table-striped js-imgs-table">
+
+   
+                <tbody>
+                    {% for img in imgs %}
+                    <tr>
+                        <td>
+                            <a href="" 
+                                class="js-delete-record" data-url="{{ path('img_delete', {id: img.id}) }}"
+                            >
+                                <span class="fa fa-trash"></span>
+                            </a>        
+                        </td>                
+                        <td>{{img.updatedAt|date('d/m/y') }}</td>
+                        <td>{{ img.name }}</td>
+                        <td>
+                        
+                            <img src="{{uploaded_asset(img.filePath)}}">
+                           
+                        </td> 
+                        <td>
+                        
+                        </td>
+                    </tr>
+                    {% endfor %}    
+                </tbody>
+        
+            </table>
+
+
+        </div>
+
+    </div>
 
 </div>

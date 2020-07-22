@@ -33,12 +33,13 @@ liip_imagine:
 
 
     filter_sets:
+
         cache: ~
 
         # the name of the "filter set"
-        squared_thumbnail_small:
+        square_thumbnail_small:
 
-            cache: patient_docs
+            #cache: patient_docs
 
             quality: 75
 

@@ -24,8 +24,12 @@ services:
             $defaultLocale: '%locale%'
 
             #$emailSender: '%app.notifications.email_sender%'
-            #$uploadsPath: '%kernel.project_dir%/public/uploads'
+
+            $uploadsPathLocal: '%kernel.project_dir%/public/DOCS'
+            
             $uploadsPath: 'https://s3.amazonaws.com/%env(AWS_S3_BUCKET_NAME)%'
+
+
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -48,6 +52,7 @@ services:
             - { name: twig.extension }        
 
 
+    Symfony\Component\Asset\Context\RequestStackContext: '@assets.context'
 
 
     Aws\S3\S3Client:
