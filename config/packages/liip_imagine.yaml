@@ -39,7 +39,15 @@ liip_imagine:
         # the name of the "filter set"
         square_thumbnail_small:
 
-            #cache: patient_docs
+            quality: 75
+
+            filters:
+                thumbnail:
+                    size:          [100, 100]
+                    mode:          outbound
+                    allow_upscale: true
+
+        square_thumbnail_medium:
 
             quality: 75
 

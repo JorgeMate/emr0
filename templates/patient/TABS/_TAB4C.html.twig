@@ -17,6 +17,10 @@
 
                 {{ form_start(form) }}
 
+                    <div class="row">
+                        
+                    </div>
+
                     <div class="row"> 
             
                         <div class="form-group col">   
@@ -72,7 +76,7 @@
                         <td>{{ img.name }}</td>
                         <td>
                         
-                            <img src="{{uploaded_asset(img.filePath)}}">
+                            <img src="{{uploaded_asset(img.filePath)|imagine_filter('square_thumbnail_small')}}">
                            
                         </td> 
                         <td>

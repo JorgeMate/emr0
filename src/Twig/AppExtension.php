@@ -17,9 +17,6 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 
-use Psr\Container\ContainerInterface;
-
-
 
 /**
  * See https://symfony.com/doc/current/templating/twig_extension.html.
@@ -37,13 +34,13 @@ class AppExtension extends AbstractExtension
 
     private $container;
 
-    public function __construct(string $locales, ContainerInterface $container)
+    public function __construct(string $locales, UploaderHelper $uploaderHelper)
     {
         $localeCodes = explode('|', $locales);
         sort($localeCodes);
         $this->localeCodes = $localeCodes;
 
-        $this->container = $container;
+        $this->uploaderHelper = $uploaderHelper;
 
     }
 
@@ -81,9 +78,9 @@ class AppExtension extends AbstractExtension
 
     public function getUploadedAssetPath(string $path):string
     {
-        return $this->container
-        ->get(UploaderHelper::class)
+        return $this->uploaderHelper
         ->getPublicPath($path);
+
     }
 
 
