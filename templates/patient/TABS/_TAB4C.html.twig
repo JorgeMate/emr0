@@ -73,10 +73,22 @@
                             </a>        
                         </td>                
                         <td>{{img.updatedAt|date('d/m/y') }}</td>
-                        <td>{{ img.name }}</td>
                         <td>
+                            {{ img.name }}
+                            <br>
+                            {{ img.description }}
+                        </td>
+                        <td>
+
+                        {% if true or form.vars.data.docFile|default %}
+
+                            <a href="{{ uploaded_asset(img.filePath) }}" target="_blank">
+                                <img src="{{ img.filePath|imagine_filter('square_thumbnail_small') }}">
+                            </a>
+
+                        {% endif %}
                         
-                            <img src="{{uploaded_asset(img.filePath)|imagine_filter('square_thumbnail_small')}}">
+                            
                            
                         </td> 
                         <td>

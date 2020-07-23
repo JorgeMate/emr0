@@ -10,8 +10,10 @@ parameters:
     app.notifications.email_sender: kimberly.systems@gmail.com
     session_max_idle_time: 900 // value in seconds
 
-    uploads_base_url: 'https://s3.amazonaws.com/%env(AWS_S3_BUCKET_NAME)%'
+    #uploads_base_url: 'https://s3.amazonaws.com/%env(AWS_S3_BUCKET_NAME)%'
 
+    uploads_dir_name: 'DOCS'
+    uploads_base_url: '%env(SITE_BASE_URL)%/%uploads_dir_name%'
 
 services:
     # default configuration for services in *this* file
@@ -25,11 +27,13 @@ services:
 
             #$emailSender: '%app.notifications.email_sender%'
 
-            $uploadsPathLocal: '%kernel.project_dir%/public/DOCS'
+            #$uploadsPathLocal: '%kernel.project_dir%/public/DOCS'
+            #$uploadsPath: 'https://s3.amazonaws.com/%env(AWS_S3_BUCKET_NAME)%'
+
+            $publicUploadsFilesystem: '@oneup_flysystem.public_uploads_filesystem_filesystem'
+            $uploadedAssetsBaseUrl: '%uploads_base_url%'
+
             
-            $uploadsPath: 'https://s3.amazonaws.com/%env(AWS_S3_BUCKET_NAME)%'
-
-
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

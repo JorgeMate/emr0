@@ -2,6 +2,7 @@
 flysystem:
 
     storages:
+    
         default.storage:
             adapter: 'local'
             options:

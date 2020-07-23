@@ -251,7 +251,7 @@ class PatientController extends AbstractController
 
             if ($uploadedFile){
 
-                $newFilename = $uploaderHelper->uploadPatientImage($uploadedFile);
+                $newFilename = $uploaderHelper->uploadPatientImage($uploadedFile, $storedImg->getName());
 
                 $storedImg->setName($newFilename);
                 
