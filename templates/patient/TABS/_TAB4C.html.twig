@@ -74,26 +74,29 @@
                         </td>                
                         <td>{{img.updatedAt|date('d/m/y') }}</td>
                         <td>
-                            {{ img.name }}
+                            {{ img.originalFilename }}
                             <br>
                             {{ img.description }}
                         </td>
-                        <td>
 
                         {% if true or form.vars.data.docFile|default %}
-
+                        <td>
                             <a href="{{ uploaded_asset(img.filePath) }}" target="_blank">
                                 <img src="{{ img.filePath|imagine_filter('square_thumbnail_small') }}">
-                            </a>
-
-                        {% endif %}
-                        
-                            
-                           
+                            </a>                           
                         </td> 
                         <td>
-                        
+                            <span>
+                                <a href="{{ path('image_patient_download', {
+                                    id: img.id,
+                                    slug:app.user.center.slug
+                                }) }}"  target="_blank"><span class="fas fa-download"></span></a>
+                            </span>
                         </td>
+                        {% endif %}
+
+                        
+                        
                     </tr>
                     {% endfor %}    
                 </tbody>

@@ -25,12 +25,15 @@ use App\Entity\DocUser;
 use App\Entity\Treatment;
 use App\Entity\DocPatient;
 
+use App\Service\UploaderHelper;
+
 
 #use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
-
+use Symfony\Component\HttpFoundation\HeaderUtils;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Controller used to manage current user.
@@ -182,7 +185,6 @@ class UserController extends AbstractController
     public function docsIndex(Request $request, $slug, DocCenterGroup $docCenterGroup)
     {
 
-
         $center = $this->getUser()->getCenter();
 
         $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
@@ -277,6 +279,37 @@ class UserController extends AbstractController
 
     }
 
+    /**
+     * @Route("/{slug}/patient-doc/{id}", methods={"GET"}, name="image_patient_download")
+     * 
+     */ 
+    public function downloadImagePat(DocPatient $docPatient, $slug, UploaderHelper $uploaderHelper)
+    {
+        #dd($docPatient);
+
+        $patient = $docPatient->getPatient();
+        $this->denyAccessUnlessGranted('PATIENT_VIEW', $patient);
+
+        $response = new StreamedResponse(function() use ($docPatient, $uploaderHelper) {
+
+            $outputStream = fopen('php://output', 'wb');
+            $fileStream = $uploaderHelper->readStream($docPatient->getFilePath(), false);
+
+            stream_copy_to_stream($fileStream, $outputStream);
+        });
+
+        $response->headers->set('Content-Type', $docPatient->getMimeType());
+
+        $disposition = HeaderUtils::makeDisposition(
+            HeaderUtils::DISPOSITION_INLINE,
+            $docPatient->getOriginalFilename()
+        );
+        
+        $response->headers->set('Content-Disposition', $disposition);
+        return $response;
+
+        
+    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

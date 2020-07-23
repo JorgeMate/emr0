@@ -6,16 +6,17 @@ use App\Repository\DocPatientRepository;
 use App\Service\UploaderHelper;
 use Doctrine\ORM\Mapping as ORM;
 
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * @ORM\Entity(repositoryClass=DocPatientRepository::class)
- * 
- * @Vich\Uploadable
  * 
  */
 class DocPatient
@@ -66,8 +67,6 @@ class DocPatient
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
-     * @Vich\UploadableField(mapping="remote_patient_docs", mimeType="mime_type", fileNameProperty="name", size="docSize")
-     * 
      * @var File
      */
     private $docFile;
@@ -77,7 +76,15 @@ class DocPatient
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="string", length=255)    
+     * @Groups({"main", "input"})   
+     */
+    private $originalFilename;
 
+# * @Assert\NotBlank() 
+# * @Assert\Length(max=100)
+# * 
 
    /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
@@ -203,6 +210,18 @@ class DocPatient
     public function getFilePath()
     {
         return UploaderHelper::PATIENT_IMAGES . '/' . $this->getName();
+    }
+
+    public function getOriginalFilename(): ?string
+    {
+        return $this->originalFilename;
+    }
+
+    public function setOriginalFilename(string $originalFilename): self
+    {
+        $this->originalFilename = $originalFilename;
+
+        return $this;
     }
 
 

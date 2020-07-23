@@ -251,13 +251,12 @@ class PatientController extends AbstractController
             if ($uploadedFile){
 
                 $newFilename = $uploaderHelper->uploadPatientImage($uploadedFile, $storedImg->getName());
-
                 $storedImg->setName($newFilename);
+                
+                $storedImg->setOriginalFilename($uploadedFile->getClientOriginalName());
                 $storedImg->setMimeType($uploadedFile->getMimeType() ?? 'application/octet-stream');
-
                 $storedImg->setDocSize($uploadedFile->getSize() ?? '0');
             
-                # $storedImg->setUpdatedAt(new \DateTime());                
             };
 
             $em->persist($storedImg);
