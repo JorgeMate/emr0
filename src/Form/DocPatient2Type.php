@@ -28,7 +28,11 @@ class DocPatient2Type extends AbstractType
 
         $imageConstraints = [
             new Image([
-                'maxSize' => '2M'
+                'maxSize' => '2M',
+                'mimeTypes' => [
+                    'image/*',
+                    'application/pdf',
+                ]
             ]),
         ];
 

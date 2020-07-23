@@ -220,6 +220,7 @@ class PatientController extends AbstractController
         $consult = new Consult();
         $formConsult = $this->createForm(ConsultType::class, $consult);
         $formConsult->handleRequest($request);
+
         if ($formConsult->isSubmitted() && $formConsult->isValid()) {
 
             $consult->setPatient($patient);
@@ -231,9 +232,7 @@ class PatientController extends AbstractController
             $this->addFlash('info', 'record.updated_successfully');
 
             return $this->redirectToRoute('patient_show', ['slug' => $slug, 'id' => $patient->getId() ] );
-
         }
-
 
         $storedImg = new DocPatient();
         $storedImg->setPatient($patient);
@@ -254,23 +253,22 @@ class PatientController extends AbstractController
                 $newFilename = $uploaderHelper->uploadPatientImage($uploadedFile, $storedImg->getName());
 
                 $storedImg->setName($newFilename);
-                
+                $storedImg->setMimeType($uploadedFile->getMimeType() ?? 'application/octet-stream');
+
+                $storedImg->setDocSize($uploadedFile->getSize() ?? '0');
+            
+                # $storedImg->setUpdatedAt(new \DateTime());                
             };
 
-
-                        
-
-            $storedImg->setDocSize('0');
-            $storedImg->setMimeType('');
-            $storedImg->setUpdatedAt(new \DateTime());
-
-                
             $em->persist($storedImg);
             $em->flush();
                 
             $this->addFlash('info', 'img.up_suc');
-            $slug = $patient->getUser()->getCenter()->getSlug();
 
+
+
+
+            $slug = $patient->getUser()->getCenter()->getSlug();
             return $this->redirectToRoute('patient_show', ['slug' =>$slug ,'id' => $patient->getId() ] );
 
         }
