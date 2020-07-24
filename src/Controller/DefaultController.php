@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +15,9 @@ use App\Form\NewCenterType;
 use App\Entity\User;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
+use Symfony\Component\Routing\Annotation\Route;
+
 
 
 
@@ -102,6 +105,23 @@ class DefaultController extends AbstractController
 
     }
 
+
+    /**
+     * @Route("/test-thumb", name="thumb")
+     */
+    public function testThumbAction()
+    {
+        $image = 'https://s3-'.
+            'eu-west-3'.
+            '.amazonaws.com/'.
+            'tech-med'.
+            '/patient_imgs/'.
+            'alien-profile-5f1b328915f70.png';
+        
+        return $this->render('default/test.html.twig',[
+            'image' => $image
+        ]);
+    }
 
 
 }

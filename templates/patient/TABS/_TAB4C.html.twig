@@ -69,21 +69,18 @@
                             <a href="" 
                                 class="js-delete-record" data-url="{{ path('img_delete', {id: img.id}) }}"
                             >
-                                <span class="fa fa-trash"></span>
+                                <span class="fa fa-trash text-danger"></span>
                             </a>        
                         </td>                
                         <td>{{img.updatedAt|date('d/m/y') }}</td>
                         <td>
                             {{ img.originalFilename }}
-                            <br>
-                            {{ img.description }}
+                            <br><br>
+                            <strong>{{ img.description }}</strong>
                         </td>
 
                         
                         <td>
-
-                        {{ img.imagePath }}
-
                         {% if true or form.vars.data.docFile|default %}
 
                             <a href="{{ path('image_patient_download', {
@@ -91,19 +88,12 @@
                                     slug:app.user.center.slug
                                 }) }}" target="_blank">
 
-                                <img src="{{ img.imagePath|imagine_filter('square_thumbnail_small') }}">
+                                <img src="{{ img.filePath|imagine_filter('square_thumbnail_small') }}">
 
                             </a>
 
                         {% endif %}
-
-                            
                         </td> 
-                  
-                        
-
-                        
-                        
                     </tr>
                     {% endfor %}    
                 </tbody>
