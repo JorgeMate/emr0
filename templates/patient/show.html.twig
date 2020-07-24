@@ -142,29 +142,37 @@
 
 {% endblock %}
 
+
+
+{% block stylesheets %}
+
+    {{ parent() }}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.css" integrity="sha512-bbUR1MeyQAnEuvdmss7V2LclMzO+R9BzRntEE57WIKInFVQjvX7l7QZSxjNDt8bg41Ww05oHSh0ycKFijqD7dA==" crossorigin="anonymous" />
+
+{% endblock %}
+
+
+
 {% block javascripts %}
 
     {{ parent() }}
 
-    <script>
-        
-    $(function() {
-        // Persistencia del último TAB seleccionado
-        $('a[data-toggle="tab"]').on('click', function(e) {
-            window.localStorage.setItem('activeTab', $(e.target).attr('href'));
+    <script> 
+        $(function() {
+            // Persistencia del último TAB seleccionado
+            $('a[data-toggle="tab"]').on('click', function(e) {
+                window.localStorage.setItem('activeTab', $(e.target).attr('href'));
+            });
+            var activeTab = window.localStorage.getItem('activeTab');
+            if (activeTab) {
+                $('#myTab a[href="' + activeTab + '"]').tab('show');
+                window.localStorage.removeItem("activeTab");
+            }
         });
-        var activeTab = window.localStorage.getItem('activeTab');
-        if (activeTab) {
-            $('#myTab a[href="' + activeTab + '"]').tab('show');
-            window.localStorage.removeItem("activeTab");
-        }
-    });
-
     </script>
 
-
     <script src="{{ asset('assets/js/medicat_stop.js') }}"></script>
-
     <script src="{{ asset('assets/js/delete_record.js') }}"></script>
 
     <script>
@@ -173,8 +181,12 @@
                 trigger: 'focus'
             })
         })
-
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.js" integrity="sha512-En/Po50Bl8kIECa2WkhxhdYeoKDcrJpBKMo9tmbuwbm9RxHWZV8/Y5xM9sh3QbrnFgM3hVR/2umJ33qGJk45pQ==" crossorigin="anonymous"></script>
+
+    <script src="{{ asset('assets/js/imgs_patient_form.js') }}"></script>
+
 
 
 {% endblock %}

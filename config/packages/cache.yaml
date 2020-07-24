@@ -13,7 +13,12 @@ framework:
 
         # APCu (not recommended with heavy random-write workloads as memory fragmentation can cause perf issues)
         #app: cache.adapter.apcu
+        app: '%cache_adapter%'
 
         # Namespaced pools use the above "app" backend by default
-        #pools:
+        pools:
+            cache.flysystem.psr6:
+                adapter: cache.app
+
+
             #my.dedicated.cache: null

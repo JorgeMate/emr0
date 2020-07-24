@@ -4,16 +4,16 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    cache_adapter: cache.adapter.apcu
     locale: 'en'
     # This parameter defines the codes of the locales (languages) enabled in the application
     app_locales: en|fr|es|nl
     app.notifications.email_sender: kimberly.systems@gmail.com
     session_max_idle_time: 900 // value in seconds
 
-    #uploads_base_url: 'https://s3.amazonaws.com/%env(AWS_S3_BUCKET_NAME)%'
-
-    uploads_dir_name: 'DOCS'
-    uploads_base_url: '%env(SITE_BASE_URL)%/%uploads_dir_name%'
+    #uploads_dir_name: 'DOCS'
+    #uploads_base_url: '%env(SITE_BASE_URL)%/%uploads_dir_name%'
+    uploads_base_url: 'https://s3.amazonaws.com/%env(AWS_S3_BUCKET_NAME)%'
 
 services:
     # default configuration for services in *this* file
@@ -27,11 +27,10 @@ services:
 
             #$emailSender: '%app.notifications.email_sender%'
 
-            #$uploadsPathLocal: '%kernel.project_dir%/public/DOCS'
-            #$uploadsPath: 'https://s3.amazonaws.com/%env(AWS_S3_BUCKET_NAME)%'
+            #$publicUploadsFilesystem: '@oneup_flysystem.public_uploads_filesystem_filesystem'
+            #$privateUploadsFilesystem: '@oneup_flysystem.private_uploads_filesystem_filesystem'
 
-            $publicUploadsFilesystem: '@oneup_flysystem.public_uploads_filesystem_filesystem'
-            $privateUploadsFilesystem: '@oneup_flysystem.private_uploads_filesystem_filesystem'
+            $uploadsFilesystem: '@oneup_flysystem.uploads_filesystem_filesystem'
 
             $uploadedAssetsBaseUrl: '%uploads_base_url%'
 

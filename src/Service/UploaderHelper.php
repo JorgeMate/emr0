@@ -3,10 +3,14 @@
 namespace App\Service;
 
 use Gedmo\Sluggable\Util\Urlizer;
+
 use League\Flysystem\FilesystemInterface;
+use League\Flysystem\FileNotFoundException;
+use League\Flysystem\AdapterInterface;
+
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Asset\Context\RequestStackContext;
-use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+#use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Symfony\Component\HttpFoundation\File\File;
@@ -14,10 +18,10 @@ use Symfony\Component\HttpFoundation\File\File;
 class UploaderHelper
 {
 
-    const PATIENT_IMAGES = '/patient_imgs';
+    const PATIENT_IMAGES = 'patient_imgs';
 
     private $filesystem;
-    private $privateFilesystem;
+    
 
     private $requestStackContext;
 
@@ -25,12 +29,11 @@ class UploaderHelper
 
     private $publicAssetBaseUrl;
 
-    public function __construct(FilesystemInterface $publicUploadsFilesystem, FilesystemInterface $privateUploadsFilesystem, RequestStackContext $requestStackContext, LoggerInterface $logger, string $uploadedAssetsBaseUrl)
+    public function __construct(FilesystemInterface $uploadsFilesystem, RequestStackContext $requestStackContext, LoggerInterface $logger, string $uploadedAssetsBaseUrl)
     {
 
-        $this->filesystem = $publicUploadsFilesystem;
-        $this->privateFilesystem = $privateUploadsFilesystem;
-
+        $this->filesystem = $uploadsFilesystem;
+    
         $this->requestStackContext = $requestStackContext;
         $this->logger = $logger;
         $this->publicAssetBaseUrl = $uploadedAssetsBaseUrl;
@@ -40,20 +43,9 @@ class UploaderHelper
 
     public function uploadPatientImage(File $file, ?string $existingFilename): string
     {
-        #$destination = $this->getParameter('kernel.project_dir').'/public/DOCS/patient_imgs';
-        #$destination = $this->uploadsPath . '/' . self::PATIENT_IMAGES;
 
-        #$originalFinalname = pathinfo($uploadedFile->getClientOriginalname(), PATHINFO_FILENAME);
-        #$newFilename = Urlizer::urlize($originalFinalname).'-'.uniqid().'.'. $uploadedFile->guessExtension();
 
-        //  $uploadedFile->move(
-        //      $destination,
-        //      $newFilename
-        //  );
-
-        #$newFilename = $this->uploadFile($file, self::PATIENT_IMAGES, true);
-
-        $newFilename = $this->uploadFile($file, self::PATIENT_IMAGES, false);
+        $newFilename = $this->uploadFile($file, self::PATIENT_IMAGES, true);
 
         if($existingFilename){
             try {
@@ -73,13 +65,30 @@ class UploaderHelper
 
     public function getPublicPath(string $path): string
     {
+        $fullPath = $this->publicAssetBaseUrl.'/'.$path;
+        // if it's already absolute, just return
+        if (strpos($fullPath, '://') !== false) {
+            return $fullPath;
+        }
+
+        // needed if you deploy under a subdirectory
         return $this->requestStackContext
-        ->getBasePath() . $this->publicAssetBaseUrl .  $path;
+            ->getBasePath().$fullPath;
+
+    }
+
+    public function deleteFile(string $path)
+    {
+        $result = $this->filesystem->delete($path);
+
+        if ($result === false) {
+            throw new \Exception(sprintf('Error deleting "%s"', $path));
+        }
     }
 
 
     /**
-     * @resource
+     * @return resource
      */
     public function readStream(string $path, bool $isPublic)
     {
@@ -87,11 +96,17 @@ class UploaderHelper
         $filesystem = $isPublic ? $this->filesystem : $this->privateFilesystem;
 
         $resource = $filesystem->readStream($path);
+
         if($resource === false){
             throw new \Exception(sprintf('Error opening stream for "%s"', $path));
         }
         return $resource;
     }
+
+
+
+
+
 
     public function uploadFile(File $file, string $directory, bool $isPublic): string
     {
@@ -109,7 +124,10 @@ class UploaderHelper
         $stream = fopen($file->getPathname(), 'r');
         $result = $filesystem->writeStream(
             $directory. '/' .$newFilename,
-            $stream
+            $stream,
+            [
+                'visibility' => $isPublic ? AdapterInterface::VISIBILITY_PUBLIC : AdapterInterface::VISIBILITY_PRIVATE
+            ]
         );
 
         if ($result === false){
