@@ -72,12 +72,12 @@ class DocPatient
     private $docFile;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=127, nullable=true)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)    
+     * @ORM\Column(type="string", length=127)    
      * @Groups({"main", "input"})   
      */
     private $originalFilename;

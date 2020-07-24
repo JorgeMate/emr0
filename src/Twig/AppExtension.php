@@ -12,6 +12,8 @@
 namespace App\Twig;
 
 use App\Service\UploaderHelper;
+use Psr\Container\ContainerInterface;
+
 use Symfony\Component\Intl\Locales;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -34,13 +36,13 @@ class AppExtension extends AbstractExtension
 
     private $container;
 
-    public function __construct(string $locales, UploaderHelper $uploaderHelper)
+    public function __construct(string $locales, ContainerInterface $container)
     {
         $localeCodes = explode('|', $locales);
         sort($localeCodes);
         $this->localeCodes = $localeCodes;
 
-        $this->uploaderHelper = $uploaderHelper;
+        $this->container = $container;
 
     }
 
@@ -78,7 +80,8 @@ class AppExtension extends AbstractExtension
 
     public function getUploadedAssetPath(string $path):string
     {
-        return $this->uploaderHelper
+        return $this->container
+        ->get(UploaderHelper::class)
         ->getPublicPath($path);
 
     }

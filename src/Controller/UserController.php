@@ -28,11 +28,11 @@ use App\Entity\DocPatient;
 use App\Service\UploaderHelper;
 
 
-#use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
-
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
+
 use Symfony\Component\HttpFoundation\HeaderUtils;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
@@ -249,41 +249,12 @@ class UserController extends AbstractController
     
     }
 
-    /**
-     * @Route("/{slug}/{bucket}/{id}/patient-doc", methods={"GET", "POST"}, name="doc_patient_show")
-     * 
-     */ 
-    public function getPathDocPat(Request $request, $slug, $bucket, DocPatient $docPatient, S3Client $S3Client)
-    {
-
-
-        $path =  'DOCS/patient_docs/' ;
-        $path .= $docPatient->getName();
- 
-        $s3 = $S3Client;
-
-        try {
-
-            $model = $this->s3->getObject(['Bucket' => $bucket, 'Key' => $path]);
-            return (string) $model->get('Body');
-
-        } catch (S3Exception $e) {
-            if ($e->getAwsErrorCode() == 'NoSuchKey') {
-                echo $e->getMessage() . ' Clave INEXISTENTE';
-            }
-            echo $e->getMessage() . PHP_EOL;
-        }
-
-
- 
-
-    }
 
     /**
-     * @Route("/{slug}/patient-doc/{id}", methods={"GET"}, name="image_patient_download")
+     * @Route("/{slug}/patient-doc/{id}", methods={"GET"}, name="image_patient_download2")
      * 
      */ 
-    public function downloadImagePat(DocPatient $docPatient, $slug, UploaderHelper $uploaderHelper)
+    public function downloadImagePat2(DocPatient $docPatient, $slug, UploaderHelper $uploaderHelper)
     {
         #dd($docPatient);
 
@@ -310,6 +281,41 @@ class UserController extends AbstractController
 
         
     }
+
+
+    /**
+     * @Route("/{slug}/patient-doc/{id}", methods={"GET"}, name="image_patient_download")
+     * 
+     */ 
+    public function downloadImagePat(DocPatient $docPatient, $slug,  S3Client $s3Client, string $s3BucketName)
+    {
+
+        $patient = $docPatient->getPatient();
+        $this->denyAccessUnlessGranted('PATIENT_VIEW', $patient);
+
+        $disposition = HeaderUtils::makeDisposition(
+            ResponseHeaderBag::DISPOSITION_INLINE,
+            $docPatient->getOriginalFilename()
+        );
+
+        //::DISPOSITION_ATTACHMENT
+
+        $command = $s3Client->getCommand('GetObject', [
+            'Bucket' => $s3BucketName,
+            'Key' => $docPatient->getFilePath(),
+            'ResponseContentType' => $docPatient->getMimeType(),
+            'ResponseContentDisposition' => $disposition,
+        ]);
+
+        $request = $s3Client->createPresignedRequest($command, '+30 minutes');
+
+        return new RedirectResponse((string) $request->getUri());
+
+
+    }
+
+
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -348,12 +354,15 @@ class UserController extends AbstractController
     /**
      * @Route("/img/{id}", methods={"DELETE"}, name="img_delete")
      */
-    public function deleteImg(DocPatient $docPatient)
+    public function deleteImg(DocPatient $docPatient, UploaderHelper $uploaderHelper)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $em = $this->getDoctrine()->getManager();
         $em->remove($docPatient);
         $em->flush();
+
+        $uploaderHelper->deleteFile($docPatient->getFilePath());
+
         return new Response(null, 204);
     }   
 

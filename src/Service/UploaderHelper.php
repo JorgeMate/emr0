@@ -10,7 +10,7 @@ use League\Flysystem\AdapterInterface;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Asset\Context\RequestStackContext;
-#use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Symfony\Component\HttpFoundation\File\File;
@@ -19,6 +19,7 @@ class UploaderHelper
 {
 
     const PATIENT_IMAGES = 'patient_imgs';
+    const USER_FILES = 'user_files';
 
     private $filesystem;
     
@@ -93,9 +94,9 @@ class UploaderHelper
     public function readStream(string $path, bool $isPublic)
     {
         ///////////////////////////////////////////////////////////////////////
-        $filesystem = $isPublic ? $this->filesystem : $this->privateFilesystem;
+        //$filesystem = $isPublic ? $this->filesystem : $this->privateFilesystem;
 
-        $resource = $filesystem->readStream($path);
+        $resource = $this->filesystem->readStream($path);
 
         if($resource === false){
             throw new \Exception(sprintf('Error opening stream for "%s"', $path));
@@ -119,10 +120,10 @@ class UploaderHelper
         $newFilename = Urlizer::urlize(pathinfo($originalFilename, PATHINFO_FILENAME)).'-'.uniqid().'.'.$file->guessExtension();
 
         ///////////////////////////////////////////////////////////////////////
-        $filesystem = $isPublic ? $this->filesystem : $this->privateFilesystem;
+        //$filesystem = $isPublic ? $this->filesystem : $this->privateFilesystem;
 
         $stream = fopen($file->getPathname(), 'r');
-        $result = $filesystem->writeStream(
+        $result = $this->filesystem->writeStream(
             $directory. '/' .$newFilename,
             $stream,
             [

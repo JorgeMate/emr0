@@ -132,9 +132,6 @@
     "jean85/pretty-package-versions": {
         "version": "1.2"
     },
-    "jms/metadata": {
-        "version": "2.3.0"
-    },
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
@@ -162,6 +159,9 @@
             "config/packages/flysystem.yaml",
             "var/storage/.gitignore"
         ]
+    },
+    "league/flysystem-cached-adapter": {
+        "version": "1.0.9"
     },
     "liip/imagine-bundle": {
         "version": "1.8",
@@ -736,18 +736,6 @@
     },
     "twig/twig": {
         "version": "v3.0.3"
-    },
-    "vich/uploader-bundle": {
-        "version": "1.5",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "1.5",
-            "ref": "c4f5755b37fb65b9c6a3cbdae91205c15a137ed4"
-        },
-        "files": [
-            "config/packages/vich_uploader.yaml"
-        ]
     },
     "webimpress/safe-writer": {
         "version": "2.0.1"

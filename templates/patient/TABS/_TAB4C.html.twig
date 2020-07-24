@@ -79,21 +79,28 @@
                             {{ img.description }}
                         </td>
 
+                        
+                        <td>
+
+                        {{ img.imagePath }}
+
                         {% if true or form.vars.data.docFile|default %}
-                        <td>
-                            <a href="{{ uploaded_asset(img.filePath) }}" target="_blank">
-                                <img src="{{ img.filePath|imagine_filter('square_thumbnail_small') }}">
-                            </a>                           
-                        </td> 
-                        <td>
-                            <span>
-                                <a href="{{ path('image_patient_download', {
+
+                            <a href="{{ path('image_patient_download', {
                                     id: img.id,
                                     slug:app.user.center.slug
-                                }) }}"  target="_blank"><span class="fas fa-download"></span></a>
-                            </span>
-                        </td>
+                                }) }}" target="_blank">
+
+                                <img src="{{ img.imagePath|imagine_filter('square_thumbnail_small') }}">
+
+                            </a>
+
                         {% endif %}
+
+                            
+                        </td> 
+                  
+                        
 
                         
                         

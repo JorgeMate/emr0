@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\NotNull;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+#use Vich\UploaderBundle\Form\Type\VichFileType;
 
 
 
