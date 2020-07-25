@@ -19,11 +19,14 @@ use Doctrine\ORM\EntityManagerInterface;
 
 use App\Form\DocUserType;
 
+
+use App\Entity\Treatment;
+
 use App\Entity\DocCenterGroup;
 use App\Entity\DocUser;
 
-use App\Entity\Treatment;
 use App\Entity\DocPatient;
+use App\Entity\DocImgPatient;
 
 use App\Service\UploaderHelper;
 
@@ -33,7 +36,9 @@ use Aws\S3\Exception\S3Exception;
 
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+#use Symfony\Component\HttpFoundation\StreamedResponse;
+
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
  * Controller used to manage current user.
@@ -251,45 +256,39 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/{slug}/patient-doc/{id}", methods={"GET"}, name="image_patient_download2")
+     * @Route("/{slug}/patient-image/{id}", methods={"GET"}, name="img_patient_download")
      * 
      */ 
-    public function downloadImagePat2(DocPatient $docPatient, $slug, UploaderHelper $uploaderHelper)
+    public function downloadImagePat(DocImgPatient $docImgPatient, $slug,  S3Client $s3Client, string $s3BucketName)
     {
-        #dd($docPatient);
-
-        $patient = $docPatient->getPatient();
+        $patient = $docImgPatient->getPatient();
         $this->denyAccessUnlessGranted('PATIENT_VIEW', $patient);
 
-        $response = new StreamedResponse(function() use ($docPatient, $uploaderHelper) {
-
-            $outputStream = fopen('php://output', 'wb');
-            $fileStream = $uploaderHelper->readStream($docPatient->getFilePath(), false);
-
-            stream_copy_to_stream($fileStream, $outputStream);
-        });
-
-        $response->headers->set('Content-Type', $docPatient->getMimeType());
-
         $disposition = HeaderUtils::makeDisposition(
-            HeaderUtils::DISPOSITION_INLINE,
-            $docPatient->getOriginalFilename()
+            ResponseHeaderBag::DISPOSITION_INLINE,
+            $docImgPatient->getOriginalFilename()
         );
-        
-        $response->headers->set('Content-Disposition', $disposition);
-        return $response;
+        //::DISPOSITION_ATTACHMENT
 
-        
+        $command = $s3Client->getCommand('GetObject', [
+            'Bucket' => $s3BucketName,
+            'Key' => $docImgPatient->getFilePath(),
+            'ResponseContentType' => $docImgPatient->getMimeType(),
+            'ResponseContentDisposition' => $disposition,
+        ]);
+
+        $request = $s3Client->createPresignedRequest($command, '+30 minutes');
+
+        return new RedirectResponse((string) $request->getUri());
     }
 
 
     /**
-     * @Route("/{slug}/patient-doc/{id}", methods={"GET"}, name="image_patient_download")
+     * @Route("/{slug}/patient-document/{id}", methods={"GET"}, name="doc_patient_download")
      * 
      */ 
-    public function downloadImagePat(DocPatient $docPatient, $slug,  S3Client $s3Client, string $s3BucketName)
+    public function downloadDocumentPat(DocPatient $docPatient, $slug,  S3Client $s3Client, string $s3BucketName)
     {
-
         $patient = $docPatient->getPatient();
         $this->denyAccessUnlessGranted('PATIENT_VIEW', $patient);
 
@@ -297,7 +296,6 @@ class UserController extends AbstractController
             ResponseHeaderBag::DISPOSITION_INLINE,
             $docPatient->getOriginalFilename()
         );
-
         //::DISPOSITION_ATTACHMENT
 
         $command = $s3Client->getCommand('GetObject', [
@@ -310,10 +308,7 @@ class UserController extends AbstractController
         $request = $s3Client->createPresignedRequest($command, '+30 minutes');
 
         return new RedirectResponse((string) $request->getUri());
-
-
     }
-
 
 
 
@@ -354,17 +349,40 @@ class UserController extends AbstractController
     /**
      * @Route("/img/{id}", methods={"DELETE"}, name="img_delete")
      */
-    public function deleteImg(DocPatient $docPatient, UploaderHelper $uploaderHelper)
+    public function deleteImg(DocImgPatient $docImgPatient, UploaderHelper $uploaderHelper)
     {
+
+        $uploaderHelper->deleteFile($docImgPatient->getFilePath());
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($docImgPatient);
+        $em->flush();
+
+        
+
+        return new Response(null, 204);
+    }   
+
+    /**
+     * @Route("/doc/{id}", methods={"DELETE"}, name="doc_delete")
+     */
+    public function deleteDoc(DocPatient $docPatient, UploaderHelper $uploaderHelper)
+    {
+
+        $uploaderHelper->deleteFile($docPatient->getFilePath());
+
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $em = $this->getDoctrine()->getManager();
         $em->remove($docPatient);
         $em->flush();
 
-        $uploaderHelper->deleteFile($docPatient->getFilePath());
+
 
         return new Response(null, 204);
     }   
+
+
 
 
 }

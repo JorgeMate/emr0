@@ -2,11 +2,15 @@ var Record = {
 
     initialize: function($wrapper) {
         this.$wrapper = $wrapper;
+
+
+
         this.$wrapper.find('.js-delete-record').on(
             'click',
             this.handleRecordDelete
             
         );
+
     },
 
     handleRecordDelete: function(e) {
@@ -39,6 +43,10 @@ $(document).ready(function() {
 
     var $tableImgs = $('.js-imgs-table');
     Record.initialize($tableImgs);
+
+    var $tableDocs = $('.js-docs-table');
+    Record.initialize($tableDocs);
+
 
 });   
 

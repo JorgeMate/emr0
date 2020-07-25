@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\DocPatient;
+use App\Entity\DocImgPatient;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,16 +12,15 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\NotNull;
-#use Vich\UploaderBundle\Form\Type\VichFileType;
 
 
 
-class DocPatient2Type extends AbstractType
+class DocImgPatientType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        /** @var DocPatient|null $image */
+        /** @var DocImgPatient|null $image */
 
         $image = $options['data'] ?? null;
         $isEdit = $image && $image->getId();
@@ -31,7 +30,7 @@ class DocPatient2Type extends AbstractType
                 'maxSize' => '2M',
                 'mimeTypes' => [
                     'image/*',
-                    'application/pdf',
+                    
                 ]
             ]),
         ];
@@ -41,7 +40,7 @@ class DocPatient2Type extends AbstractType
         {
             $imageConstraints = [
                 new NotNull([
-                    'message' => 'Please upload an image !!!',
+                    'message' => 'Please upload an IMAGE file  !!!',
                 ])
 
             ];
@@ -66,7 +65,7 @@ class DocPatient2Type extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => DocPatient::class,
+            'data_class' => DocImgPatient::class,
         ]);
     }
 }

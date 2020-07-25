@@ -95,8 +95,7 @@
         {# TAB 4 imágenes #}
         {{ include('/patient/TABS/_TAB4C.html.twig', {
 
-        form: formImg,
-            
+        form: formImg,            
         imgs: imgs,
         
         button_label_new: 'label.newpic'|trans,
@@ -107,9 +106,12 @@
         }, with_context = false) }}
 
 
-
         {# TAB 5 documentos #}
         {{ include('/patient/TABS/_TAB5.html.twig', {
+
+            form: formDoc,
+            docs: docs,
+
 
             button_label_new: 'label.newdoc'|trans,
             button_label_cancel: 'label.cancel'|trans,
@@ -173,6 +175,7 @@
     </script>
 
     <script src="{{ asset('assets/js/medicat_stop.js') }}"></script>
+    
     <script src="{{ asset('assets/js/delete_record.js') }}"></script>
 
     <script>

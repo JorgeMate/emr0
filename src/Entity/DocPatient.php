@@ -3,8 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\DocPatientRepository;
-use App\Service\UploaderHelper;
 use Doctrine\ORM\Mapping as ORM;
+
+use App\Service\UploaderHelper;
 
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -206,12 +207,6 @@ class DocPatient
         return $this;
     }
 
-
-    public function getFilePath()
-    {
-        return UploaderHelper::PATIENT_IMAGES . '/' . $this->getName();
-    }
-
     public function getOriginalFilename(): ?string
     {
         return $this->originalFilename;
@@ -223,6 +218,15 @@ class DocPatient
 
         return $this;
     }
+
+
+
+
+    public function getFilePath()
+    {
+        return UploaderHelper::PATIENT_DOCS . '/' . $this->getName();
+    }
+
 
 
 

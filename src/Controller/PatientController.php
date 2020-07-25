@@ -23,12 +23,14 @@ use App\Entity\Historia;
 use App\Entity\Opera;
 
 use App\Entity\DocPatient;
+use App\Entity\DocImgPatient;
 
 
 use App\Form\PatientType;
 use App\Form\ConsultType;
 
-use App\Form\DocPatient2Type;
+use App\Form\DocPatientType;
+use App\Form\DocImgPatientType;
 
 
 use App\Service\UploaderHelper;
@@ -206,16 +208,16 @@ class PatientController extends AbstractController
         $operas = $repository->findBy(['patient' => $patId], ['created_at' => 'DESC']);
 
         ///////////////////////////////////////////////
-        #$debts = $repository->findNotPaidOpera($patId); 
+        # $debts = $repository->findNotPaidOpera($patId); 
+        // var_dump($debts);die;
 
-        //var_dump($debts);die;
-
-        $repository = $em->getRepository(docPatient::class);
+        $repository = $em->getRepository(docImgPatient::class);
+        #$imgs = $repository->findBy(['patient' => $patId, 'mime_type' => ['image/jpeg', 'image/png']], ['updated_at' => 'DESC']);
         $imgs = $repository->findBy(['patient' => $patId], ['updated_at' => 'DESC']);
-        #$imgs = $repository->findBy(['patient' => $patId, 'mime_type' => 'image/png'], ['updated_at' => 'DESC']);
-        #$docs = $repository->findBy(['patient' => $patId, 'mime_type' => 'application/pdf'], ['updated_at' => 'DESC']);
+        $repository = $em->getRepository(docPatient::class);
+        $docs = $repository->findBy(['patient' => $patId], ['updated_at' => 'DESC']);
 
-
+        // Formulario de CONSULTAS
 
         $consult = new Consult();
         $formConsult = $this->createForm(ConsultType::class, $consult);
@@ -234,11 +236,14 @@ class PatientController extends AbstractController
             return $this->redirectToRoute('patient_show', ['slug' => $slug, 'id' => $patient->getId() ] );
         }
 
-        $storedImg = new DocPatient();
+        // Formulario de IMAGENES
+
+        $storedImg = new DocImgPatient();
         $storedImg->setPatient($patient);
         $storedImg->setVisible(true);
+        // ????????????????????/?????????
 
-        $formImg = $this->createForm(DocPatient2Type::class, $storedImg);
+        $formImg = $this->createForm(DocImgPatientType::class, $storedImg);
         $formImg->handleRequest($request);
 
         if ($formImg->isSubmitted() && $formImg->isValid()) {
@@ -251,8 +256,8 @@ class PatientController extends AbstractController
             if ($uploadedFile){
 
                 $newFilename = $uploaderHelper->uploadPatientImage($uploadedFile, $storedImg->getName());
+
                 $storedImg->setName($newFilename);
-                
                 $storedImg->setOriginalFilename($uploadedFile->getClientOriginalName());
                 $storedImg->setMimeType($uploadedFile->getMimeType() ?? 'application/octet-stream');
                 $storedImg->setDocSize($uploadedFile->getSize() ?? '0');
@@ -264,44 +269,48 @@ class PatientController extends AbstractController
                 
             $this->addFlash('info', 'img.up_suc');
 
-
-
-
             $slug = $patient->getUser()->getCenter()->getSlug();
             return $this->redirectToRoute('patient_show', ['slug' =>$slug ,'id' => $patient->getId() ] );
 
         }
 
+        // Formulario de DOCUMENTOS
 
+        $storedDoc = new DocPatient();
+        $storedDoc->setPatient($patient);
+        $storedDoc->setVisible(true);
+        
+        $formDoc = $this->createForm(DocPatientType::class, $storedDoc);
+        $formDoc->handleRequest($request);
 
+        if ($formDoc->isSubmitted() && $formDoc->isValid()) {
 
+            
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $formDoc['docFile']->getData();
 
-        if (false){
+            if ($uploadedFile){
 
+                $newFilename = $uploaderHelper->uploadPatientDoc($uploadedFile, $storedImg->getName());
 
-            // Entramos al mismo repositorio por los 2 lados
+                $storedDoc->setName($newFilename);                
+                $storedDoc->setOriginalFilename($uploadedFile->getClientOriginalName());
+                $storedDoc->setMimeType($uploadedFile->getMimeType() ?? 'application/octet-stream');
+                $storedDoc->setDocSize($uploadedFile->getSize() ?? '0');
 
-            $formDoc = $this->createForm(StoredDocType::class, $storedImg);
-            $formDoc->handleRequest($request);
-            if ($formDoc->isSubmitted() && $formDoc->isValid()) {
+            };
 
-                $em->persist($storedImg);
-                $em->flush();
-                    
-                $this->addFlash('info', 'doc.up_suc');
-                $slug = $patient->getUser()->getCenter()->getSlug();
+            $em->persist($storedDoc);
+            $em->flush();
 
-                return $this->redirectToRoute('patient_show', ['slug' => $slug, 'id' => $patient->getId() ] );
-                
-            }
+            $this->addFlash('info', 'doc.up_suc');
+            $slug = $patient->getUser()->getCenter()->getSlug();
 
-            $formImg = $this->createForm(StoredImgType::class, $storedImg);
-            $formImg->handleRequest($request);
+            return $this->redirectToRoute('patient_show', ['slug' => $slug, 'id' => $patient->getId() ] );
 
         }
 
-
-
+  
 
         return $this->render('patient/show.html.twig', [
            
@@ -315,10 +324,10 @@ class PatientController extends AbstractController
             #'debts' => $debts,
 
             'imgs' => $imgs,
-            #'docs' => $docs,
+            'docs' => $docs,
 
             'formConsult' => $formConsult->createView(),
-            #'formDoc' => $formDoc->createView(),
+            'formDoc' => $formDoc->createView(),
             'formImg' => $formImg->createView(),
 
             'show_confirmation' => true,

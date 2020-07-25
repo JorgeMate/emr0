@@ -36,7 +36,7 @@ liip_imagine:
 
             filters:
                 thumbnail:
-                    size:          [100, 100]
+                    size:          [75, 75]
                     mode:          outbound
                     allow_upscale: true
 

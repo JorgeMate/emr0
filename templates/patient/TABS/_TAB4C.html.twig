@@ -83,7 +83,7 @@
                         <td>
                         {% if true or form.vars.data.docFile|default %}
 
-                            <a href="{{ path('image_patient_download', {
+                            <a href="{{ path('img_patient_download', {
                                     id: img.id,
                                     slug:app.user.center.slug
                                 }) }}" target="_blank">

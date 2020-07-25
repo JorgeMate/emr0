@@ -18,7 +18,8 @@ use Symfony\Component\HttpFoundation\File\File;
 class UploaderHelper
 {
 
-    const PATIENT_IMAGES = 'patient_imgs';
+    const PATIENT_IMGS = 'patient_imgs';
+    const PATIENT_DOCS = 'patient_docs';
     const USER_FILES = 'user_files';
 
     private $filesystem;
@@ -44,24 +45,43 @@ class UploaderHelper
 
     public function uploadPatientImage(File $file, ?string $existingFilename): string
     {
-
-
-        $newFilename = $this->uploadFile($file, self::PATIENT_IMAGES, true);
+        $newFilename = $this->uploadFile($file, self::PATIENT_IMGS, false);
 
         if($existingFilename){
             try {
-                $result = $this->filesystem->delete(self::PATIENT_IMAGES. '/' .$existingFilename);
+                $result = $this->filesystem->delete(self::PATIENT_IMGS. '/' .$existingFilename);
 
                 if ($result === false){
-                    throw new \Exception(sprintf('Could not delete old uploaded file "%s"', $newFilename));
+                    throw new \Exception(sprintf('Could not delete old uploaded image file "%s"', $newFilename));
                 }
 
             } catch (FileNotFoundException $e) {
-                $this->logger->alert(sprintf('Old uploaded file "%s" was missing when trying to delete', $existingFilename));
+                $this->logger->alert(sprintf('Old uploaded image file "%s" was missing when trying to delete', $existingFilename));
             }
         }
 
         return $newFilename;
+    }
+
+    public function uploadPatientDoc(File $file, ?string $existingFilename): string
+    {
+        $newFilename = $this->uploadFile($file, self::PATIENT_DOCS, false);
+
+        if($existingFilename){
+            try {
+                $result = $this->filesystem->delete(self::PATIENT_DOCS. '/' .$existingFilename);
+
+                if ($result === false){
+                    throw new \Exception(sprintf('Could not delete old uploaded doc file "%s"', $newFilename));
+                }
+
+            } catch (FileNotFoundException $e) {
+                $this->logger->alert(sprintf('Old uploaded doc file "%s" was missing when trying to delete', $existingFilename));
+            }
+        }
+
+        return $newFilename;
+
     }
 
     public function getPublicPath(string $path): string
@@ -87,7 +107,6 @@ class UploaderHelper
         }
     }
 
-
     /**
      * @return resource
      */
@@ -103,10 +122,6 @@ class UploaderHelper
         }
         return $resource;
     }
-
-
-
-
 
 
     public function uploadFile(File $file, string $directory, bool $isPublic): string

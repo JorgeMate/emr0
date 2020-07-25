@@ -2,19 +2,21 @@
 
 namespace App\Entity;
 
-use App\Repository\DocUserRepository;
-use App\Service\UploaderHelper;
+use App\Repository\DocImgPatientRepository;
 use Doctrine\ORM\Mapping as ORM;
+
+use App\Service\UploaderHelper;
 
 use Symfony\Component\HttpFoundation\File\File;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 
+
+
 /**
- * @ORM\Entity(repositoryClass=DocUserRepository::class)
- * * 
+ * @ORM\Entity(repositoryClass=DocImgPatientRepository::class)
  */
-class DocUser
+class DocImgPatient
 {
     /**
      * @ORM\Id()
@@ -22,16 +24,6 @@ class DocUser
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=DocCenterGroup::class, inversedBy="docs")
-     */
-    private $docCenterGroup;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="docs")
-     */
-    private $user;
 
 
     /**
@@ -55,19 +47,10 @@ class DocUser
      */
     private $mime_type;
 
-
     /**
      * @ORM\Column(type="boolean")
      */
     private $visible;
-
-
-   /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
-     * @var File
-     */
-    private $docFile;
 
     /**
      * @ORM\Column(type="string", length=127, nullable=true)
@@ -79,8 +62,15 @@ class DocUser
      */
     private $originalFilename;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="docImgPatients")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $patient;
 
-    
+
+
+
    /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the update. If this
@@ -90,7 +80,6 @@ class DocUser
      *
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $docFile
      */
-
 
     public function setDocFile(?File $docFile = null): void
     {
@@ -111,25 +100,12 @@ class DocUser
 
 
 
-
-
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDocCenterGroup(): ?DocCenterGroup
-    {
-        return $this->docCenterGroup;
-    }
 
-    public function setDocCenterGroup(?DocCenterGroup $docCenterGroup): self
-    {
-        $this->docCenterGroup = $docCenterGroup;
-
-        return $this;
-    }
 
     public function getName(): ?string
     {
@@ -179,18 +155,6 @@ class DocUser
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getVisible(): ?bool
     {
         return $this->visible;
@@ -227,10 +191,24 @@ class DocUser
         return $this;
     }
 
+    public function getPatient(): ?Patient
+    {
+        return $this->patient;
+    }
+
+    public function setPatient(?Patient $patient): self
+    {
+        $this->patient = $patient;
+
+        return $this;
+    }
+
+
     public function getFilePath()
     {
-        return UploaderHelper::USER_FILES . '/' . $this->getName();
+        return UploaderHelper::PATIENT_IMGS . '/' . $this->getName();
     }
+
 
 
 }

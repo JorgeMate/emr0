@@ -153,6 +153,11 @@ class Patient
      */
     private $docPatients;
 
+    /**
+     * @ORM\OneToMany(targetEntity=DocImgPatient::class, mappedBy="patient", orphanRemoval=true)
+     */
+    private $docImgPatients;
+
     public function __construct()
     {
         $this->operas = new ArrayCollection();
@@ -160,6 +165,7 @@ class Patient
         $this->medicats = new ArrayCollection();
         $this->historias = new ArrayCollection();
         $this->docPatients = new ArrayCollection();
+        $this->docImgPatients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -568,6 +574,49 @@ class Patient
             // set the owning side to null (unless already changed)
             if ($docPatient->getPatient() === $this) {
                 $docPatient->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDocImgPatient(): ?DocImgPatient
+    {
+        return $this->docImgPatient;
+    }
+
+    public function setDocImgPatient(?DocImgPatient $docImgPatient): self
+    {
+        $this->docImgPatient = $docImgPatient;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DocImgPatient[]
+     */
+    public function getDocImgPatients(): Collection
+    {
+        return $this->docImgPatients;
+    }
+
+    public function addDocImgPatient(DocImgPatient $docImgPatient): self
+    {
+        if (!$this->docImgPatients->contains($docImgPatient)) {
+            $this->docImgPatients[] = $docImgPatient;
+            $docImgPatient->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocImgPatient(DocImgPatient $docImgPatient): self
+    {
+        if ($this->docImgPatients->contains($docImgPatient)) {
+            $this->docImgPatients->removeElement($docImgPatient);
+            // set the owning side to null (unless already changed)
+            if ($docImgPatient->getPatient() === $this) {
+                $docImgPatient->setPatient(null);
             }
         }
 
