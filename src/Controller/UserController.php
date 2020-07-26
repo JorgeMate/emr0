@@ -40,6 +40,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
+
+
 /**
  * Controller used to manage current user.
  *
@@ -187,7 +189,7 @@ class UserController extends AbstractController
      * @Route("/{slug}/documents-group/{id}/index", methods={"GET", "POST"}, name="docs_index")
      * 
      */ 
-    public function docsIndex(Request $request, $slug, DocCenterGroup $docCenterGroup)
+    public function docsIndex(Request $request, $slug, DocCenterGroup $docCenterGroup, UploaderHelper $uploaderHelper)
     {
 
         $center = $this->getUser()->getCenter();
@@ -208,11 +210,28 @@ class UserController extends AbstractController
 
         if ($formDoc->isSubmitted() && $formDoc->isValid()) {
 
-            $em->persist($newDoc);
-            $em->flush();        
-            $this->addFlash('info', 'doc.up_suc');
-            
+            #dd($formDoc['docFile']->getData());
+
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $formDoc['docFile']->getData();
+
+            if ($uploadedFile){
+
+                $newFilename = $uploaderHelper->uploadUserDoc($uploadedFile, $newDoc->getName());
+
+                $newDoc->setName($newFilename);
+                $newDoc->setOriginalFilename($uploadedFile->getClientOriginalName());
+                $newDoc->setMimeType($uploadedFile->getMimeType() ?? 'application/octet-stream');
+                $newDoc->setDocSize($uploadedFile->getSize() ?? '0');
+
+                $em->persist($newDoc);
+                $em->flush();        
+                $this->addFlash('info', 'doc.up_suc');
+            }
+
             return $this->redirectToRoute('docs_index', ['slug' => $slug, 'id' => $docCenterGroup->getId() ] );
+
+
         }
 
 
@@ -253,6 +272,36 @@ class UserController extends AbstractController
         }
     
     }
+
+    /**
+     * @Route("/{slug}/user-document/{id}", methods={"GET"}, name="doc_user_download")
+     * 
+     */ 
+    public function downloadDocumentUser(DocUser $docUser, $slug,  S3Client $s3Client, string $s3BucketName)
+    {
+        $center = $docUser->getUser()->getCenter();
+        $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
+
+        $disposition = HeaderUtils::makeDisposition(
+            ResponseHeaderBag::DISPOSITION_INLINE,
+            $docUser->getOriginalFilename()
+        );
+        //::DISPOSITION_ATTACHMENT
+
+        $command = $s3Client->getCommand('GetObject', [
+            'Bucket' => $s3BucketName,
+            'Key' => $docUser->getFilePath(),
+            'ResponseContentType' => $docUser->getMimeType(),
+            'ResponseContentDisposition' => $disposition,
+        ]);
+
+        $request = $s3Client->createPresignedRequest($command, '+30 minutes');
+
+        return new RedirectResponse((string) $request->getUri());
+
+
+    }
+
 
 
     /**

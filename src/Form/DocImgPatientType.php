@@ -25,17 +25,6 @@ class DocImgPatientType extends AbstractType
         $image = $options['data'] ?? null;
         $isEdit = $image && $image->getId();
 
-        $imageConstraints = [
-            new Image([
-                'maxSize' => '2M',
-                'mimeTypes' => [
-                    'image/*',
-                    
-                ]
-            ]),
-        ];
-
-
         if(!$isEdit || !$image->getName())
         {
             $imageConstraints = [
@@ -45,6 +34,18 @@ class DocImgPatientType extends AbstractType
 
             ];
         }
+
+
+        $imageConstraints = [
+            new Image([
+                'maxSize' => '2M',
+                'mimeTypes' => [
+                    'image/*',
+                ]
+            ]),
+        ];
+
+
 
         $builder->add('docFile', FileType::class, [
             'mapped' => false,

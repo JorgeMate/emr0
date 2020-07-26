@@ -9,13 +9,11 @@
 
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('center_cpanel', {slug:app.user.center.slug}) }}">
-                    <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}
-                </a>                
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a>                
                 | 
 
                 <a href="{{ path('doc_groups_index', {slug:app.user.center.slug}) }}">
-                    <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ 'label.doc_groups'|trans }}
-                </a>                
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ 'label.doc_groups'|trans }}</a>           
                 | 
             {% endif %}
 
@@ -31,13 +29,17 @@
 <div class="row"> 
 
     <div class="col-sm-4">
-
     {% if is_granted('ROLE_ADMIN') %}
+
 
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNewImg" aria-expanded="false" aria-controls="collapseNewImg">
             {# Button with data-target #}
             <i class="far fa-file-alt"></i> {{ 'label.newdoc'|trans }}
         </button>
+
+        <div class="row"> 
+            &nbsp;
+        </div>
 
         <div class="collapse" id="collapseNewImg">
             {{ form_start(form) }}
@@ -46,14 +48,20 @@
 
                     <div class="form-group col">   
 
-                   
                         {{ form_row(form.docFile, {
                                 attr: {
-                                    'placeholder': 'Seleccione una archivo',
+                                    'placeholder': 'Seleccione un documento',
                                 }
                             }) 
                         }}
                         
+                        {{ form_row(form.description, {
+                                attr: {
+                                    'placeholder': 'Describa el documento'
+                                }
+                            }) 
+                        }}
+                    
                         <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseNewImg" aria-expanded="false" aria-controls="collapseNewImg">
                                 <i class="fas fa-undo-alt"></i> {{ 'label.cancel'|trans }} 
                         </button>
@@ -76,13 +84,28 @@
                 {% for doc in docs %}
                 <tr>
                     <td>{{doc.updatedAt|date('d/m/y') }}</td>
-                    <td>{{ doc.name|slice(14) }}</td>
                     <td>
-                        <h3>
-                        <a href="{{ path('doc_user_show', {slug:app.user.center.slug, bucket:aws_s3_bucket_name, id:doc.id}) }}">
-                            <i class="far fa-file-pdf"></i>
-                        </a>
-                    </h3>
+                        {{ doc.originalFilename }}
+                        <br>
+                        <strong>{{ doc.description }}</strong>
+                    </td>
+                    <td>
+
+                        <h2>
+
+                            <a href="{{ path('doc_user_download', {
+                                    id: doc.id,
+                                    slug:app.user.center.slug
+                                }) }}" target="_blank">
+
+                                <i class="far fa-file-pdf"></i>
+                                {# <img src="{{ doc.filePath|imagine_filter('square_thumbnail_small') }}"> #}
+
+                            </a>
+
+                        </h2>
+
+
                     </td>                 
                 </tr>
                 {% endfor %}    

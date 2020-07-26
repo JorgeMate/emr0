@@ -60,18 +60,7 @@ class DocPatient
      * @ORM\Column(type="boolean")
      */
     private $visible;
-
-
-
     
-
-    /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
-     * @var File
-     */
-    private $docFile;
-
     /**
      * @ORM\Column(type="string", length=127, nullable=true)
      */
@@ -79,13 +68,23 @@ class DocPatient
 
     /**
      * @ORM\Column(type="string", length=127)    
-     * @Groups({"main", "input"})   
+     * @Groups({"main", "input"}) 
+
+     * @Assert\Length(max=100)
      */
     private $originalFilename;
 
-# * @Assert\NotBlank() 
-# * @Assert\Length(max=100)
-# * 
+
+    /* @Assert\NotBlank()   */
+
+
+/**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * 
+     * @var File
+     */
+    private $docFile;
+
 
    /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance

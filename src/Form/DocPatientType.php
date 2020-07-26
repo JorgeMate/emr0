@@ -25,26 +25,28 @@ class DocPatientType extends AbstractType
         $doc = $options['data'] ?? null;
         $isEdit = $doc && $doc->getId();
 
+        if(!$isEdit || !$image->getName())
+        {
+            $docConstraints = [
+                new NotNull([
+                    'message' => 'Please upload a DOC file  !!!',
+                ])
+
+            ];
+        }
+
         $docConstraints = [
             new File([
                 'maxSize' => '2M',
                 'mimeTypes' => [
                     
                     'application/pdf',
+                    'application/x-pdf',
                 ]
             ]),
         ];
 
 
-        if(!$isEdit || !$doc->getName())
-        {
-            $docConstraints = [
-                new NotNull([
-                    'message' => 'Please upload a PDF document !!!',
-                ])
-
-            ];
-        }
 
         $builder->add('docFile', FileType::class, [
             'mapped' => false,

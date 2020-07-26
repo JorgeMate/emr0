@@ -32,9 +32,7 @@ use App\Form\ConsultType;
 use App\Form\DocPatientType;
 use App\Form\DocImgPatientType;
 
-
 use App\Service\UploaderHelper;
-
 
 /**
  * Controller used to manage current user.
@@ -212,7 +210,6 @@ class PatientController extends AbstractController
         // var_dump($debts);die;
 
         $repository = $em->getRepository(docImgPatient::class);
-        #$imgs = $repository->findBy(['patient' => $patId, 'mime_type' => ['image/jpeg', 'image/png']], ['updated_at' => 'DESC']);
         $imgs = $repository->findBy(['patient' => $patId], ['updated_at' => 'DESC']);
         $repository = $em->getRepository(docPatient::class);
         $docs = $repository->findBy(['patient' => $patId], ['updated_at' => 'DESC']);
@@ -261,15 +258,14 @@ class PatientController extends AbstractController
                 $storedImg->setOriginalFilename($uploadedFile->getClientOriginalName());
                 $storedImg->setMimeType($uploadedFile->getMimeType() ?? 'application/octet-stream');
                 $storedImg->setDocSize($uploadedFile->getSize() ?? '0');
-            
+
+                $em->persist($storedImg);
+                $em->flush();
+                    
+                $this->addFlash('info', 'img.up_suc');
+    
             };
 
-            $em->persist($storedImg);
-            $em->flush();
-                
-            $this->addFlash('info', 'img.up_suc');
-
-            $slug = $patient->getUser()->getCenter()->getSlug();
             return $this->redirectToRoute('patient_show', ['slug' =>$slug ,'id' => $patient->getId() ] );
 
         }
@@ -298,16 +294,15 @@ class PatientController extends AbstractController
                 $storedDoc->setMimeType($uploadedFile->getMimeType() ?? 'application/octet-stream');
                 $storedDoc->setDocSize($uploadedFile->getSize() ?? '0');
 
+                $em->persist($storedDoc);
+                $em->flush();
+
+                $this->addFlash('info', 'doc.up_suc');
+
             };
 
-            $em->persist($storedDoc);
-            $em->flush();
-
-            $this->addFlash('info', 'doc.up_suc');
-            $slug = $patient->getUser()->getCenter()->getSlug();
-
+            #$slug = $patient->getUser()->getCenter()->getSlug();
             return $this->redirectToRoute('patient_show', ['slug' => $slug, 'id' => $patient->getId() ] );
-
         }
 
   

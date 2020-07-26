@@ -84,6 +84,26 @@ class UploaderHelper
 
     }
 
+    public function uploadUserDoc(File $file, ?string $existingFilename): string
+    {
+        $newFilename = $this->uploadFile($file, self::USER_FILES, false);
+
+        if($existingFilename){
+            try {
+                $result = $this->filesystem->delete(self::USER_FILES. '/' .$existingFilename);
+
+                if ($result === false){
+                    throw new \Exception(sprintf('Could not delete old uploaded user doc file "%s"', $newFilename));
+                }
+
+            } catch (FileNotFoundException $e) {
+                $this->logger->alert(sprintf('Old uploaded user doc file "%s" was missing when trying to delete', $existingFilename));
+            }
+        }
+
+        return $newFilename;
+    }
+
     public function getPublicPath(string $path): string
     {
         $fullPath = $this->publicAssetBaseUrl.'/'.$path;
