@@ -437,7 +437,7 @@
             
             <trans-unit id="entity.title_inss">
                 <source>entity.title_inss</source>
-                <target>Verzekeringsmaatschappijen</target>
+                <target>Verzekeringen</target>
             </trans-unit>
             <trans-unit id="entity.title_ins">
                 <source>entity.title_ins</source>
@@ -551,7 +551,7 @@
 
             <trans-unit id="label.places">
                 <source>label.places</source>
-                <target>Behandelings plaatsen</target>
+                <target>Plaatsen</target>
             </trans-unit>
             <trans-unit id="label.place">
                 <source>label.place</source>

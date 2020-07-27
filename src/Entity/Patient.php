@@ -158,6 +158,16 @@ class Patient
      */
     private $docImgPatients;
 
+    /**
+     * @ORM\Column(type="string", length=63, nullable=true)
+     */
+    private $code1;
+
+    /**
+     * @ORM\Column(type="string", length=63, nullable=true)
+     */
+    private $code2;
+
     public function __construct()
     {
         $this->operas = new ArrayCollection();
@@ -619,6 +629,30 @@ class Patient
                 $docImgPatient->setPatient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCode1(): ?string
+    {
+        return $this->code1;
+    }
+
+    public function setCode1(?string $code1): self
+    {
+        $this->code1 = $code1;
+
+        return $this;
+    }
+
+    public function getCode2(): ?string
+    {
+        return $this->code2;
+    }
+
+    public function setCode2(?string $code2): self
+    {
+        $this->code2 = $code2;
 
         return $this;
     }

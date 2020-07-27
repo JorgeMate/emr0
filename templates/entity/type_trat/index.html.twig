@@ -9,8 +9,7 @@
         <div class="col-auto">
             <h4>
                 <a href="{{ path('center_cpanel', {slug:app.user.center.slug}) }}">
-                    <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}
-                </a>
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a>
                 | <i class="fas fa-procedures"></i> {{ 'label.types'|trans }}
                 
             </h4>
@@ -18,8 +17,7 @@
 
         <div class="col text-right">
             <a href="{{ path('type_new', {slug: app.user.center.slug}) }}" class="btn btn-primary">
-                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.new'|trans }}
-            </a>
+                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.new'|trans }}</a>
         </div>        
 
     </div>
@@ -28,7 +26,7 @@
 
 <br>
 
-<table class="table table-striped table-hover table-responsive">
+<table class="table table-striped table-hover">
     <thead>
         <tr>
             
@@ -46,7 +44,7 @@
             
             
             <td><a href="{{ path('type_edit', {slug:app.user.center.slug, id:type.id}) }}"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
-            <td>{{ type.name }}</td>
+            <td><a href="{{ path('type_edit', {slug:app.user.center.slug, id:type.id}) }}">{{ type.name }}</a></td>
             <td class="text-center">{{type.treatments|length}}</td>
             <td class="text-center"><a href="{{ path('treats_index', {slug:app.user.center.slug, id:type.id }) }}"><i class="fas fa-search"></i></a></td>
             

@@ -433,7 +433,7 @@
             
             <trans-unit id="entity.title_inss">
                 <source>entity.title_inss</source>
-                <target>Cías. de seguros</target>
+                <target>Seguros</target>
             </trans-unit>
             <trans-unit id="entity.title_ins">
                 <source>entity.title_ins</source>
@@ -546,7 +546,7 @@
 
             <trans-unit id="label.places">
                 <source>label.places</source>
-                <target>Lugares de tratamiento</target>
+                <target>sitios</target>
             </trans-unit>
             <trans-unit id="label.place">
                 <source>label.place</source>
@@ -636,7 +636,7 @@
 
             <trans-unit id="label.doc_groups">
                 <source>label.doc_groups</source>
-                <target>Grupos de documentos disponibles</target>
+                <target>Documentos</target>
             </trans-unit>
             <trans-unit id="label.doc_group">
                 <source>label.doc_group</source>

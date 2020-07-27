@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-use Pagerfanta\Pagerfanta;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
+
+
 
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -111,28 +111,15 @@ class PatientController extends AbstractController
 
         $queryBuilder->setMaxResults('100');
             
-        $adapter = new DoctrineORMAdapter($queryBuilder);
+       
 
-        $pagerfanta = new Pagerfanta($adapter);
-
-        $pagerfanta->setMaxPerPage(10); // 10 by default
-        $maxPerPage = $pagerfanta->getMaxPerPage();
-
-        $pagerfanta->getCurrentPageOffsetStart(3);
-        $pagerfanta->getCurrentPageOffsetEnd(3);
-
-        if (isset($_GET["page"])) {
-            //  $t = $pagerfanta->getNbPages();
-            //  var_dump($t); die;
-            $page = min($_GET["page"], $pagerfanta->getNbPages());
-            $pagerfanta->setCurrentPage($page);
-        }
+     
 
         return $this->render('patient/index.html.twig', [
              
             'group' => $group,
             'center' => $center,
-            'my_pager' => $pagerfanta,
+            
             'order' => 'íd',
         ]);
 

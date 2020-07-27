@@ -431,7 +431,7 @@
             
             <trans-unit id="entity.title_inss">
                 <source>entity.title_inss</source>
-                <target>Compagnies d'assurance</target>
+                <target>Assurances</target>
             </trans-unit>
             <trans-unit id="entity.title_ins">
                 <source>entity.title_ins</source>
@@ -545,7 +545,7 @@
 
             <trans-unit id="label.places">
                 <source>label.places</source>
-                <target>Lieux de traitement</target>
+                <target>Lieux</target>
             </trans-unit>
             <trans-unit id="label.place">
                 <source>label.place</source>

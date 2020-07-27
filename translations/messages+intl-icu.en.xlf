@@ -438,7 +438,7 @@
             
             <trans-unit id="entity.title_inss">
                 <source>entity.title_inss</source>
-                <target>Insurance companies</target>
+                <target>Insurances</target>
             </trans-unit>
             <trans-unit id="entity.title_ins">
                 <source>entity.title_ins</source>
@@ -549,7 +549,7 @@
 
             <trans-unit id="label.places">
                 <source>label.places</source>
-                <target>Treatment places</target>
+                <target>Places</target>
             </trans-unit>
             <trans-unit id="label.place">
                 <source>label.place</source>
@@ -634,7 +634,7 @@
 
             <trans-unit id="label.doc_groups">
                 <source>label.doc_groups</source>
-                <target>Available documents groups</target>
+                <target>Document types</target>
             </trans-unit>
             <trans-unit id="label.doc_group">
                 <source>label.doc_group</source>

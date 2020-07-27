@@ -11,11 +11,9 @@
 
             <h4>
                 <a href="{{ path('center_cpanel', {slug:app.user.center.slug}) }}">
-                    <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}
-                </a>
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a>
                 <a href="{{ path('types_index', {slug:app.user.center.slug}) }}">
-                        <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ 'label.types'|trans }}
-                </a>    
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ 'label.types'|trans }}</a>    
                 | <i class="fas fa-procedures"></i> {{type.name}}
                 
             </h4>
@@ -24,8 +22,7 @@
 
         <div class="col text-right">
             <a href="{{ path('treatment_new', {slug:app.user.center.slug, id:type.id}) }}" class="btn btn-primary">
-                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.new'|trans }}
-            </a>
+                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.new'|trans }}</a>
         </div>        
 
     </div>
@@ -68,7 +65,7 @@
                 {% endif %}
             </td>
             <td>{{ treatment.notes }}</td>
-            <td class="text-right">{{ treatment.operas|length }} | <a href="{{ path('operasPerTreatment_index', {slug:app.user.center.slug, id:treatment.id}) }}"><i class="fas fa-users"></i></a></td>
+            <td class="text-right">{{ treatment.operas|length }} <a href="{{ path('operasPerTreatment_index', {slug:app.user.center.slug, id:treatment.id}) }}"><i class="fas fa-users text-warning"></i></a></td>
                             
         </tr>
         {% endfor %}
