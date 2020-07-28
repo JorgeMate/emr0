@@ -6,6 +6,9 @@ use App\Entity\Place;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+use Doctrine\ORM\QueryBuilder;
+
+
 /**
  * @method Place|null find($id, $lockMode = null, $lockVersion = null)
  * @method Place|null findOneBy(array $criteria, array $orderBy = null)
@@ -47,4 +50,22 @@ class PlaceRepository extends ServiceEntityRepository
         ;
     }
     */
+
+   /**
+     * @param null|string $term
+     */
+    public function findAllWithSearchQueryBuilder(?string $term): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->innerJoin('p.center', 'c');
+
+        if($term){
+            $qb->andWhere('p.name LIKE :term OR p.contact LIKE :term')
+                ->setParameter('term', '%'.$term.'%');
+        }
+
+        return $qb
+            ->orderBy('p.name');
+    }    
+
 }

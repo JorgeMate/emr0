@@ -2,6 +2,11 @@
 
 namespace App\Controller;
 
+use App\Repository\InsuranceRepository;
+use App\Repository\SourceRepository;
+use App\Repository\PlaceRepository;
+
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,6 +25,10 @@ use App\Form\InsuranceType;
 use App\Form\SourceType;
 use App\Form\PlaceType;
 
+use Knp\Component\Pager\PaginatorInterface;
+
+
+
 /**
  * Controller used to manage current center entities.
  *
@@ -35,20 +44,29 @@ class EntityController extends AbstractController
      * 
      * LISTAR todos las cias de seguro del centro id
      */
-    public function insurancesIndex($slug): Response
+    public function insurancesIndex(InsuranceRepository $repository, Request $request, $slug, PaginatorInterface $paginator): Response
     {
         $center = $this->getUser()->getCenter();
 
         $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository(Insurance::class);
-        $insurances = $repository->findBy(['center' => $center->getId()], ['name' => 'ASC']);
+        #$em = $this->getDoctrine()->getManager();
+        #$repository = $em->getRepository(Insurance::class);
+        #$insurances = $repository->findBy(['center' => $center->getId()], ['name' => 'ASC']);
+
+        $q = $request->query->get('q');
+        $queryBuilder = $repository->findAllWithSearchQueryBuilder($q);
+
+        $pagination = $paginator->paginate(
+            $queryBuilder,                      /* query NOT result */
+            $request->query->getInt('page', 1)  /*page number*/,
+            10                                  /*limit per page*/
+        );
         
         return $this->render('entity/insurance/index.html.twig', [
-
             'slug' => $slug,
-            'insurances' => $insurances,
+            #'insurances' => $insurances,
+            'pagination' => $pagination,
         ]);
     }
 
@@ -125,30 +143,38 @@ class EntityController extends AbstractController
      * 
      * LISTAR todos las fuentes del centro id
      */
-    public function sourcesIndex(Request $request, $slug): Response
+    public function sourcesIndex(SourceRepository $repository, Request $request, $slug, PaginatorInterface $paginator): Response
     {
        
         $center = $this->getUser()->getCenter();
-
         $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
 
         $showDisabled = $request->get('show');
 
         //var_dump($showDisabled);die;
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository(Source::class);
+        #$em = $this->getDoctrine()->getManager();
+        #$repository = $em->getRepository(Source::class);
 
-        if($showDisabled == 'disabled'){            
-            $sources = $repository->findBy(['center' => $center->getId()], ['name' => 'ASC']);
-        } else {
-            $sources = $repository->findBy(['center' => $center->getId(), 'enabled' => true], ['name' => 'ASC']);
-        }
+        $q = $request->query->get('q');
+        $queryBuilder = $repository->findAllWithSearchQueryBuilder($q);
+
+        $pagination = $paginator->paginate(
+            $queryBuilder,                      /* query NOT result */
+            $request->query->getInt('page', 1)  /*page number*/,
+            10                                  /*limit per page*/
+        );
+
+        #if($showDisabled == 'disabled'){            
+        #    $sources = $repository->findBy(['center' => $center->getId()], ['name' => 'ASC']);
+        #} else {
+        #    $sources = $repository->findBy(['center' => $center->getId(), 'enabled' => true], ['name' => 'ASC']);
+        #}
                 
         return $this->render('entity/source/index.html.twig', [
-             
             'slug' => $slug,
-            'sources' => $sources,
+            #'sources' => $sources,
+            'pagination' => $pagination,
         ]);
     }
 
@@ -222,20 +248,28 @@ class EntityController extends AbstractController
      * 
      * LISTAR todos los lugares del centro id
      */
-    public function placesIndex(Request $request, $slug): Response
+    public function placesIndex(PlaceRepository $repository, Request $request, $slug, PaginatorInterface $paginator): Response
     {
         $center = $this->getUser()->getCenter();
-
         $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository(Place::class);
-        $places = $repository->findBy(['center' => $center->getId()], ['name' => 'ASC']);
+        #$em = $this->getDoctrine()->getManager();
+        #$repository = $em->getRepository(Place::class);
+        #$places = $repository->findBy(['center' => $center->getId()], ['name' => 'ASC']);
+
+        $q = $request->query->get('q');
+        $queryBuilder = $repository->findAllWithSearchQueryBuilder($q);
+
+        $pagination = $paginator->paginate(
+            $queryBuilder,                      /* query NOT result */
+            $request->query->getInt('page', 1)  /*page number*/,
+            10                                  /*limit per page*/
+        );
 
         return $this->render('entity/place/index.html.twig', [
              
             'slug' => $slug,
-            'places' => $places,
+            'pagination' => $pagination,
         ]);        
 
     }

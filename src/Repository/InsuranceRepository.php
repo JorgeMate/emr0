@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Insurance;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -47,4 +49,22 @@ class InsuranceRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @param null|string $term
+     */
+    public function findAllWithSearchQueryBuilder(?string $term): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->innerJoin('i.center', 'c');
+
+        if($term){
+            $qb->andWhere('i.name LIKE :term OR i.code LIKE :term')
+                ->setParameter('term', '%'.$term.'%');
+        }
+
+        return $qb
+            ->orderBy('i.name');
+    }
+
 }

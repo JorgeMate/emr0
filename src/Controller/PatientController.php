@@ -33,6 +33,7 @@ use App\Form\DocPatientType;
 use App\Form\DocImgPatientType;
 
 use App\Service\UploaderHelper;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * Controller used to manage current user.
@@ -47,7 +48,7 @@ class PatientController extends AbstractController
     /**
      * @Route("/{slug}/patients", methods={"GET"}, name="patient_index")
      */
-    public function indexPat(Request $request)
+    public function indexPat(Request $request, PaginatorInterface $paginator)
     {
 
         //$lastIdPat = $this->getDoctrine()->getRepository(Patient::class)->lastInsertedId();
@@ -109,9 +110,14 @@ class PatientController extends AbstractController
 
         };
 
-        $queryBuilder->setMaxResults('100');
+        #$queryBuilder->setMaxResults('100');
             
        
+        $pagination = $paginator->paginate(
+            $queryBuilder, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
 
      
 
@@ -119,7 +125,7 @@ class PatientController extends AbstractController
              
             'group' => $group,
             'center' => $center,
-            
+            'pagination' => $pagination, 
             'order' => 'íd',
         ]);
 

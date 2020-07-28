@@ -48,7 +48,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for source in sources %}        
+            {% for source in pagination %}        
             <tr>
                 
                 <td><a href="{{ path('source_edit', {slug:app.user.center.slug, id:source.id}) }}"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
@@ -72,6 +72,8 @@
         </tbody>
 
     </table>
+
+    {{ knp_pagination_render(pagination) }}
     
 {% endblock %}
 

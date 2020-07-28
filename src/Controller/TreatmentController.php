@@ -16,6 +16,11 @@ use App\Entity\Treatment;
 use App\Form\TypeType;
 use App\Form\TreatmentType;
 
+use App\Repository\TypeRepository;
+use App\Repository\TreatmentRepository;
+
+use Knp\Component\Pager\PaginatorInterface;
+
 /**
  * Controller used to manage current center.
  *
@@ -28,22 +33,31 @@ class TreatmentController extends AbstractController
     /**
      * @Route("/{slug}/treatment-types", methods={"GET"}, name="types_index")
      */
-    public function indexType($slug): Response
+    public function indexType(TypeRepository $repository, Request $request, $slug, PaginatorInterface $paginator): Response
     {
 
         $center = $this->getUser()->getCenter();
-
         $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
         
-        $types = $center->getTypes();
+        #$types = $center->getTypes();
+        #$em = $this->getDoctrine()->getManager();
+        #$repository = $em->getRepository(Type::class);
+        #$types = $repository->findBy(['center' => $center->getId()], ['name' => 'ASC']);
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository(Type::class);
-        $types = $repository->findBy(['center' => $center->getId()], ['name' => 'ASC']);
+        $q = $request->query->get('q');
+        $queryBuilder = $repository->findAllWithSearchQueryBuilder($q);
+
+        $pagination = $paginator->paginate(
+            $queryBuilder,                      /* query NOT result */
+            $request->query->getInt('page', 1)  /*page number*/,
+            10                                  /*limit per page*/
+        );
+        
 
         return $this->render('entity/type_trat/index.html.twig', [
 
-            'types' => $types,
+            #'types' => $types,
+            'pagination' => $pagination,
         ]);
     }
 
@@ -110,20 +124,31 @@ class TreatmentController extends AbstractController
     /**
      * @Route("/{slug}/type/{id}/treatments", methods={"GET"}, name="treats_index")
      */
-    public function indexTreat($slug, Type $type): Response
+    public function indexTreat(TreatmentRepository $repository, Request $request, $slug, Type $type, PaginatorInterface $paginator): Response
     {
         $center = $this->getUser()->getCenter();
         $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository(Treatment::class);
+        #$em = $this->getDoctrine()->getManager();
+        #$repository = $em->getRepository(Treatment::class);
+        #$treatments = $repository->findBy(['type' => $type->getId()], ['name' => 'ASC']);
 
-        $treatments = $repository->findBy(['type' => $type->getId()], ['name' => 'ASC']);
+        $q = $request->query->get('q');
+        $t = $type->getId();
+        $queryBuilder = $repository->findAllWithSearchQueryBuilder($q, $t);
+
+        $pagination = $paginator->paginate(
+            $queryBuilder,                      /* query NOT result */
+            $request->query->getInt('page', 1)  /*page number*/,
+            10                                  /*limit per page*/
+        );
+
 
         return $this->render('entity/type_trat/trat_index.html.twig', [
 
             'type' => $type,
-            'treatments' => $treatments,
+            #'treatments' => $treatments,
+            'pagination' => $pagination,
         ]);
     }
 

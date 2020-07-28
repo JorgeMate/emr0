@@ -26,32 +26,35 @@
 
 <br>
 
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover table-responsive">
     <thead>
         <tr>
             
             <th></th>
             <th>{{ 'label.type'|trans }}</th>
             <th class="text-center">{{ 'label.treatments'|trans }}</th>
-            <th class="text-center"></th>
+
             
 
         </tr>
     </thead>
     <tbody>
-        {% for type in types %}        
+        {% for type in pagination %}        
         <tr>
             
             
             <td><a href="{{ path('type_edit', {slug:app.user.center.slug, id:type.id}) }}"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
             <td><a href="{{ path('type_edit', {slug:app.user.center.slug, id:type.id}) }}">{{ type.name }}</a></td>
-            <td class="text-center">{{type.treatments|length}}</td>
-            <td class="text-center"><a href="{{ path('treats_index', {slug:app.user.center.slug, id:type.id }) }}"><i class="fas fa-search"></i></a></td>
             
+            <td class="text-right text">{{type.treatments|length}} | <a href="{{ path('treats_index', {slug:app.user.center.slug, id:type.id }) }}"><i class="fas fa-search text-success"></i></a></td>
+
+
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+{{ knp_pagination_render(pagination) }}
     
 {% endblock %}
 

@@ -6,6 +6,8 @@ use App\Entity\Treatment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+use Doctrine\ORM\QueryBuilder;
+
 /**
  * @method Treatment|null find($id, $lockMode = null, $lockVersion = null)
  * @method Treatment|null findOneBy(array $criteria, array $orderBy = null)
@@ -47,4 +49,26 @@ class TreatmentRepository extends ServiceEntityRepository
         ;
     }
     */
+
+   /**
+     * @param null|string $term
+     * @param null|string $type
+     */
+    public function findAllWithSearchQueryBuilder(?string $term, ?string $type): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->andWhere('t.type = :type')
+            ->setParameter('type', $type);
+
+        if($term){
+            $qb->andWhere('t.name LIKE :term OR t.notes LIKE :term')
+                ->setParameter('term', '%'.$term.'%');
+        }
+
+        return $qb
+            ->orderBy('t.name');
+    }
+
 }
+
+
