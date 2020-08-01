@@ -35,6 +35,8 @@ use App\Form\DocImgPatientType;
 use App\Service\UploaderHelper;
 use Knp\Component\Pager\PaginatorInterface;
 
+use App\Repository\PatientRepository;
+
 /**
  * Controller used to manage current user.
  *
@@ -43,6 +45,62 @@ use Knp\Component\Pager\PaginatorInterface;
  */
 class PatientController extends AbstractController
 {
+
+
+    /**
+     * @Route("/{slug}/patient/search", methods={"GET"}, name="patient_search")
+     */
+    public function searchPat(Request $request, PatientRepository $patients, $slug): Response
+    {
+        $center = $this->getUser()->getCenter();
+
+        $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
+        ///////////////////////////////////////////////////////
+        if (!$request->isXmlHttpRequest()) {
+            return $this->render('patient/search.html.twig',[
+                'center' => $center,
+            ]);
+        }
+        $centerId = $center->getId();
+
+        $query = $request->query->get('q', '');
+
+        //  $request->getSession()->set('query', $query); Recordamos la búsqueda anterior ?
+
+        $limit = $request->query->get('l', 10);
+        $foundPatients = $patients->findBySearchQuery($query, $limit, $centerId);
+
+        $results = [];
+
+        foreach ($foundPatients as $patient) {
+
+            if($patient->getSex()) {
+                $sex =' <i class="fas fa-venus text-danger"></i> ';
+            } else {
+                $sex =' <i class="fas fa-mars text-info"></i> ';
+            };
+ 
+            $dob = new \DateTime($patient->getDateOfBirth()->format('Y-m-d'));
+            $today = new \DateTime('today');
+
+            $age = $today->diff($dob)->y;
+         
+            $results[] = [
+
+                'url' => $this->generateUrl('patient_show', ['id' => $patient->getId(), 'slug' => $center->getSlug()]),
+
+                'id' => htmlspecialchars($patient->getId(), ENT_COMPAT | ENT_HTML5),
+                'firstname' => htmlspecialchars($patient->getFirstname(), ENT_COMPAT | ENT_HTML5),
+                'lastname' => htmlspecialchars($patient->getLastname(), ENT_COMPAT | ENT_HTML5),
+                'birthdate' => $patient->getDateOfBirth()->format('d/m/Y'),
+                'sex' => $sex,
+                'age' => $age,
+            ];
+        }
+        return $this->json($results);        
+
+    }
+    
 
 
     /**

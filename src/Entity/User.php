@@ -141,7 +141,7 @@ class User implements UserInterface
     private $historias;
 
 
-
+    
 
 
 
@@ -157,6 +157,14 @@ class User implements UserInterface
         $this->medicats = new ArrayCollection();
         $this->historias = new ArrayCollection();
     }
+
+    public function getPatientsNo() 
+    {
+        $patientsNo = $this->getPatients()->count();
+        return $patientsNo;
+    }
+
+
 
     public function getId(): ?int
     {

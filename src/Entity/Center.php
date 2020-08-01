@@ -300,7 +300,7 @@ class Center
 
 
 
-    public function getPatientsNo() 
+    public function getPatientsNo()
     {
         $patientsNo = 0;
         foreach ($this->users as $user) {

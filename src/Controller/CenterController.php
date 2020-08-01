@@ -132,13 +132,20 @@ class CenterController extends AbstractController
      */
     public function indexUsers($slug): Response
     {
+
+        
+
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository(Center::class);
         $center = $repository->findOneBy(['slug' => $slug]);
 
+        
+
         $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
 
         $users = $center->getUsers();
+
+        #dd($slug);
         
         return $this->render('center/user/index.html.twig', [
              

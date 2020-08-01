@@ -397,10 +397,12 @@ class ImportController extends AbstractController
             if($action == 'operas'){
 
                 $sql = "
-                    SELECT *
-                    FROM opera WHERE tratamiento_id > 0 AND tratamiento_id <> 145
-                    AND id <> 1112 AND id <> 1329
-                    AND  id > 1329
+                    SELECT * FROM opera where tratamiento_id is not null 
+                    AND tratamiento_id > 0
+                    AND tratamiento_id <> 145
+                    AND id_paciente <> 19211
+                    AND id_paciente <> 19381
+                    AND id > 1328
                 ";
 
                 $stmt = $conn->prepare($sql);
