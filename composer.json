@@ -19,6 +19,7 @@
         "sensiolabs/security-checker": "^6.0",
         "sentry/sentry-symfony": "^3.5",
         "stof/doctrine-extensions-bundle": "^1.4",
+        "supersaas/api-client": "^1.1",
         "symfony/asset": "5.1.*",
         "symfony/console": "5.1.*",
         "symfony/dotenv": "5.1.*",

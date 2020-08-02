@@ -24,7 +24,7 @@ use App\Form\DocCenterGroupType;
 
 use App\Form\MedicType;
 
-
+use App\Repository\UserRepository;
 
 
 /**
@@ -36,12 +36,11 @@ use App\Form\MedicType;
  */
 class CenterController extends AbstractController
 {
- 
- 
+
     /**
      * @Route("/{slug}/cpanel", methods={"GET"}, name="center_cpanel")
      */
-    public function centerCpanel($slug): Response
+    public function centerCpanel(): Response
     {
 
         $center = $this->getUser()->getCenter();
@@ -57,7 +56,6 @@ class CenterController extends AbstractController
             'groups' => $groups,
         ]);
     }
-
 
     /**
      * @Route("/{slug}/edit", methods={"GET", "POST"}, name="center_edit")
@@ -130,20 +128,18 @@ class CenterController extends AbstractController
      * 
      * LISTAR todos los usuarios del centro slug
      */
-    public function indexUsers($slug): Response
+    public function indexUsers(UserRepository $repository, $slug): Response
     {
-
-        
 
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository(Center::class);
         $center = $repository->findOneBy(['slug' => $slug]);
 
-        
-
         $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
 
         $users = $center->getUsers();
+
+        
 
         #dd($slug);
         
