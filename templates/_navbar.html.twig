@@ -8,19 +8,16 @@
 
             {% endif %} 
 
-            <a class="navbar-brand" href="{{ path('default') }}"><img src="{{ asset('assets/images/logoKS80x50.png') }}"></a>
+            <a class="navbar-brand" href="{{ path('default') }}"><img src="{{ asset('build/images/logoKS80x50.png') }}"></a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                 <ul class="nav navbar-nav mr-auto">
 
- 
 
                     {% if app.user %} 
     
@@ -42,79 +39,73 @@
                             </div>
                         </li>
 
-
                     {% else %}
-
-                       
-
                     {% endif %}
-
-
 
                 </ul>    
 
                 <ul class="nav navbar-nav navbar-right">
 
-                {% if app.user %}           
+                    {% if app.user %}
 
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-                    </form>
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                        </form>
 
-                    <li class="nav-item">
-                        &nbsp;        
-                    </li>
+                        <li class="nav-item">
+                            &nbsp;
+                        </li>
 
-                    <li class="nav-item dropdown">
+                        <li class="nav-item dropdown">
 
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="user">
-                            <i class="far fa-user" aria-hidden="true"></i>
-                            <span class="caret"></span>
-                            <span class="sr-only">{{ app.user.email }}</span>
-                            {{app.user.firstname}} {{app.user.lastname}}
-                        </a>
-                        
-                        <ul class="dropdown-menu user" role="menu" aria-labelledby="user">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="user">
+                                <i class="far fa-user" aria-hidden="true"></i>
+                                <span class="caret"></span>
+                                <span class="sr-only">{{ app.user.email }}</span>
+                                {{app.user.firstname}} {{app.user.lastname}}
+                            </a>
 
-                            {% if is_granted('ROLE_SUPER_ADMIN') %} 
+                            <ul class="dropdown-menu user" role="menu" aria-labelledby="user">
+
+                                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                    <li>
+                                        <a class="dropdown-item" href="{{ path('super_cpanel') }}">
+                                            <i class="fas fa-key text-danger" aria-hidden="true"></i> {{ 'menu.super'|trans }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                                {% if is_granted('ROLE_ADMIN') and not is_granted('ROLE_SUPER_ADMIN') %}
+                                    <li>
+                                        <a class="dropdown-item" href="{{ path('center_cpanel', {slug:app.user.center.slug}) }}">
+                                            {% if app.user.centerUser == app.user.id %}
+                                                <i class="fa fa-key text-warning" aria-hidden="true"></i>
+                                            {% else %}
+                                                <i class="fa fa-key text-info" aria-hidden="true"></i>
+                                            {% endif %}
+                                            {{ 'menu.admin'|trans }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+
                                 <li>
-                                    <a class="dropdown-item" href="{{ path('super_cpanel') }}">
-                                        <i class="fas fa-key text-danger" aria-hidden="true"></i> {{ 'menu.super'|trans }} 
+                                    <a class="dropdown-item" href="{{ path('profile_edit') }}">
+                                        <i class="fa fa-edit" aria-hidden="true"></i> {{ 'menu.user'|trans }}
                                     </a>
                                 </li>
-                            {% endif %} 
-
-                            {% if is_granted('ROLE_ADMIN') and not is_granted('ROLE_SUPER_ADMIN') %} 
+                                <div class="dropdown-divider"></div>
                                 <li>
-                                    <a class="dropdown-item" href="{{ path('center_cpanel', {slug:app.user.center.slug}) }}">
-                                        {% if app.user.centerUser == app.user.id %}    
-                                            <i class="fa fa-key text-warning" aria-hidden="true"></i> 
-                                        {% else %}
-                                            <i class="fa fa-key text-info" aria-hidden="true"></i> 
-                                        {% endif %}
-                                        {{ 'menu.admin'|trans }}
+                                    <a class="dropdown-item" href="{{ path('app_logout') }}">
+                                        <i class="fas fa-sign-out-alt" aria-hidden="true"></i> {{ 'menu.logout'|trans }}
                                     </a>
                                 </li>
-                            {% endif %} 
-                            
-                            <li>
-                                <a class="dropdown-item" href="{{ path('profile_edit') }}">
-                                    <i class="fa fa-edit" aria-hidden="true"></i> {{ 'menu.user'|trans }}
-                                </a>
-                            </li>
-                            <div class="dropdown-divider"></div>
-                            <li>
-                                <a class="dropdown-item" href="{{ path('app_logout') }}">
-                                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i> {{ 'menu.logout'|trans }}
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
 
 
 
-                {% endif %}
+                    {% endif %}
 
                 
                     <div class="dropdown-divider"></div>

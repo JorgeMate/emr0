@@ -69,7 +69,7 @@ class UserController extends AbstractController
         if($center->getSsaasAccountName() && $center->getSsaasApiKey()){
 
             // Comprobamos si el usuario tiene uso autorizado a las agendas
-            // TODO, también moverlo a __consttruct para hacerlo una sola vez
+            // TODO, también moverlo a __construct para hacerlo una sola vez
 
             if(false){
 
@@ -429,8 +429,19 @@ class UserController extends AbstractController
 
 
         return new Response(null, 204);
-    }   
+    }
 
+    /**
+     * @Route("/opera/{id}", methods={"DELETE"}, name="opera_delete")
+     */
+    public function deleteOpera(Opera $opera)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($opera);
+        $em->flush();
+        return new Response(null, 204);
+    }
 
 
 

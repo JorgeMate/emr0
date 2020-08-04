@@ -11,13 +11,13 @@
 
 
         {% if false %}
-            <a href="{{ path(app.request.get('_route')) }}"><img src="{{ asset('assets/images/logKS400x200.png') }}"></a>
+            <a href="{{ path(app.request.get('_route')) }}"><img src="{{ asset('build/images/logKS400x200.png') }}"></a>
         {% endif %}
 
         {% if app.user.center.slug is defined %}
-            <a href="{{ path('user_cpanel', {slug:app.user.center.slug} ) }}"><img src="{{ asset('assets/images/logKS400x200.png') }}"></a>
+            <a href="{{ path('user_cpanel', {slug:app.user.center.slug} ) }}"><img src="{{ asset('build/images/logKS400x200.png') }}"></a>
         {% else %}
-            <a href="{{ path('app_login') }}"><img src="{{ asset('assets/images/logKS400x200.png') }}"></a>
+            <a href="{{ path('app_login') }}"><img src="{{ asset('build/images/logKS400x200.png') }}"></a>
         {% endif %}
         
     </div>

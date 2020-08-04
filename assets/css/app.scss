@@ -1,0 +1,226 @@
+@import '~bootstrap';
+@import '~font-awesome';
+
+
+/* Basic styles
+   ------------------------------------------------------------------------- */
+p, ul, ol {
+    font-size: 19px;
+    margin-bottom: 1.5em
+}
+
+li {
+    margin-bottom: 0.5em
+}
+
+code {
+    background: #ecf0f1;
+    color: #2c3e50
+}
+
+.text-danger, .text-danger:hover {
+    color: #e74c3c
+}
+
+i {
+    margin-right: 0.25em
+}
+
+.table.table-middle-aligned th,
+.table.table-middle-aligned td {
+    vertical-align: middle;
+}
+
+.doclink {
+    color: inherit
+}
+
+/* Utilities
+   ------------------------------------------------------------------------- */
+.m-b-0 { margin-bottom: 0 }
+
+/* Page elements
+   ------------------------------------------------------------------------- */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: lightblue;
+}
+
+header {
+    margin-bottom: 2em
+}
+
+header ul.nav li {
+    margin-bottom: 0
+}
+
+header .locales a {
+    padding-right: 10px
+}
+
+.body-container {
+    flex: 1;
+    /* needed to prevent pages with a very small height and browsers not supporting flex */
+    min-height: 600px
+}
+
+.body-container #main h1, .body-container #main h2 {
+    margin-top: 0
+}
+
+#sidebar .section {
+    margin-bottom: 2em
+}
+
+#sidebar p {
+    font-size: 15px
+}
+
+#sidebar p + p {
+    margin: 1.5em 0 0
+}
+
+footer {
+    background: #ecf0f1;
+    margin-top: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em
+}
+
+footer p {
+    color: #7b8a8b;
+    font-size: 13px;
+    margin-bottom: 0.25em
+}
+
+footer #footer-resources {
+    text-align: right
+}
+
+footer #footer-resources i {
+    color: #7b8a8b;
+    font-size: 28.5px;
+    margin-left: 0.5em
+}
+
+#sourceCodeModal h3 {
+    font-size: 19px;
+    margin-top: 0
+}
+
+#sourceCodeModal h3 small {
+    color: #7b8a8b;
+    font-size: 80%
+}
+
+#sourceCodeModal pre {
+    margin-bottom: 2em;
+    padding: 0
+}
+
+#confirmationModal .modal-dialog {
+    width: 500px
+}
+
+#confirmationModal .modal-footer button {
+    min-width: 75px
+}
+
+/* Misc. elements
+   ------------------------------------------------------------------------- */
+.section.rss a {
+    color: #f39c12;
+    font-size: 21px;
+}
+
+/* Forms
+   ------------------------------------------------------------------------- */
+
+
+/* Page: 'Technical Requirements Checker'
+   ------------------------------------------------------------------------- */
+
+/* Page: 'Homepage'
+   ------------------------------------------------------------------------- */
+
+/* Page: 'Login'
+   ------------------------------------------------------------------------- */
+
+/* Common Blog page elements
+   ------------------------------------------------------------------------- */
+.patient-metadata {
+    color: #b4bcc2;
+    font-size: 19px;
+    margin-bottom: 16px;
+}
+.patient-metadata .metadata {
+    margin-right: 1.5em;
+}
+
+.patient-tags .label {
+    margin-right: 5px;
+}
+
+/* Page: 'Blog index'
+   ------------------------------------------------------------------------- */
+body#patient_index #main h1,
+body#patient_index #main p {
+    margin-bottom: 0.5em
+}
+
+body#blog_index article.post {
+    margin-bottom: 3em;
+}
+
+body#patient_index .post-metadata {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+body#patient_index .patient-tags .label-default {
+    background-color: #e9ecec;
+    color: #6d8283;
+}
+body#patient_index .patient-tags .label-default i {
+    color: #a3b2b2;
+}
+
+/* Page: 'Patient post show'
+   ------------------------------------------------------------------------- */
+body#patient_show #main h3 {
+    margin-bottom: 0.75em
+}
+
+body#patient_show .patient-tags .label-default {
+    background-color: #e9ecec;
+    color: #6D8283;
+    font-size: 16px;
+    margin-right: 10px;
+    padding: .4em 1em .5em;
+}
+body#patient_show .patient-tags .label-default i {
+    color: #95A6A7;
+}
+
+
+/* Page: 'Comment form error'
+   ------------------------------------------------------------------------- */
+body#comment_form_error h1.text-danger {
+    margin-bottom: 1em
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+    .container {
+        width: 98%;
+    }
+}
+
+/* Page: 'Blog search'
+   ------------------------------------------------------------------------- */
+body#patient_search #main h1,
+body#patient_search #main p {
+    margin-bottom: 0.5em
+}
+

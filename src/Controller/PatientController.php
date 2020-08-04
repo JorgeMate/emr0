@@ -233,8 +233,15 @@ class PatientController extends AbstractController
 
     /**
      * @Route("{slug}/patient/{id}/show", methods={"GET", "POST"}, name="patient_show")
-     * 
+     *
      * MOSTRAR el paciente id
+     * @param Request $request
+     * @param $slug
+     * @param Patient $patient
+     * @param EntityManagerInterface $em
+     * @param UploaderHelper $uploaderHelper
+     * @return Response
+     * @throws \Exception
      */
     public function showPat(Request $request, $slug, Patient $patient, EntityManagerInterface $em, UploaderHelper $uploaderHelper): Response
     {
@@ -410,6 +417,45 @@ class PatientController extends AbstractController
         ]);
 
     }
+
+
+    /**
+     * @Route("/{slug}/treatment/{id}/edit", methods={"GET","POST"}, name="opera_edit")
+     * @param Request $request
+     * @param Opera $opera
+     * @param EntityManagerInterface $em
+     * @param $slug
+     * @return Response
+     */
+    public function editOpera(Request $request, Opera $opera, EntityManagerInterface $em, $slug): Response
+    {
+
+        $patient = $opera->getPatient();
+
+        $this->denyAccessUnlessGranted('PATIENT_EDIT', $patient);
+
+        $formOpera = $this->createForm(OperaType::class, $opera);
+        $formOpera->handleRequest($request);
+
+        if ($formOpera->isSubmitted() && $formOpera->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $this->addFlash('info', 'record.updated_successfully');
+
+            return $this->redirectToRoute('patient_show', ['slug' => $slug, 'id' => $patient->getId()] );
+        }
+
+        return $this->render('patient/opera/edit.html.twig', [
+
+            'opera' => $opera,
+            'form' => $formOpera->createView(),
+        ]);
+    }
+
+
+
+
 
 
 
