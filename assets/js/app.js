@@ -16,7 +16,7 @@ import $ from 'jquery';
 import 'bootstrap'; // adds functions to jQuery
 import 'bootstrap-datepicker';
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+import './components/get_nice_message';
 
 
 $(function() {
@@ -32,7 +32,6 @@ $(function() {
 });
 
 // Correción del fallo en input-files de bootstrap 4
-
 $('.custom-file-input').on('change', function(event) {
     var inputFile = event.currentTarget;
     $(inputFile).parent()
@@ -42,3 +41,10 @@ $('.custom-file-input').on('change', function(event) {
     $('.collapse').collapse();
 });
 
+
+
+$(function () {
+    $('[data-toggle="popover"]').popover({
+        trigger: 'focus'
+    })
+})

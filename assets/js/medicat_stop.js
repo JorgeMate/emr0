@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 var Medicat = {
 
     initialize: function($wrapper) {
@@ -27,9 +29,8 @@ var Medicat = {
 };
 
 $(document).ready(function() {
-
+    
     var $table = $('.js-medicats-table');
     Medicat.initialize($table);
-    
 });   
 

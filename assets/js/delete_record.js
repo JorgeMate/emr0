@@ -1,4 +1,5 @@
-export default function(){
+import '../css/delete_record.scss';
+import $ from 'jquery';
 
     var Record = {
 
@@ -47,7 +48,7 @@ export default function(){
 
     });
 
-};
+
 
 
 

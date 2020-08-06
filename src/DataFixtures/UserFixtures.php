@@ -131,6 +131,13 @@ class UserFixtures extends Fixture
             $user->setEmail('rbkarim@gmail.com');
             $user->setTel('');
 
+            $user->setMedic(true);
+            $user->setCod('RBK');
+            $user->setTitle('Dr,');
+            $user->setSpeciality('Plastic Surgeon');
+
+
+
             $this->passUniversalEncoded = $this->encoder->encodePassword(
                 $user,
                 $this->passUniversal

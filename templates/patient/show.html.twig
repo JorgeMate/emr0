@@ -6,9 +6,8 @@
 
     {{ include('_flash_messages.html.twig') }}
 
-    
-
     {# TÍTULO del paciente #}
+
     <div class="row justify-content-between">
 
             <div class="col-auto">
@@ -17,11 +16,11 @@
 
                     {{ patient.firstname }} {{ patient.lastname }} &nbsp;
                     {% if patient.sex == '0' %}
-                        <i class="fas fa-mars text-info"></i>
+                        <i class="fa fa-mars text-info"></i>
                     {% elseif patient.sex == '1' %}
-                        <i class="fas fa-venus text-danger"></i>
+                        <i class="fa fa-venus text-danger"></i>
                     {% else  %}
-                        <i class="far fa-question-circle text-success"></i>
+                        <i class="fa fa-question-circle text-success"></i>
                     {% endif %}
 
                     {% if patient.dateOfBirth %}
@@ -43,7 +42,7 @@
         <!-- Nav tabs -->
         <div class="nav nav-tabs" role="tablist" id="myTab">
             <a class="nav-item nav-link active" href="#nav-1" aria-controls="nav-1" role="tab" data-toggle="tab">{{ 'title.pat_info'|trans }}</a>
-            <a class="nav-item nav-link" href="#nav-2" aria-controls="nav-2" role="tab" data-toggle="tab"><i class="fas fa-key"></i> {{ 'title.med_info'|trans }}</a>
+            <a class="nav-item nav-link" href="#nav-2" aria-controls="nav-2" role="tab" data-toggle="tab"><i class="fa fa-key"></i> {{ 'title.med_info'|trans }}</a>
             <a class="nav-item nav-link" href="#nav-3" aria-controls="nav-3" role="tab" data-toggle="tab">{{ 'label.treatments'|trans }}</a>
             <a class="nav-item nav-link" href="#nav-4" aria-controls="nav-4" role="tab" data-toggle="tab">IMGS</a>
             <a class="nav-item nav-link" href="#nav-5" aria-controls="nav-5" role="tab" data-toggle="tab">DOCS</a>
@@ -146,12 +145,10 @@
 
 
 
+
 {% block stylesheets %}
-
     {{ parent() }}
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.css" integrity="sha512-bbUR1MeyQAnEuvdmss7V2LclMzO+R9BzRntEE57WIKInFVQjvX7l7QZSxjNDt8bg41Ww05oHSh0ycKFijqD7dA==" crossorigin="anonymous" />
-
+    {{ encore_entry_link_tags('delete') }}
 {% endblock %}
 
 
@@ -162,28 +159,16 @@
 
     {% if false %}
         <script src="{{ asset('assets/js/delete_record.js') }}"></script>
+        <script src="{{ asset('assets/js/medicat_stop.js') }}"></script>
+
     {% else %}
+
         {{ encore_entry_script_tags('delete') }}
+        {{ encore_entry_script_tags('med_stop') }}
+
     {% endif %}
 
-
-
-    <script src="{{ asset('assets/js/medicat_stop.js') }}"></script>
-
-
-
-    <script>
-        $(function () {
-            $('[data-toggle="popover"]').popover({
-                trigger: 'focus'
-            })
-        })
-    </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.js" integrity="sha512-En/Po50Bl8kIECa2WkhxhdYeoKDcrJpBKMo9tmbuwbm9RxHWZV8/Y5xM9sh3QbrnFgM3hVR/2umJ33qGJk45pQ==" crossorigin="anonymous"></script>
-
-    <script src="{{ asset('assets/js/imgs_patient_form.js') }}"></script>
-
-
-
 {% endblock %}
+
+
+

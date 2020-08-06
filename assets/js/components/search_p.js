@@ -1,3 +1,7 @@
+import '../../css/search_p.scss';
+import $ from 'jquery';
+
+
 /**
  * jQuery plugin for an instant searching.
  *
@@ -97,6 +101,9 @@
             if (option === 'search') instance.search();
         })
     }
+
+
+    
 
     $.fn.instantSearch = Plugin;
     $.fn.instantSearch.Constructor = InstantSearch;

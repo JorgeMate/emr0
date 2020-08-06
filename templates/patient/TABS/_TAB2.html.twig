@@ -11,13 +11,13 @@
                     <div class="row justify-content-between">
 
                         <div class="col">
-                            <h4><i class="far fa-comments"></i> {{ 'title.cons'|trans }}</h4>  
+                            <h4><i class="fa fa-comments"></i> {{ 'title.cons'|trans }}</h4>
                         </div>        
                     
                         <div class="col text-right">
                             <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseNewCon" aria-expanded="false" aria-controls="collapseExample">
                                 {# Button with data-target #}
-                                <i class="fas fa-edit" aria-hidden="true"></i> {{ button_label_new_con }}
+                                <i class="fa fa-clipboard" aria-hidden="true"></i> {{ button_label_new_con }}
                             </button>
                         </div>   
                         
@@ -59,7 +59,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th class="text-center"><i class="fas fa-user-md"></i></th>
+                            <th class="text-center"><i class="fa fa-user-md"></i></th>
                             <th class="text-center">Date</th>
                             <th>{{ 'label.con'|trans }}</th>
                             <th>{{ 'label.treatment'|trans }}</th>
@@ -104,7 +104,7 @@
                         <div class="card-header" id="headingTwo">
                             
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <h5><i class="fas fa-pills"></i> {{'title.medicat'|trans}}</h5>
+                                    <h5><i class="fas fa-pump-medical"></i> {{'title.medicat'|trans}}</h5>
                             </button>
                         
                         </div>
@@ -115,7 +115,7 @@
 
                                 <div class="text-right">
                                     <a href="{{ path('medicat_new', {slug:app.user.center.slug, id:id} )}}" class="btn btn-success"> 
-                                        {{ button_label_new_entry }} <i class="fa fa-edit" aria-hidden="true"> </i>
+                                        {{ button_label_new_entry }} <i class="fa fa-clipboard" aria-hidden="true"> </i>
                                     </a>
                                 </div>
 
@@ -155,7 +155,7 @@
                     <div class="card-header" id="headingOne">
 
                             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <h5><i class="far fa-folder-open"></i> {{'title.medHist'|trans}}</h5>
+                                <h5><i class="fa fa-file"></i>{{'title.medHist'|trans}}</h5>
                             </button>
 
                     </div>
@@ -166,7 +166,7 @@
 
                             <div class="text-right">
                                 <a href="{{ path('historia_new', {slug:app.user.center.slug, id:id} )}}" class="btn btn-success"> 
-                                    {{ button_label_new_entry }} <i class="fa fa-edit" aria-hidden="true"> </i>
+                                    {{ button_label_new_entry }} <i class="fa fa-clipboard" aria-hidden="true"> </i>
                                 </a>
                             </div>
 

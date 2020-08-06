@@ -24,8 +24,25 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
+
+    .addEntry('dp_es', './assets/js/datepicker/datepicker.es.js')
+    .addEntry('dp_en', './assets/js/datepicker/datepicker.en.js')
+    .addEntry('dp_nl', './assets/js/datepicker/datepicker.nl.js')
+    .addEntry('dp_fr', './assets/js/datepicker/datepicker.fr.js')
+
+    .addEntry('search_p', './assets/js/components/search_p.js')
+
     .addEntry('delete', './assets/js/delete_record.js')
-    .addEntry('sel-treat', './assets/js/selectTreatment2.js')
+    .addEntry('med_stop', './assets/js/medicat_stop.js')
+
+    .addEntry('sel_treat', './assets/js/selectTreatment2.js')
+
+    //.addStyleEntry('','')
+
+
+
+
+
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -58,10 +75,17 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
 
+
+    
+
+    .enablePostCssLoader()
+
+
+
+
     .copyFiles({
         from: './assets/images',
         to: 'images/[path][name].[hash:8].[ext]'
-
     })
 
     // uncomment if you use TypeScript
@@ -72,7 +96,7 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
