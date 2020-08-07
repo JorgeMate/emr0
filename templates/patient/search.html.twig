@@ -13,8 +13,8 @@
             <div class="column">
                 <h4>
                     <a href="{{ path('user_cpanel', {slug:center.slug}) }}">
-                        <i class="fas fa-arrow-left" aria-hidden="true"></i> {{ center.name }}</a> 
-                    | <i class="fas fa-users"></i> {{ 'title.patients'|trans }}
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>{{ center.name }}</a> 
+                    | <i class="fa fa-users"></i> {{ 'title.patients'|trans }}
                 </h4>
             </div>        
 
@@ -63,7 +63,7 @@
 
     <div class="card">
         <div class="card-header">
-        <i class="fas fa-users" aria-hidden="true"></i>  {{ 'title.patient_search_info'|trans }}
+        <i class="fa fa-users" aria-hidden="true"></i>  {{ 'title.patient_search_info'|trans }}
         </div>
         <div class="card-body">
             <h5 class="card-title">{{ 'title2.patient_search_info'|trans }}</h5>
@@ -72,7 +72,6 @@
     </div>
 
 {% endblock %}
-
 
 {% block stylesheets %}
     {{ parent() }}

@@ -14,12 +14,12 @@
 
         <div class="card">
             <div class="card-header"> 
-                <h5><i class="fas fa-users"></i> {{ 'label.users'|trans }}</h5>
+                <h5><i class="fa fa-users"></i> {{ 'label.users'|trans }}</h5>
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class="far fa-list-alt"></i> <a href="{{ path('users_index',{slug:center.slug}) }}"> {{ 'title.users_list'|trans }}</a></li>
-                    <li class="list-group-item"><i class="fas fa-user-md"></i> <a href="{{ path('medics_index',{slug:center.slug}) }}"> {{ 'label.medic.users'|trans }}</a></li>
+                    <li class="list-group-item"><i class="fa fa-list-alt"></i> <a href="{{ path('users_index',{slug:center.slug}) }}"> {{ 'title.users_list'|trans }}</a></li>
+                    <li class="list-group-item"><i class="fa fa-user-md"></i> <a href="{{ path('medics_index',{slug:center.slug}) }}"> {{ 'label.medic.users'|trans }}</a></li>
                 </ul>
             </div>
         </div>
@@ -30,14 +30,14 @@
 
         <div class="card">
             <div class="card-header"> 
-                <h5><i class="fas fa-sitemap"></i> {{ 'entity.title'|trans }}</h5>
+                <h5><i class="fa fa-sitemap"></i> {{ 'entity.title'|trans }}</h5>
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class="fas fa-ambulance"></i> <a href="{{ path('insurances_index',{slug:center.slug}) }}"> {{ 'entity.title_inss'|trans }}</a></li>
-                    <li class="list-group-item"><i class="far fa-question-circle"></i> <a href="{{ path('sources_index',{slug:center.slug}) }}"> {{ 'entity.title_sou'|trans }}</a></li>
-                    <li class="list-group-item"><i class="fas fa-briefcase-medical"></i> <a href="{{ path('types_index',{slug:center.slug}) }}"> {{ 'label.treatments'|trans }}</a></li>
-                    <li class="list-group-item"><i class="fas fa-hospital-alt"></i> <a href="{{ path('places_index',{slug:center.slug}) }}"> {{ 'label.places'|trans }}</a></li>
+                    <li class="list-group-item"><i class="fa fa-ambulance"></i> <a href="{{ path('insurances_index',{slug:center.slug}) }}"> {{ 'entity.title_inss'|trans }}</a></li>
+                    <li class="list-group-item"><i class="fa fa-question-circle"></i> <a href="{{ path('sources_index',{slug:center.slug}) }}"> {{ 'entity.title_sou'|trans }}</a></li>
+                    <li class="list-group-item"><i class="fa fa-list-ul"></i> <a href="{{ path('types_index',{slug:center.slug}) }}"> {{ 'label.treatments'|trans }}</a></li>
+                    <li class="list-group-item"><i class="fa fa-building-o"></i> <a href="{{ path('places_index',{slug:center.slug}) }}"> {{ 'label.places'|trans }}</a></li>
                     
 
                 </ul>
@@ -50,12 +50,12 @@
 
         <div class="card">
             <div class="card-header"> 
-                <h5><i class="far fa-folder-open"></i> <a href="{{ path('doc_groups_index',{slug:center.slug}) }}"> {{'label.doc_groups'|trans}}</a></h5>
+                <h5><i class="fa fa-folder-open"></i> <a href="{{ path('doc_groups_index',{slug:center.slug}) }}"> {{'label.doc_groups'|trans}}</a></h5>
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
                     {% for group in groups %}
-                    <li class="list-group-item"><i class="far fa-file-alt"></i> <a href="{{ path('docs_index', {slug:center.slug, id:group.id} ) }}">{{ group.name }}</a></li>
+                    <li class="list-group-item"><i class="fa fa-file-alt"></i> <a href="{{ path('docs_index', {slug:center.slug, id:group.id} ) }}">{{ group.name }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
@@ -67,12 +67,12 @@
 
         <div class="card">
             <div class="card-header"> 
-                <h5><i class="fas fa-cog"></i> Program Settings</h5>
+                <h5><i class="fa fa-cog"></i> Program Settings</h5>
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class="fas fa-toggle-on"></i> <a href=""> Program Options</a></li>
-                    <li class="list-group-item"><i class="fas fa-lock-open"></i> <a href=""> Premissions</a></li>
+                    <li class="list-group-item"><i class="fa fa-toggle-on"></i> <a href=""> Program Options</a></li>
+                    <li class="list-group-item"><i class="fa fa-lock"></i> <a href=""> Premissions</a></li>
                     
                     <li class="list-group-item"></li>
                 </ul>

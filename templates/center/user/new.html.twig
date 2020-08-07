@@ -6,7 +6,7 @@
 
 {# dump(user) #}
 
-    <h4><i class="far fa-user"></i> {{ 'title.new_user'|trans }}</h4>
+    <h4><i class="fa fa-user"></i> {{ 'title.new_user'|trans }}</h4>
 
     {{ form_start(form) }}
 
@@ -40,7 +40,7 @@
 
             <div class="form-group col-sm-3">
                 <a href="{{ path('users_index', {slug: user.center.slug}) }}" class="btn btn-block btn-success">
-                    <i class="fas fa-arrow-left" aria-hidden="true"></i> {{ 'title.users_list'|trans }}
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> {{ 'title.users_list'|trans }}
                 </a>        
             </div>
                         

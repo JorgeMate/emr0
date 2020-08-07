@@ -15,11 +15,11 @@
                     {{ patient.firstname }} {{ patient.lastname }} &nbsp;
 
                     {% if patient.sex == '0' %}
-                        <i class="fas fa-mars text-info"></i>
+                        <i class="fa fa-mars text-info"></i>
                     {% elseif patient.sex == '1' %}
-                        <i class="fas fa-venus text-danger"></i>
+                        <i class="fa fa-venus text-danger"></i>
                     {% else  %}
-                        <i class="far fa-question-circle text-success"></i>
+                        <i class="fa fa-question-circle text-success"></i>
                     {% endif %}
 
                     {% if patient.dateOfBirth %}

@@ -94,12 +94,12 @@
         {# TAB 4 imágenes #}
         {{ include('/patient/TABS/_TAB4C.html.twig', {
 
-        form: formImg,            
-        imgs: imgs,
-        
-        button_label_new: 'label.newpic'|trans,
-        button_label_cancel: 'label.cancel'|trans,
-        button_label_upload: 'label.upload'|trans,
+            form: formImg,            
+            imgs: imgs,
+            
+            button_label_new: 'label.newpic'|trans,
+            button_label_cancel: 'label.cancel'|trans,
+            button_label_upload: 'label.upload'|trans,
         
 
         }, with_context = false) }}
@@ -151,22 +151,17 @@
     {{ encore_entry_link_tags('delete') }}
 {% endblock %}
 
-
-
 {% block javascripts %}
+    {{ parent() }}  
+    {{ encore_entry_script_tags('delete') }}
+    {{ encore_entry_script_tags('med_stop') }}
 
-    {{ parent() }}
 
-    {% if false %}
-        <script src="{{ asset('assets/js/delete_record.js') }}"></script>
-        <script src="{{ asset('assets/js/medicat_stop.js') }}"></script>
+<script>
 
-    {% else %}
 
-        {{ encore_entry_script_tags('delete') }}
-        {{ encore_entry_script_tags('med_stop') }}
 
-    {% endif %}
+</script
 
 {% endblock %}
 

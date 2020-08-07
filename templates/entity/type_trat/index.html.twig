@@ -9,8 +9,8 @@
         <div class="col-auto">
             <h4>
                 <a href="{{ path('center_cpanel', {slug:app.user.center.slug}) }}">
-                    <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a>
-                | <i class="fas fa-procedures"></i> {{ 'label.types'|trans }}
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a>
+                | <i class="fa fa-procedures"></i> {{ 'label.types'|trans }}
                 
             </h4>
         </div>        
@@ -46,7 +46,7 @@
             <td><a href="{{ path('type_edit', {slug:app.user.center.slug, id:type.id}) }}"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
             <td><a href="{{ path('type_edit', {slug:app.user.center.slug, id:type.id}) }}">{{ type.name }}</a></td>
             
-            <td class="text-right text">{{type.treatments|length}} | <a href="{{ path('treats_index', {slug:app.user.center.slug, id:type.id }) }}"><i class="fas fa-search text-success"></i></a></td>
+            <td class="text-right text">{{type.treatments|length}} | <a href="{{ path('treats_index', {slug:app.user.center.slug, id:type.id }) }}"><i class="fa fa-search text-success"></i></a></td>
 
 
         </tr>

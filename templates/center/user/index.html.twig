@@ -31,7 +31,7 @@
         <div class="row justify-content-between">
 
             <div class="column">
-                <h4><span class="text-info">{{ center.name }}</span> <i class="far fa-list-alt"></i> {{ 'title.users_list'|trans }}</h4>
+                <h4><span class="text-info">{{ center.name }}</span> <i class="fa fa-list-alt"></i> {{ 'title.users_list'|trans }}</h4>
             </div>        
 
             <div class="column">
@@ -69,7 +69,7 @@
                 <td> 
                 {% if not is_granted('IS_IMPERSONATOR') %}
                     <a href="{{ path('user_cpanel', {slug:app.user.center.slug, _switch_user:user.email} ) }}">
-                        <i class="fas fa-user-shield text-danger"></i>
+                        <i class="fa fa-user-circle text-danger"></i>
                     </a>
                 {% endif %}
                 </td>
@@ -103,15 +103,15 @@
                 </td>
                 <td>
                     {% if user.centerUser == user.id %}
-                    <i class="fas fa-key text-warning"></i>
+                    <i class="fa fa-key text-warning"></i>
                     {% endif %}
 
                     {% if 'ROLE_ADMIN' in user.roles or 'ROLE_SUPER_ADMIN' in user.roles %}
-                    <i class="fas fa-key text-info"></i>
+                    <i class="fa fa-key text-info"></i>
                     {% endif %}
                 </td>
 
-                <td>{% if user.medic %}<i class="fas fa-user-md"></i>{% endif %}</td>
+                <td>{% if user.medic %}<i class="fa fa-user-md"></i>{% endif %}</td>
                 <td>
                     {{ user.firstname }} {{ user.lastname }}
                 </td>
@@ -128,9 +128,9 @@
 
                 <td class="text-center">
                     {% if user.enabled %}
-                        <i class="fas fa-toggle-on text-success"></i>
+                        <i class="fa fa-toggle-on text-success"></i>
                     {% else %}  
-                        <i class="fas fa-toggle-off text-danger"></i>
+                        <i class="fa fa-toggle-off text-danger"></i>
                     {% endif %}  
                 </td>
 
@@ -154,7 +154,7 @@
 
     {% if is_granted('IS_IMPERSONATOR') %}
         <a href="{{ path('users_index', {slug:center.slug,'_switch_user': '_exit'}) }}" class="btn btn-block btn-danger">
-            <i class="fas fa-user-shield"></i> Exit impersonation
+            <i class="fa fa-user-shield"></i> Exit impersonation
         </a>
     {% endif %}
 

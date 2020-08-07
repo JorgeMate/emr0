@@ -4,7 +4,7 @@
 
 
 <div class="card border-success mb-3">
-        <h5><div class="card-header">{{ user.firstname }} {{ user.lastname }} <i class="fas fa-user-md"></i> {{user.email}} | {{user.tel}}</div></h5>
+        <h5><div class="card-header">{{ user.firstname }} {{ user.lastname }} <i class="fa fa-user-md"></i> {{user.email}} | {{user.tel}}</div></h5>
 
     <div class="card-body">
 
@@ -25,7 +25,7 @@
 
                 <div class="form-group col-md-1"></div>
 
-                <div class="form-group col-md-2 text-right"><i class="fas fa-home"></i></div>
+                <div class="form-group col-md-2 text-right"><i class="fa fa-home"></i></div>
 
                 <div class="form-group col-md-3">
                      {{ form_row(form.internal) }}
@@ -61,7 +61,7 @@
 
                 <div class="form-group col text-right">
                     <a href="{{ path('medics_index', {slug:app.user.center.slug}) }}" class="btn btn btn-success">
-                        <i class="fas fa-undo-alt"></i> {{ 'label.cancel'|trans }}
+                        <i class="fa fa-undo-alt"></i> {{ 'label.cancel'|trans }}
                     </a>
                 </div>                
 

@@ -102,9 +102,6 @@ import $ from 'jquery';
         })
     }
 
-
-    
-
     $.fn.instantSearch = Plugin;
     $.fn.instantSearch.Constructor = InstantSearch;
 

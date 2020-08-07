@@ -2,33 +2,16 @@
 @import 'helper/variables';
 
 
+
+
 @import '~bootswatch/dist/flatly/variables';
 @import '~bootstrap';
 @import '~bootswatch/dist/flatly/bootswatch';
 
 @import '~font-awesome';
+//@import "~font-awesome/scss/font-awesome.scss";
 
 
 @import './layout/basic';
 
-
-/* Page: 'Blog search'
-   ------------------------------------------------------------------------- */
-body#patient_search #main h1,
-body#patient_search #main p {
-  margin-bottom: 0.5em
-}
-
-body#blog_search article.post:first-child {
-  margin-top: 2em;
-}
-
-body#blog_search article.post {
-  margin-bottom: 2em;
-}
-
-body#article_search .post-metadata {
-  font-size: 16px;
-  margin-bottom: 8px;
-}
 

@@ -28,16 +28,16 @@
     <div class="row justify-content-between">
 
         <div class="col">
-            <h4>{{ 'title.edit_user'|trans }} <i class="far fa-user"></i> <span class="text-success">{{ user.email }}</span></h4>
+            <h4>{{ 'title.edit_user'|trans }} <i class="fa fa-user"></i> <span class="text-success">{{ user.email }}</span></h4>
         </div>        
         <div class="col text-right">
             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
             <h5>{{ 'label.recorded'|trans }}: {{user.createdAt|date("d/m/Y") }} </h5>
                 {% if 'ROLE_ADMIN' in user.roles %}
-                    {{ 'title.center_cpanel'|trans }} <i class="fas fa-key text-info"></i> 
+                    {{ 'title.center_cpanel'|trans }} <i class="fa fa-key text-info"></i> 
                 {% endif %}        
                 {% if user.centerUser == user.id %}
-                    {{ 'title.center_owner'|trans }} <i class="fas fa-key text-warning"></i> 
+                    {{ 'title.center_owner'|trans }} <i class="fa fa-key text-warning"></i> 
                 {% endif %}        
             {% endif %}        
         </div>     
@@ -69,7 +69,7 @@
 
             {% if is_granted('ROLE_ADMIN') %}        
 
-                <div class="form-group col-auto text-right"> <i class="fas fa-user-md"></i></div>
+                <div class="form-group col-auto text-right"> <i class="fa fa-user-md"></i></div>
                 <div class="form-group col-auto">
                     {{ form_row(form.medic) }}
                 </div>
@@ -101,12 +101,12 @@
                 {% if app.user != user or is_granted('ROLE_SUPER_ADMIN') %}
                 <div class="form-group text-right">
                     <a href="{{ path('users_index', {slug:app.user.center.slug}) }}" class="btn btn-block btn-success">
-                        <i class="fas fa-arrow-left" aria-hidden="true"></i> {{ 'title.users_list'|trans }}
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i> {{ 'title.users_list'|trans }}
                     </a>
                 </div>
                 {% else %} 
                     <a href="{{ path('user_cpanel', {slug:app.user.center.slug} ) }}" class="btn btn-block btn-success">
-                        <i class="fas fa-arrow-left" aria-hidden="true"></i> {{ 'label.cancel'|trans }}
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i> {{ 'label.cancel'|trans }}
                     </a>                
                 {% endif %} 
             </div>            
@@ -161,13 +161,13 @@
                 <div class="card-body">
             
                     <h6 class="card-text text-primary">
-                        <i class="fas fa-key text-warning"></i> {{ 'title.center_owner'|trans }}<br>{{ 'security.owner_1'|trans }}
+                        <i class="fa fa-key text-warning"></i> {{ 'title.center_owner'|trans }}<br>{{ 'security.owner_1'|trans }}
                     </h6>
 
                     <br>
 
                     <h6 class="card-text text-primary">
-                        <i class="fas fa-key text-info"></i> {{ 'title.center_cpanel'|trans }}<br>{{ 'security.admin_1'|trans }}
+                        <i class="fa fa-key text-info"></i> {{ 'title.center_cpanel'|trans }}<br>{{ 'security.admin_1'|trans }}
                     </h6>
                     <br>
 

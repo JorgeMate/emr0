@@ -9,8 +9,8 @@
             <div class="col-auto">
                 <h4>
                     <a href="{{ path('center_cpanel', {slug:slug}) }}">
-                        <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a>
-                        | <i class="fas fa-hospital-alt"></i> {{ 'label.places'|trans }}
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a>
+                        | <i class="fa fa-hospital-alt"></i> {{ 'label.places'|trans }}
                 </h4>
             </div>        
 
@@ -49,15 +49,15 @@
                 <td><a href="{{ path('place_edit', {slug:slug, id:place.id}) }}"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
                 <td><a href="{{ path('place_edit', {slug:slug, id:place.id}) }}">{{ place.name }}</a></td>
                 <td class="text-center">{% if place.enabled %} 
-                        <i class="fas fa-toggle-on text-success"></i>
+                        <i class="fa fa-toggle-on text-success"></i>
                     {% else %}
-                        <i class="fas fa-toggle-off text-danger"></i>
+                        <i class="fa fa-toggle-off text-danger"></i>
                     {% endif %}
                 </td>
                 <td>{{ place.contact }}</td>
                 <td>{{ place.tel }}</td>
                 <td></td>
-                <td class="text-right">{{place.operas|length}} <a href="{{ path('operasPerPlace_index', {slug:app.user.center.slug, slug2:place.slug }) }}"><i class="fas fa-file-medical-alt"></i></a></td>
+                <td class="text-right">{{place.operas|length}} <a href="{{ path('operasPerPlace_index', {slug:app.user.center.slug, slug2:place.slug }) }}"><i class="fa fa-file-medical-alt"></i></a></td>
                 
                 
             </tr>

@@ -12,11 +12,11 @@
 
             <h4>
                 
-                <i class="fas fa-file-medical-alt"></i> {{opera.treatment.name}} | <i class="fas fa-user-injured"></i> {{ opera.patient.firstname }} {{ opera.patient.lastname }} &nbsp;
+                <i class="fa fa-file-medical-alt"></i> {{opera.treatment.name}} | <i class="fa fa-user-injured"></i> {{ opera.patient.firstname }} {{ opera.patient.lastname }} &nbsp;
                 {% if opera.patient.sex %}
-                    <i class="fas fa-venus text-danger"></i>
+                    <i class="fa fa-venus text-danger"></i>
                 {% else %}
-                    <i class="fas fa-mars text-info"></i>
+                    <i class="fa fa-mars text-info"></i>
                 {% endif %}
                 {{ opera.patient.dateOfBirth | age }}
 
@@ -61,7 +61,7 @@
         <div class="form-group col-md-3">
 
             <a href="{{ path('patient_show', {slug:app.user.center.slug, id:opera.patient.id}) }}" class="btn btn-block btn-success">
-                <i class="fas fa-undo-alt"></i> {{ 'label.cancel'|trans }}
+                <i class="fa fa-undo-alt"></i> {{ 'label.cancel'|trans }}
             </a>    
                     
         </div>

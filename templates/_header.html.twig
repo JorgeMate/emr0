@@ -9,7 +9,7 @@
                 
             {% if is_granted('IS_IMPERSONATOR') %}
                 <a href="{{ path('users_index', {slug:app.user.center.slug,'_switch_user': '_exit'}) }}" class="btn btn-danger">
-                    <i class="fas fa-user-shield"></i> Exit impersonation
+                    <i class="fa fa-user-shield"></i> Exit impersonation
                 </a>
             {% endif %}
 
@@ -26,7 +26,7 @@
                     {{app.user.center.name}}
                     
                     {% if is_granted('ROLE_SUPER_ADMIN') %} 
-                        &nbsp; <i class="fas fa-key text-danger" aria-hidden="true"></i>
+                        &nbsp; <i class="fa fa-key text-danger" aria-hidden="true"></i>
                     {% endif %} 
 
                     {% if is_granted('ROLE_ADMIN') and not is_granted('ROLE_SUPER_ADMIN') %} 

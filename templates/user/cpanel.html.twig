@@ -31,7 +31,7 @@
 
             <div class="card">
                 <div class="card-header"> 
-                    <h5><i class="far fa-calendar-alt"></i> <a href="">Agendas</a></h5>
+                    <h5><i class="fa fa-calendar-alt"></i> <a href="">Agendas</a></h5>
                 </div>
                 <div class="card-body">
                 </div>
@@ -48,7 +48,7 @@
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                     {% for group in groups %}
-                        <li class="list-group-item"><i class="far fa-file-alt"></i> <a href="{{ path('docs_index', {slug:center.slug, id:group.id} ) }}">{{ group.name }}</a></li>
+                        <li class="list-group-item"><i class="fa fa-file-alt"></i> <a href="{{ path('docs_index', {slug:center.slug, id:group.id} ) }}">{{ group.name }}</a></li>
                     {% endfor %}
                     </ul>
                 </div>

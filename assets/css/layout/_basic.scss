@@ -4,6 +4,27 @@
 
    p, ul, ol {
     font-size: $fontsize;
+    
     margin-bottom: 1.5em
   }
   
+
+
+/* Utilities
+   ------------------------------------------------------------------------- */
+   .m-b-0 { margin-bottom: 0 }
+
+   /* Page elements
+      ------------------------------------------------------------------------- */
+   body {
+     display: flex;
+     flex-direction: column;
+     min-height: 100vh;
+
+     font-family: Arial, Helvetica, sans-serif;
+
+   }
+   
+   header {
+     margin-bottom: 2em
+   }

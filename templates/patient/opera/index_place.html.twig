@@ -9,10 +9,10 @@
         <div class="col-auto">
             <h4>
                 <a href="{{ path('center_cpanel', {slug:slug}) }}">
-                    <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}
                 </a> 
                 | <a href="{{ path('places_index', {slug:app.user.center.slug} ) }}">
-                <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ 'label.places'|trans }}</a>  <i class="fas fa-hospital-alt"></i> 
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>{{ 'label.places'|trans }}</a>  <i class="fa fa-hospital-alt"></i> 
                 {{ place.name}}
             </h4>
         </div>        
@@ -56,9 +56,9 @@
             <td class="text-left">
                 {% if opera.patient.dateOfBirth != null %} {{ opera.patient.dateOfBirth | age }} {% endif %}
             {% if opera.patient.sex == 1 %}
-                <i class="fas fa-venus text-danger"></i>
+                <i class="fa fa-venus text-danger"></i>
             {% else %}
-                <i class="fas fa-mars text-info"></i>
+                <i class="fa fa-mars text-info"></i>
             {% endif %}     
 <a href="{{ path('patient_show', {slug:app.user.center.slug, id:opera.patient.id} ) }}">{{ opera.patient.firstname }} {{ opera.patient.lastname }}</a> </td>
             

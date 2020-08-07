@@ -2,6 +2,7 @@
     "devDependencies": {
         "@fortawesome/fontawesome-free": "^5.14.0",
         "@symfony/webpack-encore": "^0.30.0",
+        "autoprefixer": "^9.8.6",
         "bootstrap": "^4.5.1",
         "bootswatch": "^4.5.1",
         "core-js": "^3.0.0",
@@ -12,7 +13,8 @@
         "postcss-loader": "^3.0.0",
         "regenerator-runtime": "^0.13.2",
         "sass-loader": "^8.0.0",
-        "webpack-notifier": "^1.6.0"
+        "webpack-notifier": "^1.6.0",
+        "bootstrap-datepicker": "^1.9.0"
     },
     "license": "UNLICENSED",
     "private": true,
@@ -23,6 +25,12 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "bootstrap-datepicker": "^1.9.0"
-    }
+     
+    },
+    "browserslist": [
+        "> .05%"
+    ]
+    
+
+    
 }

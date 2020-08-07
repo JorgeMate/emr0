@@ -9,14 +9,14 @@
             <div class="col-auto">
                 <h4>
                     <a href="{{ path('center_cpanel', {slug:app.user.center.slug}) }}">
-                        <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a> | <br><br>
-                    <i class="far fa-question-circle"></i> {{ 'entity.title_sou'|trans }}
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a> | <br><br>
+                    <i class="fa fa-question-circle"></i> {{ 'entity.title_sou'|trans }}
                 </h4>
             </div>        
 
             <div class="col text-right">
                 <a href="{{ path('sources_index', {slug:app.user.center.slug,show:'disabled'}) }}" class="btn btn-outline-secondary collapse-">
-                    <i class="fas fa-toggle-off" aria-hidden="true"></i> Show disabled
+                    <i class="fa fa-toggle-off" aria-hidden="true"></i> Show disabled
                 </a>
             </div>
 
@@ -56,16 +56,16 @@
                 <td><a href="{{ path('source_edit', {slug:app.user.center.slug, id:source.id}) }}">{{ source.name }}</a></td>
                 <td class="text-center">
                     {% if source.enabled %} 
-                        <i class="fas fa-toggle-on text-success"></i>
+                        <i class="fa fa-toggle-on text-success"></i>
                     {% else %}
-                        <i class="fas fa-toggle-off text-danger"></i>
+                        <i class="fa fa-toggle-off text-danger"></i>
                     {% endif %}
                 </td>
 
                 <td>{{ source.contact }}</td>
                 <td>{{ source.tel }}</td>
                 <td></td>
-                <td class="text-right">{{source.patients|length}} | <a href="{{ path('patient_index', {slug:app.user.center.slug, entity:'source', id:source.id }) }}"><i class="fas fa-users text-warning"></i></td></a> 
+                <td class="text-right">{{source.patients|length}} | <a href="{{ path('patient_index', {slug:app.user.center.slug, entity:'source', id:source.id }) }}"><i class="fa fa-users text-warning"></i></td></a> 
                 
             </tr>
             {% endfor %}

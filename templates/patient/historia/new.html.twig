@@ -14,17 +14,17 @@
 
             <h4>
                 
-                {{ 'title.medHist'|trans }} <i class="far fa-folder-open" aria-hidden="true"></i>
-                {{ 'label.new_entry'|trans }} | <i class="fas fa-user-injured"></i>
+                {{ 'title.medHist'|trans }} <i class="fa fa-folder-open" aria-hidden="true"></i>
+                {{ 'label.new_entry'|trans }} | <i class="fa fa-user-injured"></i>
 
 
                 {{ patient.firstname }} {{ patient.lastname }} &nbsp;
                 {% if patient.sex == '0' %}
-                    <i class="fas fa-mars text-info"></i>
+                    <i class="fa fa-mars text-info"></i>
                 {% elseif patient.sex == '1' %}
-                    <i class="fas fa-venus text-danger"></i>
+                    <i class="fa fa-venus text-danger"></i>
                 {% else  %}
-                    <i class="far fa-question-circle text-success"></i>
+                    <i class="fa fa-question-circle text-success"></i>
                 {% endif %}
 
                 {% if patient.dateOfBirth %}
@@ -65,7 +65,7 @@
 
                 <div class="form-group col-sm-4">    
                     <a href="{{ path('patient_show', {slug: center.slug, id:patient.id}) }}" class="btn btn-block btn-success">
-                        <i class="fas fa-arrow-left" aria-hidden="true"></i> {{ patient.firstname }} {{ patient.lastname }}
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i> {{ patient.firstname }} {{ patient.lastname }}
                     </a>
                 </div>
         

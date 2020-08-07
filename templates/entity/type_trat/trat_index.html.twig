@@ -11,10 +11,10 @@
 
             <h4>
                 <a href="{{ path('center_cpanel', {slug:app.user.center.slug}) }}">
-                    <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a>
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a>
                 <a href="{{ path('types_index', {slug:app.user.center.slug}) }}">
-                        <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ 'label.types'|trans }}</a>    
-                | <i class="fas fa-procedures"></i> {{type.name}}
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>{{ 'label.types'|trans }}</a>    
+                | <i class="fa fa-procedures"></i> {{type.name}}
                 
             </h4>
 
@@ -37,7 +37,7 @@
     <thead>
         <tr>
 
-            <th><i class="fas fa-file-medical-alt"></i></th>            
+            <th><i class="fa fa-file-medical-alt"></i></th>            
             <th>{{ 'label.treatments'|trans }}</th>
             <th class="text-right">{{ 'label.value'|trans }}</th>
             <th class="text-center">{{'label.enabled'|trans}}</th>
@@ -59,18 +59,20 @@
             <td>{{ treatment.name }}</td>
             <td class="text-right">{{ treatment.value|number_format(2, ',', '.') }}</td>
             <td class="text-center">{% if treatment.enabled %} 
-                    <i class="fas fa-toggle-on text-success"></i>
+                    <i class="fa fa-toggle-on text-success"></i>
                 {% else %}
-                    <i class="fas fa-toggle-off text-danger"></i>
+                    <i class="fa fa-toggle-off text-danger"></i>
                 {% endif %}
             </td>
             <td>{{ treatment.notes }}</td>
-            <td class="text-right">{{ treatment.operas|length }} <a href="{{ path('operasPerTreatment_index', {slug:app.user.center.slug, id:treatment.id}) }}"><i class="fas fa-users text-warning"></i></a></td>
+            <td class="text-right">{{ treatment.operas|length }} <a href="{{ path('operasPerTreatment_index', {slug:app.user.center.slug, id:treatment.id}) }}"><i class="fa fa-users text-warning"></i></a></td>
                             
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+{{ knp_pagination_render(pagination) }}
     
 {% endblock %}
 

@@ -9,8 +9,8 @@
         <div class="col-auto">
             <h4>
                 <a href="{{ path('center_cpanel', {slug:app.user.center.slug}) }}">
-                    <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a>
-                | <i class="far fa-folder-open"></i> {{'label.doc_groups'|trans}}
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a>
+                | <i class="fa fa-folder-open"></i> {{'label.doc_groups'|trans}}
 
             </h4>
         </div>        
@@ -46,7 +46,7 @@
             <td><a href="{{ path('group_edit', {slug:app.user.center.slug, id:group.id}) }}"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
             <td>{{ group.name }}</td>
             <td class="text-center">{{group.docs|length}}</td>
-            <td class="text-center"><a href="{{ path('docs_index', {slug:app.user.center.slug, id:group.id}) }}"><i class="fas fa-search"></i></a></td>
+            <td class="text-center"><a href="{{ path('docs_index', {slug:app.user.center.slug, id:group.id}) }}"><i class="fa fa-search"></i></a></td>
 
         </tr>
         {% endfor %}

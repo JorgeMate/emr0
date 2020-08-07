@@ -75,9 +75,9 @@ class PatientController extends AbstractController
         foreach ($foundPatients as $patient) {
 
             if($patient->getSex()) {
-                $sex =' <i class="fas fa-venus text-danger"></i> ';
+                $sex =' <i class="fa fa-venus text-danger"></i> ';
             } else {
-                $sex =' <i class="fas fa-mars text-info"></i> ';
+                $sex =' <i class="fa fa-mars text-info"></i> ';
             };
  
             $dob = new \DateTime($patient->getDateOfBirth()->format('Y-m-d'));

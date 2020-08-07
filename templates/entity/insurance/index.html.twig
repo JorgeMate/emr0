@@ -9,8 +9,8 @@
             <div class="col-auto">
                 <h4>
                     <a href="{{ path('center_cpanel', {slug:app.user.center.slug}) }}">
-                        <i class="fas fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a> 
-                    | <i class="fas fa-ambulance"></i> {{ 'entity.title_inss'|trans }}
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a>
+                    | <i class="fa fa-ambulance"></i> {{ 'entity.title_inss'|trans }}
                 </h4>
             </div>        
 
@@ -51,15 +51,15 @@
             <td><a href="{{ path('insurance_edit', {slug:app.user.center.slug, id:insurance.id}) }}">{{ insurance.name }}</a></td>
             <td class="text-center">
                 {% if insurance.enabled %} 
-                    <i class="fas fa-toggle-on text-success"></i>
+                    <i class="fa fa-toggle-on text-success"></i>
                 {% else %}
-                    <i class="fas fa-toggle-off text-danger"></i>
+                    <i class="fa fa-toggle-off text-danger"></i>
                 {% endif %}
             </td>
             <td>{{ insurance.contact }}</td>
             <td>{{ insurance.tel }}</td>
             <td></td>
-            <td class="text-right">{{insurance.patients|length}} | <a href="{{ path('patient_index', {slug:app.user.center.slug, entity:'ins', id:insurance.id }) }}"><i class="fas fa-users text-warning"></i></a></td>
+            <td class="text-right">{{insurance.patients|length}} | <a href="{{ path('patient_index', {slug:app.user.center.slug, entity:'ins', id:insurance.id }) }}"><i class="fa fa-users text-warning"></i></a></td>
             
             
         </tr>

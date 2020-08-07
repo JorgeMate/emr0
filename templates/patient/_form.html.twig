@@ -135,7 +135,7 @@
 
             {% if include_back_to_home_link|default(false) %}
             <a href="{{ path('patient_show', {slug:app.user.center.slug, id:patient.id} ) }}" class="btn btn-outline-success">
-                    <i class="fas fa-undo"></i> {{ 'label.cancel'|trans }}
+                    <i class="fa fa-undo"></i> {{ 'label.cancel'|trans }}
                 </a>
             {% endif %}
                                 

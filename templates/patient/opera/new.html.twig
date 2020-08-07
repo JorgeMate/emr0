@@ -13,16 +13,16 @@
 
             <h4>
                 
-                {{ 'label.treatments'|trans }} <i class="fas fa-file-medical-alt"></i>
-                {{ 'label.new_entry'|trans }} | <i class="fas fa-user-injured"></i>
+                {{ 'label.treatments'|trans }} <i class="fa fa-file-medical-alt"></i>
+                {{ 'label.new_entry'|trans }} | <i class="fa fa-user-injured"></i>
 
                     {{ patient.firstname }} {{ patient.lastname }} &nbsp;
                     {% if patient.sex == '0' %}
-                        <i class="fas fa-mars text-info"></i>
+                        <i class="fa fa-mars text-info"></i>
                     {% elseif patient.sex == '1' %}
-                        <i class="fas fa-venus text-danger"></i>
+                        <i class="fa fa-venus text-danger"></i>
                     {% else  %}
-                        <i class="far fa-question-circle text-success"></i>
+                        <i class="fa fa-question-circle text-success"></i>
                     {% endif %}
 
                     {% if patient.dateOfBirth %}
@@ -115,7 +115,7 @@
         <div class="form-group col-md-3">
 
             <a href="{{ path('patient_show', {slug:app.user.center.slug, id:patient.id}) }}" class="btn btn-block btn-success">
-                <i class="fas fa-undo-alt"></i> {{ 'label.cancel'|trans }}
+                <i class="fa fa-undo-alt"></i> {{ 'label.cancel'|trans }}
             </a>    
         
         </div>
@@ -130,14 +130,14 @@
 {% block sidebar %}
 
     <div class="card border-success mb-3">
-        <h5><div class="card-header">  <i class="far fa-clipboard"></i> {{ 'label.treatment.new'|trans }}</div></h5>
+        <h5><div class="card-header">  <i class="fa fa-clipboard"></i> {{ 'label.treatment.new'|trans }}</div></h5>
 
         <div class="card-body">
 
             <div class="row">
 
                 <div class="col-auto">
-                    <h5><i class="fas fa-user-md"></i> <span class="text-warning" id="js-selected-doctor"></span></h5>
+                    <h5><i class="fa fa-user-md"></i> <span class="text-warning" id="js-selected-doctor"></span></h5>
                 </div>
             
             </div>
@@ -145,7 +145,7 @@
             <div class="row">
 
                 <div class="col-auto">
-                    <h5><i class="fas fa-file-medical-alt"></i> <span class="text-warning" id="js-selected-treatment"></span></h5>
+                    <h5><i class="fa fa-file-medical-alt"></i> <span class="text-warning" id="js-selected-treatment"></span></h5>
                 </div>
 
             </div>
@@ -153,7 +153,7 @@
             <div class="row">
 
                 <div class="col-auto">
-                    <h5><i class="fas fa-hospital-alt"></i> <span class="text-warning" id="js-selected-place"></span></h5>
+                    <h5><i class="fa fa-hospital-alt"></i> <span class="text-warning" id="js-selected-place"></span></h5>
                 </div>
 
             </div>
@@ -161,7 +161,7 @@
             <div class="row">
 
                 <div class="form-group col-auto">
-                    <h5><i class="far fa-calendar-alt"></i></i> <span class="text-warning" id="js-selected-date"></span></h5>
+                    <h5><i class="fa fa-calendar-alt"></i></i> <span class="text-warning" id="js-selected-date"></span></h5>
                 </div>
 
             </div>
