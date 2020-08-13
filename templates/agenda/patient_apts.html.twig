@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'patient_appointments' %}
+
+{% block title %}Appointments{% endblock %}
+
+{% block body %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <li class="breadcrumb-item"><a href="{{ path('super_cpanel') }}">{{ 'title.super_cpanel'|trans }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('centers_index') }}">{{ 'title.centers_list'|trans }}</a></li>
+            {% else %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="breadcrumb-item enabled aria-current=page"><a href="{{ path('user_cpanel', {slug: app.user.center.slug}) }}">{{ 'menu.homepage'|trans }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ path('patient_show', {slug: app.user.center.slug, id: patient.id}) }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> {{ 'label.patient'|trans }} {{ patient.id }} | {{ patient.lastname }}, {{ patient.firstname }}</a></li>
+                {% endif %}
+            {% endif %}
+        </ol>
+    </nav>
+
+    {% if records|length %}
+
+        <h4 class="text-right text-danger">Next appointments</h4>
+
+        <table class="table table-hover table-responsive">
+
+            <thead>
+                <tr>
+                    <th>Last Update by</th>
+                    <th>Updated On</th>
+                    <th></th>
+                    <th>Appointment</th>
+                    <th class="text-center">Agenda</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for record in records %}
+                {% if record.start|date("Y/m/d") >=  "now"|date("Y/m/d") %}
+                <tr>
+                    <td>
+                        {% if record.updated_by is defined and record.updated_by is not null%}
+                            {{ record.updated_by }}
+                        {% else %}
+                            {{ record.created_by }}
+                        {% endif %}
+                    </td>
+                    <td>{{ record.updated_on|date('l')|trans }}, {{ record.updated_on|date('d/M/y H:i') }}</td>
+                    <td><i class="fa fa-calendar-check-o"></i></td>
+                    <td class="text-danger">{{ record.start|date('l')|trans }}, {{ record.start|date('d/M/y H:i') }}</td>
+
+                    <td>
+
+                        <form method="post" action="https://www.supersaas.com/api/users" target="_blank">
+                            <input type="hidden" name="account" value="{{ ac_name }}"/>
+                            <input type="hidden" name="id" value="{{ app.user.id }}fk"/> <!-- The user has ID 1234 on your server's database -->
+                            <input type="hidden" name="user[name]" value="{{ app.user.email }}"/>
+                            <input type="hidden" name="user[phone]" value=""/>
+                            <!-- you can add and remove fields on the "Access Control" screen -->
+                            <input type="hidden" name="checksum" value="{{ checksum }}"/>
+                            <input type="hidden" name="after" value="{{ record.schedule_name }}"/>
+                            <input type="submit" class="btn btn-block btn-secondary btn-outline-info btn-sm" value="{{ record.schedule_name }}"/>
+                        </form>
+
+
+
+                    </td>
+                    <td>{{ record.service_name }}</td>
+                    <td></td>
+
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+
+        </table>
+
+        <br>
+
+        <h4 class="text-right text-secondary">Past appointments</h4>
+
+        <table class="table table-hover table-responsive">
+
+
+
+            <tbody>
+            {% for record in records %}
+                {% if record.start|date("Y/m/d") < "now"|date("Y/m/d") %}
+                    <tr class="text-secondary">
+                        <td>
+                            {% if record.updated_by is defined and record.updated_by is not null %}
+                                {{ record.updated_by }}
+                            {% else %}
+                                {{ record.created_by }}
+                            {% endif %}
+                        </td>
+                        <td>{{ record.updated_on|date('l')|trans }}, {{ record.updated_on|date('d/M/y H:i') }}</td>
+                        <td><i class="fa fa-calendar-check-o"></i></td>
+                        <td class="text-danger">{{ record.start|date('l')|trans }}, {{ record.start|date('d/M/y H:i') }}</td>
+                        <td class="text-center">{{ record.schedule_name }}</td>
+                        <td>{{ record.service_name }}</td>
+                        <td></td>
+
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+
+        </table>
+
+
+    {% else %}
+        <h4 class="text-right text-danger">NO pending appointments</h4>
+    {% endif %}
+
+{% endblock %}

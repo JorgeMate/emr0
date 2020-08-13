@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
     <head>
-        <meta charset="UTF-8">
+
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
         <title>{% block title %}{{ app_name }}{% endblock %}</title>
 
         {% block stylesheets %}
@@ -57,7 +59,7 @@
             {% elseif app.request.locale == 'fr' %}
                 {{ encore_entry_script_tags('dp_fr') }}    
             {% else %}  
-                {{ encore_entry_script_tags('dp_en') }}    
+                {{ encore_entry_script_tags('dp_en') }}
             {% endif %}
 
 

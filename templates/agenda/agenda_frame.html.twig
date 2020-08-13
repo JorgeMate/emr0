@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'agenda_frame' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <li class="breadcrumb-item"><a href="{{ path('super_cpanel') }}">{{ 'title.super_cpanel'|trans }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('centers_index') }}">{{ 'title.centers_list'|trans }}</a></li>
+            {% else %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="breadcrumb-item enabled aria-current=page"><a href="{{ path('user_cpanel', {slug: app.user.center.slug}) }}">{{ 'menu.homepage'|trans }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ path('patient_show', {slug: app.user.center.slug, id: patient.id}) }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> {{ 'label.patient'|trans }} {{ patient.id }} | {{ patient.lastname }}, {{ patient.firstname }}</a></li>
+                {% endif %}
+            {% endif %}
+        </ol>
+    </nav>
+
+    <div class="text-center">
+        <iframe name="iagenda" id="iagenda" height="1024px" width="1024px" src="https://www.supersaas.com/schedule/{{ ac_name }}/{{ agenda }}{{ arguments }}"></iframe>
+    </div>
+
+{% endblock %}

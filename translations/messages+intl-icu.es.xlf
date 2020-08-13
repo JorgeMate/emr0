@@ -3,6 +3,44 @@
     <file source-language="en" target-language="es" datatype="plaintext" original="file.ext">
         <body>
 
+
+            <trans-unit id="Monday">
+                <source>Monday</source>
+                <target>Lun</target>
+            </trans-unit>
+            <trans-unit id="Tuesday">
+                <source>Tuesday</source>
+                <target>Mar</target>
+            </trans-unit>
+            <trans-unit id="Wednesday">
+                <source>Wednesday</source>
+                <target>Mie</target>
+            </trans-unit>
+            <trans-unit id="Thursday">
+                <source>Thursday</source>
+                <target>Jue</target>
+            </trans-unit>
+            <trans-unit id="Friday">
+                <source>Friday</source>
+                <target>Vie</target>
+            </trans-unit>
+            <trans-unit id="Saturday">
+                <source>Saturday</source>
+                <target>Sab</target>
+            </trans-unit>
+            <trans-unit id="Sunday">
+                <source>Sunday</source>
+                <target>Dom</target>
+            </trans-unit>
+
+
+
+            <trans-unit id="label.agendas.users">
+                <source>label.agendas.users</source>
+                <target>Agendas y usuarios</target>
+            </trans-unit>
+
+
             <trans-unit id="title.super_cpanel">
                 <source>title.super_cpanel</source>
                 <target>Administración del sistema</target>
@@ -328,7 +366,7 @@
 
             <trans-unit id="text.resetting_help">
                 <source>text.resetting_help</source>
-                <target>Recibirá un email con un enlace para recuperar su contraseña. Esta opción estará disponible solo temporalmente.</target>
+                <target>Recibirá un email con un enlace para recuperar su contraseña. Esta opción estará disponible por un tiempo limitado.</target>
             </trans-unit>
 
             <trans-unit id="text.resetting_help1">

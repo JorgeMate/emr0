@@ -3,6 +3,43 @@
     <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
         <body>
 
+            <trans-unit id="Monday">
+                <source>Monday</source>
+                <target>Lun</target>
+            </trans-unit>
+            <trans-unit id="Tuesday">
+                <source>Tuesday</source>
+                <target>Mar</target>
+            </trans-unit>
+            <trans-unit id="Wednesday">
+                <source>Wednesday</source>
+                <target>Mer</target>
+            </trans-unit>
+            <trans-unit id="Thursday">
+                <source>Thursday</source>
+                <target>Jeu</target>
+            </trans-unit>
+            <trans-unit id="Friday">
+                <source>Friday</source>
+                <target>Ven</target>
+            </trans-unit>
+            <trans-unit id="Saturday">
+                <source>Saturday</source>
+                <target>Sam</target>
+            </trans-unit>
+            <trans-unit id="Sunday">
+                <source>Sunday</source>
+                <target>Dim</target>
+            </trans-unit>
+
+            <trans-unit id="label.agendas.users">
+                <source>label.agendas.users</source>
+                <target>Agendas et utilisateurs</target>
+            </trans-unit>
+
+
+
+
             <trans-unit id="title.super_cpanel">
                 <source>title.super_cpanel</source>
                 <target>Administration système</target>

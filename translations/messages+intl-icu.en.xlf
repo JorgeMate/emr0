@@ -2,7 +2,43 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
         <body>
-        
+
+
+            <trans-unit id="Monday">
+                <source>Monday</source>
+                <target>Mon</target>
+            </trans-unit>
+            <trans-unit id="Tuesday">
+                <source>Tuesday</source>
+                <target>Tue</target>
+            </trans-unit>
+            <trans-unit id="Wednesday">
+                <source>Wednesday</source>
+                <target>Wed</target>
+            </trans-unit>
+            <trans-unit id="Thursday">
+                <source>Thursday</source>
+                <target>Thu</target>
+            </trans-unit>
+            <trans-unit id="Friday">
+                <source>Friday</source>
+                <target>Fri</target>
+            </trans-unit>
+            <trans-unit id="Saturday">
+                <source>Saturday</source>
+                <target>Sat</target>
+            </trans-unit>
+            <trans-unit id="Sunday">
+                <source>Sunday</source>
+                <target>Sun</target>
+            </trans-unit>
+
+            <trans-unit id="label.agendas.users">
+                <source>label.agendas.users</source>
+                <target>Agendas users</target>
+            </trans-unit>
+
+
             <trans-unit id="title.super_cpanel">
                 <source>title.super_cpanel</source>
                 <target>SUPER c panel</target>

@@ -20,64 +20,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e00503ba-6e43-4c6b-81e4-f9dc2c66e297" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/postcss.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/AgendaController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/agenda/agenda_frame.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/agenda/agenda_resources.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/agenda/agendas_users.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/agenda/patient_apts.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/helper/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/helper/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/layout/_basic.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/layout/_basic.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/components/search_p.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/components/search_p.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/delete_record.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/delete_record.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/datepicker/datepicker.en.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/datepicker/datepicker.en.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/datepicker/datepicker.es.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/datepicker/datepicker.es.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/datepicker/datepicker.fr.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/datepicker/datepicker.fr.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/datepicker/datepicker.nl.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/datepicker/datepicker.nl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CenterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CenterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/PatientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PatientController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/_header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/_header.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/_navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/_navbar.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/UserFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/UserFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Patient.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Patient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/DocPatientType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/DocPatientType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/UploaderHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/UploaderHelper.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/center/cpanel.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/center/cpanel.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/center/doc_groups/doc_index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/center/doc_groups/doc_index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/center/doc_groups/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/center/doc_groups/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/center/doc_groups/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/center/doc_groups/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/center/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/center/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/center/user/edit-medic.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/center/user/edit-medic.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/center/user/index-medic.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/center/user/index-medic.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/center/user/index.html copy.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/center/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/center/user/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/center/user/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/center/user/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entity/insurance/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entity/insurance/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entity/insurance/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entity/insurance/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entity/place/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entity/place/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entity/place/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entity/place/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entity/source/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entity/source/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entity/source/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entity/source/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entity/type_trat/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entity/type_trat/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entity/type_trat/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entity/type_trat/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entity/type_trat/trat_edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entity/type_trat/trat_edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entity/type_trat/trat_index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entity/type_trat/trat_index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/TABS/_TAB2.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/TABS/_TAB2.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/TABS/_TAB3.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/TABS/_TAB3.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/patient/TABS/_TAB1.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/TABS/_TAB1.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/patient/TABS/_TAB4C.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/TABS/_TAB4C.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/patient/TABS/_TAB5.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/TABS/_TAB5.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/patient/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/_form.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/patient/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/historia/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/historia/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/medicat/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/medicat/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/opera/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/opera/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/opera/index_place.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/opera/index_place.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/opera/index_treatment.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/opera/index_treatment.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/opera/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/opera/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/search.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/search.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/patient/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/super/center/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/super/center/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/super/center/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/super/center/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/super/cpanel.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/super/cpanel.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/change_password.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/change_password.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/user/cpanel.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/cpanel.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translations/messages+intl-icu.en.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages+intl-icu.en.xlf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translations/messages+intl-icu.es.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages+intl-icu.es.xlf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translations/messages+intl-icu.fr.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages+intl-icu.fr.xlf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translations/messages+intl-icu.nl.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages+intl-icu.nl.xlf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,10 +241,21 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="AutoIdentifyTypo3Version" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="TYPO3AuthorEmailAddress" value="myname@example.org" />
+    <property name="TYPO3AuthorName" value="My Name" />
+    <property name="TYPO3PathToExtensionDomainModels" value="Classes/Domain/Model/" />
+    <property name="TYPO3PathToLocalExtensions" value="typo3conf/ext/" />
+    <property name="TYPO3PathToSystemExtensions" value="typo3/sysext/" />
+    <property name="TYPO3ProjectConfigured" value="true" />
+    <property name="TYPO3Version" value="None" />
+    <property name="TYPO3XliffLanguages" value="af:Afrikaans;&#10;ar:Arabic;&#10;bs:Bosnian;&#10;bg:Bulgarian;&#10;ca:Catalan;&#10;ch:Chinese (Simpl.);&#10;cs:Czech;&#10;da:Danish;&#10;de:German;&#10;el:Greek;&#10;eo:Esperanto;&#10;es:Spanish;&#10;et:Estonian;&#10;eu:Basque;&#10;fa:Persian;&#10;fi:Finnish;&#10;fo:Faroese;&#10;fr:French;&#10;fr_CA:French (Canada);&#10;gl:Galician;&#10;he:Hebrew;&#10;hi:Hindi;&#10;hr:Croatian;&#10;hu:Hungarian;&#10;is:Icelandic;&#10;it:Italian;&#10;ja:Japanese;&#10;ka:Georgian;&#10;kl:Greenlandic;&#10;km:Khmer;&#10;ko:Korean;&#10;lt:Lithuanian;&#10;lv:Latvian;&#10;ms:Malay;&#10;nl:Dutch;&#10;no:Norwegian;&#10;pl:Polish;&#10;pt:Portuguese;&#10;pt_BR:Brazilian Portuguese;&#10;ro:Romanian;&#10;ru:Russian;&#10;sk:Slovak;&#10;sl:Slovenian;&#10;sq:Albanian;&#10;sr:Serbian;&#10;sv:Swedish;&#10;th:Thai;&#10;tr:Turkish;&#10;uk:Ukrainian;&#10;vi:Vietnamese;&#10;zh:Chinese (Trad.)" />
+    <property name="TYPO3XliffPathToExtensionLanguageFiles" value="Resources/Private/Language/" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/css" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/agenda" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
   </component>
   <component name="RecentsManager">
@@ -278,6 +265,7 @@
       <recent name="$PROJECT_DIR$/assets" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/agenda" />
       <recent name="$PROJECT_DIR$/assets/css" />
     </key>
   </component>
@@ -309,6 +297,14 @@
       <workItem from="1596662767556" duration="2573000" />
       <workItem from="1596822304720" duration="567000" />
       <workItem from="1596823743131" duration="1065000" />
+      <workItem from="1596825232925" duration="3055000" />
+      <workItem from="1596830585114" duration="5928000" />
+      <workItem from="1596907365380" duration="27235000" />
+      <workItem from="1596981346539" duration="4261000" />
+      <workItem from="1596991251855" duration="6921000" />
+      <workItem from="1597082027190" duration="875000" />
+      <workItem from="1597148761242" duration="19654000" />
+      <workItem from="1597346700724" duration="6691000" />
     </task>
     <servers />
   </component>
@@ -336,6 +332,14 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1881" y="355" width="779" height="403" key="#com.intellij.fileTypes.FileTypeChooser/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1596590602910" />
+    <state x="2009" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1596936238685">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2009" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1596936238685" />
+    <state x="2012" y="406" width="518" height="302" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1596981446687">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2012" y="406" width="518" height="302" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1596981446687" />
     <state x="1452" y="127" width="1648" height="853" key="DiffContextDialog" timestamp="1596386787306">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
@@ -364,6 +368,10 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1859" y="299" width="824" height="515" key="IDE.errors.dialog/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1596577907825" />
+    <state x="2034" y="273" width="473" height="568" key="NewPhpClassDialog" timestamp="1596910144579">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2034" y="273" width="473" height="568" key="NewPhpClassDialog/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1596910144579" />
     <state x="1765" y="188" width="1022" height="737" key="SettingsEditor" timestamp="1596388260381">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
@@ -372,6 +380,10 @@
       <screen x="0" y="27" width="1280" height="997" />
     </state>
     <state x="331" y="120" width="738" height="783" key="find.popup/1280.0.1920.1080/0.27.1280.997@0.27.1280.997" timestamp="1596398581305" />
+    <state x="1939" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1597347158623">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1939" y="259" width="672" height="678" key="search.everywhere.popup/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1597347158623" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -380,6 +392,20 @@
           <url>file://$PROJECT_DIR$/templates/_navbar.html.twig</url>
           <line>18</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Controller/ImportController.php</url>
+          <line>4</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/src/Controller/AgendaController.php</url>
+          <line>30</line>
+          <properties>
+            <option name="className" value="\App\Controller\AgendaController" />
+            <option name="methodName" value="showAgendaResources" />
+          </properties>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

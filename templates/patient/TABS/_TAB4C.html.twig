@@ -58,10 +58,7 @@
         </div>
 
         <div class="col-sm-8">
-
             <table class="table table-responsive table-striped js-imgs-table">
-
-   
                 <tbody>
                     {% for img in imgs %}
                     <tr>
@@ -78,29 +75,20 @@
                             <br><br>
                             <strong>{{ img.description }}</strong>
                         </td>
-
-                        
                         <td>
                         {% if true or form.vars.data.docFile|default %}
-
                             <a href="{{ path('img_patient_download', {
                                     id: img.id,
                                     slug:app.user.center.slug
                                 }) }}" target="_blank">
-
                                 <img src="{{ img.filePath|imagine_filter('square_thumbnail_small') }}">
-
                             </a>
-
                         {% endif %}
                         </td> 
                     </tr>
                     {% endfor %}    
                 </tbody>
-        
             </table>
-
-
         </div>
 
     </div>

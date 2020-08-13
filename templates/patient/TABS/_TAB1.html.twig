@@ -101,10 +101,47 @@
                     <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
                 </a>
 
+                <br>
+                <br>
+
                 <hr>
 
-                
-                <button class="btn btn-block btn-primary">Appointments</button>
+                <form method="post" action="{{ path('agenda_frame',{slug:app.user.center.slug, id:patient.id}) }}" target="_blank">
+
+            {#
+                <form action="{{ path('agenda_frame', {slug:app.user.center.slug, id:patient.id}) }}">
+
+                <form method="post" action="https://www.supersaas.com/api/users" target="_blank">
+            #}
+
+
+                    <input type="hidden" name="account" value="{{ ac_name }}"/>
+                    <input type="hidden" name="id" value="{{ app.user.id }}fk"/> <!-- The user has ID 1234 on your server's database -->
+                    <input type="hidden" name="user[name]" value="{{ app.user.email }}"/>
+                    <input type="hidden" name="user[phone]" value=""/>
+                    <!-- you can add and remove fields on the "Access Control" screen -->
+                    <input type="hidden" name="checksum" value="{{ checksum }}"/>
+
+                    <input type="hidden", name="arguments" value="{{ arguments }}"/>
+
+                    <select name="after" class="form-control">
+                        <option value="null">{{ 'Select Agenda' }}</option>
+                        {% for agenda in agendas %}
+                            <option value="{{ agenda.name }}">{{ agenda.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <button class="btn btn-block btn-primary">New Appointment</button>
+
+                </form>
+
+
+                <br>
+                <br>
+
+                <a href="{{ path('patient_apts',{slug:app.user.center.slug, id:patient.id} ) }}">SHOW APPOINTMENTS</a>
+
+
                 
 
             </div>

@@ -1,18 +1,96 @@
-{% extends 'base93.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block body_id 'agenda_resources' %}
+{% block body_id 'users_agendas' %}
 
-{% block main %}
+{% block body %}
 
-    <table>
-    {% for resource in resources %}
-        <tr>
-            <td>
-                {{ resource.name }}
-            </td>
-        </tr>
-    {% endfor %}
-    </table>
+    <div class="row">
+
+
+        <div class="col-6">
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                        {{ 'Id.' }}
+                    </th>
+                    <th>
+                        {{ 'Cuenta' }}
+                    </th>
+                    <th>
+                        {{ 'Tel.' }}
+                    </th>
+                    <th>
+                        {{ 'ROL' }}
+                    </th>
+                    <th>
+                        {{ 'Fecha Alta' }}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for userA in usersA %}
+                    <tr>
+                        <td>
+                            {{ userA.id }}
+                        </td>
+                        <td>
+                            {{ userA.name }}
+                        </td>
+                        <td>
+                            {{ userA.mobile }}
+                        </td>
+                        <td class="text-center">
+                            {{ userA.role }}
+                        </td>
+                        <td>
+                            {{ userA.createdOn|date("d/m/Y") }}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-6">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            {{ 'Id.' }}
+                        </th>
+                        <th>
+                            {{ 'Agenda' }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for agenda in agendas %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('agenda_detail',{slug:app.user.center.slug, id:agenda.id} ) }}">{{ agenda.id }}</a>
+                        </td>
+                        <td>
+                            {{ agenda.name }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
 
 
 

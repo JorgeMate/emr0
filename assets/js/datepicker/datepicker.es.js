@@ -1,4 +1,6 @@
-jQuery(document).ready(function() {
+import $ from 'jquery';
+
+$(document).ready(function() {
     $('.js-datepicker').datepicker({
         format: 'dd/mm/yyyy',
         weekStart: 1,

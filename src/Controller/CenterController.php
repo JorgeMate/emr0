@@ -24,7 +24,9 @@ use App\Form\DocCenterGroupType;
 
 use App\Form\MedicType;
 
-use App\Repository\UserRepository;
+use App\Repository\CenterRepository;
+
+
 
 
 /**
@@ -49,11 +51,13 @@ class CenterController extends AbstractController
 
         $groups = $center->getDocCenterGroups();
 
+
         return $this->render('center/cpanel.html.twig', [
 
             'user' => $user,
             'center' => $center,
             'groups' => $groups,
+
         ]);
     }
 
@@ -128,11 +132,11 @@ class CenterController extends AbstractController
      * 
      * LISTAR todos los usuarios del centro slug
      */
-    public function indexUsers(UserRepository $repository, $slug): Response
+    public function indexUsers(CenterRepository $repository, $slug): Response
     {
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository(Center::class);
+        #$em = $this->getDoctrine()->getManager();
+        #$repository = $em->getRepository(Center::class);
         $center = $repository->findOneBy(['slug' => $slug]);
 
         $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
@@ -156,7 +160,7 @@ class CenterController extends AbstractController
      * 
      * LISTAR todos los usuarios medicos del centro id
      */
-    public function indexMedUsers(Request $request, $slug): Response
+    public function indexMedUsers($slug): Response
     {        
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository(Center::class);

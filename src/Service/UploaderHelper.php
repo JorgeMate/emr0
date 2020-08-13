@@ -45,7 +45,10 @@ class UploaderHelper
 
     public function uploadPatientImage(File $file, ?string $existingFilename): string
     {
-        $newFilename = $this->uploadFile($file, self::PATIENT_IMGS, false);
+        try {
+            $newFilename = $this->uploadFile($file, self::PATIENT_IMGS, false);
+        } catch (\Exception $e) {
+        }
 
         if($existingFilename){
             try {

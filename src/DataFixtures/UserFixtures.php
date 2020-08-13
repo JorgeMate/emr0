@@ -116,8 +116,8 @@ class UserFixtures extends Fixture
         $center->setCity('Amstelveel');
         $center->setEnabled(true);
 
-        $center->setSsaasApiKey('Q1XWSwNok5gtwUAyxsD9uw');
-        $center->setSsaasAccountName('centromedicoalfaz');
+        $center->setSsaasApiKey('VqzixnB-lWf5rhhssSCWPQ');
+        $center->setSsaasAccountName('Karimed_BV');
         
         $this->manager->persist($center);
 

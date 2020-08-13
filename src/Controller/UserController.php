@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,14 +20,16 @@ use Doctrine\ORM\EntityManagerInterface;
 
 use App\Form\DocUserType;
 
-
 use App\Entity\Treatment;
+use App\Entity\Opera;
 
 use App\Entity\DocCenterGroup;
 use App\Entity\DocUser;
 
 use App\Entity\DocPatient;
 use App\Entity\DocImgPatient;
+
+
 
 use App\Service\UploaderHelper;
 
@@ -40,7 +43,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-
+use SuperSaaS\Client;
 
 /**
  * Controller used to manage current user.
@@ -51,42 +54,38 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
  */
 class UserController extends AbstractController
 {
-
     /**
      * @Route("/{slug}/cpanel", methods={"GET","POST"}, name="user_cpanel")
      */
-    public function userCpanel($slug): Response
+    public function userCpanel(): Response
     {
         $user = $this->getUser();
         $center = $this->getUser()->getCenter();
         $groups = $center->getDocCenterGroups();
-        
 
         $client = null;
         $agendas = null;
         $checksum = null;
 
+        $ac_name = null;
+        $api_key = null;
+
         if($center->getSsaasAccountName() && $center->getSsaasApiKey()){
 
-            // Comprobamos si el usuario tiene uso autorizado a las agendas
-            // TODO, también moverlo a __construct para hacerlo una sola vez
+            $agendas = null;
 
-            if(false){
+            $ac_name = $center->getSsaasAccountName();
+            $api_key = $center->getSsaasApiKey();
 
-                $client = new Client();  // SaasS
-                /////////////////////////////////
-                $client->account_name = $center->getSsaasAccountName();
-                $client->api_key = $center->getSsaasApiKey();
+            $client = new Client();
+            $client->account_name = $ac_name;
+            $client->api_key = $api_key;
 
-            //    $usersSaas = $client->users->getList();
-            //    var_dump($usersSaas);die;
+            $agendas = $client->schedules->getList();
+            //var_dump($agendas);die;
 
-                $agendas = $client->schedules->getList();
-                //var_dump($agendas);die;
-
-                $checksum = md5($client->account_name . $client->api_key . $user->getEmail());
-                //var_dump($checksum);die;
-            }
+            $checksum = md5($ac_name . $api_key . $user->getEmail());
+            //var_dump($checksum);die;
         }
 
         return $this->render('user/cpanel.html.twig', [
@@ -95,16 +94,18 @@ class UserController extends AbstractController
             'center' => $center,
             'groups' => $groups,
 
-            'client' => $client,
-            'agendas' => $agendas,
-
             'checksum' => $checksum,
-             
+            'ac_name' => $ac_name,
+            'api_key' => $api_key,
+
+            'agendas' => $agendas,
         ]);
     }
 
     /**
      * @Route("/profile/edit", methods={"GET", "POST"}, name="profile_edit")
+     * @param Request $request
+     * @return Response
      */
     public function profileEdit(Request $request): Response
     {
@@ -133,6 +134,9 @@ class UserController extends AbstractController
 
     /**
      * @Route("/profile/change-password", methods={"GET", "POST"}, name="user_change_password")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * @return Response
      */
     public function changePassword(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
@@ -163,7 +167,10 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/{slug}/documents-groups", methods={"GET", "POST"}, name="doc_groups_index") 
+     * @Route("/{slug}/documents-groups", methods={"GET", "POST"}, name="doc_groups_index")
+     * @param Request $request
+     * @param $slug
+     * @return Response
      */
     public function programDocGroupsIndex(Request $request, $slug): Response
     {
@@ -187,8 +194,13 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{slug}/documents-group/{id}/index", methods={"GET", "POST"}, name="docs_index")
-     * 
-     */ 
+     * @param Request $request
+     * @param $slug
+     * @param DocCenterGroup $docCenterGroup
+     * @param UploaderHelper $uploaderHelper
+     * @return RedirectResponse|Response
+     * @throws \Exception
+     */
     public function docsIndex(Request $request, $slug, DocCenterGroup $docCenterGroup, UploaderHelper $uploaderHelper)
     {
 
@@ -246,8 +258,12 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{slug}/{bucket}/{id}/user-doc", methods={"GET", "POST"}, name="doc_user_show")
-     * 
-     */ 
+     * @param Request $request
+     * @param $slug
+     * @param $bucket
+     * @param DocUser $docUser
+     * @param S3Client $S3Client
+     */
     public function docUserShow(Request $request, $slug, $bucket, DocUser $docUser, S3Client $S3Client)
     {
 
@@ -275,8 +291,12 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{slug}/user-document/{id}", methods={"GET"}, name="doc_user_download")
-     * 
-     */ 
+     * @param DocUser $docUser
+     * @param $slug
+     * @param S3Client $s3Client
+     * @param string $s3BucketName
+     * @return RedirectResponse
+     */
     public function downloadDocumentUser(DocUser $docUser, $slug,  S3Client $s3Client, string $s3BucketName)
     {
         $center = $docUser->getUser()->getCenter();
@@ -303,11 +323,14 @@ class UserController extends AbstractController
     }
 
 
-
     /**
      * @Route("/{slug}/patient-image/{id}", methods={"GET"}, name="img_patient_download")
-     * 
-     */ 
+     * @param DocImgPatient $docImgPatient
+     * @param $slug
+     * @param S3Client $s3Client
+     * @param string $s3BucketName
+     * @return RedirectResponse
+     */
     public function downloadImagePat(DocImgPatient $docImgPatient, $slug,  S3Client $s3Client, string $s3BucketName)
     {
         $patient = $docImgPatient->getPatient();
@@ -334,8 +357,12 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{slug}/patient-document/{id}", methods={"GET"}, name="doc_patient_download")
-     * 
-     */ 
+     * @param DocPatient $docPatient
+     * @param $slug
+     * @param S3Client $s3Client
+     * @param string $s3BucketName
+     * @return RedirectResponse
+     */
     public function downloadDocumentPat(DocPatient $docPatient, $slug,  S3Client $s3Client, string $s3BucketName)
     {
         $patient = $docPatient->getPatient();
@@ -368,6 +395,9 @@ class UserController extends AbstractController
 
     /**
      * @Route("/treatments", methods={"POST"}, name="treatments_get")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function getTreatmentsFromTypeApi(Request $request, EntityManagerInterface $em)
     {
@@ -390,13 +420,17 @@ class UserController extends AbstractController
                 'name' => $treatment->getName(),
             ];
 
-        };
+        }
 
         return $this->json($results);
     }
 
     /**
      * @Route("/img/{id}", methods={"DELETE"}, name="img_delete")
+     * @param DocImgPatient $docImgPatient
+     * @param UploaderHelper $uploaderHelper
+     * @return Response
+     * @throws \Exception
      */
     public function deleteImg(DocImgPatient $docImgPatient, UploaderHelper $uploaderHelper)
     {
@@ -411,10 +445,14 @@ class UserController extends AbstractController
         
 
         return new Response(null, 204);
-    }   
+    }
 
     /**
      * @Route("/doc/{id}", methods={"DELETE"}, name="doc_delete")
+     * @param DocPatient $docPatient
+     * @param UploaderHelper $uploaderHelper
+     * @return Response
+     * @throws \Exception
      */
     public function deleteDoc(DocPatient $docPatient, UploaderHelper $uploaderHelper)
     {
@@ -433,6 +471,8 @@ class UserController extends AbstractController
 
     /**
      * @Route("/opera/{id}", methods={"DELETE"}, name="opera_delete")
+     * @param Opera $opera
+     * @return Response
      */
     public function deleteOpera(Opera $opera)
     {

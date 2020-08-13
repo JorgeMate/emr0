@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block body_id 'patient_edit' %}
+{% block title %}{{ 'action.edit'|trans }} {{ 'label.patient'|trans }} {{ patient.id }}{% endblock %}
 
+{% block body_id 'patient_edit' %}
 {% block body %}
 
     <div class="container">

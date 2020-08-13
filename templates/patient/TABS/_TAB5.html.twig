@@ -16,31 +16,23 @@
             <div class="collapse" id="collapseNewImg">
 
                 {{ form_start(form) }}
-
-
                     <div class="row">
-                        
                     </div>
             
-                    <div class="row"> 
-            
-                        <div class="form-group col">   
-                            
+                    <div class="row">
+                        <div class="form-group col">
                             {{ form_row(form.docFile, {
                                     attr: {
                                         'placeholder': 'Seleccione un documento',
                                     }
                                 }) 
                             }}
-                            
                             {{ form_row(form.description, {
                                     attr: {
                                         'placeholder': 'Describa el documento'
                                     }
                                 }) 
                             }}
-
-
                             <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseNewImg" aria-expanded="false" aria-controls="collapseNewImg">
                                     <i class="fa fa-undo-alt"></i> {{ button_label_cancel }} 
                             </button>
@@ -57,6 +49,8 @@
         </div>
 
         <div class="col-sm-8">
+
+            <a href="https://www.kimberly-systems.eu/EMR/php/upload_files/show_DOCS.php?file=1566206231.pdf&dir=2019">link</a>
 
            <table class="table table-responsive table-striped js-docs-table">
 

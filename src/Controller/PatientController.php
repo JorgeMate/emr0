@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use SuperSaaS\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -9,11 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
-
-
-
 use Doctrine\ORM\EntityManagerInterface;
+
 
 use App\Entity\Patient;
 
@@ -49,6 +47,11 @@ class PatientController extends AbstractController
 
     /**
      * @Route("/{slug}/patient/search", methods={"GET"}, name="patient_search")
+     * @param Request $request
+     * @param PatientRepository $patients
+     * @param $slug
+     * @return Response
+     * @throws \Exception
      */
     public function searchPat(Request $request, PatientRepository $patients, $slug): Response
     {
@@ -100,11 +103,13 @@ class PatientController extends AbstractController
         return $this->json($results);        
 
     }
-    
 
 
     /**
      * @Route("/{slug}/patients", methods={"GET"}, name="patient_index")
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
     public function indexPat(Request $request, PaginatorInterface $paginator)
     {
@@ -190,10 +195,13 @@ class PatientController extends AbstractController
     }
 
 
-     /**
+    /**
      * @Route("/{slug}/new/patient", methods={"GET", "POST"}, name="patient_new")
-     * 
+     *
      * NUEVO paciente (del usuario)
+     * @param Request $request
+     * @param $slug
+     * @return Response
      */
     public function newPat(Request $request, $slug): Response
     {
@@ -250,6 +258,54 @@ class PatientController extends AbstractController
         $patId = $patient->getId();
         
         $center = $this->getUser()->getCenter();
+
+        $agendas = null;
+        $ac_name = null;
+        $api_key = null;
+        $checksum = null;
+        $arguments = null;
+
+        if($center->getSsaasAccountName() && $center->getSsaasApiKey()) {
+
+            $ac_name = $center->getSsaasAccountName();
+            $api_key = $center->getSsaasApiKey();
+
+            $client = new Client();
+
+            $client->api_key = $api_key;
+            $client->account_name = $ac_name;
+            $agendas = $client->schedules->getList();
+
+            $checksum = md5($ac_name . $api_key . $this->getUser()->getEmail());
+
+            $SS_1_r = $patient->getId() . ' - ' . ' ' . $patient->getFirstname() . ' ' . $patient->getLastname();
+
+            if($patient->getSex() == 1){
+                $SS_2_r = "(V) ";
+            } else {
+                if($patient->getSex() == 0){
+                    $SS_2_r = "(M) ";
+                } else {
+                    $SS_2_r = "(?) ";
+                }
+            }
+
+            $SS_2_r .= $patient->getDateOfBirth()->format('d/m/Y');
+            $SS_2_r .= ' (' . $patient->getCel() . ' - ' . $patient->getTel() . ')';
+            $SS_2_r .= ' BSN ' . $patient->getCode1();
+            if (! is_null($patient->getInsurance()) ){
+                $SS_2_r .=  ' > ' . $patient->getInsurance()->getName();
+            };
+
+
+
+            $arguments = "?res[field_1_r]=" . $SS_1_r . "&res[field_2_r]=" . $SS_2_r;
+
+        }
+
+
+
+
                 
         $repository = $em->getRepository(Consult::class);
         $consults = $repository->findBy(['patient' => $patId], ['created_at' => 'DESC']);
@@ -379,6 +435,12 @@ class PatientController extends AbstractController
             'imgs' => $imgs,
             'docs' => $docs,
 
+            'agendas' => $agendas,
+            'ac_name' => $ac_name,
+            'api_key' => $api_key,
+            'checksum' => $checksum,
+            'arguments' => $arguments,
+
             'formConsult' => $formConsult->createView(),
             'formDoc' => $formDoc->createView(),
             'formImg' => $formImg->createView(),
@@ -390,8 +452,12 @@ class PatientController extends AbstractController
 
     /**
      * @Route("{slug}/patient/{id}/edit", methods={"GET", "POST"}, name="patient_edit")
-     * 
+     *
      * EDITAR el paciente id
+     * @param $slug
+     * @param Request $request
+     * @param Patient $patient
+     * @return Response
      */
     public function editPat($slug, Request $request, Patient $patient): Response
     {

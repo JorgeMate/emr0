@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block body_id 'patient_show' %}
+{% block title %}{{ 'label.patient'|trans }} {{ patient.id }}{% endblock %}
 
+{% block body_id 'patient_show' %}
 {% block body %}
 
     {{ include('_flash_messages.html.twig') }}
@@ -58,7 +59,12 @@
 
             patient: patient,
             button_label_cancel: 'label.cancel'|trans,
-            button_label_save: 'action.save'|trans
+            button_label_save: 'action.save'|trans,
+
+            agendas: agendas,
+            ac_name: ac_name,
+            checksum: checksum,
+            arguments : arguments
 
         }, with_context = false) }}
 

@@ -3,6 +3,41 @@
     <file source-language="en" target-language="nl" datatype="plaintext" original="file.ext">
         <body>
 
+            <trans-unit id="Monday">
+                <source>Monday</source>
+                <target>Maa</target>
+            </trans-unit>
+            <trans-unit id="Tuesday">
+                <source>Tuesday</source>
+                <target>Din</target>
+            </trans-unit>
+            <trans-unit id="Wednesday">
+                <source>Wednesday</source>
+                <target>Woe</target>
+            </trans-unit>
+            <trans-unit id="Thursday">
+                <source>Thursday</source>
+                <target>Don</target>
+            </trans-unit>
+            <trans-unit id="Friday">
+                <source>Friday</source>
+                <target>Vri</target>
+            </trans-unit>
+            <trans-unit id="Saturday">
+                <source>Saturday</source>
+                <target>Zat</target>
+            </trans-unit>
+            <trans-unit id="Sunday">
+                <source>Sunday</source>
+                <target>Zon</target>
+            </trans-unit>
+
+            <trans-unit id="label.agendas.users">
+                <source>label.agendas.users</source>
+                <target>Agenda's en gebruikers</target>
+            </trans-unit>
+
+
             <trans-unit id="title.super_cpanel">
                 <source>title.super_cpanel</source>
                 <target>Systeem beheerder</target>

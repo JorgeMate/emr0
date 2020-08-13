@@ -31,7 +31,6 @@ class DocPatientType extends AbstractType
                 new NotNull([
                     'message' => 'Please upload a DOC file  !!!',
                 ])
-
             ];
         }
 
@@ -45,8 +44,6 @@ class DocPatientType extends AbstractType
                 ]
             ]),
         ];
-
-
 
         $builder->add('docFile', FileType::class, [
             'mapped' => false,

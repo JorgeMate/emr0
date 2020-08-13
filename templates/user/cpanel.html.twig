@@ -11,7 +11,6 @@
     <div class="row">
 
         <div class="col-sm-3">
-
             <div class="card">
                 <div class="card-header"> 
                     <h5><i class="fa fa-users"></i> {{ 'title.patients'|trans|upper }}</h5>
@@ -26,21 +25,33 @@
             </div>
         </div>
 
-
         <div class="col-sm-3">
-
             <div class="card">
                 <div class="card-header"> 
-                    <h5><i class="fa fa-calendar-alt"></i> <a href="">Agendas</a></h5>
+                    <h5><i class="fa fa-calendar-check-o"></i> Agendas</h5>
                 </div>
                 <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for agenda in agendas %}
+                            <li class="list-group-item">
+                                <form method="post" action="https://www.supersaas.com/api/users" target="_blank">
+                                    <input type="hidden" name="account" value="{{ ac_name }}"/>
+                                    <input type="hidden" name="id" value="{{ user.id }}fk"/> <!-- The user has ID 1234 on your server's database -->
+                                    <input type="hidden" name="user[name]" value="{{ user.email }}"/>
+                                    <input type="hidden" name="user[phone]" value=""/>
+                                    <!-- you can add and remove fields on the "Access Control" screen -->
+                                    <input type="hidden" name="checksum" value="{{ checksum }}"/>
+                                    <input type="hidden" name="after" value="{{ agenda.name }}"/>
+                                    <input type="submit" class="btn btn-block btn-secondary" value="{{ agenda.name }}"/>
+                                </form>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
-
         </div>  
 
         <div class="col-sm-3">
-
             <div class="card">
                 <div class="card-header"> 
                     <h5><i class="fa fa-folder-open"></i> {{'label.docs'|trans}}</h5>
@@ -53,9 +64,7 @@
                     </ul>
                 </div>
             </div>
-
         </div>  
-
 
     </div>
     
