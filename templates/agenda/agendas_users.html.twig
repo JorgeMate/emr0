@@ -1,0 +1,23 @@
+{% extends 'base93.html.twig' %}
+
+{% block body_id 'agenda_resources' %}
+
+{% block main %}
+
+    <table>
+    {% for resource in resources %}
+        <tr>
+            <td>
+                {{ resource.name }}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+
+
+
+
+
+
+
+{% endblock %}
