@@ -46,9 +46,15 @@
                 <target>Administración del sistema</target>
             </trans-unit>
 
+
+            <trans-unit id="label.search">
+                <source>label.search</source>
+                <target>Buscar</target>
+            </trans-unit>
+
             <trans-unit id="search_for">
                 <source>search_for</source>
-                <target>Buscar registros</target>
+                <target>Buscar pacientes por apellido</target>
             </trans-unit>
 
             <trans-unit id="search_no_results">

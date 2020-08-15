@@ -27,6 +27,9 @@ use App\Entity\DocImgPatient;
 use App\Form\PatientType;
 use App\Form\ConsultType;
 
+//use App\Form\OperaType;
+
+
 use App\Form\DocPatientType;
 use App\Form\DocImgPatientType;
 
@@ -303,9 +306,6 @@ class PatientController extends AbstractController
 
         }
 
-
-
-
                 
         $repository = $em->getRepository(Consult::class);
         $consults = $repository->findBy(['patient' => $patId], ['created_at' => 'DESC']);
@@ -401,7 +401,7 @@ class PatientController extends AbstractController
 
             if ($uploadedFile){
 
-                $newFilename = $uploaderHelper->uploadPatientDoc($uploadedFile, $storedImg->getName());
+                $newFilename = $uploaderHelper->uploadPatientDoc($uploadedFile, $storedDoc->getName());
 
                 $storedDoc->setName($newFilename);                
                 $storedDoc->setOriginalFilename($uploadedFile->getClientOriginalName());

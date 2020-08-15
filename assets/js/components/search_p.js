@@ -40,7 +40,7 @@ import $ from 'jquery';
           <a href="{{ url }}">{{ firstname }} {{ lastname }}</a> &nbsp; {{ sex }} ({{ age }})\
          <br>{{ birthdate }} - Rec. N. {{ id }}\
         </p>\
-    </article>'
+        </article>'
 };
 
     InstantSearch.prototype.debounce = function () {

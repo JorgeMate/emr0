@@ -4,6 +4,7 @@ namespace App\Service;
 
 use Gedmo\Sluggable\Util\Urlizer;
 
+use League\Flysystem\FileExistsException;
 use League\Flysystem\FilesystemInterface;
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\AdapterInterface;
@@ -17,31 +18,22 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class UploaderHelper
 {
-
     const PATIENT_IMGS = 'patient_imgs';
     const PATIENT_DOCS = 'patient_docs';
     const USER_FILES = 'user_files';
 
     private $filesystem;
-    
-
     private $requestStackContext;
-
     private $logger;
-
     private $publicAssetBaseUrl;
 
     public function __construct(FilesystemInterface $uploadsFilesystem, RequestStackContext $requestStackContext, LoggerInterface $logger, string $uploadedAssetsBaseUrl)
     {
-
         $this->filesystem = $uploadsFilesystem;
-    
         $this->requestStackContext = $requestStackContext;
         $this->logger = $logger;
         $this->publicAssetBaseUrl = $uploadedAssetsBaseUrl;
-
     }
-
 
     public function uploadPatientImage(File $file, ?string $existingFilename): string
     {
@@ -89,7 +81,10 @@ class UploaderHelper
 
     public function uploadUserDoc(File $file, ?string $existingFilename): string
     {
-        $newFilename = $this->uploadFile($file, self::USER_FILES, false);
+        try {
+            $newFilename = $this->uploadFile($file, self::USER_FILES, false);
+        } catch (\Exception $e) {
+        }
 
         if($existingFilename){
             try {
@@ -131,7 +126,10 @@ class UploaderHelper
     }
 
     /**
+     * @param string $path
+     * @param bool $isPublic
      * @return resource
+     * @throws FileNotFoundException
      */
     public function readStream(string $path, bool $isPublic)
     {
@@ -150,6 +148,8 @@ class UploaderHelper
     public function uploadFile(File $file, string $directory, bool $isPublic): string
     {
 
+        $result = false;
+
         if ($file instanceof UploadedFile){
             $originalFilename = $file->getClientOriginalName();
         } else {
@@ -161,13 +161,16 @@ class UploaderHelper
         //$filesystem = $isPublic ? $this->filesystem : $this->privateFilesystem;
 
         $stream = fopen($file->getPathname(), 'r');
-        $result = $this->filesystem->writeStream(
-            $directory. '/' .$newFilename,
-            $stream,
-            [
-                'visibility' => $isPublic ? AdapterInterface::VISIBILITY_PUBLIC : AdapterInterface::VISIBILITY_PRIVATE
-            ]
-        );
+        try {
+            $result = $this->filesystem->writeStream(
+                $directory . '/' . $newFilename,
+                $stream,
+                [
+                    'visibility' => $isPublic ? AdapterInterface::VISIBILITY_PUBLIC : AdapterInterface::VISIBILITY_PRIVATE
+                ]
+            );
+        } catch (FileExistsException $e) {
+        }
 
         if ($result === false){
             throw new \Exception(sprintf('Could not write uploaded file "%s"', $newFilename));

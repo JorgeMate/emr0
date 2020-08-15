@@ -2,41 +2,103 @@
 
 namespace App\Controller;
 
+use App\Service\UploaderHelper;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\Request;
 
 use App\Entity\Center;
-
 use App\Entity\Insurance;
 use App\Entity\Source;
 use App\Entity\Place;
 use App\Entity\Type;
-
 use App\Entity\Patient;
+use App\Entity\DocPatient;
+use App\Entity\DocImgPatient;
+
+use Symfony\Component\HttpFoundation\File\File;
 
 class ImportController extends AbstractController
 {
-    /**
-     * @Route("/import-data-for-center/{id}", name="import")
-     */
-    public function index(Request $request, Center $center)
+
+    public function importDocImgHelper($item, $type)
     {
 
+        $yearDir = substr($item['created_at'], 0, 4);
+        $oldfileName = substr($item['file_random_name'], 0, 10) . '.jpg';
+        $oldfileDescription = substr($item['file_random_name'], 11);
+        $oldfileDescription = substr($oldfileDescription, 0, strlen($oldfileDescription) - 4);
+
+        if($type == 'doc'){
+            $folder = 'DOCS';
+            $storedFile = new DocPatient();
+        } else {
+            $folder = 'IMGS';
+            $storedFile = new DocImgPatient();
+
+        }
+
+
+        if (file_exists('/home/jorge/Documentos/FRAX100/'. $folder .'/' . $yearDir . '/' . $oldfileName)) {
+            //var_dump('/home/jorge/Documentos/FRAX100/'. $folder . '/' . $yearDir . '/' . $oldfileName);die;
+
+            $uploadedFile = '/home/jorge/Documentos/FRAX100/'. $folder . '/' . $yearDir . '/' . $oldfileName;
+
+            $repo = $em->getRepository(Patient::class);
+            $patient = $repo->findOneBy(['id' => $item['paciente_id']]) ;
+
+            if ($patient){
+                $storedFile->setPatient($patient);
+            }
+            $storedFile->setVisible(true);
+
+            if($type == 'doc'){
+                $newFilename = $uploaderHelper->uploadPatientDoc(new File($uploadedFile), $storedDoc->getName());
+            } else {
+                $newFilename = $uploaderHelper->uploadPatientImage(new File($uploadedFile), $storedImg->getName());
+            }
+
+            $storedFile->setUpdatedAt(date_create_from_format('Y-m-d H:i:s', $item['created_at']));
+            $storedFile->setName($newFilename);
+            $storedFile->setOriginalFilename($oldfileName);
+            $storedFile->setDescription($oldfileDescription);
+            $storedFile->setMimeType(mime_content_type($uploadedFile));
+            $storedFile->setDocSize(filesize($uploadedFile));
+
+            $em->persist($storedFile);
+            $em->flush();
+
+
+        }
+
+
+
+    }
+
+    /**
+     * @Route("/import-data-for-center/{id}", name="import")
+     * @param Request $request
+     * @param Center $center
+     * @param File $file
+     * @param EntityManagerInterface $em
+     * @param UploaderHelper $uploaderHelper
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function index(Request $request, Center $center, EntityManagerInterface $em, UploaderHelper $uploaderHelper)
+    {
+        $uploaderHelper = $uploaderHelper;
         $items = null;
 
         $action = $request->get('action');
-
         $em = $this->getDoctrine()->getManager();
 
         if($center->getId() == 2){ // solo para el centro 2
-
             $conn       = new \PDO('mysql:host=localhost;dbname=a01_kam', 'root', 'pass');
-            //$conn_emr   = new \PDO('mysql:host=localhost;dbname=emr0', 'root', 'pass');
             $conn_emr   = $this->getDoctrine()->getManager()->getConnection();
-
-
+            //$conn_emr   = new \PDO('mysql:host=localhost;dbname=emr0', 'root', 'pass');
 
             if($action == 'insurances'){
 
@@ -124,7 +186,6 @@ class ImportController extends AbstractController
                 $em->flush();
 
             }
-
             if($action == 'source_internal'){
 
                 
@@ -143,7 +204,6 @@ class ImportController extends AbstractController
 
 
             }
-
 
             if($action == 'places'){
 
@@ -166,7 +226,6 @@ class ImportController extends AbstractController
                 
                 $em->flush();
             }
-
 
             if($action == 'types'){
 
@@ -306,6 +365,8 @@ class ImportController extends AbstractController
 
                     $stmt->bindValue(':created_at', $item['created_at']);
 
+                    // Comprobar fecha correcta
+
                     if ($item['birthdate'] != '0000-00-00')
                         $stmt->bindValue(':birthdate', $item['birthdate']);
                     else {
@@ -393,7 +454,6 @@ class ImportController extends AbstractController
 
             }
 
- 
             if($action == 'operas'){
 
                 $sql = "
@@ -408,10 +468,8 @@ class ImportController extends AbstractController
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
                 $items = $stmt->fetchAll();
-    
-    
-                foreach($items as $key => $item) {
 
+                foreach($items as $key => $item) {
                     $sql = "
                     INSERT INTO opera
                     (id, patient_id, user_id, treatment_id, place_id, created_at, made_at, value) 
@@ -420,40 +478,58 @@ class ImportController extends AbstractController
                     ";
         
                     $stmt = $conn_emr->prepare($sql);
-        
+
                     $stmt->bindValue(':id', $item['id']);
                     $stmt->bindValue(':patient_id', $item['id_paciente']);
-        
                     if($item['id_medico'] == 8){
                         $item['id_medico'] = 2;
                     } else {
                         $item['id_medico'] = 1;
-        
                     }
                     $stmt->bindValue(':user_id', $item['id_medico']);
         
                     if($item['tratamiento_id'] == 0){
                         $item['tratamiento_id'] = null;
                     }
-        
                     $stmt->bindValue(':treatment_id', $item['tratamiento_id']);
 
                     if($item['id_loc'] == 0){
                         $item['id_loc'] = null;
                     }
-
-
                     $stmt->bindValue(':place_id', $item['id_loc']);
                     $stmt->bindValue(':made_at', $item['startO']);
                     
                     $stmt->execute();
-        
                 }
-        
             }
 
+            if($action == 'documento_paciente'){
 
+                $sql = "
+                    SELECT * FROM documento_paciente 
+                ";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $items = $stmt->fetchAll();
 
+                foreach($items as $key => $item) {
+                    //var_dump($item);die;
+                    $this->importDocImgHelper($item, 'doc');
+                }
+            }
+
+            if($action == 'documento_imagen') {
+
+                $sql = "SELECT * FROM documento_imagen";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $items = $stmt->fetchAll();
+
+                foreach ($items as $key => $item) {
+                    //var_dump($item);die;
+                    $this->importDocImgHelper($item, 'img');
+                }
+            }
         }
 
         return $this->render('import/index.html.twig', [

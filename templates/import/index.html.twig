@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ImportController!{% endblock %}
+{% block title %}Importar datos. Centro X{% endblock %}
 
 {% block body %}
 
@@ -28,6 +28,13 @@
         <a href="{{ path('import',{id:id, action:'consults'}) }}">Importar CONSULTAS</a>
         <br>
         <a href="{{ path('import',{id:id, action:'operas'}) }}">Importar TRATAMIENTOS (OPERACIONES)</a>
+        <br>
+        <hr>
+        <br>
+        <a href="{{ path('import',{id:id, action:'documento_paciente'}) }}">Importar documento_paciente</a>
+        <br>
+        <a href="{{ path('import',{id:id, action:'documento_imagen'}) }}">Importar documento_imagen</a>
+
 
     </div>
     <div class="col-sm-1">

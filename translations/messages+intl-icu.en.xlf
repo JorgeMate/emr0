@@ -44,9 +44,16 @@
                 <target>SUPER c panel</target>
             </trans-unit>
 
+            <trans-unit id="label.search">
+                <source>label.search</source>
+                <target>Search</target>
+            </trans-unit>
+
+
+
             <trans-unit id="search_for">
                 <source>search_for</source>
-                <target>Find records</target>
+                <target>Search patients by last name</target>
             </trans-unit>
 
             <trans-unit id="search_no_results">

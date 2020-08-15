@@ -30,21 +30,57 @@
 
     <br>
 
-    <form action="{{ path('patient_search', {slug:center.slug} ) }}" method="get">
-        <div class="form-group">
+    <div class="row justify-content-between">
 
-            <input name="q"
-                class="form-control js-search-field"
-                placeholder="{{ 'search_for'|trans }}"
-                autocomplete="off"
-                autofocus
-                data-no-results-message="{{ 'search_no_results'|trans }}"
-            >
+        <div class="col-6">
 
-            <!-- value="" -->
+            <form action="{{ path('patient_search', {slug:center.slug} ) }}" method="get">
+                <div class="form-group">
+
+                    <input name="q"
+                           class="form-control js-search-field"
+                           placeholder="{{ 'search_for'|trans }}"
+                           autocomplete="off"
+                           autofocus
+                           data-no-results-message="{{ 'search_no_results'|trans }}"
+                    >
+
+                    <!-- value="" -->
+
+                </div>
+            </form>
 
         </div>
-    </form>
+
+        <div class="col-3">
+            <form>
+                        <input  name="q"
+                                class="form-control js-search-field"
+                                placeholder="{{ 'Birthdate dd/mm/YYYY' }}"
+                        >
+
+            </form>
+        </div>
+
+
+        <div class="col-3">
+            <form action="{{ path('patient_search', {slug:center.slug} ) }}" method="get">
+
+                <div class="form-group">
+
+                    <input  name="q"
+                            class="form-control js-search-field"
+                            placeholder="{{ 'Pat. N.' }}"
+                    >
+
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+
 
     <div class="container">
 

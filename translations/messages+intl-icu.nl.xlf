@@ -43,9 +43,15 @@
                 <target>Systeem beheerder</target>
             </trans-unit>
 
+            <trans-unit id="label.search">
+                <source>label.search</source>
+                <target>Zoeken</target>
+            </trans-unit>
+
+
             <trans-unit id="search_for">
                 <source>search_for</source>
-                <target>Records zoeken</target>
+                <target>Zoek patiënten op achternaam</target>
             </trans-unit>
 
             <trans-unit id="search_no_results">
