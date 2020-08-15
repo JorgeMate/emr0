@@ -52,15 +52,15 @@
 
             {{ encore_entry_script_tags('app') }}
 
-            {% if app.request.locale == 'es' %}
+            {# if app.request.locale == 'es' #}
                 {{ encore_entry_script_tags('dp_es') }}    
-            {% elseif app.request.locale == 'nl' %}
+            {#  elseif app.request.locale == 'nl' %}
                 {{ encore_entry_script_tags('dp_nl') }}
             {% elseif app.request.locale == 'fr' %}
                 {{ encore_entry_script_tags('dp_fr') }}    
             {% else %}  
                 {{ encore_entry_script_tags('dp_en') }}
-            {% endif %}
+            {% endif #}
 
 
             {% if false %}

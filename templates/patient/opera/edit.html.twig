@@ -1,6 +1,6 @@
 {% extends 'base93.html.twig' %}
 
-{% block body_id 'opera_new' %}
+{% block body_id 'opera_edit' %}
 
 {% block main %}
 
@@ -30,28 +30,35 @@
 
 </div>
 
-{{ form_start(form, {'attr': {} }) }}
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+
 
 <div class="form-row">
 
     <div class="form-group col-md-3">
-        {{ form_row(form.user) }}
+
     </div>
 
     <div class="form-group col-md-3">
-        {{ form_row(form.place) }}
+        {{ form_row(form.treatment) }}
     </div>
 
     <div class="form-group col-md-3">
         {{ form_row(form.made_at) }}
     </div>
 
+    <div class="form-group col-md-3">
+        {{ form_row(form.place) }}
+    </div>
+
+
 </div>
 
 <div class="form-row">
 
     <div class="form-group col-md-3">
-        {{ form_row(form.value) }}
+
     </div>
     
 </div>

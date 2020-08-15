@@ -1,126 +1,135 @@
 {% extends 'base93.html.twig' %}
 
+{% block title %}{{ 'label.treatment.new'|trans }}{% endblock %}
+
 {% block body_id 'opera_new' %}
 
 {% block main %}
 
 
-<form action="{{ path('opera_save', {slug:slug}) }}" method="post">
+    <form action="{{ path('opera_save', {slug:slug}) }}" method="post">
 
-    <div class="row justify-content-between">
+    {#  form_start(form, {'attr': {'novalidate': 'novalidate'}}) #}
 
-        <div class="col-sm-auto">
+        <div class="row justify-content-between">
 
-            <h4>
-                
-                {{ 'label.treatments'|trans }} <i class="fa fa-file-medical-alt"></i>
-                {{ 'label.new_entry'|trans }} | <i class="fa fa-user-injured"></i>
+            <div class="col-sm-auto">
 
-                    {{ patient.firstname }} {{ patient.lastname }} &nbsp;
-                    {% if patient.sex == '0' %}
-                        <i class="fa fa-mars text-info"></i>
-                    {% elseif patient.sex == '1' %}
-                        <i class="fa fa-venus text-danger"></i>
-                    {% else  %}
-                        <i class="fa fa-question-circle text-success"></i>
-                    {% endif %}
+                <h4>
 
-                    {% if patient.dateOfBirth %}
-                        {{ patient.dateOfBirth | age }}    
-                    {% endif %}
-            </h4>
- 
-        </div>
+                    {{ 'label.treatments'|trans }} <i class="fa fa-file-medical-alt"></i>
+                    {{ 'label.new_entry'|trans }} | <i class="fa fa-user-injured"></i>
 
-        <div class="col"></div>
+                        {{ patient.firstname }} {{ patient.lastname }} &nbsp;
+                        {% if patient.sex == '0' %}
+                            <i class="fa fa-mars text-info"></i>
+                        {% elseif patient.sex == '1' %}
+                            <i class="fa fa-venus text-danger"></i>
+                        {% else  %}
+                            <i class="fa fa-question-circle text-success"></i>
+                        {% endif %}
 
-    </div>
+                        {% if patient.dateOfBirth %}
+                            {{ patient.dateOfBirth | age }}
+                        {% endif %}
+                </h4>
 
-    <br>
+            </div>
 
-    <div class="form-row">
-
-        <div class="form-group col-md-3">
-
-            <label for="js-select-types">{{'label.type'|trans}}</label>
-            <select class="form-control" id="js-select-types" data-url="{{ path('treatments_get') }}">
-            <option value="">{{ 'label.option'|trans }}</option>               
-            {% for type in types %}
-                <option value="{{ type.id }}">{{ type.name }}</option>
-            {% endfor %}
-           </select>
+            <div class="col"></div>
 
         </div>
 
-        <div class="form-group col-md-5">
+        <br>
 
-            <label class="text-danger" for="js-select-tratments">{{'label.treatment'|trans}}</label>
-            <select class="form-control" name="treatmentId" id="js-select-treatments">
 
-            </select>
 
-        </div>
+        <div class="form-row">
 
-        <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
 
-            <label for="js-select-medics">Dr. </label>
-            <select class="form-control" name ="userId" id="js-select-medics">
+                <label for="js-select-types">{{'label.type'|trans}}</label>
+                <select class="form-control" id="js-select-types" data-url="{{ path('treatments_get') }}">
+                <option value="">{{ 'label.option'|trans }}</option>
+                {% for type in types %}
+                    <option value="{{ type.id }}">{{ type.name }}</option>
+                {% endfor %}
+               </select>
 
-            {% for medic in medics %}
-                <option value="{{ medic.id }}">{{ medic.firstname }} {{ medic.lastname }}</option>
-            {% endfor %}
-            </select>            
-      
-        </div>
+            </div>
 
-    </div>
+            <div class="form-group col-md-5">
 
-    <div class="form-row">
+                <label class="text-danger" for="js-select-tratments">{{'label.treatment'|trans}}</label>
+                <select class="form-control" name="treatmentId" id="js-select-treatments">
 
-        <div class="form-group col-md-3">
+                </select>
 
-            <label class="text-danger" for="js-select-places">{{'label.place'|trans}}</label>
-            <select class="form-control" name="placeId" id="js-select-places">
-            <option value="">{{ 'label.option'|trans }}</option>               
-            {% for place in places %}
-                <option value="{{ place.id }}">{{ place.name }}</option>
-            {% endfor %}
-            </select>
+            </div>
 
-        </div>
+            <div class="form-group col-md-4">
 
-        <div class="form-group col-md-3">
+                <label for="js-select-medics">Dr. </label>
+                <select class="form-control" name ="userId" id="js-select-medics">
 
-            <label for="js-datepicker">Planned for date</label>
-            <input type="text" value="{{ "now"|date("m/d/Y") }}" name="madeAt" id="js-datepicker" class="form-control js-datepicker">
+                {% for medic in medics %}
+                    <option value="{{ medic.id }}">{{ medic.firstname }} {{ medic.lastname }}</option>
+                {% endfor %}
+                </select>
+
+            </div>
 
         </div>
 
-        <div class="form-group col-md-3">
-            
-            <input type="hidden" value="{{ patient.id }}" name="patientId" id="patientId">
+        <div class="form-row">
+
+            <div class="form-group col-md-3">
+
+                <label class="text-danger" for="js-select-places">{{'label.place'|trans}}</label>
+                <select class="form-control" name="placeId" id="js-select-places">
+                <option value="">{{ 'label.option'|trans }}</option>
+                {% for place in places %}
+                    <option value="{{ place.id }}">{{ place.name }}</option>
+                {% endfor %}
+                </select>
+
+            </div>
+
+            <div class="form-group col-md-3">
+
+                <label for="js-datepicker">Planned for date</label>
+                <input type="text" value="{{ "now"|date("d/m/Y") }}" name="madeAt" id="js-datepicker" class="form-control js-datepicker">
+
+            </div>
+
+            <div class="form-group col-md-3">
+
+                <input type="hidden" value="{{ patient.id }}" name="patientId" id="patientId">
+
+            </div>
 
         </div>
-       
-    </div>
-    
-    <div class="form-row">
 
-        <div class="form-group col-md-3">
-           
+        <div class="form-row">
+
+            <div class="form-group col-md-3">
+               <a href="{{ path('patient_show', {slug:app.user.center.slug, id:patient.id}) }}" class="btn btn-block btn-success">
+                    <i class="fa fa-undo-alt"></i> {{ 'label.cancel'|trans }}
+                </a>
+            </div>
+
+            <div class="form-group col-md-6"></div>
+
+            <div class="form-group col-md-3">
+
+                <button type="submit" class="btn btn-block btn-primary collapse" id="collapseNewTrat">
+                    <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.save'|trans }}
+                </button>
+
+
+            </div>
+
         </div>
-
-        <div class="form-group col-md-6"></div>
-
-        <div class="form-group col-md-3">
-
-            <a href="{{ path('patient_show', {slug:app.user.center.slug, id:patient.id}) }}" class="btn btn-block btn-success">
-                <i class="fa fa-undo-alt"></i> {{ 'label.cancel'|trans }}
-            </a>    
-        
-        </div>
-
-    </div>
 
 
 </form>
@@ -145,7 +154,7 @@
             <div class="row">
 
                 <div class="col-auto">
-                    <h5><i class="fa fa-file-medical-alt"></i> <span class="text-warning" id="js-selected-treatment"></span></h5>
+                    <h5><i class="fa fa-file-archive-o"></i> <span class="text-warning" id="js-selected-treatment"></span></h5>
                 </div>
 
             </div>
@@ -153,7 +162,7 @@
             <div class="row">
 
                 <div class="col-auto">
-                    <h5><i class="fa fa-hospital-alt"></i> <span class="text-warning" id="js-selected-place"></span></h5>
+                    <h5><i class="fa fa-hospital-o"></i> <span class="text-warning" id="js-selected-place"></span></h5>
                 </div>
 
             </div>
@@ -161,31 +170,21 @@
             <div class="row">
 
                 <div class="form-group col-auto">
-                    <h5><i class="fa fa-calendar-alt"></i></i> <span class="text-warning" id="js-selected-date"></span></h5>
+                    <h5><i class="fa fa-calendar-check-o"></i></i> <span class="text-warning" id="js-selected-date"></span></h5>
                 </div>
 
             </div>
 
             <div class="row">
-
                 <div class="form-group col">
-
-                    <button type="submit" class="btn btn-block btn-primary collapse" id="collapseNewTrat">
-                        <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.save'|trans }}
-                    </button>
-
                 </div>
-            
             </div>
 
         </div>
 
-
     </div>
   
 {% endblock %}
-
-
 
 
 {% block javascripts %}
@@ -194,13 +193,10 @@
 
     {% if false %}
         <script src="{{ asset('assets/js/selectTreatment2.js') }}"></script>
-        
     {% else %}
         {{ encore_entry_script_tags('sel_treat') }}
     {% endif %}
 
-    
-  
 {% endblock %}
 
   

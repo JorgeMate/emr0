@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\File\File;
 class ImportController extends AbstractController
 {
 
-    public function importDocImgHelper($item, $type)
+    public function importDocImgHelper($item, $type, UploaderHelper $uploaderHelper)
     {
 
         $yearDir = substr($item['created_at'], 0, 4);
@@ -87,9 +87,8 @@ class ImportController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function index(Request $request, Center $center, EntityManagerInterface $em, UploaderHelper $uploaderHelper)
+    public function index(Request $request, Center $center, EntityManagerInterface $em)
     {
-        $uploaderHelper = $uploaderHelper;
         $items = null;
 
         $action = $request->get('action');

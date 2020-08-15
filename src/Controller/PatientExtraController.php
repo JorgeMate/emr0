@@ -25,6 +25,7 @@ use App\Entity\Treatment;
 
 use App\Form\MedicatType;
 use App\Form\HistoriaType;
+use App\Form\OperaType;
 
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -153,12 +154,33 @@ class PatientExtraController extends AbstractController
         $repository = $em->getRepository(Place::class);
         $places = $repository->findBy(['center' => $centerId], ['name' => 'ASC']);
 
-        
-        //var_dump($types);die;
 
-        $opera = new Opera();
-        $opera->setUser($user);
-        $opera->setPatient($patient);
+        if (0){
+
+            //var_dump($types);die;
+
+            $opera = new Opera();
+            $opera->setUser($user);
+            $opera->setPatient($patient);
+
+            $form = $this->createForm(OperaType::class);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($opera);
+                $em->flush();
+
+                $this->addFlash('info', 'record.updated_successfully');
+
+                return $this->redirectToRoute('patient_show', ['slug' => $slug, 'id' => $patient->getId()]);
+            } 
+
+        }
+        
+        
+
 
 
         return $this->render('/patient/opera/new.html.twig', [
@@ -186,7 +208,9 @@ class PatientExtraController extends AbstractController
         $userId = $request->request->get('userId');
         $placeId = $request->request->get('placeId');
 
-        $madeAt = $request->request->get('madeAt');
+        $madeAt = date_create_from_format('Y-m-d H:i:s', $request->request->get('madeAt'));
+
+        var_dump($madeAt);die;
 
         $repository = $em->getRepository(User::class);
         $user = $repository->find($userId);
@@ -223,6 +247,48 @@ class PatientExtraController extends AbstractController
 
         return $this->redirectToRoute('patient_show', ['slug' => $slug, 'id' => $patientId]);        
 
-    }    
+    }
+
+    /**
+     * @Route("/{slug}/treatment/{id}/edit", methods={"GET","POST"}, name="opera_edit")
+     * @param Request $request
+     * @param Opera $opera
+     * @param EntityManagerInterface $em
+     * @param $slug
+     * @return Response
+     */
+    public function editOpera(Request $request, Opera $opera, EntityManagerInterface $em, $slug): Response
+    {
+
+        $patient = $opera->getPatient();
+
+        $this->denyAccessUnlessGranted('PATIENT_EDIT', $patient);
+
+        $formOpera = $this->createForm(OperaType::class, $opera);
+        $formOpera->handleRequest($request);
+
+        if ($formOpera->isSubmitted() && $formOpera->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $this->addFlash('info', 'record.updated_successfully');
+
+            return $this->redirectToRoute('patient_show', ['slug' => $slug, 'id' => $patient->getId()] );
+        }
+
+        return $this->render('patient/opera/edit.html.twig', [
+
+            'opera' => $opera,
+            'form' => $formOpera->createView(),
+        ]);
+    }
+
+
 
 }
+
+
+
+
+
+
