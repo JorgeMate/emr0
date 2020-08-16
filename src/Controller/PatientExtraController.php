@@ -178,27 +178,23 @@ class PatientExtraController extends AbstractController
             } 
 
         }
-        
-        
-
-
 
         return $this->render('/patient/opera/new.html.twig', [
 
             'slug' => $slug,
-        
             'types' => $types,
             'medics' => $medics,
             'places' => $places,
             'patient' => $patient,
-        
         ]);
-
     }
 
-   /**
+    /**
      * @Route("/{slug}/save/treatment-of-patient", methods={"POST"}, name="opera_save")
-     * 
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param $slug
+     * @return Response
      */
     public function saveOpera(Request $request, EntityManagerInterface $em, $slug): Response
     {
@@ -208,7 +204,7 @@ class PatientExtraController extends AbstractController
         $userId = $request->request->get('userId');
         $placeId = $request->request->get('placeId');
 
-        $madeAt = date_create_from_format('Y-m-d H:i:s', $request->request->get('madeAt'));
+        $madeAt = $request->request->get('madeAt');
 
         var_dump($madeAt);die;
 
@@ -224,11 +220,8 @@ class PatientExtraController extends AbstractController
         $repository = $em->getRepository(Treatment::class);
         $treatment = $repository->find($treatmentId);
 
-
         //$dateMod = substr($madeAt,6,4) . '/' . substr($madeAt,3,2) . '/' . substr($madeAt,0,2);
-
         //var_dump($dateMod);die;
-        
         //$mod = new \DateTime($dateMod);
 
         $opera = new Opera();
@@ -279,7 +272,7 @@ class PatientExtraController extends AbstractController
         return $this->render('patient/opera/edit.html.twig', [
 
             'opera' => $opera,
-            'form' => $formOpera->createView(),
+            'operaForm' => $formOpera->createView(),
         ]);
     }
 

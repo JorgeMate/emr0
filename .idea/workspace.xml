@@ -20,15 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e00503ba-6e43-4c6b-81e4-f9dc2c66e297" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/patient/opera/newOld.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ImportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ImportController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/datepicker/datepicker.en.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/datepicker/datepicker.en.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/datepicker/datepicker.es.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/datepicker/datepicker.es.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/PatientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PatientController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/PatientExtraController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PatientExtraController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Opera.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Opera.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/OperaType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/OperaType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/patient/opera/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/opera/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/opera/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/opera/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/patient/opera/newOld.html.twig" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -285,6 +284,8 @@
       <workItem from="1597414071683" duration="13538000" />
       <workItem from="1597430481884" duration="4762000" />
       <workItem from="1597523114604" duration="8721000" />
+      <workItem from="1597587404523" duration="6884000" />
+      <workItem from="1597609945238" duration="996000" />
     </task>
     <servers />
   </component>
@@ -396,6 +397,15 @@
             <option name="methodName" value="showAgendaResources" />
           </properties>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/src/Controller/PatientExtraController.php</url>
+          <line>198</line>
+          <properties>
+            <option name="className" value="\App\Controller\PatientExtraController" />
+            <option name="methodName" value="saveOpera" />
+          </properties>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

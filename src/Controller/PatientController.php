@@ -27,9 +27,6 @@ use App\Entity\DocImgPatient;
 use App\Form\PatientType;
 use App\Form\ConsultType;
 
-//use App\Form\OperaType;
-
-
 use App\Form\DocPatientType;
 use App\Form\DocImgPatientType;
 

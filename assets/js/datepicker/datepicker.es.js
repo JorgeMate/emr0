@@ -1,3 +1,4 @@
+import '../../css/bootstrap-datepicker.standalone.min.scss';
 import $ from 'jquery';
 
 $(document).ready(function() {

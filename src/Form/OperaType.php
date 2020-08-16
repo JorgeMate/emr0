@@ -7,8 +7,7 @@ use App\Entity\Place;
 
 use App\Entity\Treatment;
 use App\Entity\Opera;
-
-
+use App\Entity\User;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -25,6 +24,8 @@ use Symfony\Component\Security\Core\Security;
 
 use App\Repository\TreatmentRepository;
 use App\Repository\PlaceRepository;
+use App\Repository\UserRepository;
+
 
 
 
@@ -34,13 +35,18 @@ class OperaType extends AbstractType
 
     private $treatmentRepository;
     private $placeRepository;
+    private $userRepository;
+
     //private $typeId;
     private $centerId;
 
-    public function __construct(Security $security, TreatmentRepository $treatmentRepository, PlaceRepository $placeRepository)
+    public function __construct(Security $security, TreatmentRepository $treatmentRepository, PlaceRepository $placeRepository, UserRepository $userRepository )
     {
         $this->treatmentRepository = $treatmentRepository;
         $this->placeRepository = $placeRepository;
+        $this->userRepository = $userRepository;
+
+
         $this->centerId = $security->getUser()->getCenter()->getId();
 
 
@@ -69,8 +75,8 @@ class OperaType extends AbstractType
                     // prevents rendering it as type="date", to avoid HTML5 date pickers
                     'html5' => false,
                     // adds a class that can be selected in JavaScript
-                    'attr' => ['class' => 'js-datepicker'],
-                    'label' => '',
+                    //'attr' => ['class' => 'js-datepicker'],               // desde el form
+                    // 'label' => '',                                       // desde el form
 
                 ])
                 ->add('treatment', EntityType::class,[
@@ -81,7 +87,18 @@ class OperaType extends AbstractType
                     'placeholder' => 'label.treatments',
                     'required' => false,
 
-                ]);
+                ])
+                ->add('user', EntityType::class,[
+                    'label' => 'label.medic.user',
+                    'class' =>  User::class,
+
+                    'choices' => $this->userRepository->findBy(['center' => $this->centerId, 'medic' => true], ['lastname' => 'ASC']),
+
+                    'choice_label' => 'lastname',
+
+                    'required' => false,
+
+            ]);
 
             if($opera->getId()){
 
