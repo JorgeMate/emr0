@@ -32,6 +32,11 @@ class TreatmentController extends AbstractController
 {
     /**
      * @Route("/{slug}/treatment-types", methods={"GET"}, name="types_index")
+     * @param TypeRepository $repository
+     * @param Request $request
+     * @param $slug
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
     public function indexType(TypeRepository $repository, Request $request, $slug, PaginatorInterface $paginator): Response
     {
@@ -63,6 +68,9 @@ class TreatmentController extends AbstractController
 
     /**
      * @Route("/{slug}/treatment-type/new", methods={"GET", "POST"}, name="type_new")
+     * @param Request $request
+     * @param $slug
+     * @return Response
      */
     public function newType(Request $request, $slug): Response
     {
@@ -93,8 +101,12 @@ class TreatmentController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/{slug}/treatment-type/{id}/edit", methods={"GET", "POST"}, name="type_edit")
+     * @param Request $request
+     * @param $slug
+     * @param Type $type
+     * @return Response
      */
     public function editType(Request $request, $slug, Type $type): Response
     {
@@ -123,6 +135,12 @@ class TreatmentController extends AbstractController
 
     /**
      * @Route("/{slug}/type/{id}/treatments", methods={"GET"}, name="treats_index")
+     * @param TreatmentRepository $repository
+     * @param Request $request
+     * @param $slug
+     * @param Type $type
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
     public function indexTreat(TreatmentRepository $repository, Request $request, $slug, Type $type, PaginatorInterface $paginator): Response
     {
@@ -154,6 +172,10 @@ class TreatmentController extends AbstractController
 
     /**
      * @Route("/{slug}/type/{id}/treatment/new", methods={"GET", "POST"}, name="treatment_new")
+     * @param Request $request
+     * @param $slug
+     * @param Type $type
+     * @return Response
      */
     public function newTreatment(Request $request, $slug, Type $type): Response
     {
@@ -190,6 +212,10 @@ class TreatmentController extends AbstractController
 
     /**
      * @Route("/{slug}/treatment/{id}/edit", methods={"GET", "POST"}, name="treatment_edit")
+     * @param Request $request
+     * @param $slug
+     * @param Treatment $treatment
+     * @return Response
      */
     public function editTreatment(Request $request, $slug, Treatment $treatment): Response
     {

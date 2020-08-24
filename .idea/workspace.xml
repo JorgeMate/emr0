@@ -20,14 +20,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e00503ba-6e43-4c6b-81e4-f9dc2c66e297" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Controller/ReportController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/report/treatments.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/bootstrap-datepicker.standalone.min.scss" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/datepicker/datepicker.en.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/datepicker/datepicker.en.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/datepicker/datepicker.es.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/datepicker/datepicker.es.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/PatientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PatientController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ImportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ImportController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/PatientExtraController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PatientExtraController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/OperaType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/OperaType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/opera/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/opera/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/opera/newOld.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TreatmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TreatmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/OperaRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/OperaRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/patient/TABS/_TAB3.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/TABS/_TAB3.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/patient/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/patient/opera/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/opera/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/cpanel.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/cpanel.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translations/messages+intl-icu.en.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages+intl-icu.en.xlf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translations/messages+intl-icu.es.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages+intl-icu.es.xlf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translations/messages+intl-icu.fr.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages+intl-icu.fr.xlf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translations/messages+intl-icu.nl.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages+intl-icu.nl.xlf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,11 +221,15 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1fXvoSwLthU4pdUIn43OJPigrwt" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="AutoIdentifyTypo3Version" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="TYPO3AuthorEmailAddress" value="myname@example.org" />
@@ -285,7 +300,14 @@
       <workItem from="1597430481884" duration="4762000" />
       <workItem from="1597523114604" duration="8721000" />
       <workItem from="1597587404523" duration="6884000" />
-      <workItem from="1597609945238" duration="996000" />
+      <workItem from="1597609945238" duration="3617000" />
+      <workItem from="1598092589980" duration="1272000" />
+      <workItem from="1598101476753" duration="1999000" />
+      <workItem from="1598106224018" duration="6607000" />
+      <workItem from="1598113968986" duration="1043000" />
+      <workItem from="1598118772800" duration="247000" />
+      <workItem from="1598121031916" duration="1803000" />
+      <workItem from="1598124579920" duration="1776000" />
     </task>
     <servers />
   </component>
@@ -304,6 +326,9 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="1734" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1596577949311">
       <screen x="1280" y="0" width="1920" height="1080" />
@@ -313,10 +338,14 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1881" y="355" width="779" height="403" key="#com.intellij.fileTypes.FileTypeChooser/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1596590602910" />
-    <state x="2009" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1597530856496">
+    <state x="2009" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597614536864">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="2009" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1597530856496" />
+    <state x="2009" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1597614536864" />
+    <state x="2009" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1598112303381">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2009" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1598112303381" />
     <state x="2012" y="406" width="518" height="302" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1596981446687">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
@@ -361,10 +390,10 @@
       <screen x="0" y="27" width="1280" height="997" />
     </state>
     <state x="331" y="120" width="738" height="783" key="find.popup/1280.0.1920.1080/0.27.1280.997@0.27.1280.997" timestamp="1596398581305" />
-    <state x="1939" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1597347158623">
+    <state x="2409" y="302" width="672" height="678" key="search.everywhere.popup" timestamp="1598122259123">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="1939" y="259" width="672" height="678" key="search.everywhere.popup/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1597347158623" />
+    <state x="2409" y="302" width="672" height="678" key="search.everywhere.popup/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1598122259123" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -380,14 +409,14 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/Controller/ImportController.php</url>
-          <line>455</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/templates/patient/TABS/_TAB2.html.twig</url>
           <line>152</line>
           <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/templates/patient/TABS/_TAB3.html.twig</url>
+          <line>26</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/src/Controller/AgendaController.php</url>
@@ -399,13 +428,13 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/src/Controller/PatientExtraController.php</url>
-          <line>198</line>
+          <url>file://$PROJECT_DIR$/src/Controller/ImportController.php</url>
+          <line>98</line>
           <properties>
-            <option name="className" value="\App\Controller\PatientExtraController" />
-            <option name="methodName" value="saveOpera" />
+            <option name="className" value="\App\Controller\ImportController" />
+            <option name="methodName" value="index" />
           </properties>
-          <option name="timeStamp" value="9" />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

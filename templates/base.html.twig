@@ -13,14 +13,14 @@
                 <link rel="stylesheet" href="{{ asset('/css/all.css') }}">
                 <link rel="stylesheet" href="{{ asset('/assets/css/app.css') }}">
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
                 <link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
-
-            {% else %}
-
                 
+            {% else %}
+                
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
 
                 {{ encore_entry_link_tags('app') }}
+
             {% endif %}
 
         {% endblock %}
@@ -63,20 +63,31 @@
             {% endif #}
 
 
+
+
             {% if false %}
 
                 <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
                 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
 
+
+             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+            
+            {% if app.request.locale == 'en' %}
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
                 <script src="{{ asset('assets/js/datepicker.en.js') }}"></script>
+            {% elseif app.request.locale == 'es' %}
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.es.min.js"></script>
                 <script src="{{ asset('assets/js/datepicker.es.js') }}"></script>
+            {% elseif app.request.locale == 'nl' %}
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.nl.min.js"></script>
                 <script src="{{ asset('assets/js/datepicker.nl.js') }}"></script>
+            {% else %}
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.fr.min.js"></script>
                 <script src="{{ asset('assets/js/datepicker.fr.js') }}"></script>
+            {% endif %} 
+
+
     
             {% endif %}
 

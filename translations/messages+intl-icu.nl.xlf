@@ -3,6 +3,16 @@
     <file source-language="en" target-language="nl" datatype="plaintext" original="file.ext">
         <body>
 
+            <trans-unit id="from">
+                <source>from</source>
+                <target>Van</target>
+            </trans-unit>
+            <trans-unit id="to">
+                <source>Tot</source>
+                <target>à</target>
+            </trans-unit>
+
+
             <trans-unit id="Monday">
                 <source>Monday</source>
                 <target>Maa</target>
@@ -111,6 +121,23 @@
                 <source>action.sign_in</source>
                 <target>Inloggen</target>
             </trans-unit>
+
+
+            <trans-unit id="label.reports">
+                <source>label.reports</source>
+                <target>RAPPORTEN</target>
+            </trans-unit>
+
+            <trans-unit id="label.report.treatments">
+                <source>label.report.treatments</source>
+                <target>BEHANDELING (OPERATIES) Rapport</target>
+            </trans-unit>
+
+
+
+
+
+
 
             <trans-unit id="title.patients">
                 <source>title.patients</source>

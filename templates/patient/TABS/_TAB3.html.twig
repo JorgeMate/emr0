@@ -22,7 +22,7 @@
         
     </div>
         
-    <div class="row">
+    <div class="container-fluid">
 
         <table class="table table-responsive js-operas-table">
             <thead>
@@ -51,7 +51,11 @@
                             <span class="fa fa-trash"></span>
                         </a>
                     </td>
-                    <td>{{ opera.id }}</td>        
+                    <td>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            {{ opera.id }}
+                        {% endif %}
+                    </td>
                     <td>{{ opera.createdAt|date('d/m/y') }}</td>
                     <td>{{ opera.treatment.name }}</td>
                     <td>{{ opera.user.firstname }} {{ opera.user.lastname }}</td>

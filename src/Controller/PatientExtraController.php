@@ -206,7 +206,12 @@ class PatientExtraController extends AbstractController
 
         $madeAt = $request->request->get('madeAt');
 
-        var_dump($madeAt);die;
+        //var_dump($madeAt);die;
+
+        $dateMod = substr($madeAt,6,4) . '-' . substr($madeAt,3,2) . '-' . substr($madeAt,0,2);
+
+        $mod = new \DateTime($dateMod);
+        //var_dump($mod);die;
 
         $repository = $em->getRepository(User::class);
         $user = $repository->find($userId);
@@ -220,9 +225,6 @@ class PatientExtraController extends AbstractController
         $repository = $em->getRepository(Treatment::class);
         $treatment = $repository->find($treatmentId);
 
-        //$dateMod = substr($madeAt,6,4) . '/' . substr($madeAt,3,2) . '/' . substr($madeAt,0,2);
-        //var_dump($dateMod);die;
-        //$mod = new \DateTime($dateMod);
 
         $opera = new Opera();
 
@@ -233,7 +235,7 @@ class PatientExtraController extends AbstractController
 
         $opera->setValue($treatment->getValue());
 
-        $opera->setMadeAt($madeAt);
+        $opera->setMadeAt($mod);
 
         $em->persist($opera);
         $em->flush();
@@ -252,7 +254,6 @@ class PatientExtraController extends AbstractController
      */
     public function editOpera(Request $request, Opera $opera, EntityManagerInterface $em, $slug): Response
     {
-
         $patient = $opera->getPatient();
 
         $this->denyAccessUnlessGranted('PATIENT_EDIT', $patient);
@@ -270,7 +271,6 @@ class PatientExtraController extends AbstractController
         }
 
         return $this->render('patient/opera/edit.html.twig', [
-
             'opera' => $opera,
             'operaForm' => $formOpera->createView(),
         ]);

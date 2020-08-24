@@ -1,0 +1,99 @@
+{% extends 'base93.html.twig' %}
+
+{% block title %}{{ 'label.report.treatments'|trans }}{% endblock %}
+
+{% block main %}
+
+    <form action="{{ path('query_treatments', {slug:app.user.center.slug}) }}" method="post" enctype="multipart/form-data">
+
+
+        <div class="row justify-content-between">
+
+            <div class="col-sm-auto">
+
+                <h4 class="text-info">
+
+                    {{ 'label.report.treatments'|trans }} <i class="fa fa-file-medical-alt"></i>
+
+
+                </h4>
+
+            </div>
+
+            <div class="col text-right">
+
+                <button type="submit" class="btn btn-info" id="collapseNewTrat">
+                    <i class="fa fa-search" aria-hidden="true"></i> {{ 'label.search'|trans }}
+                </button>
+
+
+            </div>
+
+        </div>
+
+    <hr>
+
+
+        <div class="form-row">
+
+            <div class="form-group col-md-3">
+
+                <label for="js-datepicker">{{ 'from'|trans }}</label>
+                <input type="text" value="{{ from }}" name="from" id="js-datepicker" class="form-control js-datepicker">
+
+
+            </div>
+
+            <div class="form-group col-md-3">
+
+                <label for="js-datepicker">{{ 'to'|trans }}</label>
+                <input type="text" value="{{ to }}" name="to" id="js-datepicker" class="form-control js-datepicker">
+
+            </div>
+
+            <div class="form-group col-md-3">
+
+                <input type="hidden" name="user_id" value="{{ app.user.id }}">
+
+            </div>
+
+        </div>
+
+        {% if operas is defined %}
+
+            <div class="form-row">
+
+            <table>
+
+                {% for opera in operas %}
+
+                <tr>
+                    <td>{{ opera.user.title }} {{ opera.user.firstname }} {{ opera.user.lastname }}</td>
+                    <td>{{ opera.treatment.name }}</td>
+
+                    <td></td>
+                    <td></td>
+
+                </tr>
+
+                {% endfor %}
+
+
+            </table>
+
+
+
+
+
+            </div>
+
+
+
+        {% endif %}
+
+
+
+    </form>
+
+
+{% endblock %}

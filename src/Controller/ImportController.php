@@ -40,7 +40,6 @@ class ImportController extends AbstractController
 
         }
 
-
         if (file_exists('/home/jorge/Documentos/FRAX100/'. $folder .'/' . $yearDir . '/' . $oldfileName)) {
             //var_dump('/home/jorge/Documentos/FRAX100/'. $folder . '/' . $yearDir . '/' . $oldfileName);die;
 
@@ -69,13 +68,23 @@ class ImportController extends AbstractController
 
             $em->persist($storedFile);
             $em->flush();
-
-
         }
-
-
-
     }
+
+
+    private function getLastId($table, $conn_emr)
+    {
+        $sqlLast = "SELECT max(id) AS last FROM " . $table;
+        $stmt = $conn_emr->prepare($sqlLast);
+
+        $stmt->execute();
+        $item = $stmt->fetchAll();
+        $lastId = $item[0]['last'];
+        //var_dump($lastId);die;
+
+        return $lastId;
+    }
+
 
     /**
      * @Route("/import-data-for-center/{id}", name="import")
@@ -259,10 +268,16 @@ class ImportController extends AbstractController
 
             if($action == 'treatments'){
 
+                $lastId = $this->getLastId('treatment', $conn_emr);
+
                 $sql = "
-                    SELECT id, tipo_id, concepto, importe, notas, concepto as cia FROM tratamiento WHERE 1 ORDER BY id
+                    SELECT id, tipo_id, concepto, importe, notas, concepto as cia FROM tratamiento 
+                    WHERE id > :lastId 
+                    ORDER BY id
                 ";
                 $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':lastId', $lastId);
+
                 $stmt->execute();
                 $items = $stmt->fetchAll();
 
@@ -297,6 +312,18 @@ class ImportController extends AbstractController
             
             if($action == 'patients') {
 
+                $sqlLast = "SELECT max(id) AS cuantos FROM patient";
+                $stmt = $conn_emr->prepare($sqlLast);
+                $stmt->execute();
+
+                $item = $stmt->fetchAll();
+                //var_dump($item);die;
+
+                $cuantos = $item[0]['cuantos'];
+                //var_dump($cuantos);die;
+
+
+
                 $sql = "
                     SELECT id, webuser_id, seguro_id, external,
                     AES_DECRYPT(paciente.firstname, SHA1('Alumbre41')) AS firstname, 
@@ -316,10 +343,13 @@ class ImportController extends AbstractController
                     AES_DECRYPT(paciente.notas, SHA1('Alumbre41')) AS notas,
                     AES_DECRYPT(paciente.bsn, SHA1('Alumbre41')) AS bsn
                     
-                    FROM paciente WHERE id > 0 AND id <= 20000 ORDER BY id
+                    FROM paciente WHERE id > 0 AND id > :cuantos ORDER BY id
                 ";
 
                 $stmt = $conn->prepare($sql);
+
+                $stmt->bindValue(':cuantos', $cuantos);
+
                 $stmt->execute();
                 $items = $stmt->fetchAll();
 
@@ -405,16 +435,32 @@ class ImportController extends AbstractController
 
             if($action == 'consults') {
 
+                $sqlLast = "SELECT max(id) AS cuantos FROM consult";
+                $stmt = $conn_emr->prepare($sqlLast);
+                $stmt->execute();
+
+                $item = $stmt->fetchAll();
+                //var_dump($item);die;
+
+                $cuantos = $item[0]['cuantos'];
+                //var_dump($cuantos);die;
+
+
                 $sql = "
                 SELECT id, paciente_id, consult, treatment, 
                 AES_DECRYPT(notas, SHA1('Alumbre41')) AS notas, created_at 
                 FROM consulta 
-                WHERE id > 00000 AND id <= 100000
+                WHERE id > :cuantos
                 ";
-    
+
+
+
                 $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':cuantos', $cuantos);
                 $stmt->execute();
                 $items = $stmt->fetchAll();
+
+                //var_dump($items);die;
 
                 foreach($items as $key => $item) {
 
@@ -455,8 +501,14 @@ class ImportController extends AbstractController
 
             if($action == 'operas'){
 
+                $lastId = $this->getLastId('opera', $conn_emr);
+                //var_dump($lastId);die;
+
                 $sql = "
-                    SELECT * FROM opera where tratamiento_id is not null 
+                    SELECT * FROM opera where
+                        id > :lastId 
+                    AND
+                    tratamiento_id is not null 
                     AND tratamiento_id > 0
                     AND tratamiento_id <> 145
                     AND id_paciente <> 19211
@@ -465,6 +517,8 @@ class ImportController extends AbstractController
                 ";
 
                 $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':lastId', $lastId);
+
                 $stmt->execute();
                 $items = $stmt->fetchAll();
 

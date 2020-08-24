@@ -4,6 +4,16 @@
         <body>
 
 
+            <trans-unit id="from">
+                <source>from</source>
+                <target>From</target>
+            </trans-unit>
+            <trans-unit id="to">
+                <source>to</source>
+                <target>To</target>
+            </trans-unit>
+
+
             <trans-unit id="Monday">
                 <source>Monday</source>
                 <target>Mon</target>
@@ -113,6 +123,20 @@
                 <source>action.sign_in</source>
                 <target>Sign in</target>
             </trans-unit>
+
+
+            <trans-unit id="label.reports">
+                <source>label.reports</source>
+                <target>REPORTS</target>
+            </trans-unit>
+
+            <trans-unit id="label.report.treatments">
+                <source>label.report.treatments</source>
+                <target>Treatments REPORT</target>
+            </trans-unit>
+
+
+
 
             <trans-unit id="title.patients">
                 <source>title.patients</source>
