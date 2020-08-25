@@ -274,7 +274,12 @@ class PatientController extends AbstractController
 
             $client->api_key = $api_key;
             $client->account_name = $ac_name;
-            $agendas = $client->schedules->getList();
+            try{
+                $agendas = $client->schedules->getList();
+            } catch (\Exception $e) {
+
+            }
+
 
             $checksum = md5($ac_name . $api_key . $this->getUser()->getEmail());
 

@@ -72,8 +72,6 @@ class UserController extends AbstractController
 
         if($center->getSsaasAccountName() && $center->getSsaasApiKey()){
 
-            $agendas = null;
-
             $ac_name = $center->getSsaasAccountName();
             $api_key = $center->getSsaasApiKey();
 
@@ -81,8 +79,12 @@ class UserController extends AbstractController
             $client->account_name = $ac_name;
             $client->api_key = $api_key;
 
-            $agendas = $client->schedules->getList();
-            //var_dump($agendas);die;
+            try {
+                $agendas = $client->schedules->getList();
+                //var_dump($agendas);die;
+            } catch (\Exception $e){
+
+            }
 
             $checksum = md5($ac_name . $api_key . $user->getEmail());
             //var_dump($checksum);die;

@@ -47,7 +47,7 @@
 
             <div class="form-group col-md-3">
 
-                <label for="js-select-types">{{'label.type'|trans}}</label>
+                <label class="text-info" for="js-select-types">{{'label.type'|trans}}</label>
                 <select class="form-control" id="js-select-types" data-url="{{ path('treatments_get') }}">
                 <option value="">{{ 'label.option'|trans }}</option>
                 {% for type in types %}
@@ -59,7 +59,7 @@
 
             <div class="form-group col-md-5">
 
-                <label class="text-danger" for="js-select-tratments">{{'label.treatment'|trans}}</label>
+                <label class="text-info" for="js-select-treatments">{{'label.treatment'|trans}}</label>
                 <select class="form-control" name="treatmentId" id="js-select-treatments">
 
                 </select>
@@ -68,7 +68,7 @@
 
             <div class="form-group col-md-4">
 
-                <label for="js-select-medics">Dr. </label>
+                <label class="text-success" for="js-select-medics">Dr. </label>
                 <select class="form-control" name ="userId" id="js-select-medics">
 
                 {% for medic in medics %}
@@ -84,7 +84,7 @@
 
             <div class="form-group col-md-3">
 
-                <label class="text-danger" for="js-select-places">{{'label.place'|trans}}</label>
+                <label class="text-warning" for="js-select-places">{{'label.place'|trans}}</label>
                 <select class="form-control" name="placeId" id="js-select-places">
                 <option value="">{{ 'label.option'|trans }}</option>
                 {% for place in places %}
@@ -96,7 +96,7 @@
 
             <div class="form-group col-md-3">
 
-                <label for="js-datepicker">Planned for date</label>
+                <label class="text-danger" for="js-datepicker">{{'operation.date'|trans}}</label>
                 <input type="text" value="{{ "now"|date("d/m/Y") }}" name="madeAt" id="js-datepicker" class="form-control js-datepicker">
 
             </div>
@@ -145,7 +145,7 @@
             <div class="row">
 
                 <div class="col-auto">
-                    <h5><i class="fa fa-user-md"></i> <span class="text-warning" id="js-selected-doctor"></span></h5>
+                    <h5 class="text-success"><i class="fa fa-user-md"></i> <span class="text-success" id="js-selected-doctor"></span></h5>
                 </div>
             
             </div>
@@ -153,7 +153,7 @@
             <div class="row">
 
                 <div class="col-auto">
-                    <h5><i class="fa fa-file-archive-o"></i> <span class="text-warning" id="js-selected-treatment"></span></h5>
+                    <h5 class="text-info"><i class="fa fa-file-archive-o"></i> <span class="text-info" id="js-selected-treatment"></span></h5>
                 </div>
 
             </div>
@@ -161,7 +161,7 @@
             <div class="row">
 
                 <div class="col-auto">
-                    <h5><i class="fa fa-hospital-o"></i> <span class="text-warning" id="js-selected-place"></span></h5>
+                    <h5 class="text-warning"><i class="fa fa-hospital-o"></i> <span class="text-primary" id="js-selected-place"></span></h5>
                 </div>
 
             </div>
@@ -169,7 +169,7 @@
             <div class="row">
 
                 <div class="form-group col-auto">
-                    <h5><i class="fa fa-calendar-check-o"></i></i> <span class="text-warning" id="js-selected-date"></span></h5>
+                    <h5  class="text-danger"><i class="fa fa-calendar-check-o"></i></i> <span id="js-selected-date"></span></h5>
                 </div>
 
             </div>

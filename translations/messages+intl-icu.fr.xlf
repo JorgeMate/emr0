@@ -12,6 +12,11 @@
                 <target>à</target>
             </trans-unit>
 
+            <trans-unit id="operation.date">
+                <source>operation.date</source>
+                <target>Jour de traitement</target>
+            </trans-unit>
+
 
             <trans-unit id="Monday">
                 <source>Monday</source>

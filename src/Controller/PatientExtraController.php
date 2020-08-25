@@ -38,10 +38,13 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class PatientExtraController extends AbstractController
 {
-    
+
     /**
      * @Route("/{slug}/patient/{id}/new/medicat", methods={"GET", "POST"}, name="medicat_new")
-     * 
+     * @param Request $request
+     * @param $slug
+     * @param Patient $patient
+     * @return Response
      */
     public function newMed(Request $request, $slug, Patient $patient): Response
     {
@@ -79,6 +82,8 @@ class PatientExtraController extends AbstractController
 
     /**
      * @Route("/medicat/{id}", methods={"POST"}, name="medicat_stop")
+     * @param Medicat $medicat
+     * @return Response
      */
     public function medicatStop(Medicat $medicat)
     {
@@ -94,7 +99,10 @@ class PatientExtraController extends AbstractController
 
     /**
      * @Route("/{slug}/patient/{id}/new/historia", methods={"GET", "POST"}, name="historia_new")
-     * 
+     * @param Request $request
+     * @param $slug
+     * @param Patient $patient
+     * @return Response
      */
     public function newHis(Request $request, $slug, Patient $patient): Response
     {
@@ -133,7 +141,11 @@ class PatientExtraController extends AbstractController
 
     /**
      * @Route("/{slug}/patient/{id}/new/medic-act", methods={"GET", "POST"}, name="opera_new")
-     * 
+     * @param Request $request
+     * @param $slug
+     * @param Patient $patient
+     * @param EntityManagerInterface $em
+     * @return Response
      */
     public function newOpera(Request $request, $slug, Patient $patient, EntityManagerInterface $em): Response
     {

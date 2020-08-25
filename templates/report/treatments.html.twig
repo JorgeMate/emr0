@@ -1,8 +1,8 @@
-{% extends 'base93.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}{{ 'label.report.treatments'|trans }}{% endblock %}
 
-{% block main %}
+{% block body %}
 
     <form action="{{ path('query_treatments', {slug:app.user.center.slug}) }}" method="post" enctype="multipart/form-data">
 
@@ -31,69 +31,98 @@
 
         </div>
 
-    <hr>
+        <hr>
 
 
         <div class="form-row">
 
-            <div class="form-group col-md-3">
-
-                <label for="js-datepicker">{{ 'from'|trans }}</label>
-                <input type="text" value="{{ from }}" name="from" id="js-datepicker" class="form-control js-datepicker">
-
-
-            </div>
-
-            <div class="form-group col-md-3">
-
-                <label for="js-datepicker">{{ 'to'|trans }}</label>
-                <input type="text" value="{{ to }}" name="to" id="js-datepicker" class="form-control js-datepicker">
-
-            </div>
-
-            <div class="form-group col-md-3">
-
+            <div class="form-group col-md-2">
                 <input type="hidden" name="user_id" value="{{ app.user.id }}">
+                <label class="text-info for="js-datepicker">{{ 'from'|trans }}</label>
+                <input type="text" value="{{ from }}" name="from" id="js-datepicker" class="form-control js-datepicker">
+            </div>
+
+            <div class="form-group col-md-2">
+                <label class="text-info for="js-datepicker">{{ 'to'|trans }}</label>
+                <input type="text" value="{{ to }}" name="to" id="js-datepicker" class="form-control js-datepicker">
+            </div>
+
+            <div class="form-group col-md-3">
+
+                <label class="text-info" for="js-select-places">{{'label.place'|trans}}</label>
+                <select class="form-control" name="placeId" id="js-select-places">
+                    <option value="{{ selected_id }}">{{ selected_name }}</option>
+                    {% for place in places %}
+                        <option value="{{ place.id }}">{{ place.name }}</option>
+                    {% endfor %}
+                </select>
 
             </div>
 
         </div>
 
-        {% if operas is defined %}
+    </form>
 
-            <div class="form-row">
+    {% if operas[0] is defined %}
 
-            <table>
+        <div class="form-row">
 
-                {% for opera in operas %}
+            <table class="table table-striped table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Dr. </th>
+                        <th>{{ 'label.type'|trans }}</th>
+                        <th>{{ 'label.treatment'|trans }}</th>
+                        <th></th>
+                        <th>N. </th>
+                        <th></th>
+                        <th><i class="fa fa-search" aria-hidden="true"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for opera in operas %}
 
-                <tr>
-                    <td>{{ opera.user.title }} {{ opera.user.firstname }} {{ opera.user.lastname }}</td>
-                    <td>{{ opera.treatment.name }}</td>
+                    <tr>
+                        <td>{{ opera.title }} {{ opera.firstname }} {{ opera.lastname }}</td>
+                        <td>{{ opera.typeName }}</td>
+                        <td>{{ opera.name }}</td>
 
-                    <td></td>
-                    <td></td>
+                        <td></td>
+                        <td>{{ opera.cuantas }} | <i class="fa fa-users text-warning"></i></td>
+                        <td></td>
+                        <td>
+                            <form action="{{ path('treatment_details', {slug:app.user.center.slug}) }}" method="post" enctype="multipart/form-data">
 
-                </tr>
+                                <input type="hidden" name="user_id" value="{{ app.user.id }}">
+                                <input type="hidden" name="treatment_id" value="{{ opera.treatmentId }}">
+                                <input type="hidden" name="from" value="{{ from }}">
+                                <input type="hidden" name="to" value="{{ to }}">
+                                <input type="hidden" name="place_id" value="{{ place_id }}">
 
-                {% endfor %}
+
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+
+                            </form>
+
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
 
 
             </table>
 
 
+        </div>
 
 
 
-            </div>
+    {% endif %}
 
 
-
-        {% endif %}
-
-
-
-    </form>
 
 
 {% endblock %}
