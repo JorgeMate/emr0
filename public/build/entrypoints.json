@@ -1,0 +1,81 @@
+{
+  "entrypoints": {
+    "dp_fr": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~delete~dp_en~dp_es~dp_fr~dp_nl~med_stop~search_p~sel_treat.js",
+        "/build/dp_fr.js"
+      ]
+    },
+    "dp_es": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~delete~dp_en~dp_es~dp_fr~dp_nl~med_stop~search_p~sel_treat.js",
+        "/build/dp_es.js"
+      ]
+    },
+    "dp_en": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~delete~dp_en~dp_es~dp_fr~dp_nl~med_stop~search_p~sel_treat.js",
+        "/build/dp_en.js"
+      ]
+    },
+    "dp_nl": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~delete~dp_en~dp_es~dp_fr~dp_nl~med_stop~search_p~sel_treat.js",
+        "/build/dp_nl.js"
+      ]
+    },
+    "app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~delete~dp_en~dp_es~dp_fr~dp_nl~med_stop~search_p~sel_treat.js",
+        "/build/vendors~app~med_stop~search_p.js",
+        "/build/vendors~app.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
+      ]
+    },
+    "search_p": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~delete~dp_en~dp_es~dp_fr~dp_nl~med_stop~search_p~sel_treat.js",
+        "/build/vendors~app~med_stop~search_p.js",
+        "/build/vendors~search_p.js",
+        "/build/search_p.js"
+      ],
+      "css": [
+        "/build/search_p.css"
+      ]
+    },
+    "delete": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~delete~dp_en~dp_es~dp_fr~dp_nl~med_stop~search_p~sel_treat.js",
+        "/build/delete.js"
+      ],
+      "css": [
+        "/build/delete.css"
+      ]
+    },
+    "med_stop": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~delete~dp_en~dp_es~dp_fr~dp_nl~med_stop~search_p~sel_treat.js",
+        "/build/vendors~app~med_stop~search_p.js",
+        "/build/med_stop.js"
+      ]
+    },
+    "sel_treat": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~app~delete~dp_en~dp_es~dp_fr~dp_nl~med_stop~search_p~sel_treat.js",
+        "/build/sel_treat.js"
+      ]
+    }
+  }
+}
