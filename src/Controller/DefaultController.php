@@ -19,9 +19,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-
-
-
 class DefaultController extends AbstractController
 {
     /**
@@ -36,11 +33,14 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/register", methods={"GET", "POST"}, name="register")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * @return Response
      */
     public function register(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
 
-        $this->passUniversal = '4444';
+        $passUniversal = '4444';
 
         $center = new Center();
         $center->setEnabled(true);
@@ -64,12 +64,12 @@ class DefaultController extends AbstractController
             $user->setEmail($center->getEmail());
             $user->setTel($center->getTel());
 
-            $this->passUniversalEncoded = $encoder->encodePassword(
+            $passUniversalEncoded = $encoder->encodePassword(
                 $user,
-                $this->passUniversal
+                $passUniversal
             );
     
-            $user->setPassword($this->passUniversalEncoded);
+            $user->setPassword($passUniversalEncoded);
             $user->setEnabled(false);
     
             $roles[] = 'ROLE_ADMIN';
@@ -93,6 +93,7 @@ class DefaultController extends AbstractController
 
 
     }
+
 
     /**
      * @Route("/whatIs", name="whatIs")

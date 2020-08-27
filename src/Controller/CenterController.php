@@ -27,8 +27,6 @@ use App\Form\MedicType;
 use App\Repository\CenterRepository;
 
 
-
-
 /**
  * Controller used to manage current center.
  *
@@ -38,33 +36,29 @@ use App\Repository\CenterRepository;
  */
 class CenterController extends AbstractController
 {
-
     /**
      * @Route("/{slug}/cpanel", methods={"GET"}, name="center_cpanel")
      */
     public function centerCpanel(): Response
     {
-
         $center = $this->getUser()->getCenter();
         $this->denyAccessUnlessGranted('CENTER_EDIT', $center);
         $user = $this->getUser();
 
         $groups = $center->getDocCenterGroups();
 
-
         return $this->render('center/cpanel.html.twig', [
-
             'user' => $user,
             'center' => $center,
             'groups' => $groups,
-
         ]);
     }
 
     /**
      * @Route("/{slug}/edit", methods={"GET", "POST"}, name="center_edit")
-     * 
-     * EDITAR el centro id
+     * @param Request $request
+     * @param $slug
+     * @return Response
      */
     public function editCenter(Request $request, $slug): Response
     {
@@ -90,17 +84,17 @@ class CenterController extends AbstractController
             'center' => $center,
             'form' => $form->createView(),
         ]);
-
     }
 
     /**
      * @Route("/{slug}/medic-user/{id}/edit", methods={"GET", "POST"}, name="edit_user_medic")
-     * 
-     * Editar los datos médicos de un usuario
+     * @param Request $request
+     * @param $slug
+     * @param User $user
+     * @return Response
      */
     public function editMedUser(Request $request, $slug, User $user): Response
     {
-
         $this->denyAccessUnlessGranted('USER_EDIT', $user);
                
         $form = $this->createForm(MedicType::class, $user);
@@ -114,41 +108,30 @@ class CenterController extends AbstractController
             $this->addFlash('info', 'record.updated_successfully');
 
             return $this->redirectToRoute('medics_index', ['slug' => $slug]);
-
         }
 
         return $this->render('center/user/edit-medic.html.twig', [
-             
             'user' => $user,
             'form' => $form->createView(),
         ]);
     
     }
 
-
-
     /**
      * @Route("/{slug}/users", methods={"GET"}, name="users_index")
-     * 
-     * LISTAR todos los usuarios del centro slug
+     * @param CenterRepository $repository
+     * @param $slug
+     * @return Response
      */
     public function indexUsers(CenterRepository $repository, $slug): Response
     {
-
-        #$em = $this->getDoctrine()->getManager();
-        #$repository = $em->getRepository(Center::class);
         $center = $repository->findOneBy(['slug' => $slug]);
 
         $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
 
         $users = $center->getUsers();
 
-        
-
-        #dd($slug);
-        
         return $this->render('center/user/index.html.twig', [
-             
             'slug' => $slug,
             'users' => $users,
             'center' => $center 
@@ -157,8 +140,8 @@ class CenterController extends AbstractController
 
     /**
      * @Route("/{slug}/medic-users", methods={"GET"}, name="medics_index")
-     * 
-     * LISTAR todos los usuarios medicos del centro id
+     * @param $slug
+     * @return Response
      */
     public function indexMedUsers($slug): Response
     {        
@@ -174,18 +157,18 @@ class CenterController extends AbstractController
         return $this->render('center/user/index-medic.html.twig', [
             'center' => $center,
             'medics' => $medics,
-             
         ]);
-    }    
+    }
 
     /**
      * @Route("/{slug}/new/user", methods={"GET", "POST"}, name="user_new")
-     * 
-     * NUEVO usuario del centro id
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * @param $slug
+     * @return Response
      */
     public function newUser(Request $request, UserPasswordEncoderInterface $encoder, $slug): Response
-    {  
-
+    {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository(Center::class);
         $center = $repository->findOneBy(['slug' => $slug]);
@@ -222,11 +205,12 @@ class CenterController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/{slug}/user/{id}/edit", methods={"GET", "POST"}, name="user_edit")
-     * 
-     * EDITAR otro usuario del mismo centro, cualquiera si es SUPER_ADMIN 
+     * @param Request $request
+     * @param $slug
+     * @param User $user
+     * @return Response
      */
     public function editAnyUser(Request $request, $slug, User $user): Response
     {
@@ -255,11 +239,11 @@ class CenterController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/{slug}/new/documents-group", methods={"GET", "POST"}, name="group_new")
-     * 
-     * Insertar el nombre de un nuevo grupo de documentos.
+     * @param Request $request
+     * @param $slug
+     * @return Response
      */
     public function newDocGroup(Request $request, $slug): Response
     {
@@ -282,12 +266,9 @@ class CenterController extends AbstractController
             $this->addFlash('info', 'record.updated_successfully');
 
             return $this->redirectToRoute('doc_groups_index', ['slug' => $slug]);
-
-
         }
 
         return $this->render('center/doc_groups/edit.html.twig', [
-
             'group' => $group,
             'form' => $form->createView(), 
         ]);
@@ -296,9 +277,12 @@ class CenterController extends AbstractController
 
     /**
      * @Route("/{slug}/documents-group/{id}/edit", methods={"GET", "POST"}, name="group_edit")
-     * 
+     * @param Request $request
+     * @param $slug
+     * @param DocCenterGroup $docCenterGroup
+     * @return Response
      */
-    public function centerDocGroupEdit(Request $request, $slug, DocCenterGroup $docCenterGroup)
+    public function centerDocGroupEdit(Request $request, $slug, DocCenterGroup $docCenterGroup): Response
     {
         $center = $this->getUser()->getCenter();
 
@@ -317,17 +301,10 @@ class CenterController extends AbstractController
         }
 
         return $this->render('center/doc_groups/edit.html.twig', [
-
             'group' => $docCenterGroup,
             'form' => $form->createView(),
         ]);
     }
-
-
-
-
-
-
 
 
 }

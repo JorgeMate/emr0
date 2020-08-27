@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Service\UploaderHelper;
 use Doctrine\ORM\EntityManagerInterface;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use App\Entity\Center;
 use App\Entity\Insurance;
@@ -23,7 +25,7 @@ use Symfony\Component\HttpFoundation\File\File;
 class ImportController extends AbstractController
 {
 
-    public function importDocImgHelper($item, $type, UploaderHelper $uploaderHelper)
+    public function importDocImgHelper($item, $type, UploaderHelper $uploaderHelper, EntityManagerInterface $em)
     {
 
         $yearDir = substr($item['created_at'], 0, 4);
@@ -90,13 +92,10 @@ class ImportController extends AbstractController
      * @Route("/import-data-for-center/{id}", name="import")
      * @param Request $request
      * @param Center $center
-     * @param File $file
      * @param EntityManagerInterface $em
-     * @param UploaderHelper $uploaderHelper
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
+     * @return Response
      */
-    public function index(Request $request, Center $center, EntityManagerInterface $em)
+    public function index(Request $request, Center $center, EntityManagerInterface $em): Response
     {
         $items = null;
 

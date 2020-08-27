@@ -4,6 +4,7 @@
         <body>
 
 
+
             <trans-unit id="from">
                 <source>from</source>
                 <target>From</target>
@@ -12,6 +13,19 @@
                 <source>to</source>
                 <target>To</target>
             </trans-unit>
+
+            <trans-unit id="show,all">
+                <source>show.all</source>
+                <target>Show ALL</target>
+            </trans-unit>
+
+            <trans-unit id="select.doc">
+                <source>select.doc</source>
+                <target>Select a document</target>
+            </trans-unit>
+
+
+
 
             <trans-unit id="operation.date">
                 <source>operation.date</source>

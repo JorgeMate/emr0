@@ -20,25 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e00503ba-6e43-4c6b-81e4-f9dc2c66e297" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/report/treatment_details.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/emr0.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/emr0.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/PatientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PatientController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/PatientExtraController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PatientExtraController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CenterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CenterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/EntityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EntityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ImportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ImportController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ResetPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SuperController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SuperController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/OperaRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/OperaRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/center/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/center/user/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/TABS/_TAB3.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/TABS/_TAB3.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/patient/opera/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/opera/new.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/report/treatments.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/report/treatments.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/translations/messages+intl-icu.en.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages+intl-icu.en.xlf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/messages+intl-icu.es.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages+intl-icu.es.xlf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/messages+intl-icu.fr.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages+intl-icu.fr.xlf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/messages+intl-icu.nl.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages+intl-icu.nl.xlf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -315,6 +308,10 @@
       <workItem from="1598321840327" duration="10025000" />
       <workItem from="1598370654601" duration="2355000" />
       <workItem from="1598373597024" duration="2130000" />
+      <workItem from="1598376212624" duration="1501000" />
+      <workItem from="1598383590117" duration="1975000" />
+      <workItem from="1598386839746" duration="4205000" />
+      <workItem from="1598458891185" duration="1839000" />
     </task>
     <servers />
   </component>
@@ -435,7 +432,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/src/Controller/ImportController.php</url>
-          <line>98</line>
+          <line>97</line>
           <properties>
             <option name="className" value="\App\Controller\ImportController" />
             <option name="methodName" value="index" />

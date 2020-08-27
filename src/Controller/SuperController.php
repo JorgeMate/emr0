@@ -56,6 +56,8 @@ class SuperController extends AbstractController
 
     /**
      * @Route("/center/new", methods={"GET", "POST"}, name="center_new")
+     * @param Request $request
+     * @return Response
      */
     public function centerNew(Request $request): Response
     {

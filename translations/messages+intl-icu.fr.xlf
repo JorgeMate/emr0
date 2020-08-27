@@ -12,6 +12,12 @@
                 <target>à</target>
             </trans-unit>
 
+            <trans-unit id="show,all">
+                <source>show.all</source>
+                <target>Montrer TOUT</target>
+            </trans-unit>
+
+
             <trans-unit id="operation.date">
                 <source>operation.date</source>
                 <target>Jour de traitement</target>

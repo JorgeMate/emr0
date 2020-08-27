@@ -5,45 +5,44 @@
 {% block body %}
 
     <form action="{{ path('query_treatments', {slug:app.user.center.slug}) }}" method="post" enctype="multipart/form-data">
+        
+        <div class="row">
 
-
-        <div class="row justify-content-between">
-
-            <div class="col-sm-auto">
-
+            <div class="col-8">
                 <h4 class="text-info">
-
                     {{ 'label.report.treatments'|trans }} <i class="fa fa-file-medical-alt"></i>
-
-
                 </h4>
-
             </div>
 
-            <div class="col text-right">
+            <div class="col-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="defaultCheck1" value="{{ all }}", name="showAll">
+                    <label class="form-check-label" for="defaultCheck1">
+                        {{ 'show.all'|trans }}
+                    </label>
+                </div>
+            </div>
 
+            <div class="col-md-2 text-right">
                 <button type="submit" class="btn btn-info" id="collapseNewTrat">
                     <i class="fa fa-search" aria-hidden="true"></i> {{ 'label.search'|trans }}
                 </button>
-
-
             </div>
 
         </div>
 
         <hr>
 
-
         <div class="form-row">
 
             <div class="form-group col-md-2">
                 <input type="hidden" name="user_id" value="{{ app.user.id }}">
-                <label class="text-info for="js-datepicker">{{ 'from'|trans }}</label>
+                <label class="text-info id="js-datepicker">{{ 'from'|trans }}</label>
                 <input type="text" value="{{ from }}" name="from" id="js-datepicker" class="form-control js-datepicker">
             </div>
 
             <div class="form-group col-md-2">
-                <label class="text-info for="js-datepicker">{{ 'to'|trans }}</label>
+                <label class="text-info id="js-datepicker">{{ 'to'|trans }}</label>
                 <input type="text" value="{{ to }}" name="to" id="js-datepicker" class="form-control js-datepicker">
             </div>
 
@@ -59,11 +58,20 @@
 
             </div>
 
+            <div class="form-group col-md-1">
+            </div>
+
+            <div class="form-group col-md-4 text-right">
+                {% if all > 0 and operas[0] is defined %}
+                    <h4 class="text-info">{{ 'label.treatments'|trans }} : {{ operas|length }}</h4>
+                {% endif %}
+            </div>
+
         </div>
 
     </form>
 
-    {% if operas[0] is defined %}
+    {% if all < 1 and operas[0] is defined %}
 
         <div class="form-row">
 
@@ -76,53 +84,95 @@
                         <th></th>
                         <th>N. </th>
                         <th></th>
-                        <th><i class="fa fa-search" aria-hidden="true"></i></th>
+                        <th></th>
+                        <th>counter</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% set last_name = '' %}
+                    {% set total = 0 %}
+
                     {% for opera in operas %}
 
-                    <tr>
-                        <td>{{ opera.title }} {{ opera.firstname }} {{ opera.lastname }}</td>
-                        <td>{{ opera.typeName }}</td>
-                        <td>{{ opera.name }}</td>
+                        {% set total = total + opera.cuantas %}
 
-                        <td></td>
-                        <td>{{ opera.cuantas }} | <i class="fa fa-users text-warning"></i></td>
-                        <td></td>
-                        <td>
-                            <form action="{{ path('treatment_details', {slug:app.user.center.slug}) }}" method="post" enctype="multipart/form-data">
+                        <tr>
+                            <td>{{ opera.cod }}</td>
+                            <td>
+                                {% if opera.typeName != last_name %}
+                                    {{ opera.typeName }}
+                                {% endif %}
+                            </td>
+                            <td>{{ opera.name }}</td>
 
-                                <input type="hidden" name="user_id" value="{{ app.user.id }}">
-                                <input type="hidden" name="treatment_id" value="{{ opera.treatmentId }}">
-                                <input type="hidden" name="from" value="{{ from }}">
-                                <input type="hidden" name="to" value="{{ to }}">
-                                <input type="hidden" name="place_id" value="{{ place_id }}">
+                            <td></td>
+                            <td>{{ opera.cuantas }} | <i class="fa fa-users text-warning"></i></td>
+                            <td></td>
+                            <td>
+                                <form action="{{ path('treatment_details', {slug:app.user.center.slug}) }}" method="post" enctype="multipart/form-data">
 
+                                    <input type="hidden" name="user_id" value="{{ app.user.id }}">
+                                    <input type="hidden" name="treatment_id" value="{{ opera.treatmentId }}">
+                                    <input type="hidden" name="from" value="{{ from }}">
+                                    <input type="hidden" name="to" value="{{ to }}">
+                                    <input type="hidden" name="place_id" value="{{ place_id }}">
 
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
 
-                            </form>
+                                </form>
 
-                        </td>
-                    </tr>
+                            </td>
+                            <td class="text-right">{{ total }}</td>
+                        </tr>
 
+                        {% set last_name = opera.typeName %}
                     {% endfor %}
                 </tbody>
-
-
             </table>
-
-
         </div>
-
-
 
     {% endif %}
 
+    {% if all > 0 and operas[0] is defined %}
+        <div class="form-row">
 
+            <table class="table table-striped table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Dr. </th>
+                        <th>{{ 'label.type'|trans }}</th>
+                        <th>{{ 'label.treatment'|trans }}</th>
+                        <th>{{ 'label.place'|trans }}</th>
+                        <th>{{ 'label.patient'|trans }}</th>
+                        <th>{{ 'label.made_at'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% set last_name = '' %}
+                {% for opera in operas %}
+                    <tr>
+                        <td>{{ opera.cod }}</td>
+                        <td>
+                            {% if opera.typeName != last_name %}
+                                {{ opera.typeName }}
+                            {% endif %}
+                        </td>
+                        <td>{{ opera.name }}</td>
+                        <td>{{ opera.placeName }}</td>
+                        <td>
+                            <a href="{{ path('patient_show', {slug: app.user.center.slug, id: opera.patient_id}) }}">{{ opera.lastname }}</a>
+                        </td>
+                        <td>{{ opera.made_at|date('l')|trans }}, {{ opera.made_at|date('d/M/y') }}</td>
+                    </tr>
+                    {% set last_name = opera.typeName %}
+                {% endfor %}
+                </tbody>
+            </table>
 
+        </div>
+
+    {% endif %}
 
 {% endblock %}

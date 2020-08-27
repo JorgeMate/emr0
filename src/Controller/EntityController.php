@@ -41,8 +41,11 @@ class EntityController extends AbstractController
 {
     /**
      * @Route("/{slug}/insurances", methods={"GET"}, name="insurances_index")
-     * 
-     * LISTAR todos las cias de seguro del centro id
+     * @param InsuranceRepository $repository
+     * @param Request $request
+     * @param $slug
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
     public function insurancesIndex(InsuranceRepository $repository, Request $request, $slug, PaginatorInterface $paginator): Response
     {
@@ -73,7 +76,9 @@ class EntityController extends AbstractController
 
     /**
      * @Route("/{slug}/insurance/new", methods={"GET", "POST"}, name="insurance_new")
-     * 
+     * @param Request $request
+     * @param $slug
+     * @return Response
      */
     public function insuranceNew(Request $request, $slug): Response
     {
@@ -108,11 +113,14 @@ class EntityController extends AbstractController
 
     }
 
-  /**
+    /**
      * @Route("/{slug}/insurance/{id}/edit", methods={"GET", "POST"}, name="insurance_edit")
-     * 
+     * @param Request $request
+     * @param $slug
+     * @param Insurance $insurance
+     * @return Response
      */
-    public function insuranceEdit(Request $request, $slug, Insurance $insurance)
+    public function insuranceEdit(Request $request, $slug, Insurance $insurance): Response
     {
         $center = $this->getUser()->getCenter();
 
@@ -138,23 +146,19 @@ class EntityController extends AbstractController
     }
 
 
- /**
+    /**
      * @Route("/{slug}/sources", methods={"GET"}, name="sources_index")
-     * 
-     * LISTAR todos las fuentes del centro id
+     * @param SourceRepository $repository
+     * @param Request $request
+     * @param $slug
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
     public function sourcesIndex(SourceRepository $repository, Request $request, $slug, PaginatorInterface $paginator): Response
     {
        
         $center = $this->getUser()->getCenter();
         $this->denyAccessUnlessGranted('CENTER_VIEW', $center);
-
-        $showDisabled = $request->get('show');
-
-        //var_dump($showDisabled);die;
-
-        #$em = $this->getDoctrine()->getManager();
-        #$repository = $em->getRepository(Source::class);
 
         $q = $request->query->get('q');
         $queryBuilder = $repository->findAllWithSearchQueryBuilder($q);
@@ -165,12 +169,6 @@ class EntityController extends AbstractController
             10                                  /*limit per page*/
         );
 
-        #if($showDisabled == 'disabled'){            
-        #    $sources = $repository->findBy(['center' => $center->getId()], ['name' => 'ASC']);
-        #} else {
-        #    $sources = $repository->findBy(['center' => $center->getId(), 'enabled' => true], ['name' => 'ASC']);
-        #}
-                
         return $this->render('entity/source/index.html.twig', [
             'slug' => $slug,
             #'sources' => $sources,
@@ -178,13 +176,14 @@ class EntityController extends AbstractController
         ]);
     }
 
-/**
+    /**
      * @Route("/{slug}/source/new", methods={"GET", "POST"}, name="source_new")
-     * 
+     * @param Request $request
+     * @param $slug
+     * @return Response
      */
     public function sourceNew(Request $request, $slug): Response
     {
-        
         $center = $this->getUser()->getCenter();
 
         $this->denyAccessUnlessGranted('CENTER_EDIT', $center);
@@ -211,13 +210,16 @@ class EntityController extends AbstractController
             'source' => $source,
             'form' => $form->createView(), 
         ]);
-    }  
-    
-   /**
+    }
+
+    /**
      * @Route("/{slug}/source/{id}/edit", methods={"GET", "POST"}, name="source_edit")
-     * 
+     * @param Request $request
+     * @param $slug
+     * @param Source $source
+     * @return Response
      */
-    public function sourceEdit(Request $request, $slug, Source $source)
+    public function sourceEdit(Request $request, $slug, Source $source): Response
     {
         $center = $this->getUser()->getCenter();
 

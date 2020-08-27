@@ -12,6 +12,18 @@
                 <target>Hasta</target>
             </trans-unit>
 
+            <trans-unit id="show,all">
+                <source>show.all</source>
+                <target>Mostrar TODO</target>
+            </trans-unit>
+
+            <trans-unit id="select.doc">
+                <source>select.doc</source>
+                <target>Seleccione un documento</target>
+            </trans-unit>
+
+
+
             <trans-unit id="operation.date">
                 <source>operation.date</source>
                 <target>Día del tratamiento</target>
