@@ -22,6 +22,11 @@
                 <target>Seleccione un documento</target>
             </trans-unit>
 
+            <trans-unit id="program.options">
+                <source>program.options</source>
+                <target>Opciones del programa</target>
+            </trans-unit>
+
 
 
             <trans-unit id="operation.date">

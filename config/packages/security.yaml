@@ -26,6 +26,8 @@ security:
                     - App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
+                #handlers: [App\EventListener\LogoutListener]
+                # [app.logout.listener]
                 # where to redirect after logout
                 target: app_login
 

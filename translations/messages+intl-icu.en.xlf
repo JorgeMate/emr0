@@ -24,12 +24,38 @@
                 <target>Select a document</target>
             </trans-unit>
 
+            <trans-unit id="program.options">
+                <source>program.options</source>
+                <target>Program options</target>
+            </trans-unit>
+
 
 
 
             <trans-unit id="operation.date">
                 <source>operation.date</source>
                 <target>Operation date</target>
+            </trans-unit>
+
+            <trans-unit id="operateur">
+                <source>operateur</source>
+                <target>operateur</target>
+            </trans-unit>
+            <trans-unit id="assistent">
+                <source>assistent</source>
+                <target>assistent</target>
+            </trans-unit>
+            <trans-unit id="omloop">
+                <source>omloop</source>
+                <target>omloop</target>
+            </trans-unit>
+            <trans-unit id="anesthesie">
+                <source>anesthesie</source>
+                <target>anesthesie</target>
+            </trans-unit>
+            <trans-unit id="anesthesie_md">
+                <source>anesthesie_md</source>
+                <target>anesthesie md</target>
             </trans-unit>
 
 

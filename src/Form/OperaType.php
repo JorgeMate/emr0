@@ -11,10 +11,14 @@ use App\Entity\User;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -63,9 +67,9 @@ class OperaType extends AbstractType
             $form = $event->getForm();
             $opera = $event->getData();
 
-            //$this->typeId = $opera->getType();
+            $type = $opera->getTreatment()->getType();
 
-            //var_dump($opera);die;
+            //var_dump($typeId); die;
 
             $form
                 ->add('made_at', DateType::class, [
@@ -77,28 +81,23 @@ class OperaType extends AbstractType
                     // adds a class that can be selected in JavaScript
                     //'attr' => ['class' => 'js-datepicker'],               // desde el form
                     // 'label' => '',                                       // desde el form
-
                 ])
                 ->add('treatment', EntityType::class,[
                     'label' => 'label.treatment',
                     'class' =>  Treatment::class,
-                    'choices' => $this->treatmentRepository->findBy(['type' => '6'], ['name' => 'ASC']),
+                    'choices' => $this->treatmentRepository->findBy(['type' => $type], ['name' => 'ASC']),
                     'choice_label' => 'name',
-                    'placeholder' => 'label.treatments',
+                    //'placeholder' => 'label.treatments',
                     'required' => false,
 
                 ])
                 ->add('user', EntityType::class,[
                     'label' => 'label.medic.user',
                     'class' =>  User::class,
-
                     'choices' => $this->userRepository->findBy(['center' => $this->centerId, 'medic' => true], ['lastname' => 'ASC']),
-
                     'choice_label' => 'lastname',
-
                     'required' => false,
-
-            ]);
+                ]);
 
             if($opera->getId()){
 
@@ -110,9 +109,47 @@ class OperaType extends AbstractType
                     'choice_label' => 'name',
                     'placeholder' => 'label.places',
                     'required' => false,
+                ])
 
+                ->add('value', MoneyType::class,[
+                    'label' => 'label.value',
+                    'required' => false,
+                ])
+
+                ->add('operateur', TextType::class, [
+                    'label' => 'operateur',
+                    'required' => false,
+                ])
+
+                ->add('assistent', TextType::class, [
+                    'label' => 'assistent',
+                    'required' => false,
+                ])
+
+                ->add('omloop', TextType::class, [
+                    'label' => 'omloop',
+                    'required' => false,
+                ])
+
+                ->add('anesthesie', TextType::class, [
+                    'label' => 'anesthesie',
+                    'required' => false,
+                ])
+
+                ->add('anesthesie_md', TextType::class, [
+                    'label' => 'anesthesie_md',
+                    'required' => false,
+                ])
+
+                ->add('re_ok', CheckboxType::class, [
+                    'label' => 'label.re_ok',
+                    'required' => false,
+                ])
+
+                ->add('complica', CheckboxType::class, [
+                    'label' => 'label.complica',
+                    'required' => false,
                 ]);
-
 
 
                 #->add('tags', TagsInputType::class, [

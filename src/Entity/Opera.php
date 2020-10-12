@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OperaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -62,6 +64,51 @@ class Opera
      * @ORM\Column(type="text", nullable=true)
      */
     private $notes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Charge::class, mappedBy="opera")
+     */
+    private $charges;
+
+    /**
+     * @ORM\Column(type="string", length=63, nullable=true)
+     */
+    private $operateur;
+
+    /**
+     * @ORM\Column(type="string", length=63, nullable=true)
+     */
+    private $assistent;
+
+    /**
+     * @ORM\Column(type="string", length=63, nullable=true)
+     */
+    private $omloop;
+
+    /**
+     * @ORM\Column(type="string", length=63, nullable=true)
+     */
+    private $anesthesie;
+
+    /**
+     * @ORM\Column(type="string", length=63, nullable=true)
+     */
+    private $anesthesie_md;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : false})
+     */
+    private $re_ok;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : false})
+     */
+    private $complica;
+
+    public function __construct()
+    {
+        $this->charges = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -160,6 +207,121 @@ class Opera
     public function setNotes(?string $notes): self
     {
         $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Charge[]
+     */
+    public function getCharges(): Collection
+    {
+        return $this->charges;
+    }
+
+    public function addCharge(Charge $charge): self
+    {
+        if (!$this->charges->contains($charge)) {
+            $this->charges[] = $charge;
+            $charge->setOpera($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCharge(Charge $charge): self
+    {
+        if ($this->charges->contains($charge)) {
+            $this->charges->removeElement($charge);
+            // set the owning side to null (unless already changed)
+            if ($charge->getOpera() === $this) {
+                $charge->setOpera(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getOperateur(): ?string
+    {
+        return $this->operateur;
+    }
+
+    public function setOperateur(?string $operateur): self
+    {
+        $this->operateur = $operateur;
+
+        return $this;
+    }
+
+    public function getAssistent(): ?string
+    {
+        return $this->assistent;
+    }
+
+    public function setAssistent(?string $assistent): self
+    {
+        $this->assistent = $assistent;
+
+        return $this;
+    }
+
+    public function getOmloop(): ?string
+    {
+        return $this->omloop;
+    }
+
+    public function setOmloop(?string $omloop): self
+    {
+        $this->omloop = $omloop;
+
+        return $this;
+    }
+
+    public function getAnesthesie(): ?string
+    {
+        return $this->anesthesie;
+    }
+
+    public function setAnesthesie(?string $anesthesie): self
+    {
+        $this->anesthesie = $anesthesie;
+
+        return $this;
+    }
+
+    public function getAnesthesieMd(): ?string
+    {
+        return $this->anesthesie_md;
+    }
+
+    public function setAnesthesieMd(?string $anesthesie_md): self
+    {
+        $this->anesthesie_md = $anesthesie_md;
+
+        return $this;
+    }
+
+    public function getReOk(): ?bool
+    {
+        return $this->re_ok;
+    }
+
+    public function setReOk(bool $re_ok): self
+    {
+        $this->re_ok = $re_ok;
+
+        return $this;
+    }
+
+    public function getComplica(): ?bool
+    {
+        return $this->complica;
+    }
+
+    public function setComplica(bool $complica): self
+    {
+        $this->complica = $complica;
 
         return $this;
     }

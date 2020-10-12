@@ -157,6 +157,9 @@
       <path value="$PROJECT_DIR$/vendor/twig/extra-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/webpack-encore-bundle" />
       <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/vendor/thadafinser/package-info" />
+      <path value="$PROJECT_DIR$/vendor/thadafinser/user-agent-parser" />
+      <path value="$PROJECT_DIR$/vendor/whichbrowser/parser" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

@@ -20,18 +20,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e00503ba-6e43-4c6b-81e4-f9dc2c66e297" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/migrations/Version20200828213233.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Charge.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/UserLog.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/EventListener/LoginListener.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/EventListener/LogoutListener.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/EventListener/LogoutListener2.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/ChargeRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/UserLogRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Utils/AgentInfo.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/center/options.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/emr0.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/emr0.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CenterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CenterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/EntityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EntityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ImportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ImportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ResetPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SuperController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SuperController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/OperaRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/OperaRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/report/treatments.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/report/treatments.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Opera.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Opera.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/OperaType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/OperaType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/TreatmentType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/TreatmentType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/center/cpanel.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/center/cpanel.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/default/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/register.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/entity/insurance/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entity/insurance/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/entity/place/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entity/place/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/entity/source/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entity/source/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/entity/type_trat/trat_edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entity/type_trat/trat_edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/patient/opera/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient/opera/edit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/translations/messages+intl-icu.en.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages+intl-icu.en.xlf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translations/messages+intl-icu.es.xlf" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages+intl-icu.es.xlf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,6 +234,9 @@
       <path value="$PROJECT_DIR$/vendor/twig/extra-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/webpack-encore-bundle" />
       <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/vendor/thadafinser/package-info" />
+      <path value="$PROJECT_DIR$/vendor/thadafinser/user-agent-parser" />
+      <path value="$PROJECT_DIR$/vendor/whichbrowser/parser" />
     </include_path>
   </component>
   <component name="ProjectId" id="1fXvoSwLthU4pdUIn43OJPigrwt" />
@@ -240,6 +265,7 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -312,6 +338,14 @@
       <workItem from="1598383590117" duration="1975000" />
       <workItem from="1598386839746" duration="4205000" />
       <workItem from="1598458891185" duration="1839000" />
+      <workItem from="1598552066831" duration="9436000" />
+      <workItem from="1598640335472" duration="81000" />
+      <workItem from="1598640456744" duration="3175000" />
+      <workItem from="1598646480469" duration="1878000" />
+      <workItem from="1598649937404" duration="2282000" />
+      <workItem from="1598737139558" duration="602000" />
+      <workItem from="1598807708847" duration="2858000" />
+      <workItem from="1598813019302" duration="434000" />
     </task>
     <servers />
   </component>
@@ -350,10 +384,10 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="2009" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1597614536864" />
-    <state x="2009" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1598290892479">
+    <state x="2009" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1598809566618">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="2009" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1598290892479" />
+    <state x="2009" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1280.0.1920.1080/0.27.1280.997@1280.0.1920.1080" timestamp="1598809566618" />
     <state x="2012" y="406" width="518" height="302" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1596981446687">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
@@ -420,6 +454,11 @@
           <url>file://$PROJECT_DIR$/templates/patient/TABS/_TAB2.html.twig</url>
           <line>152</line>
           <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Entity/UserLog.php</url>
+          <line>4</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/src/Controller/AgendaController.php</url>

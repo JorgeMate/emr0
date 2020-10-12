@@ -1,13 +1,14 @@
 {% extends 'base93.html.twig' %}
 
+{% block title %}{{'label.treatment'|trans}} {{ treatment.id }}{% endblock %}
+
 {% block main %}
 
 <div class="form-row">
     <div class="form-group col-md-9">
-        <h4>{{'label.treatment'|trans}} <i class="fa fa-file-medical-alt"></i> {{ treatment.name }}</h4>
+        <h4>{{'label.treatment'|trans}}: <span class="text-info"><i class="fa fa-file-medical-alt"></i> {{ treatment.name }}</span></h4>
     </div>
     <div class="form-group col-md-3">
-            
     </div>
 </div>
 
@@ -40,7 +41,7 @@
         <div class="form-group col-sm-3">
             
             <a href="{{ path('treats_index', {slug:app.user.center.slug, id: treatment.type.id}) }}" class="btn btn-block btn-success">
-                <i class="fa fa-arrow-left" aria-hidden="true"></i> {{ treatment.type.name }}
+                 <i class="fa fa-arrow-left" aria-hidden="true"></i> {{ treatment.type.name }}
             </a>                
         </div>
 

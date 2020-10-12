@@ -4,13 +4,14 @@ namespace App\Form;
 
 use App\Entity\Treatment;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+
 
 class TreatmentType extends AbstractType
 {
@@ -33,9 +34,9 @@ class TreatmentType extends AbstractType
                 'attr' => ['rows' => '4'],    
             ])
 
-            ->add('value', NumberType::class, [
+            ->add('value', MoneyType::class, [
                 'label' => 'label.value',
-                'required' => false,  
+                'required' => true,  
             ])
             
             

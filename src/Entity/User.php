@@ -140,6 +140,11 @@ class User implements UserInterface
      */
     private $historias;
 
+    /**
+     * @ORM\OneToMany(targetEntity=UserLog::class, mappedBy="user")
+     */
+    private $userLogs;
+
 
     
 
@@ -156,6 +161,7 @@ class User implements UserInterface
         $this->consults = new ArrayCollection();
         $this->medicats = new ArrayCollection();
         $this->historias = new ArrayCollection();
+        $this->userLogs = new ArrayCollection();
     }
 
     public function getPatientsNo() 
@@ -645,6 +651,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($historia->getUser() === $this) {
                 $historia->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserLog[]
+     */
+    public function getUserLogs(): Collection
+    {
+        return $this->userLogs;
+    }
+
+    public function addUserLog(UserLog $userLog): self
+    {
+        if (!$this->userLogs->contains($userLog)) {
+            $this->userLogs[] = $userLog;
+            $userLog->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserLog(UserLog $userLog): self
+    {
+        if ($this->userLogs->contains($userLog)) {
+            $this->userLogs->removeElement($userLog);
+            // set the owning side to null (unless already changed)
+            if ($userLog->getUser() === $this) {
+                $userLog->setUser(null);
             }
         }
 

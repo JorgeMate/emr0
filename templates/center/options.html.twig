@@ -1,0 +1,77 @@
+{% extends 'base93.html.twig' %}
+
+{% block pag_name %}{{ 'title.center_cpanel'|trans }}{% endblock %}
+
+{% block header %}
+    {{ include('/_header.html.twig') }}
+{% endblock %}
+
+{% block body %}
+
+    <nav aria-label="breadcrumb">
+
+        <ol class="breadcrumb">
+
+
+
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+
+                <li class="breadcrumb-item"><a href="{{ path('super_cpanel') }}">{{ 'title.super_cpanel'|trans }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('centers_index') }}">{{ 'title.centers_list'|trans }}</a></li>
+
+            {% else %}
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="breadcrumb-item"><a href="{{ path('center_cpanel', {slug: app.user.center.slug}) }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> {{ 'title.center_cpanel'|trans }}</a></li>
+                    <li class="breadcrumb-item enabled aria-current=page">{{ app.user.center.name }} </li>
+                    <li class="breadcrumb-item enabled aria-current=page"><span class="text-info"> {{ 'program.options'|trans }}</span></li>
+                {% endif %}
+
+            {% endif %}
+
+        </ol>
+
+    </nav>
+
+
+    <br>
+
+
+    <h5>
+        <!-- Nav tabs -->
+        <div class="nav nav-tabs" role="tablist" id="myTab">
+            <a class="nav-item nav-link active" href="#nav-1" aria-controls="nav-1" role="tab" data-toggle="tab">Labels</a>
+            <a class="nav-item nav-link" href="#nav-2" aria-controls="nav-2" role="tab" data-toggle="tab">Option 2</a>
+            <a class="nav-item nav-link" href="#nav-3" aria-controls="nav-3" role="tab" data-toggle="tab">Option 3</a>
+            <a class="nav-item nav-link" href="#nav-4" aria-controls="nav-4" role="tab" data-toggle="tab">Option 4</a>
+
+
+        </div>
+    </h5>
+
+    {# interior de los tabls #}
+    <div class="tab-content" id="nav-tabContent">
+
+        {# TAB 1 datos paciente #}
+
+        <div role="tabpanel" class="tab-pane fade show active" id="nav-1">
+            <br>
+            <br>
+            {{ 'label.treatments' |trans}}
+            <hr>
+            <br>
+
+
+
+        </div>
+        <div role="tabpanel" class="tab-pane fade show active" id="nav-2">
+        </div>
+        <div role="tabpanel" class="tab-pane fade show active" id="nav-3">
+        </div>
+        <div role="tabpanel" class="tab-pane fade show active" id="nav-4">
+        </div>
+
+    </div>
+
+
+{% endblock %}

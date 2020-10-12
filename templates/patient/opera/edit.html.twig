@@ -1,102 +1,196 @@
-{% extends 'base93.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body_id 'opera_edit' %}
 
-{% block main %}
+{% block title %}{{ opera.id }}{% endblock %}
 
-<div class="container">
+{% block body %}
 
-    <div class="row justify-content-between">
+    {{ form_start(operaForm, {'attr': {'novalidate': 'novalidate'}}) }}
 
-        <div class="col-sm-auto">
+        <div class="container">
 
-            <h4>
-                
-                <i class="fa fa-file-medical-alt"></i> {{opera.treatment.name}} | <i class="fa fa-user-injured"></i> {{ opera.patient.firstname }} {{ opera.patient.lastname }} &nbsp;
-                {% if opera.patient.sex %}
-                    <i class="fa fa-venus text-danger"></i>
-                {% else %}
-                    <i class="fa fa-mars text-info"></i>
-                {% endif %}
-                {{ opera.patient.dateOfBirth | age }}
+            <div class="row justify-content-between">
 
-            </h4>
-    
+                <div class="col-sm-auto">
+
+                    <h4>
+                        
+                        {{opera.treatment.name}} | <i class="fa fa-user-injured"></i> {{ opera.patient.firstname }} {{ opera.patient.lastname }} &nbsp;
+                        {% if opera.patient.sex %}
+                            <i class="fa fa-venus text-danger"></i>
+                        {% else %}
+                            <i class="fa fa-mars text-info"></i>
+                        {% endif %}
+                        {{ opera.patient.dateOfBirth | age }}
+
+                    </h4>
+            
+                </div>
+
+                <div class="col"></div>
+
+            </div>
+
+            {{ form_errors(operaForm) }}
+
+            <div class="form-row">
+
+                <div class="form-group col-3">
+                    {{ form_row(operaForm.user, {
+                        label: 'Dr.',
+                    }) }}
+                </div>
+
+                <div class="form-group col-6">
+                    {{ form_row(operaForm.treatment, {
+                        
+                    }) }}
+
+                    {# disabled: true #}
+
+                </div>
+
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group has-feedback col-3">
+                    {{ form_row(operaForm.made_at, {
+                        label: 'Programada para',
+                        attr: {
+                            class: 'js-datepicker'
+                        }
+                    }) }}
+                </div>
+
+                <div class="form-group col-6">
+                    {{ form_row(operaForm.place) }}
+                </div>
+
+
+
+            </div>
+
+            <div class="form-row">
+
+
+            </div>
+
+
         </div>
 
-        <div class="col"></div>
+        <div class="container">
+
+            <div class="card border-success mb-3">
+
+                <div class="card-header">
+
+                    <div class="row justify-content-between">
+
+
+                        <div class="col-3 text-right">
+                            <button class="btn btn-outline-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseNewCon2" aria-expanded="false" aria-controls="collapseExample">
+                                {# Button with data-target #}
+                                <i class="fa fa-clipboard" aria-hidden="true"></i> Detailed Info
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card card-body collapse" id="collapseNewCon2">
+                    <div class="form-row">
+                        <div class="form-group col-3">
+                            {{ form_row(operaForm.operateur, {
+                            }) }}
+                        </div>
+                        <div class="form-group col-3">
+                            {{ form_row(operaForm.assistent, {
+                            }) }}
+                        </div>
+                        <div class="form-group col-3">
+                            {{ form_row(operaForm.omloop, {
+                            }) }}
+                        </div>
+
+                        <div class="form-group col-3 text-right text-danger">
+                            {{ form_row(operaForm.re_ok, {
+                            }) }}
+                            {{ form_row(operaForm.complica, {
+                            }) }}
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-3">
+                            {{ form_row(operaForm.anesthesie, {
+                            }) }}
+                        </div>
+                        <div class="form-group col-3">
+                            {{ form_row(operaForm.anesthesie_md, {
+                            }) }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="container">
+
+        <div class="card border-success mb-3">
+
+            <div class="card-header">
+
+                <div class="row justify-content-between">
+
+                    <div class="form-group col-3">
+                        <a href="{{ path('patient_show', {slug:app.user.center.slug, id:opera.patient.id, tab:'#nav-3'}) }}" class="btn btn-success btn-block">
+                            <i class="fa fa-arrow-left"></i> {{ 'label.treatments'|trans }}
+                        </a>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.save'|trans }}
+                        </button>
+                    </div>
+
+                    <div class="col-3 text-right">
+                        <button class="btn btn-info btn-block" type="button" data-toggle="collapse" data-target="#collapseNewCon" aria-expanded="false" aria-controls="collapseExample">
+                            {# Button with data-target #}
+                            <i class="fa fa-clipboard" aria-hidden="true"></i> ECO Info
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card card-body collapse" id="collapseNewCon">
+                <div class="form-row">
+                    {{ form_row(operaForm.value) }}
+                </div>
+            </div>
+
+        </div>
 
     </div>
 
-</div>
 
-{{ form_start(operaForm, {'attr': {'novalidate': 'novalidate'}}) }}
-
-    {{ form_errors(operaForm) }}
-
-    <div class="form-row">
-
-        <div class="form-group col-md-3">
-            {{ form_row(operaForm.user, {
-                label: 'Dr.',
-            }) }}
-        </div>
-
-        <div class="form-group col-md-3">
-            {{ form_row(operaForm.treatment, {
-                disabled: true
-            }) }}
-
-        </div>
-
-        <div class="form-group has-feedback col-md-3">
-            {{ form_row(operaForm.made_at, {
-                label: 'Programada para',
-                attr: {
-                    class: 'js-datepicker'
-                }
-            }) }}
-        </div>
-
-        <div class="form-group col-md-3">
-            {{ form_row(operaForm.place) }}
-        </div>
-
-
-    </div>
-
-    <div class="form-row">
-
-        <div class="form-group col-md-3">
-
+        <div class="form-row">
         </div>
 
     </div>
 
-    <div class="form-row">
-
-        <div class="form-group col-md-3">
-
-            <a href="{{ path('patient_show', {slug:app.user.center.slug, id:opera.patient.id}) }}" class="btn btn-block btn-success">
-                <i class="fa fa-arrow-left"></i> {{ 'label.treatments'|trans }}
-            </a>
-
-        </div>
-
-        <div class="form-group col-md-6"></div>
-
-        <div class="form-group col-md-3">
-
-            <button type="submit" class="btn btn-block btn-primary">
-                <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.save'|trans }}
-            </button>
-
-        </div>
-
-    </div>
-
-{{ form_end(operaForm) }}
-
-
+    {{ form_end(operaForm) }}
 
 {% endblock %}
+
+

@@ -70,10 +70,13 @@
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class="fa fa-toggle-on"></i> <a href=""> Program Options</a></li>
-                    <li class="list-group-item"><i class="fa fa-lock"></i> <a href=""> Premissions</a></li>
-                    
-                    <li class="list-group-item"></li>
+                    <li class="list-group-item"><i class="fa fa-toggle-on"></i> <a href="{{ path('program_options',{slug:center.slug}) }}">
+                        {{ 'program.options'|trans }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fa fa-toggle-on"></i> Configuration
+                    </li>
+                    <li class="list-group-item"><i class="fa fa-lock"></i> <a href=""> Permissions</a></li>
                 </ul>
             </div>
         </div>
