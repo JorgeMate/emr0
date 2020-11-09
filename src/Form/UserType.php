@@ -37,6 +37,8 @@ class UserType extends AbstractType
         $this->isSuper = false;
 
         $this->requestingUserId  = $security->getUser()->getId();
+
+        // var_dump($this->requestingUserId);
        
         if (in_array('ROLE_ADMIN', $security->getUser()->getRoles()))
         {
@@ -49,8 +51,13 @@ class UserType extends AbstractType
         }
 
         if($security->getUser()->getCenterUser()){
+
+        //    var_dump($security->getUser()->getCenterUser());
+
             $this->isOwner = true;
         }
+
+        
 
     }        
 

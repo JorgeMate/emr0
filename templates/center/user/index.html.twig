@@ -26,123 +26,129 @@
 
     </nav>
 
-    <div class="container">
+    
 
-        <div class="row justify-content-between">
+    <div class="row">
 
-            <div class="col">
-                <h4><span class="text-info">{{ center.name }}</span> <i class="fa fa-list-alt"></i> {{ 'title.users_list'|trans }}</h4>
-            </div>        
+        <div class="col-6">
+            <h4><span class="text-info">{{ center.name }}</span> - <i class="fa fa-list-alt"></i> {{ 'title.users_list'|trans }}</h4>
+        </div>        
 
-            <div class="col">
+        <div class="col-6">
+            <div class="text-right">
                 <a href="{{ path('user_new', {slug:slug}) }}" class="btn btn-primary">
                     <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.new'|trans }}
                 </a>
-            </div>        
-
-        </div>
+            </div>
+        </div>        
 
     </div>
 
-   <table class="table table-striped table-hover table-responsive">
 
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>{{ 'label.name'|trans }}</th>
-                <th>{{ 'label.email'|trans }}</th>
-                <th>Tel</th>
-                <th>{{ 'title.patients'|trans }}</th>
-                <th class="text-center">{{'label.enabled'|trans}}</th>
-                
-            </tr>
-        </thead>
+    {% if users|length %}
 
-        <tbody>
+         <table class="table table-striped table-hover table-responsive">
 
-         {% for user in users %}
-
-            <tr>
-                <td> 
-                {% if not is_granted('IS_IMPERSONATOR') %}
-                    <a href="{{ path('user_cpanel', {slug:app.user.center.slug, _switch_user:user.email} ) }}">
-                        <i class="fa fa-user-circle text-danger"></i>
-                    </a>
-                {% endif %}
-                </td>
-                <td class="text-center">
-
-                    {# solo podemos editar el registro de ese usuario si
-                    El demandante es el super
-                    o
-                    es el registro del mismo usuario
-                    o
-                    el demandante es el propietario del sistema
-                    o
-                    el registro es no es un administrador ni un super 
-                    #}
-
-                    {% if       is_granted('ROLE_SUPER_ADMIN')      
-                                or app.user.id == user.id
-                                or app.user.centerUser == app.user.center.id
-                                or (not('ROLE_ADMIN' in user.roles) and not('ROLE_SUPER_ADMIN' in user.roles))
-                    %}
-
-                        <div class="item-actions">
-                            <a href="{{ path('user_edit', {slug:user.center.slug, id: user.id}) }}" class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-edit" aria-hidden="true"></i>
-                            </a>
-                        </div>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>{{ 'label.name'|trans }}</th>
+                    <th>{{ 'label.email'|trans }}</th>
+                    <th>Tel</th>
+                    <th>{{ 'title.patients'|trans }}</th>
+                    <th class="text-center">{{'label.enabled'|trans}}</th>
                     
-                    {% else %}
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for user in users %}
+
+                <tr>
+                    <td> 
+                    {% if not is_granted('IS_IMPERSONATOR') %}
+                        <a href="{{ path('user_cpanel', {slug:app.user.center.slug, _switch_user:user.email} ) }}">
+                            <i class="fa fa-user-circle text-danger"></i>
+                        </a>
                     {% endif %}
+                    </td>
+                    <td class="text-center">
 
-                </td>
-                <td>
-                    {% if user.centerUser == user.id %}
-                    <i class="fa fa-key text-warning"></i>
-                    {% endif %}
+                        {# solo podemos editar el registro de ese usuario si
+                        El demandante es el super
+                        o
+                        es el registro del mismo usuario
+                        o
+                        el demandante es el propietario del sistema
+                        o
+                        el registro es no es un administrador ni un super 
+                        #}
 
-                    {% if 'ROLE_ADMIN' in user.roles or 'ROLE_SUPER_ADMIN' in user.roles %}
-                    <i class="fa fa-key text-info"></i>
-                    {% endif %}
-                </td>
+                        {% if       is_granted('ROLE_SUPER_ADMIN')      
+                                    or app.user.id == user.id
+                                    or app.user.centerUser == app.user.center.id
+                                    or (not('ROLE_ADMIN' in user.roles) and not('ROLE_SUPER_ADMIN' in user.roles))
+                        %}
 
-                <td>{% if user.medic %}<i class="fa fa-user-md"></i>{% endif %}</td>
-                <td>
-                    {{ user.firstname }} {{ user.lastname }}
-                </td>
-                <td>
-                    {{ user.email }} 
-                </td>    
-                <td>
-                    {{ user.tel }}
-                </td>
+                            <div class="item-actions">
+                                <a href="{{ path('user_edit', {slug:user.center.slug, id: user.id}) }}" class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        
+                        {% else %}
+                        {% endif %}
 
-                <td class="text-center">
-                    {#  user.patients|length #}
-                </td>
+                    </td>
+                    <td>
+                        {% if user.centerUser == user.id %}
+                        <i class="fa fa-key text-warning"></i>
+                        {% endif %}
 
-                <td class="text-center">
-                    {% if user.enabled %}
-                        <i class="fa fa-toggle-on text-success"></i>
-                    {% else %}  
-                        <i class="fa fa-toggle-off text-danger"></i>
-                    {% endif %}  
-                </td>
+                        {% if 'ROLE_ADMIN' in user.roles or 'ROLE_SUPER_ADMIN' in user.roles %}
+                        <i class="fa fa-key text-info"></i>
+                        {% endif %}
+                    </td>
+
+                    <td>{% if user.medic %}<i class="fa fa-user-md"></i>{% endif %}</td>
+                    <td>
+                        {{ user.firstname }} {{ user.lastname }}
+                    </td>
+                    <td>
+                        {{ user.email }} 
+                    </td>    
+                    <td>
+                        {{ user.tel }}
+                    </td>
+
+                    <td class="text-center">
+                        {#  user.patients|length #}
+                    </td>
+
+                    <td class="text-center">
+                        {% if user.enabled %}
+                            <i class="fa fa-toggle-on text-success"></i>
+                        {% else %}  
+                            <i class="fa fa-toggle-off text-danger"></i>
+                        {% endif %}  
+                    </td>
 
 
 
-            </tr>
-         {% endfor %}
+                </tr>
+            {% endfor %}
 
 
-        </tbody>
+            </tbody>
 
-    </table>
+        </table>
+
+
+    {% endif %}
 
 
 

@@ -136,7 +136,13 @@
 
             <trans-unit id="label.reports">
                 <source>label.reports</source>
-                <target>RAPPORTS</target>
+                <target>Rapports pour les patients</target>
+            </trans-unit>
+
+
+            <trans-unit id="label.stats">
+                <source>label.stats</source>
+                <target>Statistiques</target>
             </trans-unit>
 
             <trans-unit id="label.report.treatments">

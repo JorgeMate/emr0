@@ -22,60 +22,63 @@
 
 </div>
 
+{% if medics|length %}
 
 
-<table class="table table-responsive">
-    <thead>
-        <tr>
-            <th></th>
-            <th>{{'label.medic.title'|trans}}</th>
-            <th>{{'label.firstname'|trans}}</th>
-            <th>{{'label.lastname'|trans}}</th>
-            <th class="text-center"><i class="fa fa-user-md"></i></th>
-            
-            <th>{{'label.medic.spec'|trans}}</th>
-            <th></th>
-            <th>{{'title.access'|trans}}</th>
-            
-            <th>{{'label.enabled'|trans}}</th>
-            
-        </tr>
-        </thead>
-    <tbody>
-        {% for medic in medics %}
-        <tr>
-            <td>
-                <a href="{{ path('edit_user_medic',{slug:app.user.center.slug, id:medic.id}) }}" class="btn btn-sm btn-outline-success">
-                    <i class="fa fa-edit" aria-hidden="true"></i> 
-                </a>
-            </td>
-            <td>{{ medic.title }}</td>
-            <td>{{ medic.firstname }}</td>
-            <td>{{ medic.lastname }} </td>
-            <td>{{ medic.cod }}</td>
-            
-            <td>{{ medic.speciality }}</td>
-            <td>
-                {% if medic.internal %}
-                    <i class="fa fa-home"></i>
-                {% endif %}      
-            </td>
-            <td>{{ medic.email }} </td>
-            
-            <td class="text-center">
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th></th>
+                <th>{{'label.medic.title'|trans}}</th>
+                <th>{{'label.firstname'|trans}}</th>
+                <th>{{'label.lastname'|trans}}</th>
+                <th class="text-center"><i class="fa fa-user-md"></i></th>
+                
+                <th>{{'label.medic.spec'|trans}}</th>
+                <th></th>
+                <th>{{'title.access'|trans}}</th>
+                
+                <th>{{'label.enabled'|trans}}</th>
+                
+            </tr>
+            </thead>
+        <tbody>
+            {% for medic in medics %}
+            <tr>
+                <td>
+                    <a href="{{ path('edit_user_medic',{slug:app.user.center.slug, id:medic.id}) }}" class="btn btn-sm btn-outline-success">
+                        <i class="fa fa-edit" aria-hidden="true"></i> 
+                    </a>
+                </td>
+                <td>{{ medic.title }}</td>
+                <td>{{ medic.firstname }}</td>
+                <td>{{ medic.lastname }} </td>
+                <td>{{ medic.cod }}</td>
+                
+                <td>{{ medic.speciality }}</td>
+                <td>
+                    {% if medic.internal %}
+                        <i class="fa fa-home"></i>
+                    {% endif %}      
+                </td>
+                <td>{{ medic.email }} </td>
+                
+                <td class="text-center">
 
-                {% if medic.enabled %}
-                        <i class="fa fa-toggle-on text-success"></i>
-                {% else %}  
-                        <i class="fa fa-toggle-off text-danger"></i>
-                {% endif %} 
-  
-            </td>
-            
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+                    {% if medic.enabled %}
+                            <i class="fa fa-toggle-on text-success"></i>
+                    {% else %}  
+                            <i class="fa fa-toggle-off text-danger"></i>
+                    {% endif %} 
+    
+                </td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endif %}
 
 
 {% endblock %}

@@ -146,10 +146,16 @@
                 <target>Iniciar sesión</target>
             </trans-unit>
 
-
             <trans-unit id="label.reports">
                 <source>label.reports</source>
-                <target>INFORMES</target>
+                <target>Informes para pacientes</target>
+            </trans-unit>
+
+
+
+            <trans-unit id="label.stats">
+                <source>label.stats</source>
+                <target>Estadísticas</target>
             </trans-unit>
 
 
@@ -731,11 +737,11 @@
             </trans-unit>
             <trans-unit id="label.doc_group">
                 <source>label.doc_group</source>
-                <target>Grupos de documentos</target>
+                <target>Tipo</target>
             </trans-unit>
             <trans-unit id="label.docs">
                 <source>label.docs</source>
-                <target>Documentos</target>
+                <target>Documentos genéricos</target>
             </trans-unit>
 
             <trans-unit id="label.medic_role">

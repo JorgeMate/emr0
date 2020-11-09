@@ -52,9 +52,10 @@
         </div>  
 
         <div class="col-sm-3">
+
             <div class="card">
                 <div class="card-header"> 
-                    <h5><i class="fa fa-folder-open"></i> {{'label.docs'|trans}}</h5>
+                    <h5><i class="fa fa-folder-open-o"></i> {{'label.docs'|trans}}</h5>
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
@@ -64,21 +65,39 @@
                     </ul>
                 </div>
             </div>
-            
+
+            <br>
+
+            <div class="card">
+                <div class="card-header"> 
+                    <h5><i class="fa fa-folder-open"></i> {{'label.reports'|trans}}</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                    {% for group in groups %}
+                        <li class="list-group-item"><i class="fa fa-file-o"></i> <a href="{{ path('docs_index', {slug:center.slug, id:group.id} ) }}">{{ group.name }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+
+
         </div>
 
         <div class="col-sm-3">
             <div class="card">
                 <div class="card-header">
-                    <h5><i class="fa fa-sticky-note-o"></i> {{ 'label.reports'|trans|upper }}</h5>
+                    <h5><i class="fa fa-sticky-note-o"></i> {{ 'label.stats'|trans|upper }}</h5>
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><i class="fa fa-clipboard"></i> <a href="{{ path('report_treatments',{slug:app.user.center.slug} ) }}">{{ 'label.treatments'|trans }}</a></li>
+                        <li class="list-group-item"><i class="fa fa-clipboard"></i> <a href="{{ path('stats_treatments',{slug:app.user.center.slug} ) }}">{{ 'label.treatments'|trans }}</a></li>
 
                     </ul>
                 </div>
             </div>
+            
         </div>
 
 

@@ -49,7 +49,7 @@
 
         <div class="card">
             <div class="card-header"> 
-                <h5><i class="fa fa-folder-open-o"></i> <a href="{{ path('doc_groups_index',{slug:center.slug}) }}"> {{'label.doc_groups'|trans}}</a></h5>
+                <h5><i class="fa fa-folder-open-o"></i> <a href="{{ path('doc_groups_index',{slug:center.slug}) }}"> {{'label.docs'|trans}}</a></h5>
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
@@ -59,6 +59,24 @@
                 </ul>
             </div>
         </div>
+
+
+        <br>
+
+        <div class="card">
+            <div class="card-header"> 
+                <h5><i class="fa fa-folder-open"></i> <a href="{{ path('report_types_index',{slug:center.slug}) }}"> {{'label.reports'|trans}}</a></h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                {% for group in groups %}
+                    <li class="list-group-item"><i class="fa fa-file-o"></i> <a href="{{ path('docs_index', {slug:center.slug, id:group.id} ) }}">{{ group.name }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+
     
     </div>
 

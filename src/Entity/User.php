@@ -145,6 +145,11 @@ class User implements UserInterface
      */
     private $userLogs;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Report::class, mappedBy="user")
+     */
+    private $reports;
+
 
     
 
@@ -162,6 +167,7 @@ class User implements UserInterface
         $this->medicats = new ArrayCollection();
         $this->historias = new ArrayCollection();
         $this->userLogs = new ArrayCollection();
+        $this->reports = new ArrayCollection();
     }
 
     public function getPatientsNo() 
@@ -682,6 +688,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($userLog->getUser() === $this) {
                 $userLog->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Report[]
+     */
+    public function getReports(): Collection
+    {
+        return $this->reports;
+    }
+
+    public function addReport(Report $report): self
+    {
+        if (!$this->reports->contains($report)) {
+            $this->reports[] = $report;
+            $report->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReport(Report $report): self
+    {
+        if ($this->reports->contains($report)) {
+            $this->reports->removeElement($report);
+            // set the owning side to null (unless already changed)
+            if ($report->getUser() === $this) {
+                $report->setUser(null);
             }
         }
 

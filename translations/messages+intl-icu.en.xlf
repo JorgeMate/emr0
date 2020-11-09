@@ -173,12 +173,18 @@
 
             <trans-unit id="label.reports">
                 <source>label.reports</source>
-                <target>REPORTS</target>
+                <target>Reports for patients</target>
+            </trans-unit>
+
+
+            <trans-unit id="label.stats">
+                <source>label.stats</source>
+                <target>Statistics</target>
             </trans-unit>
 
             <trans-unit id="label.report.treatments">
                 <source>label.report.treatments</source>
-                <target>Treatments REPORT</target>
+                <target>Treatments Stats</target>
             </trans-unit>
 
 
@@ -747,15 +753,15 @@
 
             <trans-unit id="label.doc_groups">
                 <source>label.doc_groups</source>
-                <target>Document types</target>
+                <target>Documents</target>
             </trans-unit>
             <trans-unit id="label.doc_group">
                 <source>label.doc_group</source>
-                <target>Documents group</target>
+                <target>Type</target>
             </trans-unit>
             <trans-unit id="label.docs">
                 <source>label.docs</source>
-                <target>Documents</target>
+                <target>Generic documents</target>
             </trans-unit>
 
 

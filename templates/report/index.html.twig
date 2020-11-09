@@ -1,0 +1,38 @@
+{% extends 'base93.html.twig' %}
+
+{% block main %}
+
+    <div class="container">
+
+        <div class="row justify-content-between">
+
+            <div class="col-auto">
+                <h4>
+                    <a href="{{ path('center_cpanel', {slug:app.user.center.slug}) }}">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i> {{ app.user.center.name }}</a>
+                    | <i class="fa fa-folder-open"></i> {{'label.reports'|trans}}
+
+                </h4>
+            </div>        
+
+            <div class="col text-right">
+                <a href="{{ path('report_type_new', {slug: app.user.center.slug}) }}" class="btn btn-primary">
+                    <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.new'|trans }}
+                </a>
+            </div>        
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+    {% if types|length %}
+ 
+
+
+    {% endif %}
+
+{% endblock %} 
+ 

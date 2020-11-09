@@ -741,12 +741,6 @@
             "config/packages/reset_password.yaml"
         ]
     },
-    "thadafinser/package-info": {
-        "version": "v1.0.0"
-    },
-    "thadafinser/user-agent-parser": {
-        "version": "v2.0.0"
-    },
     "twig/extensions": {
         "version": "1.0",
         "recipe": {

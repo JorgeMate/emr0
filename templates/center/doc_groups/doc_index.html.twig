@@ -9,11 +9,11 @@
 
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('center_cpanel', {slug:app.user.center.slug}) }}">
-                    <i class="fa fa-arrow-left" aria-hidden="true"></i>{{ app.user.center.name }}</a>                
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> {{ app.user.center.name }}</a>                
                 | 
 
                 <a href="{{ path('doc_groups_index', {slug:app.user.center.slug}) }}">
-                    <i class="fa fa-arrow-left" aria-hidden="true"></i>{{ 'label.doc_groups'|trans }}</a>           
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> {{ 'label.docs'|trans }}</a>          
                 | 
             {% endif %}
 
@@ -80,40 +80,45 @@
 
     <div class="col-sm-8">
 
-        <table class="table table-responsive table-striped">
+        {% if docs|length %}
 
-            <tbody>
-                {% for doc in docs %}
-                <tr>
-                    <td>{{doc.updatedAt|date('d/m/y') }}</td>
-                    <td>
-                        {{ doc.originalFilename }}
-                        <br>
-                        <strong>{{ doc.description }}</strong>
-                    </td>
-                    <td>
+            <table class="table table-responsive table-striped">
 
-                        <h2>
+                <tbody>
+                    {% for doc in docs %}
+                    <tr>
+                        <td>{{doc.updatedAt|date('d/m/y') }}</td>
+                        <td>
+                            {{ doc.originalFilename }}
+                            <br>
+                            <strong>{{ doc.description }}</strong>
+                        </td>
+                        <td>
 
-                            <a href="{{ path('doc_user_download', {
-                                    id: doc.id,
-                                    slug:app.user.center.slug
-                                }) }}" target="_blank">
+                            <h2>
 
-                                <i class="fa fa-file-pdf-o"></i>
-                                {# <img src="{{ doc.filePath|imagine_filter('square_thumbnail_small') }}"> #}
+                                <a href="{{ path('doc_user_download', {
+                                        id: doc.id,
+                                        slug:app.user.center.slug
+                                    }) }}" target="_blank">
 
-                            </a>
+                                    <i class="fa fa-file-pdf-o"></i>
+                                    {# <img src="{{ doc.filePath|imagine_filter('square_thumbnail_small') }}"> #}
 
-                        </h2>
+                                </a>
+
+                            </h2>
 
 
-                    </td>                 
-                </tr>
-                {% endfor %}    
-            </tbody>
+                        </td>                 
+                    </tr>
+                    {% endfor %}    
+                </tbody>
 
-        </table>
+            </table>
+
+        {% endif %}
+
 
     </div>
 

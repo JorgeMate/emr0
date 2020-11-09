@@ -15,12 +15,14 @@ use App\Entity\Center;
 use App\Entity\User;
 
 use App\Entity\DocCenterGroup;
+use App\Entity\ReportType;
 
 use App\Form\CenterType;
 use App\Form\UserType;
 use App\Form\NewUserType;
 
 use App\Form\DocCenterGroupType;
+use App\Form\ReportTypeType;
 
 use App\Form\MedicType;
 
@@ -239,6 +241,47 @@ class CenterController extends AbstractController
         ]);
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * @Route("/{slug}/new/patient-report-type", methods={"GET", "POST"}, name="report_type_new")
+     * @param Request $request
+     * @param $slug
+     * @return Response
+     */
+    public function newReportType(Request $request, $slug): Response
+    {
+        $center = $this->getUser()->getCenter();
+
+        $this->denyAccessUnlessGranted('CENTER_EDIT', $center);
+
+        $type = new ReportType();
+        $type->setCenter($center);
+
+        $form = $this->createForm(ReportTypeType::class, $type);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($type);
+            $em->flush();
+
+            $this->addFlash('info', 'record.updated_successfully');
+
+            return $this->redirectToRoute('report_types_index', ['slug' => $slug]);
+        }
+
+        return $this->render('/report/edit.html.twig', [
+            'type' => $type,
+            'form' => $form->createView(), 
+        ]);
+
+    }
+
+
+
     /**
      * @Route("/{slug}/new/documents-group", methods={"GET", "POST"}, name="group_new")
      * @param Request $request
@@ -305,6 +348,11 @@ class CenterController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     /**
      * @Route("/{slug}/program-options", methods={"GET", "POST"}, name="program_options")

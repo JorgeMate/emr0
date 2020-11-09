@@ -118,6 +118,11 @@ class Center
      */
     private $places;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ReportType::class, mappedBy="center")
+     */
+    private $reportTypes;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -126,6 +131,7 @@ class Center
         $this->sources = new ArrayCollection();
         $this->types = new ArrayCollection();
         $this->places = new ArrayCollection();
+        $this->reportTypes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -482,6 +488,37 @@ class Center
             // set the owning side to null (unless already changed)
             if ($place->getCenter() === $this) {
                 $place->setCenter(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ReportType[]
+     */
+    public function getReportTypes(): Collection
+    {
+        return $this->reportTypes;
+    }
+
+    public function addReportType(ReportType $reportType): self
+    {
+        if (!$this->reportTypes->contains($reportType)) {
+            $this->reportTypes[] = $reportType;
+            $reportType->setCenter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReportType(ReportType $reportType): self
+    {
+        if ($this->reportTypes->contains($reportType)) {
+            $this->reportTypes->removeElement($reportType);
+            // set the owning side to null (unless already changed)
+            if ($reportType->getCenter() === $this) {
+                $reportType->setCenter(null);
             }
         }
 
